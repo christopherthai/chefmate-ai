@@ -53,7 +53,9 @@ ChefMate AI simplifies culinary creativity, offering a dynamic platform where us
 
 ## Example of a Response Structure
 
-GET /
+### GET /api/recipes
+
+![ResponseStructure](./planning/ResponseStructure.png)
 
 ## React Routes
 

@@ -1,188 +1,206 @@
 <mxfile host="65bd71144e">
     <diagram id="t-pu78wxWmvUVIiAdrmM" name="Page-1">
-        <mxGraphModel dx="3457" dy="967" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="3457" dy="1041" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="28" value="" style="shape=table;html=1;whiteSpace=wrap;startSize=0;container=1;collapsible=0;childLayout=tableLayout;" vertex="1" parent="1">
-                    <mxGeometry x="-140" y="430" width="1370" height="890" as="geometry"/>
+                <mxCell id="28" value="" style="shape=table;html=1;whiteSpace=wrap;startSize=0;container=1;collapsible=0;childLayout=tableLayout;" parent="1" vertex="1">
+                    <mxGeometry x="-140" y="430" width="1370" height="971" as="geometry"/>
                 </mxCell>
-                <mxCell id="29" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="29" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry width="1370" height="94" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;React Routes&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="29">
+                <mxCell id="30" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;React Routes&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="29" vertex="1">
                     <mxGeometry width="454" height="94" as="geometry">
                         <mxRectangle width="454" height="94" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="31" value="&lt;span style=&quot;border: 0px solid rgb(56, 61, 63); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --darkreader-bg--tw-ring-offset-width: 0px; --darkreader-bg--tw-ring-offset-color: #181a1b; --darkreader-bg--tw-ring-color: rgba(55, 71, 131, 0.5); --darkreader-bg--tw-ring-offset-shadow: 0 0 transparent; --darkreader-bg--tw-ring-shadow: 0 0 transparent; --darkreader-bg--tw-shadow: 0 0 transparent; font-weight: 600; color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28); scroll-behavior: auto !important;&quot;&gt;Component&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="29">
+                <mxCell id="31" value="&lt;span style=&quot;border: 0px solid rgb(56, 61, 63); box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --darkreader-bg--tw-ring-offset-width: 0px; --darkreader-bg--tw-ring-offset-color: #181a1b; --darkreader-bg--tw-ring-color: rgba(55, 71, 131, 0.5); --darkreader-bg--tw-ring-offset-shadow: 0 0 transparent; --darkreader-bg--tw-ring-shadow: 0 0 transparent; --darkreader-bg--tw-shadow: 0 0 transparent; font-weight: 600; color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28); scroll-behavior: auto !important;&quot;&gt;Component&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="29" vertex="1">
                     <mxGeometry x="454" width="458" height="94" as="geometry">
                         <mxRectangle width="458" height="94" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="32" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Purpose&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="29">
+                <mxCell id="32" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Purpose&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="29" vertex="1">
                     <mxGeometry x="912" width="458" height="94" as="geometry">
                         <mxRectangle width="458" height="94" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="33" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="33" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry y="94" width="1370" height="88" as="geometry"/>
                 </mxCell>
-                <mxCell id="34" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="33">
+                <mxCell id="34" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="33" vertex="1">
                     <mxGeometry width="454" height="88" as="geometry">
                         <mxRectangle width="454" height="88" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="35" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;HomePage&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="33">
+                <mxCell id="35" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;HomePage&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="33" vertex="1">
                     <mxGeometry x="454" width="458" height="88" as="geometry">
                         <mxRectangle width="458" height="88" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="36" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; background-color: rgb(25, 27, 28);&quot;&gt;Acts as the landing page where users can enter ingredients to receive AI-driven recipe suggestions. It features the main search bar for ingredient input and displays suggested recipes based on the input&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;align=center;" vertex="1" parent="33">
+                <mxCell id="36" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; background-color: rgb(25, 27, 28);&quot;&gt;Acts as the landing page where users can enter ingredients to receive AI-driven recipe suggestions. It features the main search bar for ingredient input and displays suggested recipes based on the input&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;align=center;" parent="33" vertex="1">
                     <mxGeometry x="912" width="458" height="88" as="geometry">
                         <mxRectangle width="458" height="88" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="37" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="37" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry y="182" width="1370" height="89" as="geometry"/>
                 </mxCell>
-                <mxCell id="38" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/explore&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="37">
+                <mxCell id="38" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/explore&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="37" vertex="1">
                     <mxGeometry width="454" height="89" as="geometry">
                         <mxRectangle width="454" height="89" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="39" value="&lt;span style=&quot;color: rgb(220, 217, 212); text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;ExploreRecipes&lt;/font&gt;&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="37">
+                <mxCell id="39" value="&lt;span style=&quot;color: rgb(220, 217, 212); text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;ExploreRecipes&lt;/font&gt;&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="37" vertex="1">
                     <mxGeometry x="454" width="458" height="89" as="geometry">
                         <mxRectangle width="458" height="89" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="40" value="Displays a comprehensive list of all recipes shared by users. This page includes sorting and filtering capabilities to help users find recipes by popularity, cuisine, or other criteria." style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" vertex="1" parent="37">
+                <mxCell id="40" value="Displays a comprehensive list of all recipes shared by users. This page includes sorting and filtering capabilities to help users find recipes by popularity, cuisine, or other criteria." style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="37" vertex="1">
                     <mxGeometry x="912" width="458" height="89" as="geometry">
                         <mxRectangle width="458" height="89" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="69" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="69" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry y="271" width="1370" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="70" value="&lt;span style=&quot;font-size: 16px;&quot;&gt;/recipes/:id&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="69">
+                <mxCell id="70" value="&lt;span style=&quot;font-size: 16px;&quot;&gt;/recipes/:id&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="69" vertex="1">
                     <mxGeometry width="454" height="90" as="geometry">
                         <mxRectangle width="454" height="90" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="71" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;RecipeDetails&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="69">
+                <mxCell id="71" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;RecipeDetails&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="69" vertex="1">
                     <mxGeometry x="454" width="458" height="90" as="geometry">
                         <mxRectangle width="458" height="90" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="72" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(25, 27, 28); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Provides detailed information about a specific recipe, including ingredients, and instructions. If the user is logged in and owns the recipe, it also offers options to edit or delete.&lt;/font&gt;&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" vertex="1" parent="69">
+                <mxCell id="72" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(25, 27, 28); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Provides detailed information about a specific recipe, including ingredients, and instructions. If the user is logged in and owns the recipe, it also offers options to edit or delete.&lt;/font&gt;&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="69" vertex="1">
                     <mxGeometry x="912" width="458" height="90" as="geometry">
                         <mxRectangle width="458" height="90" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="65" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="65" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry y="361" width="1370" height="88" as="geometry"/>
                 </mxCell>
-                <mxCell id="66" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/create-recipe&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="65">
+                <mxCell id="66" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/create-recipe&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="65" vertex="1">
                     <mxGeometry width="454" height="88" as="geometry">
                         <mxRectangle width="454" height="88" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="67" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;CreateRecipeForm&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="65">
+                <mxCell id="67" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;CreateRecipeForm&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="65" vertex="1">
                     <mxGeometry x="454" width="458" height="88" as="geometry">
                         <mxRectangle width="458" height="88" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="68" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Offers a form where logged-in users can input new recipe details. This includes fields for title, ingredients, cooking steps, and images&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" vertex="1" parent="65">
+                <mxCell id="68" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Offers a form where logged-in users can input new recipe details. This includes fields for title, ingredients, cooking steps, and images&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="65" vertex="1">
                     <mxGeometry x="912" width="458" height="88" as="geometry">
                         <mxRectangle width="458" height="88" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="61" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="61" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry y="449" width="1370" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="62" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/edit-recipe/:id&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="61">
+                <mxCell id="62" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/edit-recipe/:id&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="61" vertex="1">
                     <mxGeometry width="454" height="90" as="geometry">
                         <mxRectangle width="454" height="90" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="63" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;EditRecipeForm&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="61">
+                <mxCell id="63" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;EditRecipeForm&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="61" vertex="1">
                     <mxGeometry x="454" width="458" height="90" as="geometry">
                         <mxRectangle width="458" height="90" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="64" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Allows users to edit an existing recipe. The form is pre-filled with the current recipe data, which can be updated and saved&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" vertex="1" parent="61">
+                <mxCell id="64" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Allows users to edit an existing recipe. The form is pre-filled with the current recipe data, which can be updated and saved&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="61" vertex="1">
                     <mxGeometry x="912" width="458" height="90" as="geometry">
                         <mxRectangle width="458" height="90" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="57" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="57" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry y="539" width="1370" height="88" as="geometry"/>
                 </mxCell>
-                <mxCell id="58" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/profile&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="57">
+                <mxCell id="58" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/profile&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="57" vertex="1">
                     <mxGeometry width="454" height="88" as="geometry">
                         <mxRectangle width="454" height="88" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="59" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;UserProfile&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="57">
+                <mxCell id="59" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;UserProfile&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="57" vertex="1">
                     <mxGeometry x="454" width="458" height="88" as="geometry">
                         <mxRectangle width="458" height="88" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="60" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Enables users to view and edit their profile information, such as username, password and email address&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" vertex="1" parent="57">
+                <mxCell id="60" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Enables users to view and edit their profile information, such as username, password and email address&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="57" vertex="1">
                     <mxGeometry x="912" width="458" height="88" as="geometry">
                         <mxRectangle width="458" height="88" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="53" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="53" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry y="627" width="1370" height="91" as="geometry"/>
                 </mxCell>
-                <mxCell id="54" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/about&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="53">
+                <mxCell id="54" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/about&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="53" vertex="1">
                     <mxGeometry width="454" height="91" as="geometry">
                         <mxRectangle width="454" height="91" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="55" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;AboutPage&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="53">
+                <mxCell id="55" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;AboutPage&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="53" vertex="1">
                     <mxGeometry x="454" width="458" height="91" as="geometry">
                         <mxRectangle width="458" height="91" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="56" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Contains informational content about the ChefMate AI application&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" vertex="1" parent="53">
+                <mxCell id="56" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Contains informational content about the ChefMate AI application&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="53" vertex="1">
                     <mxGeometry x="912" width="458" height="91" as="geometry">
                         <mxRectangle width="458" height="91" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="49" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="49" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry y="718" width="1370" height="91" as="geometry"/>
                 </mxCell>
-                <mxCell id="50" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/login&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="49">
+                <mxCell id="50" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/login&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="49" vertex="1">
                     <mxGeometry width="454" height="91" as="geometry">
                         <mxRectangle width="454" height="91" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="51" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Login&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="49">
+                <mxCell id="51" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Login&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="49" vertex="1">
                     <mxGeometry x="454" width="458" height="91" as="geometry">
                         <mxRectangle width="458" height="91" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="52" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Provides a form for users to log into their accounts, featuring fields for username and password&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" vertex="1" parent="49">
+                <mxCell id="52" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Provides a form for users to log into their accounts, featuring fields for username and password&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="49" vertex="1">
                     <mxGeometry x="912" width="458" height="91" as="geometry">
                         <mxRectangle width="458" height="91" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="45" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                <mxCell id="45" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="28" vertex="1">
                     <mxGeometry y="809" width="1370" height="81" as="geometry"/>
                 </mxCell>
-                <mxCell id="46" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/register&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="45">
+                <mxCell id="46" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;/register&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="45" vertex="1">
                     <mxGeometry width="454" height="81" as="geometry">
                         <mxRectangle width="454" height="81" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="47" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Register&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="45">
+                <mxCell id="47" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Register&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" parent="45" vertex="1">
                     <mxGeometry x="454" width="458" height="81" as="geometry">
                         <mxRectangle width="458" height="81" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="48" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Offers a registration form for new users to create an account, requiring details like username, email, and password&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" vertex="1" parent="45">
+                <mxCell id="48" value="&lt;span style=&quot;color: rgb(220, 217, 212); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &amp;quot;Segoe UI&amp;quot;, Roboto, Ubuntu, Cantarell, &amp;quot;Noto Sans&amp;quot;, sans-serif, &amp;quot;Helvetica Neue&amp;quot;, Arial, &amp;quot;Apple Color Emoji&amp;quot;, &amp;quot;Segoe UI Emoji&amp;quot;, &amp;quot;Segoe UI Symbol&amp;quot;, &amp;quot;Noto Color Emoji&amp;quot;; font-size: 16px; text-align: left; background-color: rgb(25, 27, 28);&quot;&gt;Offers a registration form for new users to create an account, requiring details like username, email, and password&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" parent="45" vertex="1">
+                    <mxGeometry x="912" width="458" height="81" as="geometry">
+                        <mxRectangle width="458" height="81" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="73" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="28">
+                    <mxGeometry y="890" width="1370" height="81" as="geometry"/>
+                </mxCell>
+                <mxCell id="74" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;*&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="73">
+                    <mxGeometry width="454" height="81" as="geometry">
+                        <mxRectangle width="454" height="81" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="75" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;NotFoundPage&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;" vertex="1" parent="73">
+                    <mxGeometry x="454" width="458" height="81" as="geometry">
+                        <mxRectangle width="458" height="81" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="76" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Display the not found error message&lt;/font&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;pointerEvents=1;" vertex="1" parent="73">
                     <mxGeometry x="912" width="458" height="81" as="geometry">
                         <mxRectangle width="458" height="81" as="alternateBounds"/>
                     </mxGeometry>
