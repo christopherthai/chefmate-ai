@@ -46,9 +46,7 @@ ChefMate AI transforms your kitchen experience by suggesting delicious recipes t
 
 ## Example of a Response Structure
 
-GET /restaurants
-
-![ResponseStructure](./planning/ResponseStructure.png)
+GET /
 
 ## React Routes
 
