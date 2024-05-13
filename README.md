@@ -4,7 +4,7 @@
 
 ## Description
 
-ChefMate AI transforms your kitchen experience by suggesting delicious recipes tailored to your available ingredients and organizing your culinary favorites, all powered by advanced AI.
+ChefMate AI simplifies culinary creativity, offering a dynamic platform where users can discover recipes shared by a vibrant community, find new dishes based on available ingredients with AI-powered suggestions, and manage their culinary collections.
 
 ## Wireframe
 
@@ -64,6 +64,7 @@ GET /
 1. On the Explore Recipes Page, users browse through the recipes using various filters, such as cuisine, popularity, or recent additions.
 2. Users can share their favorite recipes or their own creations directly from the application to social media platforms. The system provides easy-to-use sharing buttons on each recipe page, facilitating a broader community interaction and enabling users to discuss their culinary experiences.
 3. Integrate a smart cooking timer that users can activate directly from the recipe details page. The timer can be set automatically based on the cooking times provided in the recipe or adjusted manually by the user.
+4. Users can leave comments and ratings on Recipe Detail Page.
 
 ## Trello Board
 
