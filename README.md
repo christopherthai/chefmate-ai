@@ -24,7 +24,7 @@ ChefMate AI simplifies culinary creativity, offering a dynamic platform where us
 8. Users can access their profile to update personal details such as, username, password and email address.
 9. The "About" page is available to all users who want to learn more about the ChefMate AI application.
 
-## React Components Tree
+## React Components Tree Diagram
 
 ![ReactComponentsTree](./planning/ComponentTree.png)
 
@@ -49,7 +49,7 @@ ChefMate AI simplifies culinary creativity, offering a dynamic platform where us
 
 ## API Routes
 
-![API Routes](./planning/API-Route.png)
+![API Routes](./planning/API-Routes.png)
 
 ## Example of a Response Structure
 
