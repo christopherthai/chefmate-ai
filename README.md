@@ -20,6 +20,10 @@ ChefMate AI simplifies culinary creativity, offering a dynamic platform where us
 
 ![CreateRecipe](./planning/CreateRecipePage.png)
 
+## My Recipe Page
+
+![MyRecipe](./planning/MyRecipePage.png)
+
 ## User Stories
 
 1. Users can enter ingredients they have at home into a search bar prominently featured on the homepage. The AI-driven system quickly analyzes these inputs and suggests recipes that utilize these ingredients.
