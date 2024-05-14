@@ -18,6 +18,9 @@ class User(db.Model, SerializerMixin):
     recipes = db.relationship("Recipe", back_populates="user")
     saved_recipes = db.relationship("SavedRecipes", back_populates="user")
 
+    # Define an association proxy to access the recipes of a user
+    user_saved_recipes = association_proxy("saved_recipes", "recipe")
+
     def __repr__(self):
         return f"<User {self.username} {self.email}>"
 
@@ -41,6 +44,10 @@ class Recipe(db.Model, SerializerMixin):
     recipe_ingredients = db.relationship("RecipeIngredients", back_populates="recipe")
     saved_recipes = db.relationship("SavedRecipes", back_populates="recipe")
 
+    # Define an association proxy to access the ingredients of a recipe and the users who saved the recipe
+    ingredients = association_proxy("recipe_ingredients", "ingredient")
+    recipe_saved_users = association_proxy("saved_recipes", "user")
+
     def __repr__(self):
         return f"<Recipe {self.title}>"
 
@@ -52,9 +59,13 @@ class Ingredient(db.Model, SerializerMixin):
     name = db.Column(db.String(120), nullable=False)
     category = db.Column(db.String(120), nullable=False)
 
+    # Define a relationship with the RecipeIngredients model
     recipe_ingredients = db.relationship(
         "RecipeIngredients", back_populates="ingredient"
     )
+
+    # Define an association proxy to access the recipes of an ingredient
+    recipes = association_proxy("recipe_ingredients", "recipe")
 
     def __repr__(self):
         return f"<Ingredient {self.name}"
@@ -68,6 +79,7 @@ class RecipeIngredients(db.Model, SerializerMixin):
     ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredients.id"))
     quantity = db.Column(db.String(120), nullable=False)
 
+    # Define a relationship with the Recipe model and the Ingredient model
     recipe = db.relationship("Recipe", back_populates="recipe_ingredients")
     ingredient = db.relationship("Ingredient", back_populates="recipe_ingredients")
 
@@ -85,6 +97,7 @@ class SavedRecipes(db.Model, SerializerMixin):
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.id"))
     saved_at = db.Column(db.DateTime, default=db.func.now())
 
+    # Define a relationship with the User model and the Recipe model
     user = db.relationship("User", back_populates="saved_recipes")
     recipe = db.relationship("Recipe", back_populates="saved_recipes")
 
