@@ -12,19 +12,19 @@ ChefMate AI simplifies culinary creativity, offering a dynamic platform where us
 
 ![HomePage](./planning/HomePage.png)
 
-## Explore Recipe Page
+### Explore Recipe Page
 
 ![ExploreRecipe](./planning/ExploreRecipePage.png)
 
-## Create Recipe Page
+### Create Recipe Page
 
 ![CreateRecipe](./planning/CreateRecipePage.png)
 
-## My Recipe Page
+### My Recipe Page
 
 ![MyRecipe](./planning/MyRecipePage.png)
 
-## Recipe Details Page
+### Recipe Details Page
 
 ![RecipeDetails](./planning/RecipeDetailsPage.png)
 
