@@ -24,7 +24,7 @@ class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
+    username = db.Column(db.String(255), unique=True, nullable=False)
     password_hash = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
@@ -178,7 +178,7 @@ class Recipe(db.Model, SerializerMixin):
     __tablename__ = "recipes"
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), nullable=False, unique=True)
+    title = db.Column(db.String(255), nullable=False, unique=True)
     instructions = db.Column(db.Text, nullable=False)
     preparation_time = db.Column(db.Integer, nullable=False)
     serving_size = db.Column(db.Integer, nullable=False)
@@ -358,7 +358,7 @@ class Ingredient(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
-    category = db.Column(db.String(120), nullable=False)
+    category = db.Column(db.String(150), nullable=False)
 
     # Define a relationship with the RecipeIngredients model
     recipe_ingredients = db.relationship(
