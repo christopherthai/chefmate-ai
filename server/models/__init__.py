@@ -1,4 +1,4 @@
-from .user import User
+from .users import User
 from .recipe import Recipe
 from .ingredients import Ingredient
 from .recipe_ingredients import RecipeIngredients

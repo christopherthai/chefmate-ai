@@ -9,6 +9,7 @@ from flask import request
 from flask_restful import Resource
 
 # Local imports
+from datetime import datetime
 from config import app, db, api
 
 # Add your model imports
@@ -26,6 +27,8 @@ class Register(Resource):
         new_user = User(username=username, email=email)
 
         new_user.password_hash = password
+
+        new_user.last_login = datetime.now()
 
         try:
             db.session.add(new_user)
@@ -51,6 +54,12 @@ class Login(Resource):
         user = User.query.filter_by(username=username).first()
 
         if user and user.authenticate(password):
+
+            user.last_login = datetime.now()
+
+            db.session.add(user)
+            db.session.commit()
+
             session["user_id"] = user.id
             return make_response(user.to_dict(), 200)
         else:
@@ -83,6 +92,112 @@ class Logout(Resource):
 
 
 api.add_resource(Logout, "/users/logout", endpoint="logout")
+
+
+class UsersById(Resource):
+    def get(self, user_id):
+        user = User.query.filter_by(id=user_id).first()
+
+        if not user:
+            return make_response({"error": "User not found"}, 404)
+
+        return make_response(user.to_dict(), 200)
+
+    def patch(self, user_id):
+        user = User.query.filter_by(id=user_id).first()
+
+        if not user:
+            return make_response({"error": "User not found"}, 404)
+
+        try:
+            data = request.get_json()
+
+            for attr in data:
+                setattr(user, attr, data.get(attr))
+
+            db.session.add(user)
+            db.session.commit()
+
+            return make_response(user.to_dict(), 202)
+
+        except ValueError:
+            return make_response({"error": "Invalid data"}, 400)
+
+
+api.add_resource(UsersById, "/users/<int:user_id>", endpoint="users-by-id")
+
+
+class Recipes(Resource):
+    def get(self):
+        recipes = Recipe.query.all()
+        return make_response({"recipes": [recipe.to_dict() for recipe in recipes]}, 200)
+
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_recipe = Recipe(
+                title=data.get("title"),
+                instructions=data.get("instructions"),
+                preparation_time=data.get("preparation_time"),
+                serving_size=data.get("serving_size"),
+                image_url=data.get("image_url"),
+            )
+
+            db.session.add(new_recipe)
+            db.session.commit()
+
+            return make_response(new_recipe.to_dict(), 201)
+        except ValueError:
+            return make_response({"error": "Invalid data"}, 400)
+
+
+api.add_resource(Recipes, "/recipes", endpoint="recipes")
+
+
+class RecipesById(Resource):
+
+    def get(self, recipe_id):
+        recipe = Recipe.query.filter_by(id=recipe_id).first()
+
+        if not recipe:
+            return make_response({"error": "Recipe not found"}, 404)
+
+        return make_response(recipe.to_dict(), 200)
+
+    def patch(self, recipe_id):
+        recipe = Recipe.query.filter_by(id=recipe_id).first()
+
+        if not recipe:
+            return make_response({"error": "Recipe not found"}, 404)
+
+        try:
+            data = request.get_json()
+
+            for attr in data:
+                setattr(recipe, attr, data.get(attr))
+
+            db.session.add(recipe)
+            db.session.commit()
+
+            return make_response(recipe.to_dict(), 202)
+
+        except ValueError:
+            return make_response({"error": "Invalid data"}, 400)
+
+    def delete(self, recipe_id):
+        recipe = Recipe.query.filter_by(id=recipe_id).first()
+
+        if not recipe:
+            return make_response({"error": "Recipe not found"}, 404)
+
+        db.session.delete(recipe)
+        db.session.commit()
+
+        return make_response({}, 204)
+
+
+api.add_resource(RecipesById, "/recipes/<int:recipe_id>", endpoint="recipes-by-id")
 
 
 if __name__ == "__main__":

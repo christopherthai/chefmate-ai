@@ -51,14 +51,41 @@ class User(db.Model, SerializerMixin):
 
     @hybrid_property
     def password_hash(self):
+        """
+        Returns the password hash for the user.
+
+        Raises:
+            AttributeError: If an attempt is made to view the password hash.
+
+        Returns:
+            str: The password hash.
+        """
         raise AttributeError("Password hashes may not be viewed.")
 
     @password_hash.setter
     def password_hash(self, password):
+        """
+        Setter method for the password_hash attribute.
+
+        Parameters:
+        - password (str): The password to be hashed and stored.
+
+        Returns:
+        - None
+        """
         password_hash = bcrypt.generate_password_hash(password.encode("utf-8"))
         self._password_hash = password_hash.decode("utf-8")
 
     def authenticate(self, password):
+        """
+        Authenticates the user by comparing the provided password with the stored password hash.
+
+        Parameters:
+        - password (str): The password to be authenticated.
+
+        Returns:
+        - bool: True if the password is correct, False otherwise.
+        """
         return bcrypt.check_password_hash(self._password_hash, password.encode("utf-8"))
 
     @validates("username")
