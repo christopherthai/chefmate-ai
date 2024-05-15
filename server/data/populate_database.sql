@@ -136,7 +136,7 @@ VALUES (
         'Preheat oven to 375°F (190°C). In a large pot, cook noodles in boiling water for 8 to 10 minutes. Drain noodles, and rinse with cold water. In a mixing bowl, combine ricotta cheese with egg, remaining parsley, and 1/2 teaspoon salt. In a large skillet, cook and stir ground beef and sausage over medium heat until brown. Add garlic and cook for 2 minutes. Stir in crushed tomatoes, tomato paste, tomato sauce, and water. Season with sugar, basil, fennel seeds, Italian seasoning, 1 tablespoon salt, pepper, and 2 tablespoons parsley. Simmer, covered, for about 1 1/2 hours, stirring occasionally. To assemble, spread 1 1/2 cups meat sauce in the bottom of a 9x13 inch baking dish. Arrange 6 noodles lengthwise over meat sauce. Spread with one half of the ricotta cheese mixture. Top with a third of mozzarella cheese slices. Spoon 1 1/2 cups meat sauce over mozzarella, and sprinkle with 1/4 cup Parmesan cheese. Repeat layers, and top with remaining mozzarella and Parmesan cheese. Cover with foil: to prevent sticking, either spray foil with cooking spray, or make sure the foil does not touch the cheese. Bake in preheated oven for 25 minutes. Remove foil, and bake an additional 25 minutes. Cool for 15 minutes before serving.',
         120,
         12,
-        'http://example.com/lasagna.jpg',
+        'https://cdn.pixabay.com/photo/2022/11/08/05/34/lasagna-7577748_1280.jpg',
         10
     );
 -- Insert additional 20 recipes
@@ -153,7 +153,7 @@ VALUES (
         'In a large bowl, sift together the flour, baking powder, salt, and sugar. Make a well in the center and pour in the milk, egg, and melted butter; mix until smooth. Heat a lightly oiled griddle or frying pan over medium high heat. Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake. Brown on both sides and serve hot.',
         20,
         4,
-        'http://example.com/pancakes.jpg',
+        'https://img.freepik.com/premium-photo/stack-pancakes-with-butter-syrup-top_81048-20101.jpg',
         1
     ),
     (
@@ -161,7 +161,7 @@ VALUES (
         'Heat oil in a large skillet over medium heat. Add onion, celery, and carrot. Cook until soft, about 5 minutes. Add garlic and cook for 1 minute more. Add beef and cook until browned. Stir in tomato paste and cook for 1 minute. Add wine and cook until reduced by half. Add tomatoes and simmer for 30 minutes. Season with salt and pepper. Serve over cooked spaghetti.',
         60,
         6,
-        'http://example.com/spaghetti_bolognese.jpg',
+        'https://t4.ftcdn.net/jpg/02/40/99/19/360_F_240991913_c22j6WvLgpqiUvjaLiLc5rh14WO8jShB.jpg',
         2
     ),
     (
@@ -169,7 +169,7 @@ VALUES (
         'Cook pasta according to package instructions. In a large skillet, heat butter over medium heat. Add chicken and cook until golden brown. Remove chicken from skillet. In the same skillet, add garlic and cook until fragrant. Stir in cream and simmer until thickened. Add Parmesan cheese and cook until melted. Return chicken to skillet and toss with sauce. Serve over pasta.',
         30,
         4,
-        'http://example.com/chicken_alfredo.jpg',
+        'https://people.com/thmb/2JEMLDieHqYi4nc7ktFerRsoYDw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2)/olivegarden-07f1633bd0f4406b94b84474c33ad494.jpg',
         3
     ),
     (
@@ -177,7 +177,7 @@ VALUES (
         'In a large bowl, combine cucumbers, tomatoes, bell pepper, red onion, olives, and feta cheese. In a small bowl, whisk together olive oil, lemon juice, garlic, oregano, salt, and pepper. Pour dressing over salad and toss to coat.',
         15,
         4,
-        'http://example.com/greek_salad.jpg',
+        'https://img.freepik.com/free-photo/greek-salad-with-fresh-vegetables-feta-cheese-kalamata-olives_2829-10848.jpg',
         4
     ),
     (
@@ -185,7 +185,7 @@ VALUES (
         'In a large mixing bowl, whisk together eggs, milk, sugar, vanilla, and cinnamon. Heat a lightly oiled griddle or skillet over medium-high heat. Soak bread slices in egg mixture for 20 seconds on each side. Cook bread on the griddle until golden brown on both sides. Serve hot.',
         20,
         4,
-        'http://example.com/french_toast.jpg',
+        'https://joyfoodsunshine.com/wp-content/uploads/2018/05/best-easy-french-toast-recipe-4.jpg',
         5
     ),
     (
@@ -193,7 +193,7 @@ VALUES (
         'Preheat oven to 300°F (150°C). Season ribs with salt and pepper. Wrap ribs in foil and bake for 2.5 hours. Preheat an outdoor grill to medium-high heat. Remove ribs from foil and place on the grill. Baste with BBQ sauce and grill for 5-10 minutes per side, until sauce is caramelized.',
         180,
         4,
-        'http://example.com/bbq_ribs.jpg',
+        'https://www.seriouseats.com/thmb/Omlu6IT-0rpmk8WE05iSfS8IqO8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2015__08__20150730-anova-sous-vide-rib-guide-food-lab68-j-kenji-lopez-alt-3a8181cad15d4dbc93037b66c0f209da.jpg',
         6
     ),
     (
@@ -201,7 +201,7 @@ VALUES (
         'Preheat oven to 425°F (220°C). In a large bowl, combine sliced apples, sugar, flour, cinnamon, nutmeg, and lemon juice. Roll out half of the dough and place in a 9-inch pie plate. Fill with apple mixture. Roll out remaining dough and place over filling. Trim and crimp edges. Cut slits in top crust to allow steam to escape. Bake for 45-50 minutes, until crust is golden brown.',
         90,
         8,
-        'http://example.com/apple_pie.jpg',
+        'https://www.southernliving.com/thmb/bbDY1d_ySIrCFcq8WNBkR-3x6pU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/2589601_Mailb_Mailbox_Apple_Pie_003-da802ff7a8984b2fa9aa0535997ab246.jpg',
         7
     ),
     (
@@ -209,7 +209,7 @@ VALUES (
         'In a large skillet, melt butter over medium heat. Add garlic and cook until fragrant. Stir in shrimp and cook until pink. Add white wine and lemon juice. Cook until wine is reduced by half. Stir in parsley and season with salt and pepper. Serve over pasta or with crusty bread.',
         20,
         4,
-        'http://example.com/shrimp_scampi.jpg',
+        'https://www.allrecipes.com/thmb/jiV_4f8vXFle1RdFLgd8-_31J3M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/229960-shrimp-scampi-with-pasta-DDMFS-4x3-e065ddef4e6d44479d37b4523808cc23.jpg',
         8
     ),
     (
@@ -217,7 +217,7 @@ VALUES (
         'Preheat oven to 350°F (175°C). In a large bowl, cream together butter, white sugar, and brown sugar until smooth. Beat in the eggs one at a time, then stir in vanilla. Dissolve baking soda in hot water. Add to batter along with salt. Stir in flour, chocolate chips, and nuts. Drop by large spoonfuls onto ungreased pans. Bake for about 10 minutes, or until edges are nicely browned.',
         25,
         24,
-        'http://example.com/chocolate_chip_cookies.jpg',
+        'https://www.onceuponachef.com/images/2021/11/Best-Chocolate-Chip-Cookies.jpg',
         9
     ),
     (
@@ -225,7 +225,7 @@ VALUES (
         'In a large skillet, cook ground beef over medium heat until browned. Stir in taco seasoning and water. Simmer until thickened. Spoon meat mixture into taco shells. Top with lettuce, cheese, tomatoes, and sour cream.',
         20,
         4,
-        'http://example.com/tacos.jpg',
+        'https://www.onceuponachef.com/images/2023/08/Beef-Tacos.jpg',
         10
     ),
     (
@@ -233,7 +233,7 @@ VALUES (
         'Preheat oven to 375°F (190°C). Place salmon fillets on a lined baking sheet. Drizzle with olive oil and lemon juice. Season with salt, pepper, and dill. Bake for 15-20 minutes, until salmon flakes easily with a fork.',
         25,
         4,
-        'http://example.com/baked_salmon.jpg',
+        'https://healthyrecipesblogs.com/wp-content/uploads/2021/01/baked-salmon-featured1-2022.jpg',
         1
     ),
     (
@@ -241,7 +241,7 @@ VALUES (
         'Preheat oven to 350°F (175°C). In a medium bowl, whisk together eggs, cream, salt, and pepper. Stir in cheese, ham, and green onions. Pour into prepared pie crust. Bake for 45 minutes, until the center is set and top is golden brown.',
         60,
         6,
-        'http://example.com/quiche.jpg',
+        'https://cdn.grove.wgbh.org/91/19/26660e98fc3cb052197dd68a6203/quiche-lorraine.jpg',
         2
     ),
     (
@@ -249,7 +249,7 @@ VALUES (
         'In a large skillet or wok, heat oil over medium-high heat. Add garlic and cook until fragrant. Stir in cooked rice, soy sauce, and oyster sauce. Cook until heated through. Stir in scrambled eggs and green onions.',
         20,
         4,
-        'http://example.com/fried_rice.jpg',
+        'https://www.savoryexperiments.com/wp-content/uploads/2022/11/Fried-Rice-9.jpg',
         3
     ),
     (
@@ -257,7 +257,7 @@ VALUES (
         'In a large pot, cook bacon over medium heat until crisp. Remove bacon and set aside. Add onions and celery to the pot and cook until tender. Stir in potatoes, clam juice, and water. Bring to a boil, then reduce heat and simmer until potatoes are tender. Stir in clams, cream, and cooked bacon. Season with salt and pepper. Cook until heated through.',
         45,
         6,
-        'http://example.com/clam_chowder.jpg',
+        'https://assets.epicurious.com/photos/6487316ef0a537ecfb046b4c/1:1/w_2560%2Cc_limit/ClamChowder_RECIPE_060523_54702.jpg',
         4
     ),
     (
@@ -265,7 +265,7 @@ VALUES (
         'Preheat oven to 375°F (190°C). In a large skillet, cook ground beef over medium heat until browned. Stir in cooked rice, tomato sauce, and seasonings. Spoon mixture into bell peppers. Place peppers in a baking dish and top with cheese. Bake for 25-30 minutes, until peppers are tender and cheese is melted.',
         60,
         4,
-        'http://example.com/stuffed_peppers.jpg',
+        'https://t4.ftcdn.net/jpg/05/17/79/61/360_F_517796104_wgWnFwCjS97vJjhUPDe2PG8Njh5D7LKi.jpg',
         5
     ),
     (
@@ -273,7 +273,7 @@ VALUES (
         'Preheat oven to 350°F (175°C). In a large bowl, combine mashed bananas, melted butter, sugar, egg, and vanilla. In another bowl, combine flour, baking soda, and salt. Stir into banana mixture. Pour batter into a greased loaf pan. Bake for 60-65 minutes, until a toothpick inserted into the center comes out clean.',
         75,
         8,
-        'http://example.com/banana_bread.jpg',
+        'https://www.simplyrecipes.com/thmb/tR-5eHAZ3lgNR6Yvu3yxdHMNpk8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Easy-Banana-Bread-LEAD-2-2-63dd39af009945d58f5bf4c2ae8d6070.jpg',
         6
     ),
     (
@@ -281,7 +281,7 @@ VALUES (
         'In a large skillet, cook chicken over medium heat until browned. Stir in taco seasoning and water. Simmer until thickened. Spoon chicken mixture into taco shells. Top with lettuce, cheese, tomatoes, and sour cream.',
         20,
         4,
-        'http://example.com/chicken_tacos.jpg',
+        'https://www.dinneratthezoo.com/wp-content/uploads/2017/10/slow-cooker-chicken-tacos-14.jpg',
         7
     ),
     (
@@ -289,7 +289,7 @@ VALUES (
         'Cook macaroni according to package instructions. In a large saucepan, melt butter over medium heat. Stir in flour and cook for 1 minute. Gradually whisk in milk and cook until thickened. Stir in cheese until melted. Combine cheese sauce with cooked macaroni and serve.',
         30,
         6,
-        'http://example.com/macaroni_and_cheese.jpg',
+        'https://www.pressurecookrecipes.com/wp-content/uploads/2022/12/instant-pot-mac-and-cheese.jpg',
         8
     ),
     (
@@ -297,7 +297,7 @@ VALUES (
         'In a large pot, cook ground beef over medium heat until browned. Add onions, bell pepper, and garlic and cook until tender. Stir in tomatoes, beans, chili powder, cumin, and oregano. Bring to a boil, then reduce heat and simmer for 30 minutes. Season with salt and pepper.',
         60,
         8,
-        'http://example.com/chili.jpg',
+        'https://t3.ftcdn.net/jpg/00/71/48/60/360_F_71486010_1E4qDBSqmGre3ISbs5nmjwrF9RRq7ySy.jpg',
         9
     ),
     (
@@ -305,7 +305,7 @@ VALUES (
         'In a large pot, combine chicken, onions, carrots, celery, and garlic. Add chicken broth and bring to a boil. Reduce heat and simmer until chicken is cooked through. Remove chicken and shred. Return chicken to pot and stir in noodles. Cook until noodles are tender. Season with salt and pepper.',
         60,
         6,
-        'http://example.com/chicken_soup.jpg',
+        'https://t4.ftcdn.net/jpg/04/72/62/29/360_F_472622913_00rkwfTqr8kuBjq7Y9glR0yTJlLsrrLG.jpg',
         10
     ),
     (
@@ -313,7 +313,7 @@ VALUES (
         'Preheat oven to 425°F (220°C). In a large bowl, combine pumpkin puree, sugar, cinnamon, ginger, and cloves. Stir in eggs and evaporated milk. Pour mixture into pie crust. Bake for 15 minutes. Reduce heat to 350°F (175°C) and bake for 40-50 minutes, until a knife inserted into the center comes out clean.',
         70,
         8,
-        'http://example.com/pumpkin_pie.jpg',
+        'https://t4.ftcdn.net/jpg/02/91/79/63/360_F_291796313_uzVIzYCaDgHyRIar768rphJoVwuV8Fqs.jpg',
         1
     ),
     (
@@ -321,7 +321,7 @@ VALUES (
         'In a large bowl, combine ground beef, onion, garlic, salt, and pepper. Form into patties. Preheat grill to medium-high heat. Grill patties for 5-7 minutes per side, until cooked to desired doneness. Serve on buns with lettuce, tomato, cheese, and condiments.',
         20,
         4,
-        'http://example.com/burgers.jpg',
+        'https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?cs=srgb&dl=pexels-valeriya-1639557.jpg&fm=jpg',
         2
     ),
     (
@@ -329,7 +329,7 @@ VALUES (
         'In a large pot, cover potatoes with water and bring to a boil. Reduce heat and simmer until potatoes are tender. Drain and return potatoes to pot. Mash with butter, milk, salt, and pepper until smooth and creamy.',
         30,
         6,
-        'http://example.com/mashed_potatoes.jpg',
+        'https://t4.ftcdn.net/jpg/02/77/06/43/360_F_277064380_683cuB9vF3iSLZaDg8n3pCLB34OifB9c.jpg',
         3
     ),
     (
@@ -337,7 +337,7 @@ VALUES (
         'Preheat oven to 350°F (175°C). In a large bowl, combine melted butter, sugar, eggs, and vanilla. Stir in cocoa powder, flour, baking powder, and salt. Spread batter in a greased baking pan. Bake for 20-25 minutes, until a toothpick inserted into the center comes out clean.',
         35,
         16,
-        'http://example.com/brownies.jpg',
+        'https://png.pngtree.com/thumb_back/fh260/background/20230615/pngtree-brownies-a-classic-chocolate-dessert-image_2902761.jpg',
         4
     ),
     (
@@ -345,7 +345,7 @@ VALUES (
         'In a large skillet, heat oil over medium-high heat. Add chicken, onions, and bell peppers. Cook until chicken is cooked through and vegetables are tender. Stir in fajita seasoning and water. Cook until thickened. Serve with tortillas, cheese, and sour cream.',
         30,
         4,
-        'http://example.com/fajitas.jpg',
+        'https://img.freepik.com/premium-photo/macro-shot-sizzling-juicy-fajitas-with-caramelized-onions-colorful-peppers_928211-4121.jpg',
         5
     ),
     (
@@ -353,7 +353,7 @@ VALUES (
         'Preheat oven to 400°F (200°C). In a large bowl, combine tomatoes, basil, garlic, olive oil, balsamic vinegar, salt, and pepper. Spread baguette slices on a baking sheet and toast in the oven until golden brown. Top with tomato mixture and serve.',
         15,
         6,
-        'http://example.com/bruschetta.jpg',
+        'https://cdn.pixabay.com/photo/2020/10/01/22/39/gourmet-5619887_1280.jpg',
         6
     ),
     (
@@ -361,7 +361,7 @@ VALUES (
         'Preheat oven to 425°F (220°C). In a large pot, cook chicken, carrots, peas, and celery in broth until tender. In a large skillet, melt butter and stir in flour, salt, and pepper. Gradually stir in milk and cook until thickened. Stir in chicken mixture. Pour into pie crust and top with second crust. Bake for 30-35 minutes, until crust is golden brown.',
         90,
         8,
-        'http://example.com/chicken_pot_pie.jpg',
+        'https://natashaskitchen.com/wp-content/uploads/2020/10/Chicken-Pot-Pie-9.jpg',
         7
     ),
     (
@@ -369,7 +369,7 @@ VALUES (
         'Preheat oven to 325°F (165°C). In a large bowl, mix cream cheese with sugar until smooth. Blend in milk, and then mix in eggs one at a time. Stir in sour cream, vanilla, and flour until smooth. Pour filling into crust. Bake for 1 hour. Turn off the oven, and let cheesecake cool in oven with the door closed for 5 to 6 hours to prevent cracking. Chill in refrigerator until serving.',
         420,
         12,
-        'http://example.com/cheesecake.jpg',
+        'https://www.marthastewart.com/thmb/m6R1D2iuHvVxM8u7RJz7c-Us8Rg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/MSL-865202-new-york-cheesecake-hero-horiz-0723-84e3c796119d408581d1ef4d02d801cd.jpg',
         8
     ),
     (
@@ -377,7 +377,7 @@ VALUES (
         'Preheat oven to 350°F (175°C). In a small bowl, combine butter, garlic, and parsley. Spread mixture over bread slices. Arrange slices on a baking sheet and bake for 10-12 minutes, until golden brown.',
         15,
         4,
-        'http://example.com/garlic_bread.jpg',
+        'https://t4.ftcdn.net/jpg/03/19/22/35/360_F_319223572_ILWIWBuhaeyTzGPLQ0rJCVtBSGOqw864.jpg',
         9
     ),
     (
@@ -385,7 +385,7 @@ VALUES (
         'Place eggs in a saucepan and cover with cold water. Bring water to a boil and immediately remove from heat. Cover and let eggs stand in hot water for 10-12 minutes. Remove eggs from hot water, cool under cold running water, and peel. Cut eggs in half lengthwise and remove yolks. In a small bowl, mash yolks with mayonnaise, mustard, vinegar, salt, and pepper. Fill egg whites with yolk mixture and garnish with paprika.',
         30,
         12,
-        'http://example.com/deviled_eggs.jpg',
+        'https://static01.nyt.com/images/2021/10/15/dining/aw-classic-deviled-eggs/aw-classic-deviled-eggs-master768.jpg',
         10
     );
 -- Insert data into ingredients
