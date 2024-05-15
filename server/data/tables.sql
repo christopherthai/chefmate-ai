@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR NOT NULL,
     email VARCHAR NOT NULL UNIQUE,
@@ -7,7 +7,7 @@ CREATE TABLE users (
     last_login TIMESTAMP
 );
 CREATE TABLE recipes (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     title VARCHAR(255) NOT NULL UNIQUE,
     instructions TEXT NOT NULL,
     preparation_time INTEGER NOT NULL,
@@ -18,12 +18,12 @@ CREATE TABLE recipes (
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 CREATE TABLE ingredients (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR NOT NULL UNIQUE,
     category VARCHAR(150) NOT NULL
 );
 CREATE TABLE recipe_ingredients (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     recipe_id INTEGER NOT NULL,
     ingredient_id INTEGER NOT NULL,
     quantity VARCHAR NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE recipe_ingredients (
     FOREIGN KEY (ingredient_id) REFERENCES ingredients (id)
 );
 CREATE TABLE saved_recipes (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     recipe_id INTEGER NOT NULL,
     saved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
