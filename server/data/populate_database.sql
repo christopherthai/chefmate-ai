@@ -1,5 +1,5 @@
 -- Insert data into users
-INSERT INTO users (username, password_hash, email)
+INSERT INTO users (username, _password_hash, email)
 VALUES (
         'john_doe',
         'hashedpassword1',

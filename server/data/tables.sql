@@ -1,7 +1,7 @@
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR NOT NULL,
+    _password_hash VARCHAR NOT NULL,
     email VARCHAR NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP
