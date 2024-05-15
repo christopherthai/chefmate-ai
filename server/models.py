@@ -39,7 +39,7 @@ class User(db.Model, SerializerMixin):
     # Define an association proxy to access the recipes of a user
     user_saved_recipes = association_proxy("saved_recipes", "recipe")
 
-    # Serialize rules to exclude the password_hash field and the user field from the Recipe and SavedRecipes models
+    # Serialize rules to exclude the password_hash, recipes.user, and saved_recipes.user fields
     serialize_rules = (
         "-password_hash",
         "-recipes.user",
@@ -195,7 +195,7 @@ class Recipe(db.Model, SerializerMixin):
     ingredients = association_proxy("recipe_ingredients", "ingredient")
     recipe_saved_users = association_proxy("saved_recipes", "user")
 
-    # Serialize rules to exclude the user field from the User model, the recipe field from the SavedRecipes model and the recipe_ingredients field from the RecipeIngredients model
+    # Serialize rules to exclude the user.recipes, saved_recipes.recipe, and recipe_ingredients.recipe fields
     serialize_rules = (
         "-user.recipes",
         "-saved_recipes.recipe",
@@ -362,7 +362,7 @@ class Ingredient(db.Model, SerializerMixin):
     # Define an association proxy to access the recipes of an ingredient
     recipes = association_proxy("recipe_ingredients", "recipe")
 
-    # Serialize rules to exclude the recipe_ingredients field from the RecipeIngredients model
+    # Serialize rules to exclude the ingredient field from the RecipeIngredients model
     serialize_rules = ("-recipe_ingredients.ingredient",)
 
     @validates("name")
@@ -437,7 +437,7 @@ class RecipeIngredients(db.Model, SerializerMixin):
     recipe = db.relationship("Recipe", back_populates="recipe_ingredients")
     ingredient = db.relationship("Ingredient", back_populates="recipe_ingredients")
 
-    # Serialize rules to exclude the recipe_ingredients field from the RecipeIngredients model and the ingredient field from the Ingredient model
+    # Serialize rules to exclude the recipe.recipe_ingredients and ingredient.recipe_ingredients fields
     serialize_rules = (
         "-recipe.recipe_ingredients",
         "-ingredient.recipe_ingredients",
@@ -493,7 +493,7 @@ class SavedRecipes(db.Model, SerializerMixin):
     user = db.relationship("User", back_populates="saved_recipes")
     recipe = db.relationship("Recipe", back_populates="saved_recipes")
 
-    # Serialize rules to exclude the saved_recipes field from the User model and the Recipe model
+    # Serialize rules to exclude the user.saved_recipes and recipe.saved_recipes fields
     serialize_rules = (
         "-user.saved_recipes",
         "-recipe.saved_recipes",
