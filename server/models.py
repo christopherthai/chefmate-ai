@@ -25,8 +25,8 @@ class User(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    password_hash = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     last_login = db.Column(db.DateTime)
 
@@ -176,7 +176,7 @@ class Recipe(db.Model, SerializerMixin):
     __tablename__ = "recipes"
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), nullable=False)
+    title = db.Column(db.String(120), nullable=False, unique=True)
     instructions = db.Column(db.Text, nullable=False)
     preparation_time = db.Column(db.Integer, nullable=False)
     serving_size = db.Column(db.Integer, nullable=False)
@@ -335,10 +335,23 @@ class Recipe(db.Model, SerializerMixin):
 
 
 class Ingredient(db.Model, SerializerMixin):
+    """
+    Represents an ingredient in the system.
+
+    Attributes:
+        id (int): The unique identifier of the ingredient.
+        name (str): The name of the ingredient.
+        category (str): The category of the ingredient.
+
+        recipe_ingredients (Relationship): The relationship with the RecipeIngredients model.
+        recipes (AssociationProxy): The association proxy to access the recipes of an ingredient.
+        serialize_rules (tuple): The rules to exclude the recipe_ingredients field from the RecipeIngredients model.
+    """
+
     __tablename__ = "ingredients"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False, unique=True)
     category = db.Column(db.String(120), nullable=False)
 
     # Define a relationship with the RecipeIngredients model
@@ -352,11 +365,67 @@ class Ingredient(db.Model, SerializerMixin):
     # Serialize rules to exclude the recipe_ingredients field from the RecipeIngredients model
     serialize_rules = ("-recipe_ingredients.ingredient",)
 
+    @validates("name")
+    def validate_name(self, _key, name):
+        """
+        Validates the name of an ingredient.
+
+        Args:
+            _key (str): The key of the attribute being validated.
+            name (str): The name of the ingredient.
+
+        Raises:
+            AssertionError: If no name is provided or if the name is already in use.
+
+        Returns:
+            str: The validated name.
+        """
+        if not name:
+            raise AssertionError("No name provided")
+        if Ingredient.query.filter(Ingredient.name == name).first():
+            raise AssertionError("Name is already in use")
+        return name
+
+    @validates("category")
+    def validate_category(self, _key, category):
+        """
+        Validates the category of an ingredient.
+
+        Args:
+            _key (str): The key of the attribute being validated.
+            category (str): The category of the ingredient.
+
+        Raises:
+            AssertionError: If no category is provided.
+
+        Returns:
+            str: The validated category.
+        """
+        if not category:
+            raise AssertionError("No category provided")
+        return category
+
     def __repr__(self):
         return f"<Ingredient {self.name}"
 
 
 class RecipeIngredients(db.Model, SerializerMixin):
+    """
+    Represents the relationship between recipes and ingredients.
+
+    This class defines the structure of the "recipe_ingredients" table in the database.
+    It also provides methods for validating the quantity of an ingredient in a recipe.
+
+    Attributes:
+        id (int): The primary key of the recipe ingredient.
+        recipe_id (int): The foreign key referencing the recipe.
+        ingredient_id (int): The foreign key referencing the ingredient.
+        quantity (str): The quantity of the ingredient in the recipe.
+
+        recipe (Recipe): The relationship to the Recipe model.
+        ingredient (Ingredient): The relationship to the Ingredient model.
+    """
+
     __tablename__ = "recipe_ingredients"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -374,6 +443,25 @@ class RecipeIngredients(db.Model, SerializerMixin):
         "-ingredient.recipe_ingredients",
     )
 
+    @validates("quantity")
+    def validate_quantity(self, _key, quantity):
+        """
+        Validates the quantity of an ingredient in a recipe.
+
+        Args:
+            _key (str): The key of the attribute being validated.
+            quantity (str): The quantity of the ingredient in the recipe.
+
+        Raises:
+            AssertionError: If no quantity is provided.
+
+        Returns:
+            str: The validated quantity.
+        """
+        if not quantity:
+            raise AssertionError("No quantity provided")
+        return quantity
+
     def __repr__(self):
         return (
             f"<RecipeIngredients {self.recipe_id} {self.ingredient_id} {self.quantity}>"
@@ -381,6 +469,19 @@ class RecipeIngredients(db.Model, SerializerMixin):
 
 
 class SavedRecipes(db.Model, SerializerMixin):
+    """
+    Represents a saved recipe by a user.
+
+    Attributes:
+        id (int): The unique identifier of the saved recipe.
+        user_id (int): The foreign key referencing the user who saved the recipe.
+        recipe_id (int): The foreign key referencing the saved recipe.
+        saved_at (datetime): The timestamp when the recipe was saved.
+
+        user (User): The relationship to the User model.
+        recipe (Recipe): The relationship to the Recipe model.
+    """
+
     __tablename__ = "saved_recipes"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -397,6 +498,25 @@ class SavedRecipes(db.Model, SerializerMixin):
         "-user.saved_recipes",
         "-recipe.saved_recipes",
     )
+
+    @validates("saved_at")
+    def validate_saved_at(self, _key, saved_at):
+        """
+        Validates the 'saved_at' attribute.
+
+        Args:
+            _key (str): The name of the attribute being validated.
+            saved_at: The value of the 'saved_at' attribute.
+
+        Raises:
+            AssertionError: If no 'saved_at' value is provided.
+
+        Returns:
+            The validated 'saved_at' value.
+        """
+        if not saved_at:
+            raise AssertionError("No saved_at provided")
+        return saved_at
 
     def __repr__(self):
         return f"<SavedRecipes {self.user_id} {self.recipe_id}>"
