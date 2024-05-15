@@ -34,7 +34,9 @@ class User(db.Model, SerializerMixin):
     recipes = db.relationship(
         "Recipe", back_populates="user", cascade="all, delete-orphan"
     )
-    saved_recipes = db.relationship("SavedRecipes", back_populates="user")
+    saved_recipes = db.relationship(
+        "SavedRecipes", back_populates="user", cascade="all, delete-orphan"
+    )
 
     # Define an association proxy to access the recipes of a user
     user_saved_recipes = association_proxy("saved_recipes", "recipe")
@@ -188,8 +190,12 @@ class Recipe(db.Model, SerializerMixin):
 
     # Define a relationship with the user model, the RecipeIngredients model and the SavedRecipes model
     user = db.relationship("User", back_populates="recipes")
-    recipe_ingredients = db.relationship("RecipeIngredients", back_populates="recipe")
-    saved_recipes = db.relationship("SavedRecipes", back_populates="recipe")
+    recipe_ingredients = db.relationship(
+        "RecipeIngredients", back_populates="recipe", cascade="all, delete-orphan"
+    )
+    saved_recipes = db.relationship(
+        "SavedRecipes", back_populates="recipe", cascade="all, delete-orphan"
+    )
 
     # Define an association proxy to access the ingredients of a recipe and the users who saved the recipe
     ingredients = association_proxy("recipe_ingredients", "ingredient")
