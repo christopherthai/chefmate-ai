@@ -200,5 +200,104 @@ class RecipesById(Resource):
 api.add_resource(RecipesById, "/recipes/<int:recipe_id>", endpoint="recipes-by-id")
 
 
+class Ingredients(Resource):
+    def get(self):
+        ingredients = Ingredient.query.all()
+        return make_response(
+            {"ingredients": [ingredient.to_dict() for ingredient in ingredients]}, 200
+        )
+
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_ingredient = Ingredient(
+                name=data.get("name"), category=data.get("category")
+            )
+
+            db.session.add(new_ingredient)
+            db.session.commit()
+
+            return make_response(new_ingredient.to_dict(), 201)
+        except ValueError:
+            return make_response({"error": "Invalid data"}, 400)
+
+
+api.add_resource(Ingredients, "/ingredients", endpoint="ingredients")
+
+
+class RecipesByIdIngredients(Resource):
+    def get(self, recipe_id):
+        recipe = Recipe.query.filter_by(id=recipe_id).first()
+
+        if not recipe:
+            return make_response({"error": "Recipe not found"}, 404)
+
+        return make_response(
+            {
+                "ingredients": [
+                    ingredient.to_dict() for ingredient in recipe.ingredients
+                ]
+            },
+            200,
+        )
+
+    def post(self, recipe_id):
+        recipe = Recipe.query.filter_by(id=recipe_id).first()
+
+        if not recipe:
+            return make_response({"error": "Recipe not found"}, 404)
+
+        data = request.get_json()
+
+        ingredient = Ingredient.query.filter_by(id=data.get("ingredient_id")).first()
+
+        if not ingredient:
+            return make_response({"error": "Ingredient not found"}, 404)
+
+        try:
+            new_recipe_ingredient = RecipeIngredients(
+                recipe_id=recipe_id,
+                ingredient_id=data.get("ingredient_id"),
+                quantity=data.get("quantity"),
+            )
+
+            db.session.add(new_recipe_ingredient)
+            db.session.commit()
+
+            return make_response(new_recipe_ingredient.to_dict(), 201)
+        except ValueError:
+            return make_response({"error": "Invalid data"}, 400)
+
+
+api.add_resource(
+    RecipesByIdIngredients,
+    "/recipes/<int:recipe_id>/ingredients",
+    endpoint="recipes-by-id-ingredients",
+)
+
+
+class DeleteIngredientsByIdInRecipe(Resource):
+    def delete(self, recipe_id, ingredient_id):
+        recipe_ingredient = RecipeIngredients.query.filter_by(
+            recipe_id=recipe_id, ingredient_id=ingredient_id
+        ).first()
+
+        if not recipe_ingredient:
+            return make_response({"error": "Recipe ingredient not found"}, 404)
+
+        db.session.delete(recipe_ingredient)
+        db.session.commit()
+
+        return make_response({}, 204)
+
+
+api.add_resource(
+    DeleteIngredientsByIdInRecipe,
+    "/recipes/<int:recipe_id>/ingredients/<int:ingredient_id>",
+    endpoint="delete-ingredients-by-id-in-recipe",
+)
+
+
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
