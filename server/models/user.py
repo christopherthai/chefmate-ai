@@ -1,0 +1,153 @@
+from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm import validates
+from config import db
+
+
+class User(db.Model, SerializerMixin):
+    """
+    Represents a user in the system.
+
+    Attributes:
+        id (int): The unique identifier for the user.
+        username (str): The username of the user.
+        password_hash (str): The hashed password of the user.
+        email (str): The email address of the user.
+        created_at (datetime): The timestamp when the user was created.
+        last_login (datetime): The timestamp of the user's last login.
+
+        recipes (list): The list of recipes created by the user.
+        saved_recipes (list): The list of recipes saved by the user.
+        user_saved_recipes (list): The list of saved recipes associated with the user.
+    """
+
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(255), unique=True, nullable=False)
+    password_hash = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    last_login = db.Column(db.DateTime)
+
+    # Define a relationship with the Recipe model and the SavedRecipes model
+    recipes = db.relationship(
+        "Recipe", back_populates="user", cascade="all, delete-orphan"
+    )
+    saved_recipes = db.relationship(
+        "SavedRecipes", back_populates="user", cascade="all, delete-orphan"
+    )
+
+    # Define an association proxy to access the recipes of a user
+    user_saved_recipes = association_proxy("saved_recipes", "recipe")
+
+    # Serialize rules to exclude the password_hash, recipes.user, and saved_recipes.user fields
+    serialize_rules = (
+        "-password_hash",
+        "-recipes.user",
+        "-saved_recipes.user",
+    )
+
+    @validates("username")
+    def validate_username(self, _key, username):
+        """
+        Validates the username.
+
+        Args:
+            _key (str): The key of the attribute being validated.
+            username (str): The username to be validated.
+
+        Raises:
+            AssertionError: If no username is provided or if the username is already in use.
+
+        Returns:
+            str: The validated username.
+        """
+        if not username:
+            raise AssertionError("No username provided")
+        if User.query.filter(User.username == username).first():
+            raise AssertionError("Username is already in use")
+        return username
+
+    @validates("password_hash")
+    def validate_password_hash(self, _key, password_hash):
+        """
+        Validates the password hash.
+
+        Args:
+            _key (str): The key associated with the password hash.
+            password_hash (str): The password hash to be validated.
+
+        Raises:
+            AssertionError: If no password is provided.
+
+        Returns:
+            str: The validated password hash.
+        """
+        if not password_hash:
+            raise AssertionError("No password provided")
+        return password_hash
+
+    @validates("email")
+    def validate_email(self, _key, email):
+        """
+        Validates the email address.
+
+        Args:
+            _key (str): The key associated with the email attribute.
+            email (str): The email address to be validated.
+
+        Raises:
+            AssertionError: If no email is provided, if the email is already in use, or if the email address is invalid.
+
+        Returns:
+            str: The validated email address.
+        """
+        if not email:
+            raise AssertionError("No email provided")
+        if User.query.filter(User.email == email).first():
+            raise AssertionError("Email is already in use")
+        if "@" not in email:
+            raise AssertionError("Invalid email address")
+        return email
+
+    @validates("created_at")
+    def validate_created_at(self, _key, created_at):
+        """
+        Validates the 'created_at' attribute.
+
+        Args:
+            _key (str): The name of the attribute being validated.
+            created_at: The value of the 'created_at' attribute.
+
+        Raises:
+            AssertionError: If no 'created_at' value is provided.
+
+        Returns:
+            The validated 'created_at' value.
+        """
+        if not created_at:
+            raise AssertionError("No created_at provided")
+        return created_at
+
+    @validates("last_login")
+    def validate_last_login(self, _key, last_login):
+        """
+        Validates the last_login field.
+
+        Args:
+            _key (str): The name of the field being validated.
+            last_login (datetime): The value of the last_login field.
+
+        Raises:
+            AssertionError: If no last_login is provided.
+
+        Returns:
+            datetime: The validated last_login value.
+        """
+        if not last_login:
+            raise AssertionError("No last_login provided")
+        return last_login
+
+    def __repr__(self):
+        return f"<User {self.username} {self.email}>"
