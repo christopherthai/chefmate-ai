@@ -7,7 +7,33 @@ from models import User
 
 
 class Register(Resource):
+    """
+    Resource class for user registration.
+
+    This class handles the HTTP POST request for user registration.
+    It receives user data in JSON format and creates a new user in the database.
+
+    Attributes:
+        None
+
+    Methods:
+        post(self): Handles the POST request for user registration.
+
+    """
+
     def post(self):
+        """
+        Create a new user.
+
+        This method creates a new user by extracting the username, password, and email from the request JSON data.
+        It then creates a new User object with the extracted data and sets the password hash and last login time.
+        The new user is added to the database and the session is updated with the user's ID.
+        Finally, a response with the new user's data is returned.
+
+        Returns:
+            A response with the new user's data if the user is successfully created.
+            An error response with status code 422 if there is an integrity error during the creation process.
+        """
         data = request.get_json()
 
         username = data.get("username")
@@ -32,6 +58,15 @@ class Register(Resource):
 
 
 class Login(Resource):
+    """
+    Represents the login resource.
+
+    This resource handles the authentication of users by verifying their credentials.
+
+    Methods:
+    - post: Authenticates the user based on the provided username and password.
+    """
+
     def post(self):
         data = request.get_json()
 
@@ -54,9 +89,20 @@ class Login(Resource):
 
 
 class CheckSession(Resource):
+    """
+    Represents a resource for checking user session.
+
+    Methods:
+        get: Retrieves the user associated with the current session.
+    """
 
     def get(self):
+        """
+        Retrieves the user associated with the current session.
 
+        Returns:
+            A tuple containing the user's information and the HTTP status code.
+        """
         user_id = session["user_id"]
         if user_id:
             user = User.query.filter(User.id == user_id).first()
@@ -66,8 +112,27 @@ class CheckSession(Resource):
 
 
 class Logout(Resource):
-    def delete(self):
+    """
+    Represents the logout resource.
 
+    This resource handles the deletion of the user session and returns a response
+    with status code 204 if the user is successfully logged out. If the user is
+    not authenticated, it returns a response with status code 401.
+
+    Methods:
+        delete: Deletes the user session and returns a response.
+
+    """
+
+    def delete(self):
+        """
+        Deletes the user session and returns a response.
+
+        Returns:
+            A response with status code 204 if the user is successfully logged out.
+            If the user is not authenticated, it returns a response with status code 401.
+
+        """
         if session.get("user_id"):
             session["user_id"] = None
             return make_response({}, 204)
@@ -76,7 +141,25 @@ class Logout(Resource):
 
 
 class UsersById(Resource):
+    """
+    Represents a resource for handling user operations by ID.
+
+    Methods:
+    - get(user_id): Retrieves a user by ID.
+    - patch(user_id): Updates a user by ID.
+    """
+
     def get(self, user_id):
+        """
+        Retrieves a user by ID.
+
+        Args:
+        - user_id: The ID of the user to retrieve.
+
+        Returns:
+        - If the user is found, returns the user data as a dictionary with a 200 status code.
+        - If the user is not found, returns an error message with a 404 status code.
+        """
         user = User.query.filter_by(id=user_id).first()
 
         if not user:
@@ -85,6 +168,17 @@ class UsersById(Resource):
         return make_response(user.to_dict(), 200)
 
     def patch(self, user_id):
+        """
+        Updates a user by ID.
+
+        Args:
+        - user_id: The ID of the user to update.
+
+        Returns:
+        - If the user is found and the update is successful, returns the updated user data as a dictionary with a 202 status code.
+        - If the user is not found, returns an error message with a 404 status code.
+        - If the data provided for the update is invalid, returns an error message with a 400 status code.
+        """
         user = User.query.filter_by(id=user_id).first()
 
         if not user:
@@ -108,7 +202,24 @@ class UsersById(Resource):
 
 
 class RecipesByUserId(Resource):
+    """
+    Resource class for retrieving recipes by user ID.
+    """
+
     def get(self, user_id):
+        """
+        Retrieve a user's recipes by user ID.
+
+        Args:
+            user_id (int): The ID of the user.
+
+        Returns:
+            A response containing the user's recipes in JSON format.
+
+        Raises:
+            HTTPException: If the user is not found.
+
+        """
         user = User.query.filter_by(id=user_id).first()
 
         if not user:
@@ -121,6 +232,15 @@ class RecipesByUserId(Resource):
 
 
 def initialize_routes(api):
+    """
+    Initializes the routes for the user resources.
+
+    Args:
+        api: The Flask-Restful API object.
+
+    Returns:
+        None
+    """
     api.add_resource(Register, "/users/register", endpoint="register")
     api.add_resource(Login, "/users/login", endpoint="login")
     api.add_resource(CheckSession, "/users/check-session", endpoint="check-session")
