@@ -10,7 +10,11 @@ from flask_bcrypt import Bcrypt
 from sqlalchemy import MetaData
 import os
 
+# Set the base directory to the absolute path of the current file's directory
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+# Set the DATABASE variable to the value of the environment variable "DB_URI"
+# If the environment variable is not set, use a SQLite database located in the app.db file within the base directory
 DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
 
 # Instantiate app, set attributes
