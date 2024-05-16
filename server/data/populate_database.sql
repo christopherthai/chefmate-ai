@@ -390,36 +390,74 @@ VALUES (
     );
 -- Insert data into ingredients
 INSERT INTO ingredients (name, category)
-VALUES ('Flour', 'Baking'),
-    ('Sugar', 'Baking'),
-    ('Salt', 'Seasoning'),
-    ('Butter', 'Dairy'),
-    ('Eggs', 'Dairy'),
-    ('Milk', 'Dairy'),
+VALUES ('All-purpose Flour', 'Baking'),
+    ('Granulated Sugar', 'Baking'),
+    ('Kosher Salt', 'Seasoning'),
+    ('Unsalted Butter', 'Dairy'),
+    ('Large Eggs', 'Dairy'),
+    ('Whole Milk', 'Dairy'),
     ('Baking Powder', 'Baking'),
     ('Baking Soda', 'Baking'),
     ('Vanilla Extract', 'Flavoring'),
     ('Olive Oil', 'Oil'),
-    ('Garlic', 'Vegetable'),
-    ('Onion', 'Vegetable'),
-    ('Tomato', 'Vegetable'),
-    ('Chicken', 'Meat'),
-    ('Beef', 'Meat'),
-    ('Pork', 'Meat'),
-    ('Lettuce', 'Vegetable'),
-    ('Cheese', 'Dairy'),
-    ('Pasta', 'Grain'),
-    ('Rice', 'Grain'),
-    ('Potato', 'Vegetable'),
-    ('Carrot', 'Vegetable'),
-    ('Celery', 'Vegetable'),
-    ('Cucumber', 'Vegetable'),
-    ('Bell Pepper', 'Vegetable'),
-    ('Lemon', 'Fruit'),
-    ('Cilantro', 'Herb'),
-    ('Basil', 'Herb'),
-    ('Parsley', 'Herb'),
-    ('Feta Cheese', 'Dairy');
+    ('Minced Garlic', 'Vegetable'),
+    ('Yellow Onion', 'Vegetable'),
+    ('Roma Tomatoes', 'Vegetable'),
+    ('Boneless Chicken Breast', 'Meat'),
+    ('Ground Beef', 'Meat'),
+    ('Pork Ribs', 'Meat'),
+    ('Romaine Lettuce', 'Vegetable'),
+    ('Cheddar Cheese', 'Dairy'),
+    ('Spaghetti Pasta', 'Grain'),
+    ('White Rice', 'Grain'),
+    ('Russet Potatoes', 'Vegetable'),
+    ('Carrots', 'Vegetable'),
+    ('Celery Stalks', 'Vegetable'),
+    ('English Cucumber', 'Vegetable'),
+    ('Bell Peppers', 'Vegetable'),
+    ('Lemons', 'Fruit'),
+    ('Fresh Cilantro', 'Herb'),
+    ('Fresh Basil', 'Herb'),
+    ('Fresh Parsley', 'Herb'),
+    ('Crumbled Feta Cheese', 'Dairy'),
+    ('Smoked Bacon', 'Meat'),
+    ('Grated Parmesan Cheese', 'Dairy'),
+    ('Heavy Cream', 'Dairy'),
+    ('Plain Yogurt', 'Dairy'),
+    ('Red Wine', 'Beverage'),
+    ('Tomato Sauce', 'Condiment'),
+    ('Tomato Paste', 'Condiment'),
+    ('Chicken Broth', 'Beverage'),
+    ('Soy Sauce', 'Condiment'),
+    ('Sesame Oil', 'Oil'),
+    ('Bread Crumbs', 'Baking'),
+    ('Croutons', 'Baking'),
+    ('Ground Cinnamon', 'Spice'),
+    ('Ground Nutmeg', 'Spice'),
+    ('Granny Smith Apples', 'Fruit'),
+    ('Raw Shrimp', 'Seafood'),
+    ('Dry White Wine', 'Beverage'),
+    ('Chocolate Chips', 'Baking'),
+    ('Taco Shells', 'Grain'),
+    ('Salmon Fillets', 'Seafood'),
+    ('Diced Ham', 'Meat'),
+    ('Green Onions', 'Vegetable'),
+    ('Clam Juice', 'Seafood'),
+    ('Canned Clams', 'Seafood'),
+    ('Ground Sausage', 'Meat'),
+    ('Crushed Tomatoes', 'Vegetable'),
+    ('Worcestershire Sauce', 'Condiment'),
+    ('Fresh Dill', 'Herb'),
+    ('Sour Cream', 'Dairy'),
+    ('Mozzarella Cheese', 'Dairy'),
+    ('Dijon Mustard', 'Condiment'),
+    ('Anchovy Paste', 'Condiment'),
+    ('Evaporated Milk', 'Dairy'),
+    ('Pumpkin Puree', 'Vegetable'),
+    ('Hamburger Buns', 'Grain'),
+    ('Cocoa Powder', 'Baking'),
+    ('Lasagna Noodles', 'Grain'),
+    ('Red Bell Peppers', 'Vegetable');
 -- Insert data into recipe_ingredients
 -- Chocolate Cake
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
@@ -434,11 +472,11 @@ VALUES (1, 1, '2 cups'),
     (1, 9, '1 tsp');
 -- Pasta Carbonara
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES (2, 20, '12 oz'),
+VALUES (2, 19, '12 oz'),
     (2, 4, '1 tbsp'),
     (2, 5, '2 large'),
-    (2, 18, '1/2 cup'),
-    (2, 15, '8 oz'),
+    (2, 31, '1/2 cup'),
+    (2, 30, '8 oz'),
     (2, 11, '2 cloves');
 -- Chicken Curry
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
@@ -446,8 +484,8 @@ VALUES (3, 10, '2 tbsp'),
     (3, 11, '1 large'),
     (3, 14, '1 lb'),
     (3, 12, '2 cloves'),
-    (3, 13, '1 can'),
-    (3, 22, '2 large');
+    (3, 33, '1 cup'),
+    (3, 27, '2 tbsp');
 -- Beef Stew
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES (4, 15, '2 lbs'),
@@ -456,8 +494,8 @@ VALUES (4, 15, '2 lbs'),
     (4, 21, '2 cups'),
     (4, 22, '3 large'),
     (4, 23, '3 ribs'),
-    (4, 24, '1/4 cup'),
-    (4, 2, '2 tbsp');
+    (4, 36, '1/4 cup'),
+    (4, 3, '2 tbsp');
 -- Vegetable Stir Fry
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES (5, 10, '2 tbsp'),
@@ -465,7 +503,7 @@ VALUES (5, 10, '2 tbsp'),
     (5, 24, '1 large'),
     (5, 25, '1 large'),
     (5, 26, '1 large'),
-    (5, 27, '2 tbsp');
+    (5, 39, '2 tbsp');
 -- Grilled Cheese Sandwich
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES (6, 4, '2 tbsp'),
@@ -474,9 +512,12 @@ VALUES (6, 4, '2 tbsp'),
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES (7, 17, '1 head'),
     (7, 18, '1/2 cup'),
-    (7, 25, '1/4 cup'),
+    (7, 42, '1/4 cup'),
     (7, 10, '2 tbsp'),
-    (7, 12, '2 cloves');
+    (7, 12, '2 cloves'),
+    (7, 9, '1 tbsp'),
+    (7, 41, '1 tsp'),
+    (7, 40, '2 tbsp');
 -- Blueberry Muffins
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
 VALUES (8, 1, '2 cups'),
@@ -492,21 +533,264 @@ VALUES (9, 2, '1 cup'),
     (9, 26, '1 cup');
 -- Lasagna
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
-VALUES (10, 14, '1 lb'),
-    (10, 15, '1 lb'),
+VALUES (10, 15, '1 lb'),
+    (10, 56, '1 lb'),
     (10, 11, '1 large'),
     (10, 12, '2 cloves'),
-    (10, 20, '12 oz'),
+    (10, 67, '12 oz'),
     (10, 18, '2 cups');
+-- Pancakes
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (11, 1, '2 cups'),
+    (11, 7, '1 1/2 tsp'),
+    (11, 3, '1 tsp'),
+    (11, 2, '2 tbsp'),
+    (11, 6, '1 1/4 cups'),
+    (11, 5, '1 large'),
+    (11, 4, '3 tbsp');
+-- Spaghetti Bolognese
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (12, 10, '2 tbsp'),
+    (12, 11, '1 large'),
+    (12, 22, '2 stalks'),
+    (12, 14, '1 lb'),
+    (12, 13, '2 cloves'),
+    (12, 19, '12 oz');
+-- Chicken Alfredo
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (13, 19, '12 oz'),
+    (13, 4, '1/4 cup'),
+    (13, 14, '1 lb'),
+    (13, 11, '2 cloves'),
+    (13, 31, '1 cup');
+-- Greek Salad
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (14, 24, '1 large'),
+    (14, 13, '2 cloves'),
+    (14, 25, '1 large'),
+    (14, 27, '1 tbsp'),
+    (14, 29, '1/2 cup');
+-- French Toast
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (15, 5, '2 large'),
+    (15, 6, '1/2 cup'),
+    (15, 2, '1 tbsp'),
+    (15, 9, '1 tsp'),
+    (15, 7, '1 tsp'),
+    (15, 17, '4 slices');
+-- BBQ Ribs
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (16, 16, '2 lbs'),
+    (16, 3, '1 tbsp'),
+    (16, 27, '2 tbsp');
+-- Apple Pie
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (17, 43, '6 cups'),
+    (17, 2, '3/4 cup'),
+    (17, 1, '2 tbsp'),
+    (17, 3, '1/2 tsp'),
+    (17, 44, '1 tsp');
+-- Shrimp Scampi
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (18, 10, '1/4 cup'),
+    (18, 11, '2 cloves'),
+    (18, 45, '1 lb'),
+    (18, 27, '1 tbsp'),
+    (18, 46, '1/4 cup');
+-- Chocolate Chip Cookies
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (19, 4, '1 cup'),
+    (19, 2, '1 cup'),
+    (19, 3, '1/2 tsp'),
+    (19, 5, '2 large'),
+    (19, 1, '2 cups'),
+    (19, 47, '1 cup');
+-- Tacos
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (20, 14, '1 lb'),
+    (20, 18, '1/2 cup'),
+    (20, 48, '8 shells'),
+    (20, 26, '1 cup'),
+    (20, 13, '2 cloves');
+-- Baked Salmon
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (21, 49, '4 fillets'),
+    (21, 10, '1/4 cup'),
+    (21, 26, '1/4 cup'),
+    (21, 27, '2 tsp');
+-- Quiche
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (22, 5, '4 large'),
+    (22, 6, '1 cup'),
+    (22, 18, '1 cup'),
+    (22, 50, '1/2 cup'),
+    (22, 27, '1/4 cup');
+-- Fried Rice
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (23, 10, '2 tbsp'),
+    (23, 13, '2 cloves'),
+    (23, 20, '2 cups'),
+    (23, 19, '1 cup'),
+    (23, 39, '1/4 cup');
+-- Clam Chowder
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (24, 15, '1/2 lb'),
+    (24, 11, '1 large'),
+    (24, 13, '2 cloves'),
+    (24, 21, '1 cup'),
+    (24, 53, '1 cup'),
+    (24, 54, '1/2 cup');
+-- Stuffed Peppers
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (25, 14, '1 lb'),
+    (25, 24, '4 large'),
+    (25, 19, '1 cup'),
+    (25, 13, '2 cloves'),
+    (25, 18, '1/2 cup');
+-- Banana Bread
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (26, 1, '2 cups'),
+    (26, 2, '1 cup'),
+    (26, 3, '1 tsp'),
+    (26, 4, '1/2 cup'),
+    (26, 5, '2 large'),
+    (26, 6, '1 cup'),
+    (26, 7, '1 tsp');
+-- Chicken Tacos
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (27, 14, '1 lb'),
+    (27, 48, '8 shells'),
+    (27, 18, '1/2 cup'),
+    (27, 26, '1 cup'),
+    (27, 13, '2 cloves');
+-- Macaroni and Cheese
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (28, 19, '12 oz'),
+    (28, 4, '1/4 cup'),
+    (28, 18, '1 cup'),
+    (28, 11, '2 cloves'),
+    (28, 6, '1 cup');
+-- Chili
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (29, 14, '1 lb'),
+    (29, 11, '1 large'),
+    (29, 12, '2 cloves'),
+    (29, 56, '2 cans'),
+    (29, 53, '1 can'),
+    (29, 21, '1 cup');
+-- Chicken Soup
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (30, 14, '1 lb'),
+    (30, 11, '1 large'),
+    (30, 12, '2 cloves'),
+    (30, 22, '2 stalks'),
+    (30, 21, '2 cups'),
+    (30, 13, '1/2 cup');
+-- Pumpkin Pie
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (31, 65, '2 cups'),
+    (31, 2, '1 cup'),
+    (31, 61, '1 tsp'),
+    (31, 64, '1/2 tsp'),
+    (31, 5, '2 large'),
+    (31, 58, '1 can'),
+    (31, 1, '1/2 cup');
+-- Burgers
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (32, 15, '1 lb'),
+    (32, 11, '1 large'),
+    (32, 12, '2 cloves'),
+    (32, 3, '1 tsp'),
+    (32, 27, '1 tbsp'),
+    (32, 66, '4 slices');
+-- Mashed Potatoes
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (33, 21, '2 lbs'),
+    (33, 4, '1/4 cup'),
+    (33, 6, '1/2 cup'),
+    (33, 3, '1 tsp');
+-- Brownies
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (34, 4, '1/2 cup'),
+    (34, 2, '1 cup'),
+    (34, 5, '2 large'),
+    (34, 9, '1 tsp'),
+    (34, 67, '1 cup'),
+    (34, 8, '1/2 cup');
+-- Fajitas
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (35, 14, '1 lb'),
+    (35, 25, '1 large'),
+    (35, 24, '1 large'),
+    (35, 27, '1 tbsp'),
+    (35, 18, '4 tortillas');
+-- Bruschetta
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (36, 24, '4 large'),
+    (36, 27, '1 tbsp'),
+    (36, 9, '1 tsp'),
+    (36, 18, '1/4 cup'),
+    (36, 29, '1/4 cup');
+-- Chicken Pot Pie
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (37, 14, '1 lb'),
+    (37, 21, '2 cups'),
+    (37, 22, '2 stalks'),
+    (37, 23, '1 cup'),
+    (37, 18, '1 cup'),
+    (37, 25, '1 large');
+-- Cheesecake
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (38, 4, '1 cup'),
+    (38, 2, '1 cup'),
+    (38, 31, '1 cup'),
+    (38, 5, '4 large'),
+    (38, 9, '1 tsp'),
+    (38, 27, '1/4 cup');
+-- Garlic Bread
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (39, 10, '2 cloves'),
+    (39, 4, '1/4 cup'),
+    (39, 18, '1/4 cup'),
+    (39, 25, '1/4 cup'),
+    (39, 30, '1 loaf');
+-- Deviled Eggs
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity)
+VALUES (40, 5, '12 large'),
+    (40, 4, '1/4 cup'),
+    (40, 11, '1/2 cup'),
+    (40, 3, '1 tsp'),
+    (40, 27, '1/2 tsp'),
+    (40, 1, '1/4 cup');
 -- Insert data into saved_recipes
 INSERT INTO saved_recipes (user_id, recipe_id)
 VALUES (1, 2),
+    (1, 11),
+    (1, 31),
     (2, 1),
+    (2, 12),
+    (2, 32),
     (3, 4),
+    (3, 13),
+    (3, 33),
     (4, 3),
+    (4, 14),
+    (4, 34),
     (5, 6),
+    (5, 15),
+    (5, 35),
     (6, 5),
+    (6, 16),
+    (6, 36),
     (7, 8),
+    (7, 17),
+    (7, 37),
     (8, 7),
+    (8, 18),
+    (8, 38),
     (9, 10),
-    (10, 9);
+    (9, 19),
+    (9, 39),
+    (10, 9),
+    (10, 20),
+    (10, 40);
