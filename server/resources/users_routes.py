@@ -69,9 +69,9 @@ class Login(Resource):
 
     def post(self):
         """
-        Create a new user.
+        Authenticate the user.
 
-        This method handles the HTTP POST request to create a new user. It expects a JSON payload
+        This method handles the HTTP POST request to authenticate the user. It expects a JSON payload
         containing the username and password of the user. If the username and password are valid,
         the user is authenticated and added to the database. The user's last login timestamp is
         updated, and the user's ID is stored in the session. Finally, a JSON response with the user's
