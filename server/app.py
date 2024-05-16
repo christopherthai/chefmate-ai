@@ -17,6 +17,6 @@ recipes_routes.initialize_routes(api)
 ingredients_routes.initialize_routes(api)
 saved_recipes_routes.initialize_routes(api)
 
-
+# Running the app
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

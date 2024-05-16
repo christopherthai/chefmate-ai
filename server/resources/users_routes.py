@@ -68,6 +68,19 @@ class Login(Resource):
     """
 
     def post(self):
+        """
+        Create a new user.
+
+        This method handles the HTTP POST request to create a new user. It expects a JSON payload
+        containing the username and password of the user. If the username and password are valid,
+        the user is authenticated and added to the database. The user's last login timestamp is
+        updated, and the user's ID is stored in the session. Finally, a JSON response with the user's
+        details is returned.
+
+        Returns:
+            A JSON response with the user's details if the user is successfully created and authenticated.
+            Otherwise, returns a JSON response with an error message and a 401 Unauthorized status code.
+        """
         data = request.get_json()
 
         username = data.get("username")
@@ -101,12 +114,13 @@ class CheckSession(Resource):
         Retrieves the user associated with the current session.
 
         Returns:
-            A tuple containing the user's information and the HTTP status code.
+            A response containing the user data if the user is authenticated.
+            An empty response with a 401 status code if the user is not authenticated.
         """
         user_id = session["user_id"]
         if user_id:
             user = User.query.filter(User.id == user_id).first()
-            return user.to_dict(), 200
+            return make_response(user.to_dict(), 200)
 
         return {}, 401
 
