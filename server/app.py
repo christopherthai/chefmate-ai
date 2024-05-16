@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from datetime import datetime
 from flask import request, jsonify, make_response, Flask, session
 from sqlalchemy.exc import IntegrityError
 
@@ -9,7 +10,6 @@ from flask import request
 from flask_restful import Resource
 
 # Local imports
-from datetime import datetime
 from config import app, db, api
 
 # Add your model imports
