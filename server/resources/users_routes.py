@@ -105,9 +105,25 @@ class UsersById(Resource):
             return make_response({"error": "Invalid data"}, 400)
 
 
+class RecipesByUserId(Resource):
+    def get(self, user_id):
+        user = User.query.filter_by(id=user_id).first()
+
+        if not user:
+            return make_response({"error": "User not found"}, 404)
+
+        return make_response(
+            {"recipes": [recipe.to_dict() for recipe in user.recipes]},
+            200,
+        )
+
+
 def initialize_routes(api):
     api.add_resource(Register, "/users/register", endpoint="register")
     api.add_resource(Login, "/users/login", endpoint="login")
     api.add_resource(CheckSession, "/users/check-session", endpoint="check-session")
     api.add_resource(Logout, "/users/logout", endpoint="logout")
     api.add_resource(UsersById, "/users/<int:user_id>", endpoint="users-by-id")
+    api.add_resource(
+        RecipesByUserId, "/users/<int:user_id>/recipes", endpoint="recipes-by-user-id"
+    )

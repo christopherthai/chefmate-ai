@@ -29,7 +29,7 @@ class SavedRecipes(db.Model, SerializerMixin):
     user = db.relationship("User", back_populates="saved_recipes")
     recipe = db.relationship("Recipe", back_populates="saved_recipes")
 
-    # Serialize rules to exclude the user.saved_recipes and recipe.saved_recipes fields
+    # Serialize rules to avoid circular references
     serialize_rules = (
         "-user",
         "-recipe",

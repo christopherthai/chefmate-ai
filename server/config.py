@@ -14,8 +14,10 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Set the DATABASE variable to the value of the environment variable "DB_URI"
-# If the environment variable is not set, use a SQLite database located in the app.db file within the base directory
-DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}")
+# If the environment variable is not set, use a SQLite database at the path ./data/app.db relative to the base directory of the project
+DATABASE = os.environ.get(
+    "DB_URI", f"sqlite:///{os.path.join(BASE_DIR, './data/app.db')}"
+)
 
 # Instantiate app, set attributes
 app = Flask(__name__)
