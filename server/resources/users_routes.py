@@ -96,6 +96,8 @@ class UsersById(Resource):
             for attr in data:
                 setattr(user, attr, data.get(attr))
 
+            user.password_hash = data.get("password")
+
             db.session.add(user)
             db.session.commit()
 
