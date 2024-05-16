@@ -315,6 +315,16 @@ class SavedRecipesByUserId(Resource):
             200,
         )
 
+
+api.add_resource(
+    SavedRecipesByUserId,
+    "/users/<int:user_id>/saved-recipes",
+    endpoint="saved-recipes-by-user-id",
+)
+
+
+class SavedRecipesByUserIdAndRecipeId(Resource):
+
     def post(self, user_id, recipe_id):
         user = User.query.filter_by(id=user_id).first()
 
@@ -351,9 +361,9 @@ class SavedRecipesByUserId(Resource):
 
 
 api.add_resource(
-    SavedRecipesByUserId,
+    SavedRecipesByUserIdAndRecipeId,
     "/users/<int:user_id>/saved-recipes/<int:recipe_id>",
-    endpoint="saved-recipes-by-user-id",
+    endpoint="saved-recipes-by-user-id-and-recipe-id",
 )
 
 
