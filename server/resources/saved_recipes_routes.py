@@ -5,7 +5,23 @@ from models import User, Recipe, SavedRecipes
 
 
 class SavedRecipesByUserId(Resource):
+    """
+    Represents an API resource for retrieving saved recipes by user ID.
+
+    Methods:
+        get(user_id): Retrieves the saved recipes for the specified user ID.
+    """
+
     def get(self, user_id):
+        """
+        Retrieves the saved recipes for a specific user.
+
+        Args:
+            user_id (int): The ID of the user.
+
+        Returns:
+            A response containing the saved recipes for the user.
+        """
         user = User.query.filter_by(id=user_id).first()
 
         if not user:
@@ -23,8 +39,25 @@ class SavedRecipesByUserId(Resource):
 
 
 class SavedRecipesByUserIdAndRecipeId(Resource):
+    """
+    Represents an API resource for managing saved recipes by user ID and recipe ID.
+
+    Methods:
+        post(user_id, recipe_id): Create a new saved recipe for the specified user and recipe.
+        delete(user_id, recipe_id): Delete a saved recipe for the specified user and recipe.
+    """
 
     def post(self, user_id, recipe_id):
+        """
+        Create a new saved recipe for a user.
+
+        Args:
+            user_id (int): The ID of the user.
+            recipe_id (int): The ID of the recipe.
+
+        Returns:
+            A response object with the saved recipe data if successful, or an error response if unsuccessful.
+        """
         user = User.query.filter_by(id=user_id).first()
 
         if not user:
@@ -46,6 +79,17 @@ class SavedRecipesByUserIdAndRecipeId(Resource):
             return make_response({"error": "Invalid data"}, 400)
 
     def delete(self, user_id, recipe_id):
+        """
+        Delete a saved recipe for a specific user.
+
+        Args:
+            user_id (int): The ID of the user.
+            recipe_id (int): The ID of the recipe.
+
+        Returns:
+            flask.Response: The response object with status code 204 if successful,
+            or a response object with status code 404 if the saved recipe is not found.
+        """
         saved_recipe = SavedRecipes.query.filter_by(
             user_id=user_id, recipe_id=recipe_id
         ).first()
@@ -60,13 +104,22 @@ class SavedRecipesByUserIdAndRecipeId(Resource):
 
 
 def initialize_routes(api):
-    api.add_resource(
-        SavedRecipesByUserIdAndRecipeId,
-        "/users/<int:user_id>/saved-recipes/<int:recipe_id>",
-        endpoint="saved-recipes-by-user-id-and-recipe-id",
-    )
+    """
+    Initializes the routes for the saved recipes API.
+
+    Args:
+        api: The Flask-Restful API object.
+
+    Returns:
+        None
+    """
     api.add_resource(
         SavedRecipesByUserId,
         "/users/<int:user_id>/saved-recipes",
         endpoint="saved-recipes-by-user-id",
+    )
+    api.add_resource(
+        SavedRecipesByUserIdAndRecipeId,
+        "/users/<int:user_id>/saved-recipes/<int:recipe_id>",
+        endpoint="saved-recipes-by-user-id-and-recipe-id",
     )
