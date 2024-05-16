@@ -44,7 +44,7 @@ class User(db.Model, SerializerMixin):
 
     # Serialize rules to exclude the password_hash, recipes.user, and saved_recipes.user fields
     serialize_rules = (
-        "-password_hash",
+        "-_password_hash",
         "-recipes.user",
         "-saved_recipes.user",
     )

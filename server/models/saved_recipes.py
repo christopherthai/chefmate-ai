@@ -31,8 +31,8 @@ class SavedRecipes(db.Model, SerializerMixin):
 
     # Serialize rules to exclude the user.saved_recipes and recipe.saved_recipes fields
     serialize_rules = (
-        "-user.saved_recipes",
-        "-recipe.saved_recipes",
+        "-user",
+        "-recipe",
     )
 
     @validates("saved_at")
