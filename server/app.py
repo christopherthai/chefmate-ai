@@ -299,5 +299,81 @@ api.add_resource(
 )
 
 
+class SavedRecipesByUserId(Resource):
+    def get(self, user_id):
+        user = User.query.filter_by(id=user_id).first()
+
+        if not user:
+            return make_response({"error": "User not found"}, 404)
+
+        return make_response(
+            {
+                "saved_recipes": [
+                    saved_recipe.to_dict() for saved_recipe in user.saved_recipes
+                ]
+            },
+            200,
+        )
+
+    def post(self, user_id, recipe_id):
+        user = User.query.filter_by(id=user_id).first()
+
+        if not user:
+            return make_response({"error": "User not found"}, 404)
+
+        recipe = Recipe.query.filter_by(id=recipe_id).first()
+
+        if not recipe:
+            return make_response({"error": "Recipe not found"}, 404)
+
+        try:
+            new_saved_recipe = SavedRecipes(user_id=user_id, recipe_id=recipe_id)
+
+            db.session.add(new_saved_recipe)
+            db.session.commit()
+
+            return make_response(new_saved_recipe.to_dict(), 201)
+        except ValueError:
+            return make_response({"error": "Invalid data"}, 400)
+
+    def delete(self, user_id, recipe_id):
+        saved_recipe = SavedRecipes.query.filter_by(
+            user_id=user_id, recipe_id=recipe_id
+        ).first()
+
+        if not saved_recipe:
+            return make_response({"error": "Saved recipe not found"}, 404)
+
+        db.session.delete(saved_recipe)
+        db.session.commit()
+
+        return make_response({}, 204)
+
+
+api.add_resource(
+    SavedRecipesByUserId,
+    "/users/<int:user_id>/saved-recipes/<int:recipe_id>",
+    endpoint="saved-recipes-by-user-id",
+)
+
+
+class RecipesByUserId(Resource):
+    def get(self, user_id):
+        user = User.query.filter_by(id=user_id).first()
+
+        if not user:
+            return make_response({"error": "User not found"}, 404)
+
+        return make_response(
+            {"recipes": [recipe.to_dict() for recipe in user.recipes]},
+            200,
+        )
+
+
+api.add_resource(
+    RecipesByUserId, "/users/<int:user_id>/recipes", endpoint="recipes-by-user-id"
+)
+
+
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
