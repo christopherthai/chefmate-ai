@@ -204,6 +204,9 @@ class UsersById(Resource):
 class RecipesByUserId(Resource):
     """
     Resource class for retrieving recipes by user ID.
+
+    Methods:
+        get(self, user_id): Retrieves a user's recipes by user ID.
     """
 
     def get(self, user_id):
