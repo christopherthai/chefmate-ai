@@ -68,7 +68,7 @@ class CheckSession(Resource):
 class Logout(Resource):
     def delete(self):
 
-        if "user_id" in session:
+        if session.get("user_id"):
             session["user_id"] = None
             return make_response({}, 204)
 
