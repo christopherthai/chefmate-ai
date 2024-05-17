@@ -1,9 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Container, Typography, Button } from "@mui/material";
 
+/**
+ * Page component for the 404 Not Found page
+ * @component
+ * @returns {JSX.Element} JSX.Element
+ */
 function NotFoundPage() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook from react-router-dom to navigate to different pages
 
+  /**
+   * Redirects the user to the home page
+   * @returns {void}
+   */
   const handleGoHome = () => {
     navigate("/");
   };

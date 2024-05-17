@@ -1,6 +1,11 @@
 import { Typography, Container, Box, Grid } from "@mui/material";
 import RecipeImage from "../images/Recipes.jpg";
 
+/**
+ * Page component for the About page
+ * @component
+ * @returns {JSX.Element} JSX.Element
+ */
 function AboutPage() {
   return (
     <Grid
@@ -29,7 +34,7 @@ function AboutPage() {
           </Box>
         </Grid>
 
-        <Box sx={{ marginBottom: "3rem" }}>
+        <Box sx={{ marginBottom: "2rem" }}>
           <Typography variant="h6" gutterBottom>
             How It Works
           </Typography>
