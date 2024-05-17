@@ -33,12 +33,22 @@ class Register(Resource):
         Returns:
             A response with the new user's data if the user is successfully created.
             An error response with status code 422 if there is an integrity error during the creation process.
+            An error response with status code 400 if the username or email is already in use.
         """
         data = request.get_json()
 
         username = data.get("username")
         password = data.get("password")
         email = data.get("email")
+
+        existing_user = User.query.filter_by(username=username).first()
+        existing_email = User.query.filter_by(email=email).first()
+
+        if existing_user is not None:
+            return {"error": "Username is already in use"}, 400
+
+        if existing_email is not None:
+            return {"error": "Email address is already in use"}, 400
 
         new_user = User(username=username, email=email)
 

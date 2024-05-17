@@ -40,7 +40,7 @@ function LoginForm() {
     <Container
       component="main"
       maxWidth="xs"
-      sx={{ marginTop: 25, paddingBottom: "40.5rem" }}
+      sx={{ marginTop: 25, paddingBottom: "42rem" }}
     >
       <CssBaseline />
       <Box
