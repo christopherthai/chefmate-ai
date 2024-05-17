@@ -1,42 +1,45 @@
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import {
   Drawer,
-  Button,
+  ListItemButton,
   List,
-  ListItem,
   ListItemText,
   Box,
   AppBar,
   Toolbar,
   IconButton,
   ListItemIcon,
+  Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
+import ExploreIcon from "@mui/icons-material/Explore";
+import KitchenIcon from "@mui/icons-material/Kitchen";
 
 function NavBar() {
-  const theme = useTheme(); // Get the theme object
+  const theme = useTheme(); // Get the theme object from the context
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
-  const [isCollapsed, setIsCollapsed] = useState(isMobile);
-  const [isOpen, setIsOpen] = useState(!isMobile);
+  const [isSideBarCollapsed, setIsSideBarCollapsed] = useState(isMobile); // Set the initial state of the sidebar when it is collapsed
+  const [isSideBarOpen, setIsSideBarOpen] = useState(!isMobile); // Set the initial state of the sidebar when it is open
 
-  // Update isCollapsed when isMobile changes and set isOpen to !isMobile
+  // Update isSideBarCollapsed when isMobile changes and set isSideBarOpen to !isMobile
   useEffect(() => {
-    setIsCollapsed(isMobile);
-    setIsOpen(!isMobile);
+    setIsSideBarCollapsed(isMobile);
+    setIsSideBarOpen(!isMobile);
   }, [isMobile]);
 
-  // Toggle the collapsed state
+  //Toggles the collapse state of the sidebar.
   const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
+    setIsSideBarCollapsed(!isSideBarCollapsed);
   };
 
-  // Toggle the open state
+  //Toggles the state of the side bar.
   const toggleOpen = () => {
-    setIsOpen(!isOpen);
+    setIsSideBarOpen(!isSideBarOpen);
   };
 
   return (
@@ -54,49 +57,117 @@ function NavBar() {
           >
             <MenuIcon />
           </IconButton>
+          <Box sx={{ display: "flex", width: "35%" }}>
+            <Typography
+              variant="h1"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                fontSize: "25px",
+                fontFamily: "'Roboto', sans-serif",
+                width: "20%",
+              }}
+            >
+              ChefMate AI
+            </Typography>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
         sx={{
-          width: isMobile ? 220 : isCollapsed ? 60 : 220, // Set the width of the drawer
-          flexShrink: 0, // Prevent the drawer from shrinking in flex layout
           "& .MuiDrawer-paper": {
-            width: isMobile ? 220 : isCollapsed ? 60 : 220, // Set the width of the drawer
-            boxSizing: "border-box", // Prevent the width from increasing due to padding
-            backgroundColor: "#f5f5f5", // Set the background color of the drawer
+            width: isMobile ? 220 : isSideBarCollapsed ? 220 : 60,
+            boxSizing: "border-box",
+            backgroundColor: "#f5f5f5",
           },
         }}
         anchor="left"
-        open={isOpen}
+        open={isSideBarOpen}
         variant="persistent"
       >
-        <Toolbar /> {/* This is the spacer */}
-        <Box sx={{ overflow: isCollapsed ? "hidden" : "auto" }}>
+        <Toolbar />
+        <Box sx={{ overflow: "hidden" }}>
           <List>
-            <ListItem button>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <InfoIcon />
-              </ListItemIcon>
-              <ListItemText primary="About" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Explore Recipe" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Create Recipe" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="My Recipes" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Login" />
-            </ListItem>
+            <ListItemButton component={NavLink} to="/">
+              {!isSideBarCollapsed ? (
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  width="25px"
+                >
+                  <HomeIcon />
+                  <Typography variant="caption">Home</Typography>
+                </Box>
+              ) : (
+                <>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Home" />
+                </>
+              )}
+            </ListItemButton>
+            <ListItemButton component={NavLink} to="/about">
+              {!isSideBarCollapsed ? (
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  width="25px"
+                >
+                  <InfoIcon />
+                  <Typography variant="caption">About</Typography>
+                </Box>
+              ) : (
+                <>
+                  <ListItemIcon>
+                    <InfoIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="About" />
+                </>
+              )}
+            </ListItemButton>
+            <ListItemButton component={NavLink} to="/explore">
+              {!isSideBarCollapsed ? (
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  width="25px"
+                >
+                  <ExploreIcon />
+                  <Typography variant="caption">Explore</Typography>
+                </Box>
+              ) : (
+                <>
+                  <ListItemIcon>
+                    <ExploreIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Explore Recipes" />
+                </>
+              )}
+            </ListItemButton>
+            <ListItemButton component={NavLink} to="/create-recipe">
+              {!isSideBarCollapsed ? (
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  width="25px"
+                >
+                  <KitchenIcon />
+                  <Typography variant="caption">Create</Typography>
+                </Box>
+              ) : (
+                <>
+                  <ListItemIcon>
+                    <KitchenIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Create Recipes" />
+                </>
+              )}
+            </ListItemButton>
           </List>
         </Box>
       </Drawer>

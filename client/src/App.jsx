@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import ExploreRecipes from "./pages/ExploreRecipes";
@@ -8,7 +7,7 @@ import RecipeDetails from "./pages/RecipeDetails";
 import CreateRecipeForm from "./pages/CreateRecipeForm";
 import EditRecipeForm from "./pages/EditRecipeForm";
 import UserProfile from "./pages/UserProfile";
-import MyRecipes from "./pages/MyRecipes";
+import YourRecipes from "./pages/YourRecipes";
 import AboutPage from "./pages/AboutPage";
 import LoginForm from "./pages/LoginForm";
 import RegistrationForm from "./pages/RegistrationForm";
@@ -24,7 +23,6 @@ function App() {
     <>
       <UserContext.Provider value={{ isLogin, setIsLogin, user, setUser }}>
         <div className="app">
-          {/* <Header /> */}
           <NavBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -33,7 +31,7 @@ function App() {
             <Route path="/create-recipe" element={<CreateRecipeForm />} />
             <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
             <Route path="/profile" element={<UserProfile />} />
-            <Route path="/my-recipe" element={<MyRecipes />} />
+            <Route path="/your-recipe" element={<YourRecipes />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegistrationForm />} />
