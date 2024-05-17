@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Drawer,
@@ -6,73 +6,59 @@ import {
   List,
   ListItemText,
   Box,
-  AppBar,
   Toolbar,
-  IconButton,
   ListItemIcon,
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import ExploreIcon from "@mui/icons-material/Explore";
 import KitchenIcon from "@mui/icons-material/Kitchen";
+import UserContext from "../UserContext";
+import Header from "./Header";
 
+/**
+ * The NavBar component displays the navigation bar of the application.
+ * @returns {JSX.Element}
+ */
 function NavBar() {
   const theme = useTheme(); // Get the theme object from the context
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
   const [isSideBarCollapsed, setIsSideBarCollapsed] = useState(isMobile); // Set the initial state of the sidebar when it is collapsed
   const [isSideBarOpen, setIsSideBarOpen] = useState(!isMobile); // Set the initial state of the sidebar when it is open
+  const { isLogin, setIsLogin } = useContext(UserContext); // Use the UserContext to access the user's login status
 
-  // Update isSideBarCollapsed when isMobile changes and set isSideBarOpen to !isMobile
+  //Update the state of the side bar based on the screen size.
   useEffect(() => {
     setIsSideBarCollapsed(isMobile);
     setIsSideBarOpen(!isMobile);
   }, [isMobile]);
 
-  //Toggles the collapse state of the sidebar.
+  /**
+   * Toggles the state of the side bar.
+   * @returns {void}
+   */
   const toggleCollapse = () => {
     setIsSideBarCollapsed(!isSideBarCollapsed);
   };
 
-  //Toggles the state of the side bar.
+  /**
+   * Toggles the state of the side bar.
+   * @returns {void}
+   */
   const toggleOpen = () => {
     setIsSideBarOpen(!isSideBarOpen);
   };
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar
-        position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="collapse drawer"
-            edge="start"
-            onClick={isMobile ? toggleOpen : toggleCollapse}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Box sx={{ display: "flex", width: "35%" }}>
-            <Typography
-              variant="h1"
-              component="div"
-              sx={{
-                flexGrow: 1,
-                fontSize: "25px",
-                fontFamily: "'Roboto', sans-serif",
-                width: "20%",
-              }}
-            >
-              ChefMate AI
-            </Typography>
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <Header
+        isMobile={isMobile}
+        toggleCollapse={toggleCollapse}
+        toggleOpen={toggleOpen}
+      />
       <Drawer
         sx={{
           "& .MuiDrawer-paper": {
