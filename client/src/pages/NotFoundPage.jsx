@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Box, Container, Typography, Button } from "@mui/material";
+import { Container, Typography, Button } from "@mui/material";
 
 /**
  * Page component for the 404 Not Found page

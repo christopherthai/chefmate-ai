@@ -1,5 +1,117 @@
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { Formik, Form, Field } from "formik";
+import { TextField } from "formik-mui";
+import {
+  Box,
+  Button,
+  Typography,
+  Container,
+  CssBaseline,
+  Avatar,
+  Grid,
+  Link,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+
+const validationSchema = Yup.object().shape({
+  username: Yup.string().required("Username is required"),
+  password: Yup.string().required("Password is required"),
+});
+
+const initialValues = {
+  username: "",
+  password: "",
+};
+
+const handleSubmit = (values, { setSubmitting }) => {
+  console.log(values);
+  setSubmitting(false);
+};
+
 function LoginForm() {
-  return <div>LoginForm</div>;
+  const navigate = useNavigate();
+
+  const handleGoToRegisterPage = () => {
+    navigate("/register");
+  };
+
+  return (
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{ marginTop: 25, paddingBottom: "40.5rem" }}
+    >
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Log In
+        </Typography>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ submitForm, isSubmitting }) => (
+            <Form>
+              <Field
+                component={TextField}
+                name="username"
+                type="text"
+                label="Username"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+              />
+              <Field
+                component={TextField}
+                type="password"
+                label="Password"
+                name="password"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                disabled={isSubmitting}
+                onClick={submitForm}
+              >
+                Log In
+              </Button>
+            </Form>
+          )}
+        </Formik>
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          sx={{ paddingTop: "1rem" }}
+        >
+          <Grid item>
+            <Link onClick={handleGoToRegisterPage} variant="body2">
+              <Box sx={{ cursor: "pointer" }}>
+                {"Don't have an account? Sign Up"}
+              </Box>
+            </Link>
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
+  );
 }
 
 export default LoginForm;
