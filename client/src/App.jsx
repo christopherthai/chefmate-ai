@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import ExploreRecipes from "./pages/ExploreRecipes";
@@ -23,6 +24,7 @@ function App() {
     <>
       <UserContext.Provider value={{ isLogin, setIsLogin, user, setUser }}>
         <div className="app">
+          {/* <Header /> */}
           <NavBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
