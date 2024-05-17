@@ -71,32 +71,34 @@ function NavBar() {
         variant="persistent"
       >
         <Toolbar /> {/* This is the spacer */}
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <InfoIcon />
-            </ListItemIcon>
-            <ListItemText primary="About" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Explore Recipe" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Create Recipe" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="My Recipes" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Login" />
-          </ListItem>
-        </List>
+        <Box sx={{ overflow: isCollapsed ? "hidden" : "auto" }}>
+          <List>
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <InfoIcon />
+              </ListItemIcon>
+              <ListItemText primary="About" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Explore Recipe" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Create Recipe" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="My Recipes" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Login" />
+            </ListItem>
+          </List>
+        </Box>
       </Drawer>
     </Box>
   );
