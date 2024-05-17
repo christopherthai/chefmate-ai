@@ -14,6 +14,7 @@ import RegistrationForm from "./pages/RegistrationForm";
 import NotFoundPage from "./pages/NotFoundPage";
 import UserContext from "./UserContext";
 import { useState } from "react";
+import { Box } from "@mui/material";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false); // State to store the login status
@@ -24,20 +25,30 @@ function App() {
       <UserContext.Provider value={{ isLogin, setIsLogin, user, setUser }}>
         <div className="app">
           <NavBar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/explore" element={<ExploreRecipes />} />
-            <Route path="/recipes/:id" element={<RecipeDetails />} />
-            <Route path="/create-recipe" element={<CreateRecipeForm />} />
-            <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
-            <Route path="/profile" element={<UserProfile />} />
-            <Route path="/your-recipe" element={<YourRecipes />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<RegistrationForm />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-          <Footer />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "99vh", // This makes sure the container takes up the full height of the viewport
+            }}
+          >
+            <Box sx={{ flex: "1 0 auto" }}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/explore" element={<ExploreRecipes />} />
+                <Route path="/recipes/:id" element={<RecipeDetails />} />
+                <Route path="/create-recipe" element={<CreateRecipeForm />} />
+                <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
+                <Route path="/profile" element={<UserProfile />} />
+                <Route path="/your-recipe" element={<YourRecipes />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/login" element={<LoginForm />} />
+                <Route path="/register" element={<RegistrationForm />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Box>
+            <Footer />
+          </Box>
         </div>
       </UserContext.Provider>
     </>

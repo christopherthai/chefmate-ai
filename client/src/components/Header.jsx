@@ -1,6 +1,13 @@
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Box, AppBar, Toolbar, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Icon,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
@@ -32,26 +39,29 @@ function Header({ isMobile, toggleCollapse, toggleOpen }) {
         >
           <MenuIcon />
         </IconButton>
+
         <Box sx={{ display: "flex", width: "35%" }}>
-          <Typography
-            variant="h1"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              fontSize: "25px",
-              fontFamily: "'Roboto', sans-serif",
-              width: "20%",
-            }}
-          >
-            ChefMate AI
-          </Typography>
+          <IconButton color="inherit" component={NavLink} to="/">
+            <Typography
+              variant="h1"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                fontSize: "25px",
+                fontFamily: "'Roboto', sans-serif",
+                width: "20%",
+              }}
+            >
+              ChefMate AI
+            </Typography>
+          </IconButton>
         </Box>
         <Box flexGrow={1} />
         <Box display="flex" alignItems="center">
           <IconButton color="inherit" component={NavLink} to="/login">
             <AccountCircle sx={{ mr: 1 }} />
             <Typography variant="h6" component="div">
-              Sign In
+              Log In
             </Typography>
           </IconButton>
         </Box>
