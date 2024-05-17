@@ -12,7 +12,7 @@ function AboutPage() {
       container
       direction="column"
       justifyContent="center"
-      style={{ minHeight: "10vh" }}
+      style={{ minHeight: "10vh", paddingBottom: "0.2rem" }}
     >
       <Container sx={{ padding: { xs: "5rem", md: "10rem" } }}>
         <Typography

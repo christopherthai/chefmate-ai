@@ -5,10 +5,9 @@ function Footer() {
     <Box
       sx={{
         textAlign: "center",
-        marginTop: "4rem",
-        position: "relative",
-        bottom: 20,
+        marginTop: "2rem",
         width: "100%",
+        paddingTop: "3rem",
       }}
     >
       <Typography variant="body1" color="text.secondary">

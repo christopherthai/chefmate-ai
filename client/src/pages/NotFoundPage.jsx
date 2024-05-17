@@ -19,7 +19,12 @@ function NotFoundPage() {
 
   return (
     <Container
-      sx={{ textAlign: "center", padding: "0rem", marginTop: "16rem" }}
+      sx={{
+        textAlign: "center",
+        padding: "0rem",
+        marginTop: "16rem",
+        paddingBottom: "40rem",
+      }}
     >
       <Typography
         variant="h1"
