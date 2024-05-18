@@ -14,41 +14,47 @@ import RegistrationForm from "./pages/RegistrationForm";
 import NotFoundPage from "./pages/NotFoundPage";
 import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { store } from "./store";
+
+// Create a new instance of QueryClient
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <>
       <Provider store={store}>
-        <CssBaseline />
-        <div className="app">
-          <NavBar />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              minHeight: "99vh", // This makes sure the container takes up the full height of the viewport
-            }}
-          >
-            <Box sx={{ flex: "1 0 auto" }}>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/explore" element={<ExploreRecipes />} />
-                <Route path="/recipes/:id" element={<RecipeDetails />} />
-                <Route path="/create-recipe" element={<CreateRecipeForm />} />
-                <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
-                <Route path="/profile" element={<UserProfile />} />
-                <Route path="/your-recipe" element={<YourRecipes />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/login" element={<LoginForm />} />
-                <Route path="/register" element={<RegistrationForm />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
+        <QueryClientProvider client={queryClient}>
+          <CssBaseline />
+          <div className="app">
+            <NavBar />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "99vh", // This makes sure the container takes up the full height of the viewport
+              }}
+            >
+              <Box sx={{ flex: "1 0 auto" }}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/explore" element={<ExploreRecipes />} />
+                  <Route path="/recipes/:id" element={<RecipeDetails />} />
+                  <Route path="/create-recipe" element={<CreateRecipeForm />} />
+                  <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
+                  <Route path="/profile" element={<UserProfile />} />
+                  <Route path="/your-recipe" element={<YourRecipes />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/login" element={<LoginForm />} />
+                  <Route path="/register" element={<RegistrationForm />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+              </Box>
+              <Footer />
             </Box>
-            <Footer />
-          </Box>
-        </div>
+          </div>
+        </QueryClientProvider>
       </Provider>
     </>
   );

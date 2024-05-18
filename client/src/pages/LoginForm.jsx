@@ -12,6 +12,8 @@ import {
   Link,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useMutation } from "react-query";
+import axios from "axios";
 
 /**
  * Validation schema for the login form
@@ -34,19 +36,6 @@ const initialValues = {
 };
 
 /**
- * Handles the form submission
- * @param {Object} values - Form values
- * @param {Object} formikBag - Formik bag
- * @param {Function} formikBag.setSubmitting - Set the submitting state
- * @returns {void}
- *
- */
-const handleSubmit = (values, { setSubmitting }) => {
-  console.log(values);
-  setSubmitting(false);
-};
-
-/**
  * Login form component
  * @component
  * @return {JSX.Element}
@@ -54,6 +43,24 @@ const handleSubmit = (values, { setSubmitting }) => {
 function LoginForm() {
   const navigate = useNavigate(); // Navigation object
 
+  // Login mutation function using react-query useMutation hook to send a POST request to the server to login the user with the given values
+  const loginMutation = useMutation(
+    (values) => axios.post("/api/users/login", values),
+    {
+      onSuccess: (data) => {
+        console.log("Logged in successfully:", data);
+        navigate("/");
+      },
+      onError: (error) => {
+        console.error("Error logging in:", error);
+      },
+    }
+  );
+
+  const handleSubmit = (values, { setSubmitting }) => {
+    loginMutation.mutate(values);
+    setSubmitting(false);
+  };
   /**
    * Navigates to the register page
    * @function

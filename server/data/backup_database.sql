@@ -8,16 +8,19 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP
 );
-INSERT INTO users VALUES(1,'john_doe','hashedpassword1','john@example.com','2024-05-16 13:45:58',NULL);
-INSERT INTO users VALUES(2,'jane_doe','hashedpassword2','jane@example.com','2024-05-16 13:45:58',NULL);
-INSERT INTO users VALUES(3,'alice_smith','hashedpassword3','alice@example.com','2024-05-16 13:45:58',NULL);
-INSERT INTO users VALUES(4,'bob_jones','hashedpassword4','bob@example.com','2024-05-16 13:45:58',NULL);
-INSERT INTO users VALUES(5,'carol_white','hashedpassword5','carol@example.com','2024-05-16 13:45:58',NULL);
-INSERT INTO users VALUES(6,'dave_brown','hashedpassword6','dave@example.com','2024-05-16 13:45:58',NULL);
-INSERT INTO users VALUES(7,'eve_black','hashedpassword7','eve@example.com','2024-05-16 13:45:58',NULL);
-INSERT INTO users VALUES(8,'frank_gray','hashedpassword8','frank@example.com','2024-05-16 13:45:58',NULL);
-INSERT INTO users VALUES(9,'grace_hall','hashedpassword9','grace@example.com','2024-05-16 13:45:58',NULL);
-INSERT INTO users VALUES(10,'hank_lopez','hashedpassword10','hank@example.com','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(1,'john_doe','$2b$12$r.ijiRsf40Lqq75uBBPa6ekf8po6dOE1Sv3TAM0OmCc6Lt5MFbh1m','john@example.com','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(2,'jane_doe','$2b$12$RTuryqp6iKPJjyevvtgRpO671CuVx6l2kWvcdIr9UPqmBQzd8JQHa','jane@example.com','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(3,'alice_smith','$2b$12$ko3/otX6ngQHwBH45Bhew.CifGiQfgT9DYipNjCbP/30cyrdX84Ee','alice@example.com','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(4,'bob_jones','$2b$12$ZCjPnTTzpBb88XjTH7mXXeQpGDFgPGuSJp3/.gdUOCIhWEHVIzDYK','bob@example.com','2024-05-16 13:45:58','2024-05-18 16:33:19.350851');
+INSERT INTO users VALUES(5,'carol_white','$2b$12$JO.3Ej4A0SfgXmRMEgJ0wOaN4711unFB/eK.iGiJcx2/Nr58AG61y','carol@example.com','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(6,'dave_brown','$2b$12$mCJeL92OyZXgTNGX8ABTZOSIKfPxAuXdbbXR07qtj1Wc4w1rv9AWG','test@exampoe','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(7,'eve_black','$2b$12$GGfQ0QlwszwoWhnRhcNo9uGWEyYCd48lKhw5Kh18IGdP0wkAHdILy','eve@example.com','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(8,'frank_gray','$2b$12$oyHAV28msUW4anT9wW1nQeGulgUHIJR0SD9Vrw49bYX8h0HGoVUgG','frank@example.com','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(9,'grace_hall','$2b$12$ekgolUapOWTe.cBUNWMguuOZfjNoD2fyLN9p0PqtC3xJxEwNknGZa','grace@example.com','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(10,'hank_lopez','$2b$12$L.UyGEL4idBWZuDYk5vfzuMHWJqg8sQ/jGrikCImL1GsxIn0WgQqe','hank@example.com','2024-05-16 13:45:58',NULL);
+INSERT INTO users VALUES(11,'test_user','$2b$12$PamntBJe/N2oZhhG5/D2u.WJAa30Brm0nhHi1d/DEYs4nNFICiDLi','test1@example.com','2024-05-16 16:11:15','2024-05-16 12:11:15.447849');
+INSERT INTO users VALUES(12,'test_user1','$2b$12$ENIA8LtYBZD6po9PSjofP.PQb8T8LTWDR0oS0xoUMv8ElcYttmzAy','test2@example.com','2024-05-16 16:24:40','2024-05-16 12:24:40.436407');
+INSERT INTO users VALUES(13,'test_user2','$2b$12$g2sHsnorw7WiUlHDSCtbXuRW39XHuHPDVcurpjlViul/qLHyqOb8i','test3@example.com','2024-05-16 16:25:08','2024-05-16 12:38:14.489412');
 CREATE TABLE recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title VARCHAR(255) NOT NULL UNIQUE,
@@ -142,6 +145,7 @@ INSERT INTO ingredients VALUES(65,'Hamburger Buns','Grain');
 INSERT INTO ingredients VALUES(66,'Cocoa Powder','Baking');
 INSERT INTO ingredients VALUES(67,'Lasagna Noodles','Grain');
 INSERT INTO ingredients VALUES(68,'Red Bell Peppers','Vegetable');
+INSERT INTO ingredients VALUES(69,'Apple','Fruit');
 CREATE TABLE recipe_ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     recipe_id INTEGER NOT NULL,
@@ -363,7 +367,6 @@ INSERT INTO recipe_ingredients VALUES(210,38,5,'4 large');
 INSERT INTO recipe_ingredients VALUES(211,38,9,'1 tsp');
 INSERT INTO recipe_ingredients VALUES(212,38,27,'1/4 cup');
 INSERT INTO recipe_ingredients VALUES(213,39,10,'2 cloves');
-INSERT INTO recipe_ingredients VALUES(214,39,4,'1/4 cup');
 INSERT INTO recipe_ingredients VALUES(215,39,18,'1/4 cup');
 INSERT INTO recipe_ingredients VALUES(216,39,25,'1/4 cup');
 INSERT INTO recipe_ingredients VALUES(217,39,30,'1 loaf');
@@ -412,9 +415,9 @@ INSERT INTO saved_recipes VALUES(28,10,9,'2024-05-16 13:45:58');
 INSERT INTO saved_recipes VALUES(29,10,20,'2024-05-16 13:45:58');
 INSERT INTO saved_recipes VALUES(30,10,40,'2024-05-16 13:45:58');
 DELETE FROM sqlite_sequence;
-INSERT INTO sqlite_sequence VALUES('users',10);
-INSERT INTO sqlite_sequence VALUES('recipes',40);
-INSERT INTO sqlite_sequence VALUES('ingredients',68);
-INSERT INTO sqlite_sequence VALUES('recipe_ingredients',223);
-INSERT INTO sqlite_sequence VALUES('saved_recipes',30);
+INSERT INTO sqlite_sequence VALUES('users',13);
+INSERT INTO sqlite_sequence VALUES('recipes',42);
+INSERT INTO sqlite_sequence VALUES('ingredients',69);
+INSERT INTO sqlite_sequence VALUES('recipe_ingredients',225);
+INSERT INTO sqlite_sequence VALUES('saved_recipes',31);
 COMMIT;
