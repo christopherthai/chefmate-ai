@@ -14,24 +14,52 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
+/**
+ * Validation schema for the login form
+ * @constant
+ * @type {Yup.ObjectSchema}
+ */
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
   password: Yup.string().required("Password is required"),
 });
 
+/**
+ * Initial values for the login form
+ * @constant
+ * @type {Object}
+ */
 const initialValues = {
   username: "",
   password: "",
 };
 
+/**
+ * Handles the form submission
+ * @param {Object} values - Form values
+ * @param {Object} formikBag - Formik bag
+ * @param {Function} formikBag.setSubmitting - Set the submitting state
+ * @returns {void}
+ *
+ */
 const handleSubmit = (values, { setSubmitting }) => {
   console.log(values);
   setSubmitting(false);
 };
 
+/**
+ * Login form component
+ * @component
+ * @return {JSX.Element}
+ */
 function LoginForm() {
   const navigate = useNavigate();
 
+  /**
+   * Navigates to the register page
+   * @function
+   * @returns {void}
+   */
   const handleGoToRegisterPage = () => {
     navigate("/register");
   };
