@@ -28,9 +28,9 @@ function NavBar() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
   const [isSideBarCollapsed, setIsSideBarCollapsed] = useState(false); // Set the initial state of the sidebar when it is collapsed
   const [isSideBarOpen, setIsSideBarOpen] = useState(false); // Set the initial state of the sidebar when it is open
-  const { isLogin, setIsLogin } = useContext(UserContext); // Use the UserContext to access the user's login status
   const [width, setWidth] = useState(220); // Set the initial width of the sidebar
   const [prevIsMobile, setPrevIsMobile] = useState(isMobile); // Set the initial state of the previous screen size
+  const { isLogin, setIsLogin } = useContext(UserContext); // Use the UserContext to access the user's login status
 
   //Set the initial state of the sidebar based on the screen size.
   useEffect(() => {

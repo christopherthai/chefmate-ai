@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { PersonOutline } from "@mui/icons-material";
 
 /**
  * The Header component displays the header of the application.
@@ -59,7 +60,7 @@ function Header({ isMobile, toggleCollapse, toggleOpen }) {
         <Box flexGrow={1} />
         <Box display="flex" alignItems="center">
           <IconButton color="inherit" component={NavLink} to="/login">
-            <AccountCircle sx={{ mr: 1 }} />
+            <PersonOutline sx={{ mr: 1 }} />
             <Typography variant="h6" component="div">
               Log In
             </Typography>
