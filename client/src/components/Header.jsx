@@ -8,6 +8,7 @@ import { PersonOutline } from "@mui/icons-material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import {
   setIsSidebarCollapsed,
   setIsSidebarOpen,
@@ -20,6 +21,7 @@ import {
 function Header() {
   const theme = useTheme(); // Get the theme object from the context
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
+  const [anchorEl, setAnchorEl] = useState(null); // Set the anchor element for the menu
 
   // Get the navbar state from the store
   const { isSidebarCollapsed, isSidebarOpen } = useSelector(
@@ -36,6 +38,23 @@ function Header() {
   // Toggle the sidebar open state
   const toggleOpen = () => {
     dispatch(setIsSidebarOpen(!isSidebarOpen));
+  };
+
+  /**
+   * Handle the click event for the account icon
+   * @param {Event} event
+   * @returns {void}
+   */
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  /**
+   * Handle the close event for the menu
+   * @returns {void}
+   */
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -71,16 +90,31 @@ function Header() {
         </Box>
         <Box flexGrow={1} />
         <Box display="flex" alignItems="center">
-          <IconButton color="inherit" component={NavLink} to="/login">
-            {isLoggedIn ? (
-              <AccountCircle sx={{ mr: 1 }} />
-            ) : (
+          {!isLoggedIn ? (
+            <IconButton color="inherit" component={NavLink} to="/login">
               <PersonOutline sx={{ mr: 1 }} />
-            )}
-            <Typography variant="h6" component="div">
-              {isLoggedIn ? "" : "Log In"}
-            </Typography>
-          </IconButton>
+              <Typography variant="h6" component="div">
+                {"Log In"}
+              </Typography>
+            </IconButton>
+          ) : (
+            <>
+              <IconButton color="inherit" onClick={handleClick}>
+                <AccountCircle sx={{ mr: 1 }} />
+              </IconButton>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>Your Recipes</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+              </Menu>
+            </>
+          )}
         </Box>
       </Toolbar>
     </AppBar>

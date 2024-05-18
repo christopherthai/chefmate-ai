@@ -58,7 +58,7 @@ function NavBar() {
     }
   };
   // Check the session of the user when the component mounts using the useQuery hook
-  const { data } = useQuery("session", checkSession);
+  const { data, isError, error, isLoading } = useQuery("session", checkSession);
 
   // Set the initial state of the sidebar based on the screen size.
   useEffect(() => {
