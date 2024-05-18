@@ -127,12 +127,12 @@ class CheckSession(Resource):
             A response containing the user data if the user is authenticated.
             An empty response with a 401 status code if the user is not authenticated.
         """
-        user_id = session["user_id"]
+        user_id = session.get("user_id")
         if user_id:
             user = User.query.filter(User.id == user_id).first()
             return make_response(user.to_dict(), 200)
 
-        return {}, 401
+        return {"error": "401 Unauthorized"}, 401
 
 
 class Logout(Resource):

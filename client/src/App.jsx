@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
@@ -16,11 +17,17 @@ import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
+
 import { store } from "./store";
 
 // Create a new instance of QueryClient
 const queryClient = new QueryClient();
 
+/**
+ * The App component is the root component of the application.
+ * @component
+ * @return {JSX.Element}
+ */
 function App() {
   return (
     <>

@@ -5,7 +5,7 @@ import {
   setWidth,
   setPrevIsMobile,
 } from "../store/actions/navbarActions";
-
+import { setIsLoggedIn, setUser } from "../store/actions/userActions";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {
@@ -25,7 +25,8 @@ import InfoIcon from "@mui/icons-material/Info";
 import ExploreIcon from "@mui/icons-material/Explore";
 import KitchenIcon from "@mui/icons-material/Kitchen";
 import Header from "./Header";
-
+import axios from "axios";
+import { useQuery } from "react-query";
 /**
  * The NavBar component displays the navigation bar of the application.
  * @returns {JSX.Element}
@@ -36,6 +37,28 @@ function NavBar() {
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
   const { isSidebarCollapsed, isSidebarOpen, width, prevIsMobile } =
     useSelector((state) => state.navbar); // Get the navbar state from the store
+
+  /**
+   * Function to check the session of the user
+   * @async
+   * @function
+   * @returns {Promise<Object>}
+   * @throws {Error}
+   */
+  const checkSession = async () => {
+    try {
+      const response = await axios.get("/api/users/check-session");
+      console.log(response.data);
+      dispatch(setIsLoggedIn(true));
+      dispatch(setUser(response.data));
+      return response.data;
+    } catch (error) {
+      console.error("Error checking session: ", error);
+      return null;
+    }
+  };
+  // Check the session of the user when the component mounts using the useQuery hook
+  const { data } = useQuery("session", checkSession);
 
   // Set the initial state of the sidebar based on the screen size.
   useEffect(() => {

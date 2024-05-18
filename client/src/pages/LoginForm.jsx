@@ -51,7 +51,7 @@ function LoginForm() {
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
 
   /**
-   * Snackbar close handler
+   * Snackbar close handler function
    * @function
    * @param {Event} event - Event object
    * @param {string} reason - Reason for the close

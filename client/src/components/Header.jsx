@@ -5,6 +5,8 @@ import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { PersonOutline } from "@mui/icons-material";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setIsSidebarCollapsed,
@@ -23,7 +25,7 @@ function Header() {
   const { isSidebarCollapsed, isSidebarOpen } = useSelector(
     (state) => state.navbar
   );
-  const { user, isLoggedIn } = useSelector((state) => state.user); // Get the user object from the store
+  const { isLoggedIn } = useSelector((state) => state.user); // Get the user object from the store
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
 
   // Toggle the sidebar collapse state
@@ -71,9 +73,9 @@ function Header() {
         <Box display="flex" alignItems="center">
           <IconButton color="inherit" component={NavLink} to="/login">
             {isLoggedIn ? (
-              <AccountCircle sx={{ mr: 1 }} /> // Icon when user is logged in
+              <AccountCircle sx={{ mr: 1 }} />
             ) : (
-              <PersonOutline sx={{ mr: 1 }} /> // Icon when user is not logged in
+              <PersonOutline sx={{ mr: 1 }} />
             )}
             <Typography variant="h6" component="div">
               {isLoggedIn ? "" : "Log In"}
