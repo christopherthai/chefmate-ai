@@ -23,6 +23,7 @@ function Header() {
   const { isSidebarCollapsed, isSidebarOpen } = useSelector(
     (state) => state.navbar
   );
+  const { user, isLoggedIn } = useSelector((state) => state.user); // Get the user object from the store
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
 
   // Toggle the sidebar collapse state
@@ -69,9 +70,13 @@ function Header() {
         <Box flexGrow={1} />
         <Box display="flex" alignItems="center">
           <IconButton color="inherit" component={NavLink} to="/login">
-            <PersonOutline sx={{ mr: 1 }} />
+            {isLoggedIn ? (
+              <AccountCircle sx={{ mr: 1 }} /> // Icon when user is logged in
+            ) : (
+              <PersonOutline sx={{ mr: 1 }} /> // Icon when user is not logged in
+            )}
             <Typography variant="h6" component="div">
-              Log In
+              {isLoggedIn ? "" : "Log In"}
             </Typography>
           </IconButton>
         </Box>

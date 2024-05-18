@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { TextField } from "formik-mui";
@@ -12,8 +13,12 @@ import {
   Link,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import { useMutation } from "react-query";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser, setIsLoggedIn } from "../store/actions/userActions";
 
 /**
  * Validation schema for the login form
@@ -42,21 +47,55 @@ const initialValues = {
  */
 function LoginForm() {
   const navigate = useNavigate(); // Navigation object
+  const [open, setOpen] = useState(false); // State for the snackbar open status
+  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
 
-  // Login mutation function using react-query useMutation hook to send a POST request to the server to login the user with the given values
+  /**
+   * Snackbar close handler
+   * @function
+   * @param {Event} event - Event object
+   * @param {string} reason - Reason for the close
+   * @returns {void}
+   */
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  /**
+   * Login mutation function using axios post request to the server
+   * @function
+   * @param {Object} values - Login form values
+   * @returns {Promise}
+   * @throws {Error}
+   * @returns {void}
+   * @async
+   */
   const loginMutation = useMutation(
     (values) => axios.post("/api/users/login", values),
     {
-      onSuccess: (data) => {
-        console.log("Logged in successfully:", data);
+      onSuccess: (user_data) => {
+        console.log("User logged in:", user_data.data);
+        dispatch(setUser(user_data.data));
+        dispatch(setIsLoggedIn(true));
         navigate("/");
       },
       onError: (error) => {
         console.error("Error logging in:", error);
+        setOpen(true);
       },
     }
   );
 
+  /**
+   * Handles the form submission
+   * @function
+   * @param {Object} values - Form values
+   * @param {Object} formikHelpers - Formik helper functions
+   * @returns {void}
+   */
   const handleSubmit = (values, { setSubmitting }) => {
     loginMutation.mutate(values);
     setSubmitting(false);
@@ -129,6 +168,22 @@ function LoginForm() {
             </Form>
           )}
         </Formik>
+
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <MuiAlert
+            onClose={handleClose}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            {"Invalid username or password"}
+          </MuiAlert>
+        </Snackbar>
+
         <Grid
           container
           justifyContent="center"
