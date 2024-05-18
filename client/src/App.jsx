@@ -12,17 +12,14 @@ import AboutPage from "./pages/AboutPage";
 import LoginForm from "./pages/LoginForm";
 import RegistrationForm from "./pages/RegistrationForm";
 import NotFoundPage from "./pages/NotFoundPage";
-import UserContext from "./UserContext";
-import { useState } from "react";
 import { Box } from "@mui/material";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false); // State to store the login status
-  const [user, setUser] = useState(null); // State to store the user's information
-
   return (
     <>
-      <UserContext.Provider value={{ isLogin, setIsLogin, user, setUser }}>
+      <Provider store={store}>
         <div className="app">
           <NavBar />
           <Box
@@ -50,7 +47,7 @@ function App() {
             <Footer />
           </Box>
         </div>
-      </UserContext.Provider>
+      </Provider>
     </>
   );
 }

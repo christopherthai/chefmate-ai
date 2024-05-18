@@ -1,31 +1,40 @@
 import { NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Icon,
-} from "@mui/material";
+import { Box, AppBar, Toolbar, IconButton, Typography } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { PersonOutline } from "@mui/icons-material";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setIsSidebarCollapsed,
+  setIsSidebarOpen,
+} from "../store/actions/navbarActions";
 
 /**
  * The Header component displays the header of the application.
- * @param {object} props - The props of the component.
- * @param {boolean} props.isMobile - The flag to indicate if the screen is mobile.
- * @param {function} props.toggleCollapse - The function to toggle the collapse state of the sidebar.
- * @param {function} props.toggleOpen - The function to toggle the open state of the sidebar.
  * @returns {JSX.Element}
  */
-function Header({ isMobile, toggleCollapse, toggleOpen }) {
-  Header.propTypes = {
-    isMobile: PropTypes.bool.isRequired,
-    toggleCollapse: PropTypes.func.isRequired,
-    toggleOpen: PropTypes.func.isRequired,
+function Header() {
+  const theme = useTheme(); // Get the theme object from the context
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
+
+  // Get the navbar state from the store
+  const { isSidebarCollapsed, isSidebarOpen } = useSelector(
+    (state) => state.navbar
+  );
+  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
+
+  // Toggle the sidebar collapse state
+  const toggleCollapse = () => {
+    dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
   };
+
+  // Toggle the sidebar open state
+  const toggleOpen = () => {
+    dispatch(setIsSidebarOpen(!isSidebarOpen));
+  };
+
   return (
     <AppBar
       position="fixed"

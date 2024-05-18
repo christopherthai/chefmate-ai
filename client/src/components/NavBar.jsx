@@ -1,4 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setIsSidebarCollapsed,
+  setIsSidebarOpen,
+  setWidth,
+  setPrevIsMobile,
+} from "../store/actions/navbarActions";
+
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Drawer,
@@ -16,7 +24,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import ExploreIcon from "@mui/icons-material/Explore";
 import KitchenIcon from "@mui/icons-material/Kitchen";
-import UserContext from "../UserContext";
 import Header from "./Header";
 
 /**
@@ -26,55 +33,40 @@ import Header from "./Header";
 function NavBar() {
   const theme = useTheme(); // Get the theme object from the context
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
-  const [isSideBarCollapsed, setIsSideBarCollapsed] = useState(false); // Set the initial state of the sidebar when it is collapsed
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false); // Set the initial state of the sidebar when it is open
-  const [width, setWidth] = useState(220); // Set the initial width of the sidebar
-  const [prevIsMobile, setPrevIsMobile] = useState(isMobile); // Set the initial state of the previous screen size
-  const { isLogin, setIsLogin } = useContext(UserContext); // Use the UserContext to access the user's login status
+  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
+  const { isSidebarCollapsed, isSidebarOpen, width, prevIsMobile } =
+    useSelector((state) => state.navbar); // Get the navbar state from the store
 
-  //Set the initial state of the sidebar based on the screen size.
+  // Set the initial state of the sidebar based on the screen size.
   useEffect(() => {
-    setIsSideBarCollapsed(isMobile);
-    setIsSideBarOpen(!isMobile);
-  }, [isMobile]);
+    dispatch(setIsSidebarCollapsed(isMobile));
+    dispatch(setIsSidebarOpen(!isMobile));
+  }, [isMobile, dispatch]);
 
-  //Set the width of the sidebar based on the screen size.
+  // Set the width of the sidebar based on the screen size.
   useEffect(() => {
     if (isMobile && width === 60) {
-      setWidth(60);
-      setTimeout(() => setWidth(220), 1000);
+      dispatch(setWidth(60));
+      setTimeout(() => dispatch(setWidth(220)), 500);
     } else {
-      setWidth(isSideBarCollapsed ? 220 : 60);
+      dispatch(setWidth(isSidebarCollapsed ? 220 : 60));
     }
-    if (!isMobile && prevIsMobile && isSideBarOpen) {
-      setIsSideBarCollapsed(true);
+    if (!isMobile && prevIsMobile && isSidebarOpen) {
+      dispatch(setIsSidebarCollapsed(true));
     }
-    setPrevIsMobile(isMobile);
-  }, [isMobile, isSideBarCollapsed, isSideBarOpen, prevIsMobile, width]);
-
-  /**
-   * Toggles the state of the side bar.
-   * @returns {void}
-   */
-  const toggleCollapse = () => {
-    setIsSideBarCollapsed(!isSideBarCollapsed);
-  };
-
-  /**
-   * Toggles the state of the side bar.
-   * @returns {void}
-   */
-  const toggleOpen = () => {
-    setIsSideBarOpen(!isSideBarOpen);
-  };
+    dispatch(setPrevIsMobile(isMobile));
+  }, [
+    isMobile,
+    isSidebarCollapsed,
+    isSidebarOpen,
+    prevIsMobile,
+    width,
+    dispatch,
+  ]);
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Header
-        isMobile={isMobile}
-        toggleCollapse={toggleCollapse}
-        toggleOpen={toggleOpen}
-      />
+      <Header />
       <Drawer
         sx={{
           "& .MuiDrawer-paper": {
@@ -84,14 +76,14 @@ function NavBar() {
           },
         }}
         anchor="left"
-        open={isSideBarOpen}
+        open={isSidebarOpen}
         variant="persistent"
       >
         <Toolbar />
         <Box sx={{ overflow: "hidden" }}>
           <List>
             <ListItemButton component={NavLink} to="/">
-              {!isSideBarCollapsed ? (
+              {!isSidebarCollapsed ? (
                 <Box
                   display="flex"
                   flexDirection="column"
@@ -111,7 +103,7 @@ function NavBar() {
               )}
             </ListItemButton>
             <ListItemButton component={NavLink} to="/about">
-              {!isSideBarCollapsed ? (
+              {!isSidebarCollapsed ? (
                 <Box
                   display="flex"
                   flexDirection="column"
@@ -131,7 +123,7 @@ function NavBar() {
               )}
             </ListItemButton>
             <ListItemButton component={NavLink} to="/explore">
-              {!isSideBarCollapsed ? (
+              {!isSidebarCollapsed ? (
                 <Box
                   display="flex"
                   flexDirection="column"
@@ -151,7 +143,7 @@ function NavBar() {
               )}
             </ListItemButton>
             <ListItemButton component={NavLink} to="/create-recipe">
-              {!isSideBarCollapsed ? (
+              {!isSidebarCollapsed ? (
                 <Box
                   display="flex"
                   flexDirection="column"

@@ -1,5 +1,5 @@
 import { Typography, Container, Box, Grid } from "@mui/material";
-import RecipeImage from "../images/Recipes.jpg";
+import RecipeImage from "../assets/images/Recipes.jpg";
 
 /**
  * Page component for the About page
