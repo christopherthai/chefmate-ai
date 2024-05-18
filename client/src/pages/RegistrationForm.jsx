@@ -7,7 +7,6 @@ import {
   Button,
   Typography,
   Container,
-  CssBaseline,
   Avatar,
   Grid,
   Link,
@@ -73,7 +72,6 @@ function RegistrationForm() {
       maxWidth="xs"
       sx={{ marginTop: 25, paddingBottom: "31rem" }}
     >
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,

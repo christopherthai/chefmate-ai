@@ -13,6 +13,7 @@ import LoginForm from "./pages/LoginForm";
 import RegistrationForm from "./pages/RegistrationForm";
 import NotFoundPage from "./pages/NotFoundPage";
 import { Box } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import { Provider } from "react-redux";
 import { store } from "./store";
 
@@ -20,6 +21,7 @@ function App() {
   return (
     <>
       <Provider store={store}>
+        <CssBaseline />
         <div className="app">
           <NavBar />
           <Box
