@@ -53,7 +53,7 @@ const handleSubmit = (values, { setSubmitting }) => {
  * @return {JSX.Element}
  */
 function LoginForm() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Navigation object
 
   /**
    * Navigates to the register page
@@ -131,10 +131,12 @@ function LoginForm() {
           sx={{ paddingTop: "1rem" }}
         >
           <Grid item>
-            <Link onClick={handleGoToRegisterPage} variant="body2">
-              <Box sx={{ cursor: "pointer" }}>
-                {"Don't have an account? Sign Up"}
-              </Box>
+            <Link
+              onClick={handleGoToRegisterPage}
+              variant="body2"
+              component="button"
+            >
+              {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
         </Grid>
