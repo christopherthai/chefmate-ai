@@ -21,7 +21,7 @@ class Ingredient(db.Model, SerializerMixin):
     __tablename__ = "ingredients"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String, nullable=False)
     category = db.Column(db.String(150), nullable=False)
 
     # Define a relationship with the RecipeIngredients model
@@ -45,15 +45,13 @@ class Ingredient(db.Model, SerializerMixin):
             name (str): The name of the ingredient.
 
         Raises:
-            AssertionError: If no name is provided or if the name is already in use.
+            AssertionError: If no name is provided.
 
         Returns:
             str: The validated name.
         """
         if not name:
             raise AssertionError("No name provided")
-        if Ingredient.query.filter(Ingredient.name == name).first():
-            raise AssertionError("Name is already in use")
         return name
 
     @validates("category")
