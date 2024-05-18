@@ -26,15 +26,31 @@ import Header from "./Header";
 function NavBar() {
   const theme = useTheme(); // Get the theme object from the context
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
-  const [isSideBarCollapsed, setIsSideBarCollapsed] = useState(isMobile); // Set the initial state of the sidebar when it is collapsed
-  const [isSideBarOpen, setIsSideBarOpen] = useState(!isMobile); // Set the initial state of the sidebar when it is open
+  const [isSideBarCollapsed, setIsSideBarCollapsed] = useState(false); // Set the initial state of the sidebar when it is collapsed
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false); // Set the initial state of the sidebar when it is open
   const { isLogin, setIsLogin } = useContext(UserContext); // Use the UserContext to access the user's login status
+  const [width, setWidth] = useState(220); // Set the initial width of the sidebar
+  const [prevIsMobile, setPrevIsMobile] = useState(isMobile); // Set the initial state of the previous screen size
 
-  //Update the state of the side bar based on the screen size.
+  //Set the initial state of the sidebar based on the screen size.
   useEffect(() => {
     setIsSideBarCollapsed(isMobile);
     setIsSideBarOpen(!isMobile);
   }, [isMobile]);
+
+  //Set the width of the sidebar based on the screen size.
+  useEffect(() => {
+    if (isMobile && width === 60) {
+      setWidth(60);
+      setTimeout(() => setWidth(220), 1000);
+    } else {
+      setWidth(isSideBarCollapsed ? 220 : 60);
+    }
+    if (!isMobile && prevIsMobile && isSideBarOpen) {
+      setIsSideBarCollapsed(true);
+    }
+    setPrevIsMobile(isMobile);
+  }, [isMobile, isSideBarCollapsed, isSideBarOpen, prevIsMobile, width]);
 
   /**
    * Toggles the state of the side bar.
@@ -62,7 +78,7 @@ function NavBar() {
       <Drawer
         sx={{
           "& .MuiDrawer-paper": {
-            width: isMobile ? 220 : isSideBarCollapsed ? 220 : 60,
+            width: width,
             boxSizing: "border-box",
             backgroundColor: "#f5f5f5",
           },
