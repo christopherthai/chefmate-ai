@@ -49,7 +49,7 @@ function App() {
                   <Route path="/create-recipe" element={<CreateRecipeForm />} />
                   <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
                   <Route path="/profile" element={<UserProfile />} />
-                  <Route path="/your-recipe" element={<YourRecipes />} />
+                  <Route path="/your-recipes" element={<YourRecipes />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/login" element={<LoginForm />} />
                   <Route path="/register" element={<RegistrationForm />} />

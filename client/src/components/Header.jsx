@@ -70,6 +70,11 @@ function Header() {
     navigate("/profile");
   };
 
+  const handleRedirectToYourRecipes = () => {
+    setAnchorEl(null);
+    navigate("/your-recipes");
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -123,7 +128,9 @@ function Header() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleRedirectToProfile}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Your Recipes</MenuItem>
+                <MenuItem onClick={handleRedirectToYourRecipes}>
+                  Your Recipes
+                </MenuItem>
                 <LogOut handleClose={handleClose} />
               </Menu>
             </>

@@ -1,5 +1,11 @@
+import UserDetails from "../components/UserDetails";
+
 function UserProfile() {
-  return <div>Profile</div>;
+  return (
+    <>
+      <UserDetails />
+    </>
+  );
 }
 
 export default UserProfile;
