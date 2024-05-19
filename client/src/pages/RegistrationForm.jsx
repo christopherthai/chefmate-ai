@@ -53,7 +53,7 @@ function RegistrationForm() {
   const navigate = useNavigate(); // Navigation object
   const [open, setOpen] = useState(false); // State for the snackbar open status
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
-  const [errorMessage, setErrorMessage] = useState(""); // Add this line
+  const [errorMessage, setErrorMessage] = useState(""); // State for the error message
 
   /**
    * Snackbar close handler function
@@ -79,7 +79,7 @@ function RegistrationForm() {
         navigate("/");
       },
       onError: (error) => {
-        console.error("Error logging in:", error.response.data.error);
+        // console.error("Error logging in:", error.response.data.error);
         setErrorMessage(error.response.data.error);
         setOpen(true);
       },

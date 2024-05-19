@@ -49,6 +49,7 @@ function LoginForm() {
   const navigate = useNavigate(); // Navigation object
   const [open, setOpen] = useState(false); // State for the snackbar open status
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
+  const [errorMessage, setErrorMessage] = useState(""); // State for the error message
 
   /**
    * Snackbar close handler function
@@ -83,7 +84,7 @@ function LoginForm() {
         navigate("/");
       },
       onError: (error) => {
-        console.error("Error logging in:", error);
+        setErrorMessage(error.response.data.error);
         setOpen(true);
       },
     }
@@ -179,7 +180,7 @@ function LoginForm() {
             severity="error"
             sx={{ width: "100%" }}
           >
-            {"Invalid username or password"}
+            {errorMessage}
           </MuiAlert>
         </Snackbar>
 
