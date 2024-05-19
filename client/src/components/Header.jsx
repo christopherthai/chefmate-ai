@@ -13,6 +13,7 @@ import {
   setIsSidebarCollapsed,
   setIsSidebarOpen,
 } from "../store/actions/navbarActions";
+import LogOut from "./LogOut";
 
 /**
  * The Header component displays the header of the application.
@@ -111,7 +112,7 @@ function Header() {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>Your Recipes</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <LogOut handleClose={handleClose} />
               </Menu>
             </>
           )}

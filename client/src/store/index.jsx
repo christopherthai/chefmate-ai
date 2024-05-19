@@ -7,6 +7,7 @@ import { userReducer } from "../store/reducers/userReducer";
  * @type {object}
  * @property {object} reducer - The reducer object.
  * @property {object} navbar - The navbar reducer.
+ * @property {object} user - The user reducer.
  * @exports store
  */
 export const store = configureStore({
