@@ -54,6 +54,8 @@ function NavBar() {
       return response.data;
     } catch (error) {
       console.error("Error checking session: ", error);
+      dispatch(setIsLoggedIn(false));
+      dispatch(setUser(null));
       return null;
     }
   };

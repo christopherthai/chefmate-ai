@@ -1,6 +1,6 @@
 import MenuItem from "@mui/material/MenuItem";
 import { useDispatch } from "react-redux";
-import { setIsLoggedIn } from "../store/actions/userActions";
+import { setUser, setIsLoggedIn } from "../store/actions/userActions";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -23,13 +23,11 @@ function LogOut({ handleClose }) {
   /**
    * The useMutation hook is used to create a mutation function that can be used to log out the user.
    * The mutation function is created using an axios delete request to the /api/users/logout endpoint.
-   * The onSuccess callback is called when the mutation is successful.
-   * It dispatches the setIsLoggedIn action with a value of false to update the user state in the store. It then closes the menu and navigates to the login page.
-   * The onError callback is called when the mutation fails. It logs the error to the console.
    */
   const logOutMutation = useMutation(() => axios.delete("/api/users/logout"), {
     onSuccess: () => {
       dispatch(setIsLoggedIn(false));
+      dispatch(setUser(null));
       handleClose();
       navigate("/login");
     },

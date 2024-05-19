@@ -22,14 +22,14 @@ import LogOut from "./LogOut";
 function Header() {
   const theme = useTheme(); // Get the theme object from the context
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
+  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
   const [anchorEl, setAnchorEl] = useState(null); // Set the anchor element for the menu
+  const { isLoggedIn } = useSelector((state) => state.user); // Get the user object from the store
 
   // Get the navbar state from the store
   const { isSidebarCollapsed, isSidebarOpen } = useSelector(
     (state) => state.navbar
   );
-  const { isLoggedIn } = useSelector((state) => state.user); // Get the user object from the store
-  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
 
   // Toggle the sidebar collapse state
   const toggleCollapse = () => {
