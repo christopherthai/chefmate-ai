@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
@@ -12,6 +13,12 @@ import {
   Link,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import { useMutation } from "react-query";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser, setIsLoggedIn } from "../store/actions/userActions";
 
 /**
  * Validation schema for the registration form
@@ -42,20 +49,47 @@ const initialValues = {
   email: "",
 };
 
-/**
- * Handles the form submission
- * @param {Object} values - Form values
- * @param {Object} formikBag - Formik bag
- * @param {Function} formikBag.setSubmitting - Set the submitting state
- * @returns {void}
- */
-const handleSubmit = (values, { setSubmitting }) => {
-  console.log(values);
-  setSubmitting(false);
-};
-
 function RegistrationForm() {
   const navigate = useNavigate(); // Navigation object
+  const [open, setOpen] = useState(false); // State for the snackbar open status
+  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
+  const [errorMessage, setErrorMessage] = useState(""); // Add this line
+
+  /**
+   * Snackbar close handler function
+   * @function
+   * @param {Event} event - Event object
+   * @param {string} reason - Reason for the close
+   * @returns {void}
+   */
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const registrationMutation = useMutation(
+    (values) => axios.post("/api/users/register", values),
+    {
+      onSuccess: (user_data) => {
+        console.log("Registration:", user_data.data);
+        dispatch(setUser(user_data.data));
+        dispatch(setIsLoggedIn(true));
+        navigate("/");
+      },
+      onError: (error) => {
+        console.error("Error logging in:", error.response.data.error);
+        setErrorMessage(error.response.data.error);
+        setOpen(true);
+      },
+    }
+  );
+
+  const handleSubmit = (values, { setSubmitting }) => {
+    registrationMutation.mutate(values);
+    setSubmitting(false);
+  };
 
   /**
    * Navigates to the login page
@@ -153,6 +187,20 @@ function RegistrationForm() {
             </Grid>
           </Form>
         </Formik>
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <MuiAlert
+            onClose={handleClose}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            {errorMessage}
+          </MuiAlert>
+        </Snackbar>
       </Box>
     </Container>
   );

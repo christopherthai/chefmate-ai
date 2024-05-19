@@ -168,7 +168,6 @@ function LoginForm() {
             </Form>
           )}
         </Formik>
-
         <Snackbar
           open={open}
           autoHideDuration={6000}
