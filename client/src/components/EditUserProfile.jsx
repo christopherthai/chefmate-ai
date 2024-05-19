@@ -87,7 +87,6 @@ function EditUserProfile() {
     if (reason === "clickaway") {
       return;
     }
-
     setOpenSuccessMessageBox(false);
   };
 

@@ -1,5 +1,7 @@
+import RecipeList from "../components/Recipe/RecipeList";
+
 function ExploreRecipes() {
-  return <div>ExploreRecipes</div>;
+  return <RecipeList />;
 }
 
 export default ExploreRecipes;

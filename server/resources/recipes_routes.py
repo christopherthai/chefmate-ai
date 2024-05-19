@@ -17,7 +17,7 @@ class Recipes(Resource):
             A JSON response containing all recipes.
         """
         recipes = Recipe.query.all()
-        return make_response({"recipes": [recipe.to_dict() for recipe in recipes]}, 200)
+        return make_response([recipe.to_dict() for recipe in recipes], 200)
 
 
 class CreateRecipe(Resource):

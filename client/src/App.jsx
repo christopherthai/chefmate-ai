@@ -17,6 +17,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Create a new instance of QueryClient
 const queryClient = new QueryClient();
@@ -27,6 +29,9 @@ const queryClient = new QueryClient();
  * @return {JSX.Element}
  */
 function App() {
+  const theme = useTheme(); // Get the theme object from the context
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is small
+  const navBarWidth = 6; // Width of the navigation bar in rem units
   return (
     <>
       <Provider store={store}>
@@ -38,7 +43,8 @@ function App() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                minHeight: "99vh", // This makes sure the container takes up the full height of the viewport
+                minHeight: "99vh",
+                marginLeft: { sm: isSmallScreen ? 0 : navBarWidth },
               }}
             >
               <Box sx={{ flex: "1 0 auto" }}>
