@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Box, AppBar, Toolbar, IconButton, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
@@ -14,6 +15,7 @@ import {
   setIsSidebarOpen,
 } from "../store/actions/navbarActions";
 import LogOut from "./LogOut";
+import UserProfile from "../pages/UserProfile";
 
 /**
  * The Header component displays the header of the application.
@@ -25,6 +27,7 @@ function Header() {
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
   const [anchorEl, setAnchorEl] = useState(null); // Set the anchor element for the menu
   const { isLoggedIn } = useSelector((state) => state.user); // Get the user object from the store
+  const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
 
   // Get the navbar state from the store
   const { isSidebarCollapsed, isSidebarOpen } = useSelector(
@@ -56,6 +59,15 @@ function Header() {
    */
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  /**
+   * Handle the redirect to the profile page
+   * @returns {void}
+   */
+  const handleRedirectToProfile = () => {
+    setAnchorEl(null);
+    navigate("/profile");
   };
 
   return (
@@ -110,7 +122,7 @@ function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleRedirectToProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>Your Recipes</MenuItem>
                 <LogOut handleClose={handleClose} />
               </Menu>
