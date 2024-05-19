@@ -47,8 +47,8 @@ const initialValues = {
  */
 function LoginForm() {
   const navigate = useNavigate(); // Navigation object
-  const [open, setOpen] = useState(false); // State for the snackbar open status
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
+  const [openMessageBox, setOpenMessageBox] = useState(false); // State for the snackbar openMessageBox status
   const [errorMessage, setErrorMessage] = useState(""); // State for the error message
 
   /**
@@ -58,11 +58,11 @@ function LoginForm() {
    * @param {string} reason - Reason for the close
    * @returns {void}
    */
-  const handleClose = (event, reason) => {
+  const handleCloseMessageBox = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    setOpenMessageBox(false);
   };
 
   /**
@@ -85,7 +85,7 @@ function LoginForm() {
       },
       onError: (error) => {
         setErrorMessage(error.response.data.error);
-        setOpen(true);
+        setOpenMessageBox(true);
       },
     }
   );
@@ -170,13 +170,13 @@ function LoginForm() {
           )}
         </Formik>
         <Snackbar
-          open={open}
+          open={openMessageBox}
           autoHideDuration={6000}
-          onClose={handleClose}
+          onClose={handleCloseMessageBox}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
           <MuiAlert
-            onClose={handleClose}
+            onClose={handleCloseMessageBox}
             severity="error"
             sx={{ width: "100%" }}
           >

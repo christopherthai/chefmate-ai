@@ -51,8 +51,8 @@ const initialValues = {
 
 function RegistrationForm() {
   const navigate = useNavigate(); // Navigation object
-  const [open, setOpen] = useState(false); // State for the snackbar open status
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
+  const [openMessageBox, setOpenMessageBox] = useState(false); // State for the snackbar MessageBox status
   const [errorMessage, setErrorMessage] = useState(""); // State for the error message
 
   /**
@@ -62,11 +62,11 @@ function RegistrationForm() {
    * @param {string} reason - Reason for the close
    * @returns {void}
    */
-  const handleClose = (event, reason) => {
+  const handleCloseMessageBox = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    setOpenMessageBox(false);
   };
 
   const registrationMutation = useMutation(
@@ -81,7 +81,7 @@ function RegistrationForm() {
       onError: (error) => {
         // console.error("Error logging in:", error.response.data.error);
         setErrorMessage(error.response.data.error);
-        setOpen(true);
+        setOpenMessageBox(true);
       },
     }
   );
@@ -188,13 +188,13 @@ function RegistrationForm() {
           </Form>
         </Formik>
         <Snackbar
-          open={open}
+          open={openMessageBox}
           autoHideDuration={6000}
-          onClose={handleClose}
+          onClose={handleCloseMessageBox}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
           <MuiAlert
-            onClose={handleClose}
+            onClose={handleCloseMessageBox}
             severity="error"
             sx={{ width: "100%" }}
           >

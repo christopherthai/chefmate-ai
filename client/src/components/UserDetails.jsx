@@ -1,15 +1,21 @@
 import { useSelector } from "react-redux";
 import { Box, Typography, Container, Paper } from "@mui/material";
+import EditUserProfile from "../components/EditUserProfile";
 
+/**
+ * Page component for the User Profile page
+ * @component
+ * @returns {JSX.Element} JSX.Element
+ */
 function UserDetails() {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user); // Get user from Redux store
 
   return (
     <Box
       display="flex"
       justifyContent="center"
       alignItems="center"
-      minHeight="50vh"
+      minHeight="55vh"
     >
       <Container maxWidth="sm">
         <Paper elevation={3} sx={{ padding: 3, marginTop: 4 }}>
@@ -29,6 +35,7 @@ function UserDetails() {
             <Typography variant="h7">{user.email}</Typography>
           </Box>
         </Paper>
+        <EditUserProfile />
       </Container>
     </Box>
   );

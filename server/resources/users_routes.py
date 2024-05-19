@@ -220,7 +220,10 @@ class UsersById(Resource):
             for attr in data:
                 setattr(user, attr, data.get(attr))
 
-            user.password_hash = data.get("password")
+            password = data.get("password")
+
+            if password is not None:
+                user.password_hash = password
 
             db.session.add(user)
             db.session.commit()
