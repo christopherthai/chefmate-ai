@@ -9,6 +9,8 @@ import {
   Container,
   CircularProgress,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+import RecipeCard from "./RecipeCard";
 
 /**
  * Fetches the recipes from the server
@@ -42,22 +44,17 @@ function RecipeList() {
 
   return (
     <Container maxWidth="lg" sx={{ pt: 12, pb: 1, pl: 8 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{ textAlign: "center", marginBottom: "2rem" }}
+      >
+        Explore Recipes
+      </Typography>
       <Grid container spacing={3}>
         {recipes.map((recipe) => (
-          <Grid item xs={12} sm={6} md={4} key={recipe.id}>
-            <Card sx={{ maxWidth: 350 }}>
-              <CardMedia
-                sx={{ height: 140 }}
-                image={recipe.image_url}
-                title={recipe.title}
-              />
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  {recipe.title}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          <RecipeCard recipe={recipe} key={recipe.id} />
         ))}
       </Grid>
     </Container>
