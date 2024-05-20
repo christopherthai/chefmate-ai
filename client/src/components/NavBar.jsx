@@ -24,6 +24,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import ExploreIcon from "@mui/icons-material/Explore";
 import KitchenIcon from "@mui/icons-material/Kitchen";
+import CircularProgress from "@mui/material/CircularProgress";
 import Header from "./Header";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -96,6 +97,18 @@ function NavBar() {
     width,
     dispatch,
   ]);
+
+  // Display a loading spinner while fetching the user session
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  // Display an error message if the request fails
+  if (isError) {
+    return (
+      <Typography variant="h5">An error occurred: {error.message}</Typography>
+    );
+  }
 
   return (
     <Box sx={{ display: "flex" }}>

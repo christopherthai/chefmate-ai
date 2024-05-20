@@ -67,8 +67,6 @@ class RecipesById(Resource):
 
     Methods:
     - get: Retrieves a specific recipe by its ID.
-    - patch: Updates a specific recipe by its ID.
-    - delete: Deletes a specific recipe by its ID.
     """
 
     def get(self, recipe_id):
@@ -87,6 +85,12 @@ class RecipesById(Resource):
             return make_response({"error": "Recipe not found"}, 404)
 
         return make_response(recipe.to_dict(), 200)
+
+
+class RecipesByIdAndUserId(Resource):
+    """
+    Represents a resource for updating and deleting recipes by their ID and user ID.
+    """
 
     def patch(self, recipe_id, user_id):
         """
@@ -268,8 +272,14 @@ def initialize_routes(api):
     )
     api.add_resource(
         RecipesById,
-        "/recipes/<int:recipe_id>/users/<int:user_id>",
+        "/recipes/<int:recipe_id>",
         endpoint="recipes-by-id",
+    )
+
+    api.add_resource(
+        RecipesByIdAndUserId,
+        "/recipes/<int:recipe_id>/users/<int:user_id>",
+        endpoint="recipes-by-id-and-user-id",
     )
     api.add_resource(
         RecipesByIdIngredients,

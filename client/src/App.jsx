@@ -26,7 +26,7 @@ function App() {
   const theme = useTheme(); // Get the theme object from the context
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is small
   const navBarWidth = 6; // Width of the navigation bar in rem units
-  const { isSidebarCollapsed } = useSelector((state) => state.navbar); // Get the navbar state from the store
+  //   const { isSidebarCollapsed } = useSelector((state) => state.navbar); // Get the navbar state from the store
 
   return (
     <>
