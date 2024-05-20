@@ -1,15 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Grid,
-  Container,
-  CircularProgress,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { Typography, Grid, Container, CircularProgress } from "@mui/material";
 import RecipeCard from "./RecipeCard";
 
 /**
@@ -40,6 +31,13 @@ function RecipeList() {
   // Display a loading spinner while fetching the recipes
   if (isLoading) {
     return <CircularProgress />;
+  }
+
+  // Display an error message if the request fails
+  if (isError) {
+    return (
+      <Typography variant="h5">An error occurred: {isError.message}</Typography>
+    );
   }
 
   return (

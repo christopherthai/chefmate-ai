@@ -13,15 +13,9 @@ import LoginForm from "./pages/LoginForm";
 import RegistrationForm from "./pages/RegistrationForm";
 import NotFoundPage from "./pages/NotFoundPage";
 import { Box } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { Provider } from "react-redux";
-import { store } from "./store";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
-// Create a new instance of QueryClient
-const queryClient = new QueryClient();
+import { useSelector } from "react-redux";
 
 /**
  * The App component is the root component of the application.
@@ -32,41 +26,38 @@ function App() {
   const theme = useTheme(); // Get the theme object from the context
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is small
   const navBarWidth = 6; // Width of the navigation bar in rem units
+  const { isSidebarCollapsed } = useSelector((state) => state.navbar); // Get the navbar state from the store
+
   return (
     <>
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <CssBaseline />
-          <div className="app">
-            <NavBar />
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                minHeight: "99vh",
-                marginLeft: { sm: isSmallScreen ? 0 : navBarWidth },
-              }}
-            >
-              <Box sx={{ flex: "1 0 auto" }}>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/explore" element={<ExploreRecipes />} />
-                  <Route path="/recipes/:id" element={<RecipeDetails />} />
-                  <Route path="/create-recipe" element={<CreateRecipeForm />} />
-                  <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
-                  <Route path="/profile" element={<UserProfile />} />
-                  <Route path="/your-recipes" element={<YourRecipes />} />
-                  <Route path="/about" element={<AboutPage />} />
-                  <Route path="/login" element={<LoginForm />} />
-                  <Route path="/register" element={<RegistrationForm />} />
-                  <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-              </Box>
-              <Footer />
-            </Box>
-          </div>
-        </QueryClientProvider>
-      </Provider>
+      <div className="app">
+        <NavBar />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "99vh",
+            marginLeft: { sm: isSmallScreen ? 0 : navBarWidth },
+          }}
+        >
+          <Box sx={{ flex: "1 0 auto" }}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/explore" element={<ExploreRecipes />} />
+              <Route path="/recipes/:id" element={<RecipeDetails />} />
+              <Route path="/create-recipe" element={<CreateRecipeForm />} />
+              <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
+              <Route path="/profile" element={<UserProfile />} />
+              <Route path="/your-recipes" element={<YourRecipes />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/register" element={<RegistrationForm />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Box>
+          <Footer />
+        </Box>
+      </div>
     </>
   );
 }
