@@ -57,12 +57,10 @@ function NavBar() {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log(response.data);
       dispatch(setIsLoggedIn(true));
       dispatch(setUser(response.data));
       return response.data;
     } catch (error) {
-      console.error("Error checking session: ", error);
       localStorage.removeItem("accessToken");
       dispatch(setIsLoggedIn(false));
       dispatch(setUser(null));

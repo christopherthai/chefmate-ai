@@ -1,14 +1,14 @@
 import { SET_USER, SET_IS_LOGGED_IN } from "../actions/userActions";
 
 /**
- * The loadState function retrieves the state from local storage.
- * @returns {Object} The state object
+ * The loadState function retrieves the isLoggedIn state from local storage.
+ * @returns {boolean} The isLoggedIn state
  * @returns {undefined} If the state is not found
  * @returns {undefined} If an error occurs
  */
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem("state");
+    const serializedState = localStorage.getItem("isLoggedIn");
     if (serializedState === null) {
       return undefined;
     }
@@ -19,29 +19,27 @@ const loadState = () => {
 };
 
 /**
- * The saveState function saves the state to local storage.
- * @param {Object} state The state object
+ * The saveState function saves the isLoggedIn state to local storage.
+ * @param {boolean} isLoggedIn The isLoggedIn state
  * @returns {undefined}
  */
-const saveState = (state) => {
+const saveState = (isLoggedIn) => {
   try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem("state", serializedState);
+    const serializedState = JSON.stringify(isLoggedIn);
+    localStorage.setItem("isLoggedIn", serializedState);
   } catch {
     console.error("Error saving state");
   }
 };
 
-// Load the state from local storage if it exists or set it to null
+// Load the isLoggedIn state from local storage if it exists or set it to false
 const persistedState = loadState();
 
 // Set the initial state of the user reducer
-const initialState = persistedState
-  ? persistedState
-  : {
-      user: null,
-      isLoggedIn: false,
-    };
+const initialState = {
+  user: null,
+  isLoggedIn: persistedState !== undefined ? persistedState : false,
+};
 
 /**
  * The userReducer function manages the user state.
@@ -63,13 +61,11 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: action.payload,
       };
+      saveState(action.payload);
       break;
     default:
       nextState = state;
   }
-
-  // Save the state to local storage
-  saveState(nextState);
 
   return nextState;
 };
