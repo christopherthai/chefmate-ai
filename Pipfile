@@ -17,6 +17,8 @@ honcho = "*"
 gunicorn = "*"
 flask-bcrypt = "*"
 python-dotenv = "*"
+flask-security = "*"
+flask-jwt-extended = "*"
 
 [requires]
 python_full_version = "3.8.13"

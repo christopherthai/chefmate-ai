@@ -46,14 +46,24 @@ function NavBar() {
    * @throws {Error}
    */
   const checkSession = async () => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken || accessToken.split(".").length !== 3) {
+      console.error("Invalid access token: ", accessToken);
+      return null;
+    }
     try {
-      const response = await axios.get("/api/users/check-session");
+      const response = await axios.get("/api/users/check-session", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       console.log(response.data);
       dispatch(setIsLoggedIn(true));
       dispatch(setUser(response.data));
       return response.data;
     } catch (error) {
       console.error("Error checking session: ", error);
+      localStorage.removeItem("accessToken");
       dispatch(setIsLoggedIn(false));
       dispatch(setUser(null));
       return null;

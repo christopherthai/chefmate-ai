@@ -9,6 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from sqlalchemy import MetaData
 from dotenv import load_dotenv
+from flask_jwt_extended import JWTManager
 import os
 
 # Set the base directory to the absolute path of the current file's directory
@@ -26,6 +27,7 @@ load_dotenv()
 # Instantiate app, set attributes
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
@@ -44,6 +46,9 @@ bcrypt = Bcrypt(app)
 
 # Instantiate REST API
 api = Api(app)
+
+# Instantiate JWT Manager
+jwt = JWTManager(app)
 
 # Instantiate CORS
 CORS(app)

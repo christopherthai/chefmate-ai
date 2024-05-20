@@ -2,6 +2,12 @@ from datetime import datetime
 from flask_restful import Resource
 from flask import request, jsonify, make_response, Flask, session
 from sqlalchemy.exc import IntegrityError
+from flask_jwt_extended import (
+    create_access_token,
+    jwt_required,
+    get_jwt_identity,
+    unset_jwt_cookies,
+)
 from config import db
 from models import User
 
@@ -60,11 +66,12 @@ class Register(Resource):
             db.session.add(new_user)
             db.session.commit()
 
-            session["user_id"] = new_user.id
+            access_token = create_access_token(identity=new_user.id)
 
-            return make_response(new_user.to_dict(), 201)
+            return {"access_token": access_token, "user": new_user.to_dict()}, 201
         except IntegrityError:
-            return {"error": "422 Unprocessable Entity"}, 422
+            db.session.rollback()
+            return {"error": "An error occurred during registration"}, 422
 
 
 class Login(Resource):
@@ -111,8 +118,9 @@ class Login(Resource):
             db.session.add(user)
             db.session.commit()
 
-            session["user_id"] = user.id
-            return make_response(user.to_dict(), 200)
+            access_token = create_access_token(identity=user.id)
+
+            return {"access_token": access_token, "user": user.to_dict()}, 200
         else:
             return {"error": "401 Unauthorized"}, 401
 
@@ -125,6 +133,7 @@ class CheckSession(Resource):
         get: Retrieves the user associated with the current session.
     """
 
+    @jwt_required()
     def get(self):
         """
         Retrieves the user associated with the current session.
@@ -133,12 +142,13 @@ class CheckSession(Resource):
             A response containing the user data if the user is authenticated.
             An empty response with a 401 status code if the user is not authenticated.
         """
-        user_id = session.get("user_id")
-        if user_id:
-            user = User.query.filter(User.id == user_id).first()
-            return make_response(user.to_dict(), 200)
+        user_id = get_jwt_identity()
 
-        return {"error": "401 Unauthorized"}, 401
+        user = User.query.filter(User.id == user_id).first()
+        if user is None:
+            return {"error": "User not found"}, 404
+
+        return make_response(user.to_dict(), 200)
 
 
 class Logout(Resource):
@@ -154,6 +164,7 @@ class Logout(Resource):
 
     """
 
+    @jwt_required()
     def delete(self):
         """
         Deletes the user session and returns a response.
@@ -163,11 +174,9 @@ class Logout(Resource):
             If the user is not authenticated, it returns a response with status code 401.
 
         """
-        if session.get("user_id"):
-            session["user_id"] = None
-            return make_response({}, 204)
-
-        return {"error": "401 Unauthorized"}, 401
+        resp = make_response({}, 204)
+        unset_jwt_cookies(resp)
+        return resp
 
 
 class UsersById(Resource):

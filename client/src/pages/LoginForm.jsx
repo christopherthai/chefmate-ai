@@ -77,9 +77,9 @@ function LoginForm() {
   const loginMutation = useMutation(
     (values) => axios.post("/api/users/login", values),
     {
-      onSuccess: (user_data) => {
-        console.log("User logged in:", user_data.data);
-        dispatch(setUser(user_data.data));
+      onSuccess: (response) => {
+        localStorage.setItem("accessToken", response.data.access_token);
+        dispatch(setUser(response.data.user));
         dispatch(setIsLoggedIn(true));
         navigate("/");
       },

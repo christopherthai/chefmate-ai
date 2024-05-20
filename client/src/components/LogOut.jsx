@@ -24,17 +24,26 @@ function LogOut({ handleClose }) {
    * The useMutation hook is used to create a mutation function that can be used to log out the user.
    * The mutation function is created using an axios delete request to the /api/users/logout endpoint.
    */
-  const logOutMutation = useMutation(() => axios.delete("/api/users/logout"), {
-    onSuccess: () => {
-      dispatch(setIsLoggedIn(false));
-      dispatch(setUser(null));
-      handleClose();
-      navigate("/login");
-    },
-    onError: (error) => {
-      console.error("Error logging out: ", error);
-    },
-  });
+  const logOutMutation = useMutation(
+    () =>
+      axios.delete("/api/users/logout", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }),
+    {
+      onSuccess: () => {
+        localStorage.removeItem("accessToken");
+        dispatch(setIsLoggedIn(false));
+        dispatch(setUser(null));
+        handleClose();
+        navigate("/login");
+      },
+      onError: (error) => {
+        console.error("Error logging out: ", error);
+      },
+    }
+  );
 
   /**
    * Handle the logout event

@@ -72,10 +72,10 @@ function RegistrationForm() {
   const registrationMutation = useMutation(
     (values) => axios.post("/api/users/register", values),
     {
-      onSuccess: (user_data) => {
-        console.log("Registration:", user_data.data);
-        dispatch(setUser(user_data.data));
+      onSuccess: (response) => {
+        localStorage.setItem("accessToken", response.data.access_token);
         dispatch(setIsLoggedIn(true));
+        dispatch(setUser(response.data.user));
         navigate("/");
       },
       onError: (error) => {
