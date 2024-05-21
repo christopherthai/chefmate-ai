@@ -147,7 +147,7 @@ function RecipeContent({ recipe }) {
         sx={{
           display: "flex",
           justifyContent: "flex-end",
-          marginTop: "-8rem",
+          marginTop: "-7.5rem",
         }}
       >
         <Button
