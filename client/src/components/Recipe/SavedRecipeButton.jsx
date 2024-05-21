@@ -10,6 +10,7 @@ import {
   DialogTitle,
   Box,
 } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 /**
  * Component to render the saved recipe button
@@ -17,10 +18,11 @@ import {
  * @returns {JSX.Element}
  */
 function SavedRecipeButton() {
-  const { isLoggedIn } = useSelector((state) => state.user); // Get user from Redux store
+  const { user, isLoggedIn } = useSelector((state) => state.user); // Get user from Redux store
   const [openDialogBox, setOpenDialogBox] = useState(false); // State for the dialog box open status
+  const { id } = useParams(); // Get the recipe ID from the URL
 
-  const handleOpenDialogBox = () => {
+  const handleClick = () => {
     if (isLoggedIn == false) {
       setOpenDialogBox(true);
     }
@@ -45,7 +47,7 @@ function SavedRecipeButton() {
       <Button
         variant="contained"
         color="primary"
-        onClick={handleOpenDialogBox}
+        onClick={handleClick}
         sx={{
           backgroundColor: "#4caf50",
           "&:hover": {

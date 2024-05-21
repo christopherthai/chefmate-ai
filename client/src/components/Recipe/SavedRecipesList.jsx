@@ -54,9 +54,13 @@ function SavedRecipesList() {
         Saved Recipes
       </Typography>
       <Grid container spacing={3}>
-        {savedRecipes.saved_recipes.map((recipe) => (
-          <RecipeCard recipe={recipe.recipe} key={recipe.recipe.id} />
-        ))}
+        {savedRecipes.saved_recipes && savedRecipes.saved_recipes.length > 0 ? (
+          savedRecipes.saved_recipes.map((recipe) => (
+            <RecipeCard recipe={recipe.recipe} key={recipe.recipe.id} />
+          ))
+        ) : (
+          <Typography variant="h5">No saved recipes found</Typography>
+        )}
       </Grid>
     </Container>
   );

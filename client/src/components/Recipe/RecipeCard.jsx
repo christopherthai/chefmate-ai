@@ -27,6 +27,8 @@ function RecipeCard({ recipe }) {
 
   const { user_id, id, image_url, title } = recipe; // Destructure the recipe object
 
+  //   console.log("recipe", recipe);
+
   /**
    * Function to check the session of the user
    * @async
@@ -38,6 +40,7 @@ function RecipeCard({ recipe }) {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken || accessToken.split(".").length !== 3) {
       console.error("Invalid access token: ", accessToken);
+      dispatch(setIsLoggedIn(false));
       return null;
     }
     try {
@@ -46,10 +49,10 @@ function RecipeCard({ recipe }) {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+
       dispatch(setUser(response.data));
       return response.data;
     } catch (error) {
-      console.log("error: ", error);
       localStorage.removeItem("accessToken");
       dispatch(setIsLoggedIn(false));
       return null;

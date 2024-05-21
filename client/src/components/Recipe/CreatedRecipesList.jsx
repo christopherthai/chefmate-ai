@@ -54,9 +54,15 @@ function CreatedRecipesList() {
         Created Recipes
       </Typography>
       <Grid container spacing={3}>
-        {createdRecipes.recipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe.id} />
-        ))}
+        {createdRecipes.recipes && createdRecipes.recipes.length > 0 ? (
+          createdRecipes.recipes.map((recipe) => (
+            <RecipeCard recipe={recipe} key={recipe.id} />
+          ))
+        ) : (
+          <Typography variant="h5">
+            You have not created any recipes yet.
+          </Typography>
+        )}
       </Grid>
     </Container>
   );
