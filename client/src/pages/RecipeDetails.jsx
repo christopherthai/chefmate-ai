@@ -2,26 +2,27 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
-import {
-  Typography,
-  Box,
-  Grid,
-  Container,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  CardMedia,
-} from "@mui/material";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import Typography from "@mui/material/Typography";
+import RecipeContent from "../components/Recipe/RecipeContent";
 
+/**
+ * The RecipeDetails component fetches and displays the details of a recipe
+ * @component
+ * @return {JSX.Element} The RecipeDetails component
+ */
 function RecipeDetails() {
-  const { id } = useParams();
+  const { id } = useParams(); // Get the recipe ID from the URL
+
+  /**
+   * Fetches the recipe from the server
+   * @returns {Promise<Object>} The recipe object
+   */
   const fetchRecipe = async () => {
     const { data } = await axios.get(`/api/recipes/${id}`);
     return data;
   };
 
+  // Fetch the recipe from the server using the useQuery hook from react-query
   const {
     data: recipe,
     isLoading,
@@ -29,69 +30,17 @@ function RecipeDetails() {
     error,
   } = useQuery("recipe", fetchRecipe);
 
+  // Display a loading spinner while fetching the recipe
   if (isLoading) {
     return <CircularProgress />;
   }
 
+  // Display an error message if the request fails
   if (isError) {
     return <Typography variant="h6">Error: {error.message}</Typography>;
   }
 
-  console.log(recipe.recipe_ingredients);
-
-  return (
-    <Container sx={{ padding: { xs: "5rem", md: "10rem" } }}>
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        sx={{ textAlign: "center", marginBottom: "2rem" }}
-      >
-        {recipe.title}
-      </Typography>
-
-      <Grid container justifyContent="center">
-        <CardMedia
-          component="img"
-          image={recipe.image_url}
-          alt="Recipe Image"
-          sx={{ width: "120%", height: "auto", marginLeft: "-10%" }}
-        />
-      </Grid>
-
-      <Box sx={{ marginBottom: "2rem" }}>
-        <Typography variant="h6">Instructions</Typography>
-        <Typography variant="body1">{recipe.instructions}</Typography>
-      </Box>
-
-      <List sx={{ marginBottom: "2rem" }}>
-        <Typography variant="h6">Ingredients</Typography>
-        {recipe.recipe_ingredients.map((ingredient) => (
-          <ListItem key={ingredient.id}>
-            <ListItemIcon>
-              <FiberManualRecordIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <>
-                  <Typography
-                    variant="body1"
-                    sx={{ fontWeight: "fontWeightBold" }}
-                    component="span"
-                  >
-                    {`${ingredient.quantity}`}
-                  </Typography>
-                  <Typography variant="body1" component="span">
-                    {` ${ingredient.ingredient.name}`}
-                  </Typography>
-                </>
-              }
-            />
-          </ListItem>
-        ))}
-      </List>
-    </Container>
-  );
+  return <RecipeContent recipe={recipe} />;
 }
 
 export default RecipeDetails;
