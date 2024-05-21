@@ -13,6 +13,8 @@ import {
 import { useParams } from "react-router-dom";
 import { setSavedRecipes } from "../../store/actions/userActions";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+import { useMutation } from "react-query";
 
 /**
  * Component to render the saved recipe button
@@ -29,11 +31,9 @@ function SavedRecipeButton() {
     if (isLoggedIn == false) {
       setOpenDialogBox(true);
     } else if (isLoggedIn == true && savedRecipes == false) {
-      // Remove the recipe from the saved recipes
-      dispatch(setSavedRecipes(true));
+      savedRecipeMutation.mutate(id);
     } else {
-      // Add the recipe to the saved recipes
-      dispatch(setSavedRecipes(false));
+      unSavedRecipeMutation.mutate(id);
     }
   };
 
@@ -45,6 +45,51 @@ function SavedRecipeButton() {
   const handleCloseDialogBox = () => {
     setOpenDialogBox(false);
   };
+
+  /**
+   * Mutation to save the recipe to the user's saved recipes list in the database
+   * @constant
+   * @type {Mutation}
+   * @returns {void}
+   */
+  const savedRecipeMutation = useMutation(
+    (recipeId) =>
+      axios.post(`/api/users/${user.id}/saved-recipes/${id}`, {
+        user_id: user.id,
+        recipe_id: recipeId,
+      }),
+    {
+      onSuccess: (response) => {
+        dispatch(setSavedRecipes(true));
+      },
+      onError: (error) => {
+        console.error("Error saving recipe:", error.response.data.error);
+      },
+    }
+  );
+
+  /**
+   * Mutation to remove the recipe from the user's saved recipes list in the database
+   * @constant
+   * @type {Mutation}
+   * @returns {void}
+   */
+  const unSavedRecipeMutation = useMutation(
+    (recipeId) =>
+      axios.delete(`/api/users/${user.id}/saved-recipes/${id}`, {
+        user_id: user.id,
+        recipe_id: recipeId,
+      }),
+    {
+      onSuccess: (response) => {
+        dispatch(setSavedRecipes(false));
+      },
+      onError: (error) => {
+        console.error("Error unsaving recipe:", error.response.data.error);
+      },
+    }
+  );
+
   return (
     <Box
       sx={{
