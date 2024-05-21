@@ -2,6 +2,7 @@ import {
   SET_USER,
   SET_IS_LOGGED_IN,
   SET_USER_HAS_ACCESS,
+  SET_SAVED_RECIPES,
 } from "../actions/userActions";
 
 // Set the initial state of the user reducer
@@ -9,6 +10,7 @@ const initialState = {
   user: null,
   userHasAccess: JSON.parse(localStorage.getItem("userHasAccess")) || false,
   isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
+  savedRecipes: JSON.parse(localStorage.getItem("savedRecipes")) || false,
 };
 
 /**
@@ -36,6 +38,12 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userHasAccess: action.payload,
+      };
+    case SET_SAVED_RECIPES:
+      localStorage.setItem("savedRecipes", JSON.stringify(action.payload));
+      return {
+        ...state,
+        savedRecipes: action.payload,
       };
     default:
       return state;

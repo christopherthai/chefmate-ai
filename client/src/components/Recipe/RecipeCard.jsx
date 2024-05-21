@@ -9,6 +9,7 @@ import {
   setUser,
   setIsLoggedIn,
   setUserHasAccess,
+  setSavedRecipes,
 } from "../../store/actions/userActions";
 
 function RecipeCard({ recipe }) {
@@ -22,10 +23,11 @@ function RecipeCard({ recipe }) {
       id: PropType.number,
       image_url: PropType.string,
       title: PropType.string,
+      saved_recipes: PropType.array,
     }),
   };
 
-  const { user_id, id, image_url, title } = recipe; // Destructure the recipe object
+  const { user_id, id, image_url, title, saved_recipes } = recipe; // Destructure the recipe object
 
   //   console.log("recipe", recipe);
 
@@ -91,6 +93,24 @@ function RecipeCard({ recipe }) {
     }
   };
 
+  // Check if the recipe is saved by the logged in user
+  const isRecipeSavedByUser = saved_recipes.some(
+    (recipe) => recipe.user_id === loginUser.id
+  );
+
+  /**
+   * The handleCheckSavedRecipes function checks if the logged in user has saved the recipe
+   * @function
+   * @returns {void}
+   */
+  const handleCheckSavedRecipes = () => {
+    if (loginUser && isRecipeSavedByUser) {
+      dispatch(setSavedRecipes(true));
+    } else {
+      dispatch(setSavedRecipes(false));
+    }
+  };
+
   /**
    * The handleClick function navigates to the recipe details page
    * @function
@@ -98,6 +118,7 @@ function RecipeCard({ recipe }) {
    */
   const handleClick = () => {
     handleCheckUserHasAccess();
+    handleCheckSavedRecipes();
     navigate(`/recipes/${id}`);
     window.scrollTo(0, 0); // Scroll to the top of the page
   };

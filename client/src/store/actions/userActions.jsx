@@ -1,6 +1,7 @@
 export const SET_USER = "SET_USER";
 export const SET_IS_LOGGED_IN = "SET_IS_LOGGED_IN";
 export const SET_USER_HAS_ACCESS = "SET_USER_HAS_ACCESS";
+export const SET_SAVED_RECIPES = "SET_SAVED_RECIPES";
 
 /**
  * Sets the user in the Redux store.
@@ -33,4 +34,15 @@ export const setIsLoggedIn = (isLoggedIn) => ({
 export const setUserHasAccess = (userHasAccess) => ({
   type: SET_USER_HAS_ACCESS,
   payload: userHasAccess,
+});
+
+/**
+ * Sets the saved recipes in the Redux store.
+ * @function
+ * @param {boolean} savedRecipes - The saved recipes
+ * @returns {Object}
+ */
+export const setSavedRecipes = (savedRecipes) => ({
+  type: SET_SAVED_RECIPES,
+  payload: savedRecipes,
 });
