@@ -20,9 +20,12 @@ const validationSchema = Yup.object().shape({
   image_url: Yup.string()
     .url("Must be a valid URL")
     .required("Image URL is required"),
-  ingredients: Yup.array()
-    .of(Yup.string().required("Ingredient is required"))
-    .min(1, "At least one ingredient is required"),
+  ingredients: Yup.array().of(
+    Yup.object().shape({
+      name: Yup.string().required("Ingredient is required"),
+      quantity: Yup.string().required("Quantity is required"),
+    })
+  ),
 });
 
 // Initial values for the form fields using Formik
@@ -32,7 +35,7 @@ const initialValues = {
   preparation_time: "",
   serving_size: "",
   image_url: "",
-  ingredients: [""],
+  ingredients: [{ name: "", quantity: "" }],
 };
 
 /**
@@ -68,7 +71,12 @@ function CreateRecipeForm() {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <Typography variant="h4" align="center " gutterBottom>
-                      Create Recipe
+                      Create a New Recipe
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography variant="h5" align="center " gutterBottom>
+                      Fill out the form below to create and share a new recipe
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
@@ -146,17 +154,34 @@ function CreateRecipeForm() {
                         <Grid container spacing={2}>
                           {values.ingredients.map((ingredient, index) => (
                             <Grid item xs={12} key={index}>
-                              <Field
-                                name={`ingredients[${index}]`}
-                                as={TextField}
-                                label={`Ingredient ${index + 1}`}
-                                fullWidth
-                              />
-                              <ErrorMessage
-                                name={`ingredients[${index}]`}
-                                component="div"
-                                style={{ color: "red" }}
-                              />
+                              <Grid container spacing={2}>
+                                <Grid item xs={6}>
+                                  <Field
+                                    name={`ingredients[${index}].name`}
+                                    as={TextField}
+                                    label={`Ingredient ${index + 1}`}
+                                    fullWidth
+                                  />
+                                  <ErrorMessage
+                                    name={`ingredients[${index}].name`}
+                                    component="div"
+                                    style={{ color: "red" }}
+                                  />
+                                </Grid>
+                                <Grid item xs={6}>
+                                  <Field
+                                    name={`ingredients[${index}].quantity`}
+                                    as={TextField}
+                                    label={`Ingredient ${index + 1} Quantity`}
+                                    fullWidth
+                                  />
+                                  <ErrorMessage
+                                    name={`ingredients[${index}].quantity`}
+                                    component="div"
+                                    style={{ color: "red" }}
+                                  />
+                                </Grid>
+                              </Grid>
                               <Button
                                 variant="contained"
                                 color="secondary"

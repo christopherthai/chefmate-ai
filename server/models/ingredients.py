@@ -22,7 +22,7 @@ class Ingredient(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    category = db.Column(db.String(150), nullable=False)
+    category = db.Column(db.String(150))
 
     # Define a relationship with the RecipeIngredients model
     recipe_ingredients = db.relationship(
@@ -53,25 +53,6 @@ class Ingredient(db.Model, SerializerMixin):
         if not name:
             raise AssertionError("No name provided")
         return name
-
-    @validates("category")
-    def validate_category(self, _key, category):
-        """
-        Validates the category of an ingredient.
-
-        Args:
-            _key (str): The key of the attribute being validated.
-            category (str): The category of the ingredient.
-
-        Raises:
-            AssertionError: If no category is provided.
-
-        Returns:
-            str: The validated category.
-        """
-        if not category:
-            raise AssertionError("No category provided")
-        return category
 
     def __repr__(self):
         return f"<Ingredient {self.name}"
