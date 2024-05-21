@@ -11,6 +11,7 @@ import {
   Box,
 } from "@mui/material";
 
+// Validation schema for the form fields using Yup
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   instructions: Yup.string().required("Instruction is required"),
@@ -24,21 +25,29 @@ const validationSchema = Yup.object().shape({
     .min(1, "At least one ingredient is required"),
 });
 
+// Initial values for the form fields using Formik
+const initialValues = {
+  title: "",
+  instructions: "",
+  preparation_time: "",
+  serving_size: "",
+  image_url: "",
+  ingredients: [""],
+};
+
+/**
+ * CreateRecipeForm component is a form that allows users to create a new recipe.
+ * It uses Formik for form state management and Yup for form validation.
+ * @returns {JSX.Element} CreateRecipeForm component
+ * @component
+ */
 function CreateRecipeForm() {
   const { isLoggedIn, user } = useSelector((state) => state.user);
 
-  const initialValues = {
-    title: "",
-    instructions: "",
-    preparation_time: "",
-    serving_size: "",
-    image_url: "",
-    ingredients: [""],
-  };
-
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
     console.log(values);
     setSubmitting(false);
+    resetForm();
   };
 
   return (
