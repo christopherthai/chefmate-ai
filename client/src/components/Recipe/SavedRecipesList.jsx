@@ -44,7 +44,7 @@ function SavedRecipesList() {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ pt: 12, pb: 1, pl: 8 }}>
+    <Container maxWidth="lg" sx={{ pt: 5, pb: 8, pl: 8 }}>
       <Typography
         variant="h4"
         component="h1"

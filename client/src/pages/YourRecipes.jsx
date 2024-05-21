@@ -6,6 +6,7 @@ import { setUser } from "../store/actions/userActions";
 import CircularProgress from "@mui/material/CircularProgress";
 import SavedRecipesList from "../components/Recipe/SavedRecipesList";
 import CreatedRecipesList from "../components/Recipe/CreatedRecipesList";
+import { Container } from "@mui/material";
 
 function YourRecipes() {
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
@@ -51,10 +52,18 @@ function YourRecipes() {
     );
   }
   return (
-    <div>
+    <Container maxWidth="lg" sx={{ pt: 12, pb: 1, pl: 1 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        sx={{ textAlign: "center", marginBottom: "2rem" }}
+      >
+        Your Saved and Created Recipes
+      </Typography>
       <SavedRecipesList />
       <CreatedRecipesList />
-    </div>
+    </Container>
   );
 }
 
