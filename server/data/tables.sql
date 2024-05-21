@@ -20,7 +20,7 @@ CREATE TABLE recipes (
 CREATE TABLE ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR NOT NULL UNIQUE,
-    category VARCHAR(150) NOT NULL
+    category VARCHAR(150)
 );
 CREATE TABLE recipe_ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
