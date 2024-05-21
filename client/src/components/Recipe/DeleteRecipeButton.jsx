@@ -10,6 +10,11 @@ import {
   DialogTitle,
 } from "@mui/material";
 
+/**
+ * Component to render the delete recipe button
+ * @component
+ * @returns {JSX.Element}
+ */
 function DeleteRecipeButton() {
   const { isLoggedIn, userHasAccess } = useSelector((state) => state.user); // Get user from Redux store
   const [openDialogBox, setOpenDialogBox] = useState(false); // State for the dialog box open status
@@ -20,6 +25,11 @@ function DeleteRecipeButton() {
     }
   };
 
+  /**
+   * Function to close the dialog box
+   * @function
+   * @returns {void}
+   */
   const handleCloseDialogBox = () => {
     setOpenDialogBox(false);
   };

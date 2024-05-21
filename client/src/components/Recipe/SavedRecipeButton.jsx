@@ -11,6 +11,11 @@ import {
   Box,
 } from "@mui/material";
 
+/**
+ * Component to render the saved recipe button
+ * @component
+ * @returns {JSX.Element}
+ */
 function SavedRecipeButton() {
   const { isLoggedIn } = useSelector((state) => state.user); // Get user from Redux store
   const [openDialogBox, setOpenDialogBox] = useState(false); // State for the dialog box open status
@@ -21,6 +26,11 @@ function SavedRecipeButton() {
     }
   };
 
+  /**
+   * Function to close the dialog box
+   * @function
+   * @returns {void}
+   */
   const handleCloseDialogBox = () => {
     setOpenDialogBox(false);
   };

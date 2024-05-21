@@ -12,12 +12,22 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
+/**
+ * Component to render the edit recipe button
+ * @component
+ * @returns {JSX.Element}
+ */
 function EditRecipeButton() {
   const { isLoggedIn, userHasAccess } = useSelector((state) => state.user); // Get user from Redux store
   const [openDialogBox, setOpenDialogBox] = useState(false); // State for the dialog box open status
   const navigate = useNavigate(); // Get the navigate function from the context
   const { id } = useParams(); // Get the recipe ID from the URL
 
+  /**
+   * Function to handle the click event of the button
+   * @function
+   * @returns {void}
+   */
   const handleClick = () => {
     if (isLoggedIn == false) {
       setOpenDialogBox(true);
@@ -26,6 +36,11 @@ function EditRecipeButton() {
     }
   };
 
+  /**
+   * Function to close the dialog box
+   * @function
+   * @returns {void}
+   */
   const handleCloseDialogBox = () => {
     setOpenDialogBox(false);
   };
