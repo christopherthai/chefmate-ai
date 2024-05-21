@@ -8,56 +8,51 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Box,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
-function EditRecipeButton() {
-  const { isLoggedIn, userHasAccess } = useSelector((state) => state.user); // Get user from Redux store
+function SavedRecipeButton() {
+  const { isLoggedIn } = useSelector((state) => state.user); // Get user from Redux store
   const [openDialogBox, setOpenDialogBox] = useState(false); // State for the dialog box open status
-  const navigate = useNavigate(); // Get the navigate function from the context
-  const { id } = useParams(); // Get the recipe ID from the URL
 
-  const handleClick = () => {
+  const handleOpenDialogBox = () => {
     if (isLoggedIn == false) {
       setOpenDialogBox(true);
-    } else if (isLoggedIn == true && userHasAccess == true) {
-      navigate(`/edit-recipe/${id}`);
     }
   };
 
   const handleCloseDialogBox = () => {
     setOpenDialogBox(false);
   };
-
-  // Disable the button if the user does not have access
-  const buttonDisabled = !userHasAccess;
-
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "flex-end",
+        marginTop: "-7.5rem",
+      }}
+    >
       <Button
         variant="contained"
         color="primary"
-        onClick={handleClick}
-        disabled={buttonDisabled}
+        onClick={handleOpenDialogBox}
         sx={{
-          backgroundColor: "#1976d2",
+          backgroundColor: "#4caf50",
           "&:hover": {
-            backgroundColor: "#1565c0",
+            backgroundColor: "#388e3c",
           },
           color: "#fff",
           padding: "1rem",
           borderRadius: "0.5rem",
-          marginBottom: "0.5rem",
         }}
       >
-        Edit Recipe
+        Save Recipe
       </Button>
       <Dialog open={openDialogBox} onClose={handleCloseDialogBox}>
         <DialogTitle>{"You are not logged in"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To edit recipes, you need to be logged in. Please log in to
+            To save recipes, you need to be logged in. Please log in to
             continue.
           </DialogContentText>
         </DialogContent>
@@ -70,8 +65,8 @@ function EditRecipeButton() {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </Box>
   );
 }
 
-export default EditRecipeButton;
+export default SavedRecipeButton;

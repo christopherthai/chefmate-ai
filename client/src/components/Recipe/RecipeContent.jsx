@@ -1,14 +1,10 @@
-import {
-  Typography,
-  Box,
-  Grid,
-  Container,
-  CardMedia,
-  Button,
-} from "@mui/material";
+import { Typography, Box, Grid, Container, CardMedia } from "@mui/material";
 import PropTypes from "prop-types";
 import RecipeInstructions from "./RecipeInstructions";
 import IngredientList from "./IngredientList";
+import SavedRecipeButton from "./SavedRecipeButton";
+import DeleteRecipeButton from "./DeleteRecipeButton";
+import EditRecipeButton from "./EditRecipeButton";
 
 /**
  * The RecipeContent component displays the content of a recipe
@@ -111,61 +107,10 @@ function RecipeContent({ recipe }) {
           maxWidth: "8.6rem",
         }}
       >
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{
-            backgroundColor: "#1976d2",
-            "&:hover": {
-              backgroundColor: "#1565c0",
-            },
-            color: "#fff",
-            padding: "1rem",
-            borderRadius: "0.5rem",
-            marginBottom: "0.5rem",
-          }}
-        >
-          Edit Recipe
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          sx={{
-            backgroundColor: "#dc004e",
-            "&:hover": {
-              backgroundColor: "#9a0036",
-            },
-            color: "#fff",
-            padding: "1rem",
-            borderRadius: "0.5rem",
-          }}
-        >
-          Delete Recipe
-        </Button>
+        <EditRecipeButton />
+        <DeleteRecipeButton />
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginTop: "-7.5rem",
-        }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{
-            backgroundColor: "#4caf50",
-            "&:hover": {
-              backgroundColor: "#388e3c",
-            },
-            color: "#fff",
-            padding: "1rem",
-            borderRadius: "0.5rem",
-          }}
-        >
-          Save Recipe
-        </Button>
-      </Box>
+      <SavedRecipeButton />
     </Container>
   );
 }

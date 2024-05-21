@@ -1,4 +1,8 @@
-import { SET_USER, SET_IS_LOGGED_IN } from "../actions/userActions";
+import {
+  SET_USER,
+  SET_IS_LOGGED_IN,
+  SET_USER_HAS_ACCESS,
+} from "../actions/userActions";
 
 /**
  * The loadState function retrieves the isLoggedIn state from local storage.
@@ -38,6 +42,7 @@ const persistedState = loadState();
 // Set the initial state of the user reducer
 const initialState = {
   user: null,
+  userHasAccess: false,
   isLoggedIn: persistedState !== undefined ? persistedState : false,
 };
 
@@ -62,6 +67,12 @@ export const userReducer = (state = initialState, action) => {
         isLoggedIn: action.payload,
       };
       saveState(action.payload);
+      break;
+    case SET_USER_HAS_ACCESS:
+      nextState = {
+        ...state,
+        userHasAccess: action.payload,
+      };
       break;
     default:
       nextState = state;
