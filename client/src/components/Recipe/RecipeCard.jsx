@@ -23,6 +23,7 @@ function RecipeCard({ recipe }) {
    */
   const handleClick = () => {
     navigate(`/recipes/${id}`);
+    window.scrollTo(0, 0); // Scroll to the top of the page
   };
 
   return (
