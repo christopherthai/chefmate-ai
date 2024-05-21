@@ -18,10 +18,18 @@ import {
 function DeleteRecipeButton() {
   const { isLoggedIn, userHasAccess } = useSelector((state) => state.user); // Get user from Redux store
   const [openDialogBox, setOpenDialogBox] = useState(false); // State for the dialog box open status
+  const [openDeleteDialogBox, setOpenDeleteDialogBox] = useState(false); // State for the delete dialog box open status
 
+  /**
+   * Function to handle the click event on the button
+   * @function
+   * @returns {void}
+   */
   const handleClick = () => {
     if (isLoggedIn == false) {
       setOpenDialogBox(true);
+    } else if (isLoggedIn == true) {
+      setOpenDeleteDialogBox(true);
     }
   };
 
@@ -32,6 +40,20 @@ function DeleteRecipeButton() {
    */
   const handleCloseDialogBox = () => {
     setOpenDialogBox(false);
+  };
+
+  /**
+   * Function to close the delete dialog box
+   * @function
+   * @returns {void}
+   */
+  const handleCloseDeleteDialogBox = () => {
+    setOpenDeleteDialogBox(false);
+  };
+
+  const handleDeleteRecipe = () => {
+    console.log("Recipe deleted");
+    setOpenDeleteDialogBox(false);
   };
 
   // Disable the button if the user does not have access
@@ -70,6 +92,23 @@ function DeleteRecipeButton() {
           </Button>
           <Button component={Link} to="/login" color="primary" autoFocus>
             Go to Login
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={openDeleteDialogBox} onClose={handleCloseDeleteDialogBox}>
+        <DialogTitle>{"Confirm Delete"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this recipe? This action cannot be
+            undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDeleteDialogBox} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteRecipe} color="secondary" autoFocus>
+            Delete
           </Button>
         </DialogActions>
       </Dialog>

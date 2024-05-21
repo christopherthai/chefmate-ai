@@ -95,7 +95,7 @@ function RecipeCard({ recipe }) {
 
   // Check if the recipe is saved by the logged in user
   const isRecipeSavedByUser = saved_recipes.some(
-    (recipe) => recipe.user_id === loginUser.id
+    (recipe) => loginUser && recipe.user_id === loginUser.id
   );
 
   /**
