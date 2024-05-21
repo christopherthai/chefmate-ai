@@ -32,7 +32,6 @@ function UserProfile() {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log(response.data);
       dispatch(setUser(response.data));
       return response.data;
     } catch (error) {

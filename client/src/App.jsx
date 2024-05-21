@@ -36,7 +36,7 @@ function App() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            minHeight: "99vh",
+            minHeight: "100vh",
             marginLeft: { sm: isSmallScreen ? 0 : navBarWidth },
           }}
         >

@@ -1,9 +1,14 @@
 import { Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/actions/userActions";
 import CircularProgress from "@mui/material/CircularProgress";
+import SavedRecipesList from "../components/Recipe/SavedRecipesList";
+import CreatedRecipesList from "../components/Recipe/CreatedRecipesList";
 
 function YourRecipes() {
+  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
   /**
    * Function to check the session of the user
    * @async
@@ -23,6 +28,7 @@ function YourRecipes() {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      dispatch(setUser(response.data));
       return response.data;
     } catch (error) {
       localStorage.removeItem("accessToken");
@@ -44,7 +50,12 @@ function YourRecipes() {
       <Typography variant="h5">An error occurred: {isError.message}</Typography>
     );
   }
-  return <div>YourRecipes</div>;
+  return (
+    <div>
+      <SavedRecipesList />
+      <CreatedRecipesList />
+    </div>
+  );
 }
 
 export default YourRecipes;

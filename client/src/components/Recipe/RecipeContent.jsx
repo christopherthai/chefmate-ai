@@ -91,7 +91,7 @@ function RecipeContent({ recipe }) {
           alt="Recipe Image"
           sx={{
             width: "100%",
-            height: "auto",
+            height: 600,
             marginLeft: "-2%",
             paddingBottom: "2rem",
           }}
