@@ -1,15 +1,20 @@
 import { Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../store/actions/userActions";
 import CircularProgress from "@mui/material/CircularProgress";
 import SavedRecipesList from "../components/Recipe/SavedRecipesList";
 import CreatedRecipesList from "../components/Recipe/CreatedRecipesList";
 import { Container } from "@mui/material";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import { setDeleteRecipeDeleteMessage } from "../store/actions/recipeActions";
 
 function YourRecipes() {
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
+  const { deleteMessage } = useSelector((state) => state.recipe); // Get deleteMessage from Redux store
+
   /**
    * Function to check the session of the user
    * @async
@@ -45,6 +50,20 @@ function YourRecipes() {
     return <CircularProgress />;
   }
 
+  /**
+   * Snackbar close handler function for delete message box
+   * @function
+   * @param {Event} event - Event object
+   * @param {string} reason - Reason for the close
+   * @returns {void}
+   */
+  const handleDeleteMessageBox = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    dispatch(setDeleteRecipeDeleteMessage(false));
+  };
+
   // Display an error message if the request fails
   if (isError) {
     return (
@@ -63,6 +82,21 @@ function YourRecipes() {
       </Typography>
       <SavedRecipesList />
       <CreatedRecipesList />
+      <Snackbar
+        open={deleteMessage}
+        autoHideDuration={6000}
+        onClose={handleDeleteMessageBox}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <MuiAlert
+          onClose={handleDeleteMessageBox}
+          severity="success"
+          elevation={6}
+          variant="filled"
+        >
+          {"Recipe deleted successfully!"}
+        </MuiAlert>
+      </Snackbar>
     </Container>
   );
 }

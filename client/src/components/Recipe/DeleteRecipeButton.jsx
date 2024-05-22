@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import { useMutation } from "react-query";
 import { useParams, useNavigate } from "react-router-dom";
+import { setDeleteRecipeDeleteMessage } from "../../store/actions/recipeActions";
 
 /**
  * Component to render the delete recipe button
@@ -26,6 +27,7 @@ function DeleteRecipeButton() {
   const [openDeleteDialogBox, setOpenDeleteDialogBox] = useState(false); // State for the delete dialog box open status
   const { id } = useParams(); // Get the recipe ID from the URL
   const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
+  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
 
   /**
    * Function to handle the click event on the button
@@ -70,6 +72,7 @@ function DeleteRecipeButton() {
       onSuccess: () => {
         console.log("Recipe deleted");
         setOpenDeleteDialogBox(false);
+        dispatch(setDeleteRecipeDeleteMessage(true));
         navigate(-1);
       },
       onError: (error) => {
