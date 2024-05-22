@@ -59,9 +59,11 @@ function CreatedRecipesList() {
             <RecipeCard recipe={recipe} key={recipe.id} />
           ))
         ) : (
-          <Typography variant="h5">
-            You have not created any recipes yet.
-          </Typography>
+          <Grid item xs={12}>
+            <Typography variant="h5" sx={{ textAlign: "center" }}>
+              You have not created any recipes yet.
+            </Typography>
+          </Grid>
         )}
       </Grid>
     </Container>

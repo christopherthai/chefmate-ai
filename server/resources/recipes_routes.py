@@ -55,6 +55,11 @@ class CreateRecipe(Resource):
         ).endswith((".png", ".jpg", ".jpeg")):
             return make_response({"error": "Invalid image URL"}, 400)
 
+        existing_title = Recipe.query.filter_by(title=data.get("title")).first()
+
+        if existing_title:
+            return make_response({"error": "Recipe already exists"}, 400)
+
         ingredients_list = data.get("ingredients")
 
         try:

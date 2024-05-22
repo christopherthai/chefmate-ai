@@ -59,7 +59,11 @@ function SavedRecipesList() {
             <RecipeCard recipe={recipe.recipe} key={recipe.recipe.id} />
           ))
         ) : (
-          <Typography variant="h5">No saved recipes found</Typography>
+          <Grid item xs={12}>
+            <Typography variant="h5" sx={{ textAlign: "center" }}>
+              No saved recipes found
+            </Typography>
+          </Grid>
         )}
       </Grid>
     </Container>

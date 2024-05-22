@@ -38,6 +38,12 @@ const validationSchema = Yup.object().shape({
   ),
 });
 
+/**
+ * EditRecipeForm component
+ * @component
+ * @param {Object} recipe - Recipe object
+ * @return {JSX.Element}
+ */
 function EditRecipeForm({ recipe }) {
   const { isLoggedIn } = useSelector((state) => state.user); // Get the isLoggedIn state from the user slice of the Redux store
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook

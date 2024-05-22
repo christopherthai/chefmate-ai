@@ -5,6 +5,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import EditRecipeForm from "../components/Recipe/EditRecipeForm";
 
+/**
+ * EditRecipePage component
+ * @component
+ * @return {JSX.Element}
+ */
 function EditRecipePage() {
   const { id } = useParams(); // Get the recipe ID from the URL
 
