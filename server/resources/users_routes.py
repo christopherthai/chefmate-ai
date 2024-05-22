@@ -105,11 +105,8 @@ class Login(Resource):
 
         user = User.query.filter_by(username=username).first()
 
-        if not user:
-            return {"error": "Invalid Username or Password"}, 401
-
-        if user.authenticate(password) is False:
-            return {"error": "Invalid Password"}, 401
+        if not user or not user.authenticate(password):
+            return {"error": "Invalid credentials"}, 401
 
         if user and user.authenticate(password):
 

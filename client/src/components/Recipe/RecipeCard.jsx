@@ -39,7 +39,6 @@ function RecipeCard({ recipe }) {
   const checkSession = async () => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken || accessToken.split(".").length !== 3) {
-      console.error("Invalid access token: ", accessToken);
       dispatch(setIsLoggedIn(false));
       return null;
     }
