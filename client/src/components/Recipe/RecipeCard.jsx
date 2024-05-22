@@ -29,8 +29,6 @@ function RecipeCard({ recipe }) {
 
   const { user_id, id, image_url, title, saved_recipes } = recipe; // Destructure the recipe object
 
-  //   console.log("recipe", recipe);
-
   /**
    * Function to check the session of the user
    * @async

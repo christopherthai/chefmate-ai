@@ -41,7 +41,11 @@ class CreateRecipe(Resource):
         Raises:
             ValueError: If the data provided is invalid.
         """
+
         data = request.get_json()
+
+        # ingredients_list is a list of dictionaries with keys: quantity, name
+        ingredients_list = data.get("ingredients")
 
         try:
             new_recipe = Recipe(
@@ -55,6 +59,23 @@ class CreateRecipe(Resource):
 
             db.session.add(new_recipe)
             db.session.commit()
+
+            for ingredient in ingredients_list:
+                new_ingredient = Ingredient(
+                    name=ingredient.get("name"),
+                )
+
+                db.session.add(new_ingredient)
+                db.session.commit()
+
+                recipe_ingredient = RecipeIngredients(
+                    recipe_id=new_recipe.id,
+                    ingredient_id=new_ingredient.id,
+                    quantity=ingredient.get("quantity"),
+                )
+
+                db.session.add(recipe_ingredient)
+                db.session.commit()
 
             return make_response(new_recipe.to_dict(), 201)
         except ValueError:
@@ -268,7 +289,7 @@ def initialize_routes(api):
     """
     api.add_resource(Recipes, "/recipes", endpoint="recipes")
     api.add_resource(
-        CreateRecipe, "/users/<int:user_id>/recipes", endpoint="create-recipe"
+        CreateRecipe, "/users/<int:user_id>/create-recipes", endpoint="create-recipe"
     )
     api.add_resource(
         RecipesById,
