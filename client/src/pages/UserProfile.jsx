@@ -4,7 +4,7 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import UserDetails from "../components/UserDetails";
 import { useDispatch } from "react-redux";
-import { setUser, setIsLoggedIn } from "../store/actions/userActions";
+import { setUser, setIsLoggedIn } from "../store/userSlice";
 
 /**
  * UserProfile page component

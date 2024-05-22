@@ -2,14 +2,14 @@ import { Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../store/actions/userActions";
+import { setUser } from "../store/userSlice";
 import CircularProgress from "@mui/material/CircularProgress";
 import SavedRecipesList from "../components/Recipe/SavedRecipesList";
 import CreatedRecipesList from "../components/Recipe/CreatedRecipesList";
 import { Container } from "@mui/material";
 import { Snackbar, Box } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
-import { setDeleteRecipeDeleteMessage } from "../store/actions/recipeActions";
+import { setDeleteRecipeDeleteMessage } from "../store/recipeSlice";
 
 function YourRecipes() {
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook

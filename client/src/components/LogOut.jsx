@@ -1,6 +1,6 @@
 import MenuItem from "@mui/material/MenuItem";
 import { useDispatch } from "react-redux";
-import { setUser, setIsLoggedIn } from "../store/actions/userActions";
+import { setUser, setIsLoggedIn } from "../store/userSlice";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";

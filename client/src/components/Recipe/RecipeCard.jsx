@@ -17,7 +17,7 @@ import {
   setIsLoggedIn,
   setUserHasAccess,
   setSavedRecipes,
-} from "../../store/actions/userActions";
+} from "../../store/userSlice";
 
 function RecipeCard({ recipe }) {
   const navigate = useNavigate(); // Get the navigate function from the context

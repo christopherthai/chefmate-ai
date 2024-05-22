@@ -4,8 +4,8 @@ import {
   setIsSidebarOpen,
   setWidth,
   setPrevIsMobile,
-} from "../store/actions/navbarActions";
-import { setIsLoggedIn, setUser } from "../store/actions/userActions";
+} from "../store/navbarSlice";
+import { setIsLoggedIn, setUser } from "../store/userSlice";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {

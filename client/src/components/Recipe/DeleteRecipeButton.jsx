@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import { useMutation } from "react-query";
 import { useParams, useNavigate } from "react-router-dom";
-import { setDeleteRecipeDeleteMessage } from "../../store/actions/recipeActions";
+import { setDeleteRecipeDeleteMessage } from "../../store/recipeSlice";
 
 /**
  * Component to render the delete recipe button

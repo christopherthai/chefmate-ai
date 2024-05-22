@@ -11,7 +11,7 @@ import {
   Box,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { setSavedRecipes } from "../../store/actions/userActions";
+import { setSavedRecipes } from "../../store/userSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useMutation } from "react-query";

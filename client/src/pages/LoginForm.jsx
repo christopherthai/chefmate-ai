@@ -19,7 +19,7 @@ import MuiAlert from "@mui/material/Alert";
 import { useMutation } from "react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setUser, setIsLoggedIn } from "../store/actions/userActions";
+import { setUser, setIsLoggedIn } from "../store/userSlice";
 
 /**
  * Validation schema for the login form

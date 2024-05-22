@@ -2,7 +2,7 @@ import RecipeList from "../components/Recipe/RecipeList";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { useDispatch, useSelector } from "react-redux";
-import { setDeleteRecipeDeleteMessage } from "../store/actions/recipeActions";
+import { setDeleteRecipeDeleteMessage } from "../store/recipeSlice";
 
 /**
  * The ExploreRecipes page displays a list of recipes.

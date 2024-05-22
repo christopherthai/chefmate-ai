@@ -10,10 +10,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import {
-  setIsSidebarCollapsed,
-  setIsSidebarOpen,
-} from "../store/actions/navbarActions";
+import { setIsSidebarCollapsed, setIsSidebarOpen } from "../store/navbarSlice";
 import LogOut from "./LogOut";
 
 /**

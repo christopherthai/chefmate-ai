@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { navbarReducer } from "../store/reducers/navbarReducer";
-import { userReducer } from "../store/reducers/userReducer";
-import { recipeReducer } from "../store/reducers/recipeReducer";
+import navbarReducer from "./navbarSlice";
+import userReducer from "./userSlice";
+import recipeReducer from "./recipeSlice";
 
 /**
  * The Redux store for the application.

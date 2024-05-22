@@ -14,7 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../store/actions/userActions";
+import { setUser } from "../store/userSlice";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";

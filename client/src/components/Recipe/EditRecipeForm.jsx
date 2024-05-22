@@ -15,7 +15,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch } from "react-redux";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { setUser, setIsLoggedIn } from "../../store/actions/userActions";
+import { setUser, setIsLoggedIn } from "../../store/userSlice";
 import { useMutation } from "react-query";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
