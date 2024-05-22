@@ -44,6 +44,11 @@ class CreateRecipe(Resource):
 
         data = request.get_json()
 
+        if len(data.get("instructions")) < 10:
+            return make_response(
+                {"error": "Instructions must be at least 10 characters long"}, 400
+            )
+
         # ingredients_list is a list of dictionaries with keys: quantity, name
         ingredients_list = data.get("ingredients")
 

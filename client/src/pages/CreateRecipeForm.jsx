@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import LoginPrompt from "../components/LoginPrompt";
 import { Formik, Field, Form, FieldArray, ErrorMessage } from "formik";
@@ -16,6 +17,8 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { setUser, setIsLoggedIn } from "../store/actions/userActions";
 import { useMutation } from "react-query";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 // Validation schema for the form fields using Yup
 const validationSchema = Yup.object().shape({
@@ -43,8 +46,45 @@ const validationSchema = Yup.object().shape({
 function CreateRecipeForm() {
   const { isLoggedIn } = useSelector((state) => state.user); // Get the isLoggedIn state from the user slice of the Redux store
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
-  //   const { isLoggedIn, user } = useSelector((state) => state.user);
+  const [openErrorMessageBox, setOpenErrorMessageBox] = useState(false); // State for the snackbar MessageBox status
+  const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false); // State for the snackbar MessageBox status
+  const [errorMessage, setErrorMessage] = useState(""); // State for the error message
 
+  /**
+   * Snackbar close handler function for error message
+   * @function
+   * @param {Event} event - Event object
+   * @param {string} reason - Reason for the close
+   * @returns {void}
+   */
+  const handleCloseErrorMessageBox = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenErrorMessageBox(false);
+  };
+
+  /**
+   * Snackbar close handler function for success message
+   * @function
+   * @param {Event} event - Event object
+   * @param {string} reason - Reason for the close
+   * @returns {void}
+   */
+  const handleCloseSuccessMessageBox = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSuccessMessageBox(false);
+  };
+
+  /**
+   * Create a new recipe on the server using the POST /api/users/:id/create-recipes route
+   * @async
+   * @function
+   * @param {Object} newRecipe - New recipe object
+   * @returns {Promise<Object>}
+   */
   const createRecipe = async (newRecipe) => {
     const response = await axios.post(
       `/api/users/${loginUser.id}/create-recipes`,
@@ -90,12 +130,14 @@ function CreateRecipeForm() {
     isError,
   } = useQuery("loginUser", checkSession);
 
+  // Mutation to create a new recipe on the server using the createRecipe function
   const createRecipeMutation = useMutation(createRecipe, {
     onSuccess: (response) => {
-      console.log("Recipe created successfully:", response);
+      setOpenSuccessMessageBox(true);
     },
     onError: (error) => {
-      console.error("Error saving recipe:", error.response.data.error);
+      setErrorMessage(error.response.data.error);
+      setOpenErrorMessageBox(true);
     },
   });
 
@@ -122,8 +164,14 @@ function CreateRecipeForm() {
     ingredients: [{ quantity: "", name: "" }],
   };
 
+  /**
+   * Function to handle the form submission
+   * @function
+   * @param {Object} values - Form values
+   * @param {Object} formikHelpers - Formik helper functions
+   * @returns {void}
+   */
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    console.log("Submitting form:", values);
     createRecipeMutation.mutate(values);
     setSubmitting(false);
     resetForm();
@@ -298,7 +346,7 @@ function CreateRecipeForm() {
                         color="primary"
                         disabled={isSubmitting}
                       >
-                        {isSubmitting ? (
+                        {createRecipeMutation.isLoading ? (
                           <CircularProgress size={24} />
                         ) : (
                           "Submit"
@@ -310,6 +358,35 @@ function CreateRecipeForm() {
               </Form>
             )}
           </Formik>
+          <Snackbar
+            open={openErrorMessageBox}
+            autoHideDuration={6000}
+            onClose={handleCloseErrorMessageBox}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          >
+            <MuiAlert
+              onClose={handleCloseErrorMessageBox}
+              severity="error"
+              sx={{ width: "100%" }}
+            >
+              {errorMessage}
+            </MuiAlert>
+          </Snackbar>
+          <Snackbar
+            open={openSuccessMessageBox}
+            autoHideDuration={6000}
+            onClose={handleCloseSuccessMessageBox}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          >
+            <MuiAlert
+              onClose={handleCloseSuccessMessageBox}
+              severity="success"
+              elevation={6}
+              variant="filled"
+            >
+              {"Recipe created successfully"}
+            </MuiAlert>
+          </Snackbar>
         </Container>
       ) : (
         <LoginPrompt />

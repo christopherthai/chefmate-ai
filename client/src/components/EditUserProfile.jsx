@@ -119,7 +119,6 @@ function EditUserProfile() {
    * @returns {void}
    */
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log(values);
     userProfileMutation.mutate(values);
     setSubmitting(false);
   };
