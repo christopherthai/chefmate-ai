@@ -9,6 +9,7 @@ import {
   Grid,
   Typography,
   Box,
+  CardMedia,
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch } from "react-redux";
@@ -106,7 +107,7 @@ function EditRecipeForm({ recipe }) {
    */
   const updateRecipe = async (updatedRecipe) => {
     const response = await axios.patch(
-      `/api/recipes/${updatedRecipe.id}`,
+      `/api/users/${loginUser.id}/recipes/${id}/update-recipe`,
       updatedRecipe
     );
     return response.data;
@@ -213,10 +214,18 @@ function EditRecipeForm({ recipe }) {
                   Edit Recipe
                 </Typography>
               </Grid>
-              <Grid item xs={12}>
-                <Typography variant="h5" align="center" gutterBottom>
-                  Edit your recipe here
-                </Typography>
+              <Grid container justifyContent="center">
+                <CardMedia
+                  component="img"
+                  image={image_url}
+                  alt="Recipe Image"
+                  sx={{
+                    width: "100%",
+                    height: 600,
+                    marginLeft: "1%",
+                    paddingBottom: "2rem",
+                  }}
+                />
               </Grid>
               <Grid item xs={12}>
                 <Field name="title" as={TextField} label="Title" fullWidth />

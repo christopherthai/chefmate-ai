@@ -87,6 +87,116 @@ class CreateRecipe(Resource):
             return make_response({"error": "Invalid data"}, 400)
 
 
+class UpdateRecipe(Resource):
+    """
+    Represents a resource for updating a recipe.
+
+    Methods:
+        patch(recipe_id, user_id): Update the specified recipe.
+    """
+
+    def patch(self, recipe_id, user_id):
+        """
+        Update the specified recipe.
+
+        Args:
+            recipe_id (int): The ID of the recipe to update.
+            user_id(int): The ID of the user performing the update.
+
+        Returns:
+            Response: The response containing the updated recipe data.
+
+        Raises:
+            ValueError: If the data provided is invalid.
+        """
+        recipe = Recipe.query.filter_by(id=recipe_id).first()
+
+        if not recipe:
+            return make_response({"error": "Recipe not found"}, 404)
+
+        if recipe.user_id != user_id:
+            return make_response({"error": "Unauthorized"}, 401)
+
+        data = request.get_json()
+
+        if len(data.get("instructions")) < 10:
+            return make_response(
+                {"error": "Instructions must be at least 10 characters long"}, 400
+            )
+
+        # ingredients_list is a list of dictionaries with keys: id, quantity, name d
+        ingredients_list = data.get("ingredients")
+
+        try:
+
+            existing_recipe = Recipe.query.filter_by(title=data.get("title")).first()
+
+            if not existing_recipe:
+                recipe.title = data.get("title")
+
+            recipe.instructions = data.get("instructions")
+            recipe.preparation_time = data.get("preparation_time")
+            recipe.serving_size = data.get("serving_size")
+            recipe.image_url = data.get("image_url")
+
+            db.session.add(recipe)
+            db.session.commit()
+
+            recipe_ingredients = RecipeIngredients.query.filter_by(
+                recipe_id=recipe.id
+            ).all()
+
+            # Delete recipe ingredients that are not in the updated list
+            for recipe_ingredient in recipe_ingredients:
+                if recipe_ingredient.ingredient_id not in [
+                    ingredient.get("id") for ingredient in ingredients_list
+                ]:
+                    db.session.delete(recipe_ingredient)
+                    db.session.commit()
+
+            # Update or add new recipe ingredients
+            for ingredient in ingredients_list:
+
+                current_ingredient = Ingredient.query.filter_by(
+                    id=ingredient.get("id")
+                ).first()
+
+                if not current_ingredient:
+                    new_ingredient = Ingredient(
+                        name=ingredient.get("name"),
+                    )
+
+                    db.session.add(new_ingredient)
+                    db.session.commit()
+
+                    recipe_ingredient = RecipeIngredients(
+                        recipe_id=recipe.id,
+                        ingredient_id=new_ingredient.id,
+                        quantity=ingredient.get("quantity"),
+                    )
+
+                    db.session.add(recipe_ingredient)
+                    db.session.commit()
+
+                if current_ingredient:
+                    current_ingredient.name = ingredient.get("name")
+                    db.session.add(current_ingredient)
+                    db.session.commit()
+
+                    current_recipe_ingredient = RecipeIngredients.query.filter_by(
+                        recipe_id=recipe.id, ingredient_id=current_ingredient.id
+                    ).first()
+
+                    if current_recipe_ingredient:
+                        current_recipe_ingredient.quantity = ingredient.get("quantity")
+                        db.session.add(current_recipe_ingredient)
+                        db.session.commit()
+
+            return make_response(recipe.to_dict(), 202)
+        except ValueError:
+            return make_response({"error": "Invalid data"}, 400)
+
+
 class RecipesById(Resource):
     """
     Represents a resource for handling requests related to a specific recipe.
@@ -295,6 +405,11 @@ def initialize_routes(api):
     api.add_resource(Recipes, "/recipes", endpoint="recipes")
     api.add_resource(
         CreateRecipe, "/users/<int:user_id>/create-recipes", endpoint="create-recipe"
+    )
+    api.add_resource(
+        UpdateRecipe,
+        "/users/<int:user_id>/recipes/<int:recipe_id>/update-recipe",
+        endpoint="update-recipe",
     )
     api.add_resource(
         RecipesById,
