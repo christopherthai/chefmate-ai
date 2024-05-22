@@ -13,6 +13,7 @@ import {
   Link,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import CircularProgress from "@mui/material/CircularProgress";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { useMutation } from "react-query";
@@ -164,7 +165,11 @@ function LoginForm() {
                 disabled={isSubmitting}
                 onClick={submitForm}
               >
-                Log In
+                {loginMutation.isLoading ? (
+                  <CircularProgress size={24} />
+                ) : (
+                  "Log In"
+                )}
               </Button>
             </Form>
           )}

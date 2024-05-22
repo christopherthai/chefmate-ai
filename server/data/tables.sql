@@ -19,7 +19,7 @@ CREATE TABLE recipes (
 );
 CREATE TABLE ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR NOT NULL UNIQUE,
+    name VARCHAR NOT NULL,
     category VARCHAR(150)
 );
 CREATE TABLE recipe_ingredients (

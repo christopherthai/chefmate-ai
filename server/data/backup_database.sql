@@ -79,7 +79,7 @@ INSERT INTO recipes VALUES(39,'Garlic Bread','Preheat oven to 350°F (175°C). I
 INSERT INTO recipes VALUES(40,'Deviled Eggs','Place eggs in a saucepan and cover with cold water. Bring water to a boil and immediately remove from heat. Cover and let eggs stand in hot water for 10-12 minutes. Remove eggs from hot water, cool under cold running water, and peel. Cut eggs in half lengthwise and remove yolks. In a small bowl, mash yolks with mayonnaise, mustard, vinegar, salt, and pepper. Fill egg whites with yolk mixture and garnish with paprika.',30,12,'https://static01.nyt.com/images/2021/10/15/dining/aw-classic-deviled-eggs/aw-classic-deviled-eggs-master768.jpg','2024-05-16 13:45:58',10);
 CREATE TABLE ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR NOT NULL UNIQUE,
+    name VARCHAR NOT NULL,
     category VARCHAR(150)
 );
 INSERT INTO ingredients VALUES(1,'All-purpose Flour','Baking');

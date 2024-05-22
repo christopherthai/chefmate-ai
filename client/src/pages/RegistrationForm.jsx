@@ -19,6 +19,7 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser, setIsLoggedIn } from "../store/actions/userActions";
+import CircularProgress from "@mui/material/CircularProgress";
 
 /**
  * Validation schema for the registration form
@@ -172,7 +173,11 @@ function RegistrationForm() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              {registrationMutation.isLoading ? (
+                <CircularProgress size={24} />
+              ) : (
+                "Sign Up"
+              )}
             </Button>
             <Grid container justifyContent="center">
               <Grid item>
