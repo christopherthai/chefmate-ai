@@ -223,8 +223,16 @@ class UsersById(Resource):
         try:
             data = request.get_json()
 
-            for attr in data:
-                setattr(user, attr, data.get(attr))
+            existing_username = User.query.filter_by(
+                username=data.get("username")
+            ).first()
+            existing_email = User.query.filter_by(email=data.get("email")).first()
+
+            if not existing_username:
+                user.username = data.get("username")
+
+            if not existing_email:
+                user.email = data.get("email")
 
             password = data.get("password")
 
