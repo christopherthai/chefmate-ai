@@ -32,6 +32,7 @@ function EditRecipeButton() {
     if (isLoggedIn == false) {
       setOpenDialogBox(true);
     } else if (isLoggedIn == true && userHasAccess == true) {
+      window.scroll(0, 0);
       navigate(`/edit-recipe/${id}`);
     }
   };

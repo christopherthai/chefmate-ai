@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import ExploreRecipes from "./pages/ExploreRecipes";
 import RecipeDetails from "./pages/RecipeDetails";
 import CreateRecipeForm from "./pages/CreateRecipeForm";
-import EditRecipeForm from "./pages/EditRecipeForm";
+import EditRecipePage from "./pages/EditRecipePage";
 import UserProfile from "./pages/UserProfile";
 import YourRecipes from "./pages/YourRecipes";
 import AboutPage from "./pages/AboutPage";
@@ -15,7 +15,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 /**
  * The App component is the root component of the application.
@@ -46,7 +46,7 @@ function App() {
               <Route path="/explore" element={<ExploreRecipes />} />
               <Route path="/recipes/:id" element={<RecipeDetails />} />
               <Route path="/create-recipe" element={<CreateRecipeForm />} />
-              <Route path="/edit-recipe/:id" element={<EditRecipeForm />} />
+              <Route path="/edit-recipe/:id" element={<EditRecipePage />} />
               <Route path="/profile" element={<UserProfile />} />
               <Route path="/your-recipes" element={<YourRecipes />} />
               <Route path="/about" element={<AboutPage />} />
