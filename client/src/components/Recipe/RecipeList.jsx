@@ -1,6 +1,12 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { Typography, Grid, Container, CircularProgress } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  Container,
+  CircularProgress,
+  Box,
+} from "@mui/material";
 import RecipeCard from "./RecipeCard";
 
 /**
@@ -30,7 +36,18 @@ function RecipeList() {
 
   // Display a loading spinner while fetching the recipes
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   // Display an error message if the request fails

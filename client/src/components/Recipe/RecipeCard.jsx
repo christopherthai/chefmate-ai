@@ -1,4 +1,11 @@
-import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Grid,
+  Box,
+} from "@mui/material";
 import PropType from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -64,11 +71,6 @@ function RecipeCard({ recipe }) {
     isLoading,
     isError,
   } = useQuery("loginUser", checkSession);
-
-  // Display a loading spinner while fetching the recipes
-  if (isLoading) {
-    return <CircularProgress />;
-  }
 
   // Display an error message if the request fails
   if (isError) {

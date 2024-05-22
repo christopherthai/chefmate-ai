@@ -87,6 +87,13 @@ function RegistrationForm() {
     }
   );
 
+  /**
+   * Handles the form submission
+   * @function
+   * @param {Object} values - The form values
+   * @param {Object} formikHelpers - The formik helpers
+   * @returns {void}
+   */
   const handleSubmit = (values, { setSubmitting }) => {
     registrationMutation.mutate(values);
     setSubmitting(false);

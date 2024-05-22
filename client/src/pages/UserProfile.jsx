@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -46,7 +46,18 @@ function UserProfile() {
 
   // Display a loading spinner while fetching the recipes
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   // Display an error message if the request fails

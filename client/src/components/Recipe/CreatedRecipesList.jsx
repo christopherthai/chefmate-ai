@@ -1,7 +1,13 @@
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useQuery } from "react-query";
-import { CircularProgress, Typography, Grid, Container } from "@mui/material";
+import {
+  CircularProgress,
+  Typography,
+  Grid,
+  Container,
+  Box,
+} from "@mui/material";
 import RecipeCard from "./RecipeCard";
 
 /**
@@ -33,7 +39,18 @@ function CreatedRecipesList() {
 
   // Display a loading spinner while fetching the created recipes
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   // Display an error message if the request fails

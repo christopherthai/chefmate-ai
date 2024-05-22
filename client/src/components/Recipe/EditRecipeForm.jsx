@@ -170,7 +170,18 @@ function EditRecipeForm({ recipe }) {
 
   // Display a loading spinner while fetching the user data
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   // Display an error message if the request fails

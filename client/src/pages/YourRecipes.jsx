@@ -7,7 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import SavedRecipesList from "../components/Recipe/SavedRecipesList";
 import CreatedRecipesList from "../components/Recipe/CreatedRecipesList";
 import { Container } from "@mui/material";
-import { Snackbar } from "@mui/material";
+import { Snackbar, Box } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { setDeleteRecipeDeleteMessage } from "../store/actions/recipeActions";
 
@@ -47,7 +47,18 @@ function YourRecipes() {
 
   // Display a loading spinner while fetching the recipes
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   /**

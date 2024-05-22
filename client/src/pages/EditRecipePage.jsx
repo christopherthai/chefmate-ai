@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import EditRecipeForm from "../components/Recipe/EditRecipeForm";
+import { Box } from "@mui/material";
 
 /**
  * EditRecipePage component
@@ -32,7 +33,18 @@ function EditRecipePage() {
 
   // Display a loading spinner while fetching the recipe
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   // Display an error message if the request fails
