@@ -9,6 +9,9 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
+import axios from "axios";
+import { useMutation } from "react-query";
+import { useParams, useNavigate } from "react-router-dom";
 
 /**
  * Component to render the delete recipe button
@@ -16,9 +19,13 @@ import {
  * @returns {JSX.Element}
  */
 function DeleteRecipeButton() {
-  const { isLoggedIn, userHasAccess } = useSelector((state) => state.user); // Get user from Redux store
+  const { isLoggedIn, userHasAccess, user } = useSelector(
+    (state) => state.user
+  ); // Get user from Redux store
   const [openDialogBox, setOpenDialogBox] = useState(false); // State for the dialog box open status
   const [openDeleteDialogBox, setOpenDeleteDialogBox] = useState(false); // State for the delete dialog box open status
+  const { id } = useParams(); // Get the recipe ID from the URL
+  const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
 
   /**
    * Function to handle the click event on the button
@@ -51,9 +58,33 @@ function DeleteRecipeButton() {
     setOpenDeleteDialogBox(false);
   };
 
+  /**
+   * Mutation to delete the recipe from the database
+   * @constant
+   * @type {Mutation}
+   * @returns {void}
+   */
+  const deleteRecipeMutation = useMutation(
+    () => axios.delete(`/api/recipes/${id}/users/${user.id}`),
+    {
+      onSuccess: () => {
+        console.log("Recipe deleted");
+        setOpenDeleteDialogBox(false);
+        navigate(-1);
+      },
+      onError: (error) => {
+        console.error("Error deleting recipe", error);
+      },
+    }
+  );
+
+  /**
+   * Function to delete the recipe
+   * @function
+   * @returns {void}
+   * */
   const handleDeleteRecipe = () => {
-    console.log("Recipe deleted");
-    setOpenDeleteDialogBox(false);
+    deleteRecipeMutation.mutate();
   };
 
   // Disable the button if the user does not have access
