@@ -49,7 +49,6 @@ class CreateRecipe(Resource):
                 {"error": "Instructions must be at least 10 characters long"}, 400
             )
 
-        # ingredients_list is a list of dictionaries with keys: quantity, name
         ingredients_list = data.get("ingredients")
 
         try:
@@ -65,6 +64,7 @@ class CreateRecipe(Resource):
             db.session.add(new_recipe)
             db.session.commit()
 
+            # Add ingredients to the recipe
             for ingredient in ingredients_list:
                 new_ingredient = Ingredient(
                     name=ingredient.get("name"),
@@ -124,7 +124,6 @@ class UpdateRecipe(Resource):
                 {"error": "Instructions must be at least 10 characters long"}, 400
             )
 
-        # ingredients_list is a list of dictionaries with keys: id, quantity, name d
         ingredients_list = data.get("ingredients")
 
         try:

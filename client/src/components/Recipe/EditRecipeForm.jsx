@@ -61,6 +61,8 @@ function EditRecipeForm({ recipe }) {
     recipe_ingredients,
   } = recipe;
 
+  const [image, setImage] = useState(image_url); // State for the image URL
+
   // Map the recipe ingredients to the required format for the form
   const ingredients = recipe_ingredients.map((ingredient) => {
     return {
@@ -194,10 +196,10 @@ function EditRecipeForm({ recipe }) {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
           updateRecipeMutation.mutate(values, {
-            onSuccess: () => {
+            onSuccess: (recipe_data) => {
               setSubmitting(false);
+              setImage(recipe_data.image_url);
             },
             onError: (error) => {
               setErrorMessage(error.response.data.error);
@@ -217,7 +219,7 @@ function EditRecipeForm({ recipe }) {
               <Grid container justifyContent="center">
                 <CardMedia
                   component="img"
-                  image={image_url}
+                  image={image}
                   alt="Recipe Image"
                   sx={{
                     width: "100%",
