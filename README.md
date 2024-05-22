@@ -36,7 +36,7 @@ ChefMate AI simplifies culinary creativity, offering a dynamic platform where us
 4. From both the list of AI-suggested recipes on the homepage and the comprehensive recipe list on the Explore Recipes page, users can click on any recipe to view its detailed information. This action redirects them to the Recipe Details page, where they can see ingredients, cooking instructions, preparation time, and serving size.
 5. Logged-in users can save recipes to their favorites on the recipe details page. For recipes they have created, they also have options to edit or delete them.
 6. Users who are logged in can create a new recipe by navigating to a "Create Recipe" form, accessible from their user dashboard or via a direct link in the main navigation. Additionally, users can edit their existing recipes by selecting the "Edit" option on the Recipe Details page.
-7. In the "My Recipes" page, accessible from the main navigation, users can view and manage all recipes they have created or saved. This page allows them to organize recipes into collections edit, or delete them as needed.
+7. In the "My Recipes" page, accessible from the main navigation, users can view and manage all recipes they have created or saved. This page allows them to organize recipes into collections, edit, or delete them as needed.
 8. Users can access their profile to update personal details such as, username, password and email address.
 9. The "About" page is available to all users who want to learn more about the ChefMate AI application.
 
