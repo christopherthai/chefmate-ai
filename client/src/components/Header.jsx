@@ -15,7 +15,6 @@ import {
   setIsSidebarOpen,
 } from "../store/actions/navbarActions";
 import LogOut from "./LogOut";
-import UserProfile from "../pages/UserProfile";
 
 /**
  * The Header component displays the header of the application.
