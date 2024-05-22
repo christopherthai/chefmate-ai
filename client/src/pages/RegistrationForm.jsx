@@ -174,7 +174,7 @@ function RegistrationForm() {
               sx={{ mt: 3, mb: 2 }}
             >
               {registrationMutation.isLoading ? (
-                <CircularProgress size={24} />
+                <CircularProgress size={24} color="action" />
               ) : (
                 "Sign Up"
               )}

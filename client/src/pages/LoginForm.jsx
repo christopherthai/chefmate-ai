@@ -166,7 +166,7 @@ function LoginForm() {
                 onClick={submitForm}
               >
                 {loginMutation.isLoading ? (
-                  <CircularProgress size={24} />
+                  <CircularProgress size={24} color="action" />
                 ) : (
                   "Log In"
                 )}
