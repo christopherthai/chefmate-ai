@@ -10,6 +10,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // Validation schema for the form fields using Yup
 const validationSchema = Yup.object().shape({
@@ -22,8 +23,8 @@ const validationSchema = Yup.object().shape({
     .required("Image URL is required"),
   ingredients: Yup.array().of(
     Yup.object().shape({
-      name: Yup.string().required("Ingredient is required"),
       quantity: Yup.string().required("Quantity is required"),
+      name: Yup.string().required("Ingredient is required"),
     })
   ),
 });
@@ -35,7 +36,7 @@ const initialValues = {
   preparation_time: "",
   serving_size: "",
   image_url: "",
-  ingredients: [{ name: "", quantity: "" }],
+  ingredients: [{ quantity: "", name: "" }],
 };
 
 /**
@@ -155,28 +156,28 @@ function CreateRecipeForm() {
                           {values.ingredients.map((ingredient, index) => (
                             <Grid item xs={12} key={index}>
                               <Grid container spacing={2}>
-                                <Grid item xs={6}>
+                                <Grid item xs={2}>
                                   <Field
-                                    name={`ingredients[${index}].name`}
+                                    name={`ingredients[${index}].quantity`}
                                     as={TextField}
-                                    label={`Ingredient ${index + 1}`}
+                                    label={`Quantity`}
                                     fullWidth
                                   />
                                   <ErrorMessage
-                                    name={`ingredients[${index}].name`}
+                                    name={`ingredients[${index}].quantity`}
                                     component="div"
                                     style={{ color: "red" }}
                                   />
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={10}>
                                   <Field
-                                    name={`ingredients[${index}].quantity`}
+                                    name={`ingredients[${index}].name`}
                                     as={TextField}
-                                    label={`Ingredient ${index + 1} Quantity`}
+                                    label={`Ingredient ${index + 1} `}
                                     fullWidth
                                   />
                                   <ErrorMessage
-                                    name={`ingredients[${index}].quantity`}
+                                    name={`ingredients[${index}].name`}
                                     component="div"
                                     style={{ color: "red" }}
                                   />
@@ -222,7 +223,11 @@ function CreateRecipeForm() {
                         color="primary"
                         disabled={isSubmitting}
                       >
-                        Submit
+                        {isSubmitting ? (
+                          <CircularProgress size={24} />
+                        ) : (
+                          "Submit"
+                        )}
                       </Button>
                     </Grid>
                   </Box>
