@@ -153,7 +153,7 @@ function CreateRecipeForm() {
   }
 
   // Initial values for the form fields using Formik
-  const initialValues = {
+  let initialValues = {
     title: "",
     instructions: "",
     preparation_time: "",
@@ -161,19 +161,6 @@ function CreateRecipeForm() {
     image_url: "",
     user_id: isLoggedIn && loginUser ? loginUser.id : "",
     ingredients: [{ quantity: "", name: "" }],
-  };
-
-  /**
-   * Function to handle the form submission
-   * @function
-   * @param {Object} values - Form values
-   * @param {Object} formikHelpers - Formik helper functions
-   * @returns {void}
-   */
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    createRecipeMutation.mutate(values);
-    setSubmitting(false);
-    resetForm();
   };
 
   return (
@@ -187,7 +174,18 @@ function CreateRecipeForm() {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+              createRecipeMutation.mutate(values, {
+                onSuccess: () => {
+                  resetForm();
+                  setSubmitting(false);
+                },
+                onError: (error) => {
+                  setErrorMessage(error.response.data.error);
+                  setOpenErrorMessageBox(true);
+                },
+              });
+            }}
           >
             {({ values, isSubmitting }) => (
               <Form>
@@ -339,17 +337,8 @@ function CreateRecipeForm() {
                   </Grid>
                   <Box style={{ marginLeft: "auto", marginTop: "-5.34rem" }}>
                     <Grid item xs={12}>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        disabled={isSubmitting}
-                      >
-                        {createRecipeMutation.isLoading ? (
-                          <CircularProgress size={24} />
-                        ) : (
-                          "Submit"
-                        )}
+                      <Button type="submit" variant="contained" color="primary">
+                        Submit
                       </Button>
                     </Grid>
                   </Box>
