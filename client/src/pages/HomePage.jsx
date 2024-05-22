@@ -14,6 +14,7 @@ import { useQuery } from "react-query";
 import axiosInstance from "../services/axiosInstance";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 /**
  * Fetch recipes from the server
@@ -99,7 +100,11 @@ function HomePage() {
           <CircularProgress size={40} />
         </Typography>
       )}
-      {error && <Typography>Error fetching recipes</Typography>}
+      {error && (
+        <Typography>
+          <ErrorOutlineIcon /> Error fetching recipes
+        </Typography>
+      )}
       {data && (
         <Grid container spacing={2}>
           {data.choices.map((recipe, index) => (
