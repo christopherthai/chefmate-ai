@@ -49,6 +49,12 @@ class CreateRecipe(Resource):
                 {"error": "Instructions must be at least 10 characters long"}, 400
             )
 
+        # Check if the image URL is valid
+        if not data.get("image_url").startswith(("http", "https")) or not data.get(
+            "image_url"
+        ).endswith((".png", ".jpg", ".jpeg")):
+            return make_response({"error": "Invalid image URL"}, 400)
+
         ingredients_list = data.get("ingredients")
 
         try:
@@ -132,6 +138,12 @@ class UpdateRecipe(Resource):
 
             if not existing_recipe:
                 recipe.title = data.get("title")
+
+            # Check if the image URL is valid
+            if not data.get("image_url").startswith(("http", "https")) or not data.get(
+                "image_url"
+            ).endswith((".png", ".jpg", ".jpeg")):
+                return make_response({"error": "Invalid image URL"}, 400)
 
             recipe.instructions = data.get("instructions")
             recipe.preparation_time = data.get("preparation_time")
