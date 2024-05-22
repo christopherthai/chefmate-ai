@@ -70,7 +70,6 @@ function DeleteRecipeButton() {
     () => axios.delete(`/api/recipes/${id}/users/${user.id}`),
     {
       onSuccess: () => {
-        console.log("Recipe deleted");
         setOpenDeleteDialogBox(false);
         dispatch(setDeleteRecipeDeleteMessage(true));
         navigate(-1);

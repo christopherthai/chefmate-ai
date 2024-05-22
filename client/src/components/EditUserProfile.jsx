@@ -31,6 +31,7 @@ function EditUserProfile() {
   const [openDialogBox, setOpenDialogBox] = useState(false); // State for the dialog box open status
   const [openErrorMessageBox, setOpenErrorMessageBox] = useState(false); // State for the snackbar MessageBox status
   const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false); // State for the snackbar MessageBox status
+  const [errorMessage, setErrorMessage] = useState(""); // State for the error message
 
   // Validation schema for the edit profile form
   const validationSchema = Yup.object().shape({
@@ -105,7 +106,8 @@ function EditUserProfile() {
         setOpenSuccessMessageBox(true); // Open the success message box
         handleCloseDialogBox(); // Close the dialog box
       },
-      onError: () => {
+      onError: (error) => {
+        setErrorMessage(error.response.data.message);
         setOpenErrorMessageBox(true);
       },
     }
@@ -212,7 +214,7 @@ function EditUserProfile() {
                   severity="error"
                   sx={{ width: "100%" }}
                 >
-                  {"Update Both Username and Email Address"}
+                  {errorMessage}
                 </MuiAlert>
               </Snackbar>
             </Form>
