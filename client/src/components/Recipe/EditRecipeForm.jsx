@@ -306,7 +306,7 @@ function EditRecipeForm({ recipe }) {
                       {values.ingredients.map((ingredient, index) => (
                         <Grid item xs={12} key={index}>
                           <Grid container spacing={2}>
-                            <Grid item xs={2}>
+                            <Grid item xs={3}>
                               <Field
                                 name={`ingredients[${index}].quantity`}
                                 as={TextField}
@@ -319,7 +319,7 @@ function EditRecipeForm({ recipe }) {
                                 style={{ color: "red" }}
                               />
                             </Grid>
-                            <Grid item xs={10}>
+                            <Grid item xs={9}>
                               <Field
                                 name={`ingredients[${index}].name`}
                                 as={TextField}

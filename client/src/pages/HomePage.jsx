@@ -49,7 +49,7 @@ function HomePage() {
     ["recipes", ingredients],
     () => fetchRecipes(ingredients),
     {
-      enabled: false, // Disable automatic fetching
+      enabled: false, // Disable automatic refetching
     }
   );
   return (
