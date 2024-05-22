@@ -5,7 +5,7 @@ const initialState = {
   user: null,
   userHasAccess: JSON.parse(localStorage.getItem("userHasAccess")) || false,
   isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
-  savedRecipes: JSON.parse(localStorage.getItem("savedRecipes")) || [],
+  savedRecipes: JSON.parse(localStorage.getItem("savedRecipes")) || false,
 };
 
 /**
