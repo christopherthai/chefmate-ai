@@ -32,7 +32,7 @@ const fetchRecipes = async (ingredients) => {
 /**
  * Initial values for the form
  * @type {Object}
- * @property {string} ingredient - The ingredient to search for
+ * @property {string} ingredients - The ingredient to search for
  * @returns {Object} - The initial values
  */
 const initialValues = {
