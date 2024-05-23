@@ -433,15 +433,21 @@ class RecipesSuggestions(Resource):
         if not ingredients:
             return make_response({"error": "No ingredients provided"}, 400)
 
-        response = openai.Completion.create(
-            engine="text-davinci-002",
-            prompt=f"Provide recipes using the following ingredients: {ingredients}",
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {
+                    "role": "user",
+                    "content": f"Provide recipes using the following ingredients: {ingredients}",
+                },
+            ],
             max_tokens=150,
         )
 
-        recipes = response.choices[0].text.strip().split("\n\n")
+        recipes = response.choices[0].message["content"].strip().split("\n\n")
 
-        return jsonify({"recipes": recipes})
+        return make_response(jsonify({"recipes": recipes}), 200)
 
 
 def initialize_routes(api):

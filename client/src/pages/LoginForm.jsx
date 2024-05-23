@@ -20,6 +20,7 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser, setIsLoggedIn } from "../store/userSlice";
+import { GoogleLogin } from "react-google-login";
 
 /**
  * Validation schema for the login form
@@ -171,6 +172,12 @@ function LoginForm() {
                   "Log In"
                 )}
               </Button>
+              {/* <GoogleLogin
+                clientId="YOUR_CLIENT_ID"
+                buttonText="Login with Google"
+                //   onSuccess={handleLoginSuccess}
+                //   onFailure={handleLoginFailure}
+              /> */}
             </Form>
           )}
         </Formik>

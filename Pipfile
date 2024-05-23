@@ -19,7 +19,7 @@ flask-bcrypt = "*"
 python-dotenv = "*"
 flask-security = "*"
 flask-jwt-extended = "*"
-openai = "*"
+openai = "==0.28.0"
 
 [requires]
 python_full_version = "3.8.13"

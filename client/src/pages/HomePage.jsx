@@ -10,8 +10,7 @@ import {
   CardMedia,
 } from "@mui/material";
 import { Formik, Form, Field } from "formik";
-import { useQuery } from "react-query";
-import { useState } from "react";
+import { useMutation } from "react-query";
 import CircularProgress from "@mui/material/CircularProgress";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import axios from "axios";
@@ -19,7 +18,7 @@ import axios from "axios";
 /**
  * Fetch recipes from the server
  * @param {string} ingredients - The ingredients to search for
- * @returns {Promise} - The response data
+ * @returns {Promise<Array>} - The recipes
  */
 const fetchRecipes = async (ingredients) => {
   const response = await axios.post("/api/recipes/suggestions", {
@@ -43,23 +42,7 @@ const initialValues = {
  * @returns {JSX.Element} - The home page component
  */
 function HomePage() {
-  const [ingredients, setIngredients] = useState("");
-
-  const { data, error, isLoading, refetch } = useQuery(
-    ["recipes", ingredients],
-    () => fetchRecipes(ingredients),
-    {
-      enabled: false, // Disable automatic refetching
-    },
-    {
-      onSuccess: () => {
-        console.log("Recipes fetched successfully");
-      },
-      onError: (error) => {
-        console.error("Error fetching recipes", error);
-      },
-    }
-  );
+  const fetchRecipesMutation = useMutation(fetchRecipes);
   return (
     <Container sx={{ marginTop: 19 }}>
       <Typography variant="h4" gutterBottom textAlign="center">
@@ -76,11 +59,10 @@ function HomePage() {
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          setIngredients(values.ingredient);
-          refetch();
+          fetchRecipesMutation.mutate(values.ingredient);
         }}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, values }) => (
           <Form>
             <Box
               sx={{
@@ -104,6 +86,7 @@ function HomePage() {
                 variant="contained"
                 color="primary"
                 sx={{ marginLeft: 2 }}
+                disabled={!values.ingredient}
               >
                 Search
               </Button>
@@ -111,7 +94,7 @@ function HomePage() {
           </Form>
         )}
       </Formik>
-      {isLoading && (
+      {fetchRecipesMutation.isLoading && (
         <Box
           sx={{
             display: "flex",
@@ -123,7 +106,7 @@ function HomePage() {
           <CircularProgress />
         </Box>
       )}
-      {error && (
+      {fetchRecipesMutation.error && (
         <Box
           sx={{
             display: "flex",
@@ -133,12 +116,12 @@ function HomePage() {
           }}
         >
           <ErrorOutlineIcon style={{ marginRight: "5px" }} />
-          <Typography>No ingredients provided</Typography>
+          <Typography>Error fetching recipes</Typography>
         </Box>
       )}
-      {data && (
+      {fetchRecipesMutation.isSuccess && (
         <Grid container spacing={2}>
-          {data.choices.map((recipe, index) => (
+          {fetchRecipesMutation.data.map((recipe, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card>
                 <CardMedia
@@ -152,7 +135,7 @@ function HomePage() {
                 <CardContent>
                   <Typography variant="h6">Recipe {index + 1}</Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {recipe.text}
+                    {recipe}
                   </Typography>
                 </CardContent>
               </Card>
