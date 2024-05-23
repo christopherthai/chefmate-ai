@@ -33,13 +33,13 @@ class Register(Resource):
 
         This method creates a new user by extracting the username, password, and email from the request JSON data.
         It then creates a new User object with the extracted data and sets the password hash and last login time.
-        The new user is added to the database and the session is updated with the user's ID.
-        Finally, a response with the new user's data is returned.
+        The new user is added to the database and access token is created for the user.
 
         Returns:
-            A response with the new user's data if the user is successfully created.
-            An error response with status code 422 if there is an integrity error during the creation process.
-            An error response with status code 400 if the username or email is already in use.
+            If the user is successfully created, returns an access token and the user data with a 201 status code.
+            If the username is already in use, returns an error message with a 400 status code.
+            If the email address is already in use, returns an error message with a 400 status code.
+            If an error occurs during registration, returns an error message with a 422 status code.
         """
         data = request.get_json()
 
@@ -88,15 +88,13 @@ class Login(Resource):
         """
         Authenticate the user.
 
-        This method handles the HTTP POST request to authenticate the user. It expects a JSON payload
-        containing the username and password of the user. If the username and password are valid,
-        the user is authenticated and added to the database. The user's last login timestamp is
-        updated, and the user's ID is stored in the session. Finally, a JSON response with the user's
-        details is returned.
+        This method authenticates the user by verifying the provided username and password.
+        If the user is authenticated, an access token is created and returned in the response.
 
         Returns:
-            A JSON response with the user's details if the user is successfully created and authenticated.
-            Otherwise, returns a JSON response with an error message and a 401 Unauthorized status code.
+            If the user is authenticated, returns an access token and the user's data with a 200 status code.
+            If the user is not authenticated, returns an error message with a 401 status code.
+
         """
         data = request.get_json()
 
@@ -136,8 +134,8 @@ class CheckSession(Resource):
         Retrieves the user associated with the current session.
 
         Returns:
-            A response containing the user data if the user is authenticated.
-            An empty response with a 401 status code if the user is not authenticated.
+            A response containing the user data in JSON format.
+
         """
         user_id = get_jwt_identity()
 
@@ -168,7 +166,7 @@ class Logout(Resource):
 
         Returns:
             A response with status code 204 if the user is successfully logged out.
-            If the user is not authenticated, it returns a response with status code 401.
+            A response with status code 401 if the user is not authenticated.
 
         """
         resp = make_response({}, 204)
