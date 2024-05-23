@@ -434,20 +434,52 @@ class RecipesSuggestions(Resource):
             return make_response({"error": "No ingredients provided"}, 400)
 
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {
                     "role": "user",
-                    "content": f"Provide recipes using the following ingredients: {ingredients}",
+                    "content": f"Provide a detailed recipe using the following ingredients: {ingredients}. The format should be:\n\nRecipe Title: <title>\n\nIngredients:\n<ingredients list>\n\nInstructions:\n<step-by-step instructions>",
                 },
             ],
-            max_tokens=150,
+            max_tokens=500,
         )
 
-        recipes = response.choices[0].message["content"].strip().split("\n\n")
+        # Parse the response
+        content = response["choices"][0]["message"]["content"].strip()
+        recipes = []
+        current_recipe = {}
+        current_section = None
 
-        return make_response(jsonify({"recipes": recipes}), 200)
+        for line in content.split("\n"):
+            line = line.strip()
+            if line.startswith("Recipe Title:"):
+                if current_recipe:
+                    recipes.append(current_recipe)
+                    current_recipe = {}
+                current_recipe["title"] = line[len("Recipe Title: ") :].strip()
+                current_section = None
+            elif line.startswith("Ingredients:"):
+                current_recipe["ingredients"] = ""
+                current_section = "ingredients"
+            elif line.startswith("Instructions:"):
+                current_recipe["instructions"] = ""
+                current_section = "instructions"
+            elif current_section:
+                if current_section == "ingredients":
+                    current_recipe["ingredients"] += line + "\n"
+                elif current_section == "instructions":
+                    current_recipe["instructions"] += line + "\n"
+
+        if current_recipe:  # Add the last recipe if it exists
+            recipes.append(current_recipe)
+
+        # Strip trailing newlines and extra spaces
+        for recipe in recipes:
+            recipe["ingredients"] = recipe["ingredients"].strip()
+            recipe["instructions"] = recipe["instructions"].strip()
+
+        return jsonify({"recipes": recipes})
 
 
 def initialize_routes(api):

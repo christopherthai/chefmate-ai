@@ -7,13 +7,17 @@ import {
   Grid,
   Card,
   CardContent,
-  CardMedia,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import { useMutation } from "react-query";
 import CircularProgress from "@mui/material/CircularProgress";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 /**
  * Fetch recipes from the server
@@ -42,7 +46,10 @@ const initialValues = {
  * @returns {JSX.Element} - The home page component
  */
 function HomePage() {
+  const theme = useTheme(); // Get the theme object from the context
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
   const fetchRecipesMutation = useMutation(fetchRecipes);
+
   return (
     <Container sx={{ marginTop: 19 }}>
       <Typography variant="h4" gutterBottom textAlign="center">
@@ -54,7 +61,7 @@ function HomePage() {
         gutterBottom
         style={{ paddingBottom: "20px" }}
       >
-        Enter the ingredients you have and we will suggest recipes for you
+        Enter the ingredients you have and we will suggest a recipe for you
       </Typography>
       <Formik
         initialValues={initialValues}
@@ -115,33 +122,58 @@ function HomePage() {
             height: "40vh",
           }}
         >
-          <ErrorOutlineIcon style={{ marginRight: "5px" }} />
+          <Alert severity="error" style={{ marginRight: "5px" }} />
           <Typography>Error fetching recipes</Typography>
         </Box>
       )}
       {fetchRecipesMutation.isSuccess && (
-        <Grid container spacing={2}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          style={{
+            minHeight: "50vh",
+            width: isMobile ? "90vw" : "40vw",
+            margin: isMobile ? 0 : "auto",
+            paddingTop: "30px",
+          }}
+        >
           {fetchRecipesMutation.data.map((recipe, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={`https://via.placeholder.com/150?text=Recipe+Image+${
-                    index + 1
-                  }`} // Placeholder image
-                  alt={`Recipe ${index + 1}`}
-                />
                 <CardContent>
-                  <Typography variant="h6">Recipe {index + 1}</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {recipe}
+                  <Typography
+                    variant="h6"
+                    align="center"
+                    style={{ paddingBottom: "25px" }}
+                  >
+                    {recipe.title}
                   </Typography>
+                  <Typography variant="subtitle1">
+                    <strong>Ingredients:</strong>
+                  </Typography>
+                  <List>
+                    {recipe.ingredients.split("\n").map((ingredient, i) => (
+                      <ListItem key={i} disablePadding>
+                        <ListItemText primary={ingredient.trim()} />
+                      </ListItem>
+                    ))}
+                  </List>
+                  <Typography variant="subtitle1">
+                    <strong>Instructions:</strong>
+                  </Typography>
+                  <List>
+                    {recipe.instructions.split("\n").map((instruction, i) => (
+                      <ListItem key={i} disablePadding>
+                        <ListItemText primary={instruction.trim()} />
+                      </ListItem>
+                    ))}
+                  </List>
                 </CardContent>
               </Card>
             </Grid>
           ))}
-        </Grid>
+        </Box>
       )}
     </Container>
   );
