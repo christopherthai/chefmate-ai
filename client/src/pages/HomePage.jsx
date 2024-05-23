@@ -43,12 +43,21 @@ const initialValues = {
  * @returns {JSX.Element} - The home page component
  */
 function HomePage() {
-  const [ingredients, setIngredients] = useState(""); // Ingredients state for the search form
+  const [ingredients, setIngredients] = useState("");
+
   const { data, error, isLoading, refetch } = useQuery(
     ["recipes", ingredients],
     () => fetchRecipes(ingredients),
     {
       enabled: false, // Disable automatic refetching
+    },
+    {
+      onSuccess: () => {
+        console.log("Recipes fetched successfully");
+      },
+      onError: (error) => {
+        console.error("Error fetching recipes", error);
+      },
     }
   );
   return (
@@ -103,14 +112,29 @@ function HomePage() {
         )}
       </Formik>
       {isLoading && (
-        <Typography variant="body1">
-          <CircularProgress size={40} />
-        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "40vh",
+          }}
+        >
+          <CircularProgress />
+        </Box>
       )}
       {error && (
-        <Typography>
-          <ErrorOutlineIcon /> Error fetching recipes
-        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "40vh",
+          }}
+        >
+          <ErrorOutlineIcon style={{ marginRight: "5px" }} />
+          <Typography>No ingredients provided</Typography>
+        </Box>
       )}
       {data && (
         <Grid container spacing={2}>
