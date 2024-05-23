@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request, jsonify, make_response, Flask, session
 from config import db
 from models import Recipe, Ingredient, RecipeIngredients
+import openai
 
 
 class Recipes(Resource):
@@ -229,7 +230,7 @@ class RecipesById(Resource):
         - recipe_id (int): The ID of the recipe to retrieve.
 
         Returns:
-        - response (dict): The response containing the retrieved recipe or an error message.
+        - response (dict): The response containing the retrieved recipe
         """
         recipe = Recipe.query.filter_by(id=recipe_id).first()
 
@@ -253,7 +254,7 @@ class RecipesByIdAndUserId(Resource):
         - user_id (int): The ID of the user performing the update.
 
         Returns:
-        - response (dict): The response containing the updated recipe or an error message.
+        - response (dict): The response containing the updated recipe
         """
         recipe = Recipe.query.filter_by(id=recipe_id).first()
 
@@ -286,7 +287,7 @@ class RecipesByIdAndUserId(Resource):
         - user_id (int): The ID of the user performing the deletion.
 
         Returns:
-        - response (dict): The response indicating the success of the deletion or an error message.
+        - response (dict): The response indicating the success of the deletion
         """
         recipe = Recipe.query.filter_by(id=recipe_id).first()
 
@@ -304,10 +305,10 @@ class RecipesByIdAndUserId(Resource):
 
 class RecipesByIdIngredients(Resource):
     """
-    Represents a resource for retrieving and adding ingredients for a specific recipe.
+    Represents a resource for retrieving and adding ingredients for a recipe.
 
     Methods:
-        - get(self, recipe_id): Retrieves the ingredients for the specified recipe.
+        - get(self, recipe_id): Retrieves the ingredients for the recipe.
         - post(self, recipe_id): Adds a new ingredient to the specified recipe.
     """
 
@@ -381,7 +382,8 @@ class DeleteIngredientsByIdInRecipe(Resource):
     Represents a resource for deleting an ingredient by its ID in a recipe.
 
     Methods:
-        delete(recipe_id, ingredient_id): Deletes the specified ingredient from the recipe.
+        delete(recipe_id, ingredient_id): Deletes the specified
+        ingredient from the recipe.
     """
 
     def delete(self, recipe_id, ingredient_id):
@@ -393,7 +395,9 @@ class DeleteIngredientsByIdInRecipe(Resource):
             ingredient_id (int): The ID of the ingredient.
 
         Returns:
-            flask.Response: The response object with status code 204 if successful, or a response object with status code 404 if the recipe ingredient is not found.
+            flask.Response: The response object with status code 204
+            if successful, or a response object with status code 404 if
+            the recipe ingredient is not found.
         """
         recipe_ingredient = RecipeIngredients.query.filter_by(
             recipe_id=recipe_id, ingredient_id=ingredient_id
@@ -406,6 +410,38 @@ class DeleteIngredientsByIdInRecipe(Resource):
         db.session.commit()
 
         return make_response({}, 204)
+
+
+class RecipesSuggestions(Resource):
+    """
+    Represents a resource for providing recipe suggestions based on ingredients.
+
+    Methods:
+        post: Retrieves recipe suggestions based on the provided ingredients.
+    """
+
+    def post(self):
+        """
+        Handle POST requests to retrieve recipes based on provided ingredients.
+
+        Returns:
+            A JSON response containing a list of recipes.
+        """
+        data = request.get_json()
+        ingredients = data.get("ingredients")
+
+        if not ingredients:
+            return make_response({"error": "No ingredients provided"}, 400)
+
+        response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=f"Provide recipes using the following ingredients: {ingredients}",
+            max_tokens=150,
+        )
+
+        recipes = response.choices[0].text.strip().split("\n\n")
+
+        return jsonify({"recipes": recipes})
 
 
 def initialize_routes(api):
@@ -447,4 +483,7 @@ def initialize_routes(api):
         DeleteIngredientsByIdInRecipe,
         "/recipes/<int:recipe_id>/ingredients/<int:ingredient_id>",
         endpoint="delete-ingredients-by-id-in-recipe",
+    )
+    api.add_resource(
+        RecipesSuggestions, "/recipes/suggestions", endpoint="recipes-suggestions"
     )

@@ -22,7 +22,9 @@ import axios from "axios";
  * @returns {Promise} - The response data
  */
 const fetchRecipes = async (ingredients) => {
-  const response = await axios.post("/api/recipes", { ingredients });
+  const response = await axios.post("/api/recipes/suggestions", {
+    ingredients,
+  });
   return response.data.recipes;
 };
 
