@@ -95,7 +95,7 @@ function HomePage() {
                 sx={{ marginLeft: 2 }}
                 disabled={!values.ingredient}
               >
-                Search
+                Find Recipes
               </Button>
             </Box>
           </Form>
@@ -133,13 +133,13 @@ function HomePage() {
           alignItems="center"
           style={{
             minHeight: "50vh",
-            width: isMobile ? "90vw" : "40vw",
+            width: isMobile ? "90vw" : "600px",
             margin: isMobile ? 0 : "auto",
             paddingTop: "30px",
           }}
         >
           {fetchRecipesMutation.data.map((recipe, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid key={index}>
               <Card>
                 <CardContent>
                   <Typography
