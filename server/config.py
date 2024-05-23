@@ -21,7 +21,6 @@ DATABASE = os.environ.get(
     "DB_URI", f"sqlite:///{os.path.join(BASE_DIR, './data/app.db')}"
 )
 
-# Load environment variables from the .env file
 load_dotenv()
 
 # Instantiate app, set attributes

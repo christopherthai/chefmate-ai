@@ -11,10 +11,10 @@ import {
 } from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import { useQuery } from "react-query";
-import axiosInstance from "../services/axiosInstance";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import axios from "axios";
 
 /**
  * Fetch recipes from the server
@@ -22,11 +22,8 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
  * @returns {Promise} - The response data
  */
 const fetchRecipes = async (ingredients) => {
-  const response = await axiosInstance.post("/recipes", {
-    prompt: `Provide recipes using the following ingredients: ${ingredients}`,
-    max_tokens: 150,
-  });
-  return response.data;
+  const response = await axios.post("/api/recipes", { ingredients });
+  return response.data.recipes;
 };
 
 /**
@@ -45,7 +42,7 @@ const initialValues = {
  */
 function HomePage() {
   const [ingredients, setIngredients] = useState(""); // Ingredients state for the search form
-  const { data, isLoading, error, refresh } = useQuery(
+  const { data, error, isLoading, refetch } = useQuery(
     ["recipes", ingredients],
     () => fetchRecipes(ingredients),
     {
@@ -55,13 +52,21 @@ function HomePage() {
   return (
     <Container sx={{ marginTop: 19 }}>
       <Typography variant="h4" gutterBottom textAlign="center">
-        AI Recipe Generator
+        AI Recipe Suggester
+      </Typography>
+      <Typography
+        variant="h5"
+        align="center"
+        gutterBottom
+        style={{ paddingBottom: "20px" }}
+      >
+        Enter the ingredients you have and we will suggest recipes for you
       </Typography>
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
           setIngredients(values.ingredient);
-          refresh();
+          refetch();
         }}
       >
         {({ errors, touched }) => (
