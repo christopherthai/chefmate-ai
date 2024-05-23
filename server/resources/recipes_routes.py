@@ -425,7 +425,7 @@ class RecipesSuggestions(Resource):
         Handle POST requests to retrieve recipes based on provided ingredients.
 
         Returns:
-            A JSON response containing a list of recipes.
+            A JSON response containing the recipe suggestion
         """
         data = request.get_json()
         ingredients = data.get("ingredients")
