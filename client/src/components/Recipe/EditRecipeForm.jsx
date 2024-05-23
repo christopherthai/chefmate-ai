@@ -24,12 +24,26 @@ import PropTypes from "prop-types";
 // Validation schema for the form fields using Yup
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
-  instructions: Yup.string().required("Instruction is required"),
+  instructions: Yup.string()
+    .min(10, "Instructions must be at least 10 characters")
+    .required("Instruction is required"),
   preparation_time: Yup.number().required("Preparation time is required"),
   serving_size: Yup.number().required("Serving size is required"),
   image_url: Yup.string()
-    .url("Must be a valid URL")
-    .required("Image URL is required"),
+    .required("Image URL is required")
+    .test(
+      "isValidUrl",
+      "Must be a valid URL",
+      (value) => value.startsWith("http://") || value.startsWith("https://")
+    )
+    .test(
+      "isValidFile",
+      "Must be a valid image file",
+      (value) =>
+        value.endsWith(".png") ||
+        value.endsWith(".jpg") ||
+        value.endsWith(".jpeg")
+    ),
   ingredients: Yup.array().of(
     Yup.object().shape({
       quantity: Yup.string().required("Quantity is required"),
