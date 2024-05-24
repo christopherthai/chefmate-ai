@@ -21,8 +21,8 @@ class SavedRecipes(db.Model, SerializerMixin):
     __tablename__ = "saved_recipes"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.id"), nullable=False)
     saved_at = db.Column(db.DateTime, server_default=db.func.now())
 
     # Define a relationship with the User model and the Recipe model

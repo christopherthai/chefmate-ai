@@ -25,9 +25,10 @@ class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255), unique=True, nullable=False)
-    _password_hash = db.Column(db.String, nullable=False)
+    username = db.Column(db.String(255), unique=True)
+    _password_hash = db.Column(db.String, nullable=True)
     email = db.Column(db.String, unique=True, nullable=False)
+    google_id = db.Column(db.String(100), unique=True, nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     last_login = db.Column(db.DateTime)
 
@@ -98,13 +99,11 @@ class User(db.Model, SerializerMixin):
             username (str): The username to be validated.
 
         Raises:
-            AssertionError: If no username is provided or if the username is already in use.
+            AssertionError: If the username is already in use.
 
         Returns:
             str: The validated username.
         """
-        if not username:
-            raise AssertionError("No username provided")
         if User.query.filter(User.username == username).first():
             raise AssertionError("Username is already in use")
         return username

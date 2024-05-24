@@ -24,8 +24,10 @@ class RecipeIngredients(db.Model, SerializerMixin):
     __tablename__ = "recipe_ingredients"
 
     id = db.Column(db.Integer, primary_key=True)
-    recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.id"))
-    ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredients.id"))
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.id"), nullable=False)
+    ingredient_id = db.Column(
+        db.Integer, db.ForeignKey("ingredients.id"), nullable=False
+    )
     quantity = db.Column(db.String, nullable=False)
 
     # Define a relationship with the Recipe model and the Ingredient model

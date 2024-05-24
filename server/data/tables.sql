@@ -1,11 +1,14 @@
+-- Create users table
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username VARCHAR(255) NOT NULL UNIQUE,
-    _password_hash VARCHAR NOT NULL,
+    username VARCHAR(255) UNIQUE,
+    _password_hash VARCHAR,
     email VARCHAR NOT NULL UNIQUE,
+    google_id VARCHAR(100) UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP
 );
+-- Create recipes table with foreign key reference to users table
 CREATE TABLE recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title VARCHAR(255) NOT NULL UNIQUE,
@@ -17,11 +20,13 @@ CREATE TABLE recipes (
     user_id INTEGER,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
+-- Create ingredients table
 CREATE TABLE ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR NOT NULL,
     category VARCHAR(150)
 );
+-- Create recipe_ingredients table with foreign key references to recipes and ingredients tables
 CREATE TABLE recipe_ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     recipe_id INTEGER NOT NULL,
@@ -30,6 +35,7 @@ CREATE TABLE recipe_ingredients (
     FOREIGN KEY (recipe_id) REFERENCES recipes (id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredients (id)
 );
+-- Create saved_recipes table with foreign key references to users and recipes tables
 CREATE TABLE saved_recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
