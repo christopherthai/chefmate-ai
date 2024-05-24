@@ -8,7 +8,10 @@ from flask_jwt_extended import (
     get_jwt_identity,
     unset_jwt_cookies,
 )
-from config import db
+from google.oauth2 import id_token
+from google.auth.transport import requests
+import requests as reqs
+from config import db, app
 from models import User
 
 
@@ -279,6 +282,77 @@ class RecipesByUserId(Resource):
         )
 
 
+class GoogleLogin(Resource):
+    """
+    Resource class for handling Google login functionality.
+
+    This class provides a POST method to handle the Google login process.
+    It verifies the token received from the client using Google's token info endpoint.
+    If the token is valid, it checks if the user already exists in the database.
+    If the user doesn't exist, a new user is created.
+    Finally, it returns an access token and user information in the response.
+
+    Attributes:
+        None
+
+    Methods:
+        post: Handles the Google login process.
+
+    """
+
+    def post(self):
+        """
+        Create a new user or update the existing user based on the provided token.
+
+        Returns:
+            A dictionary containing the access token and user information if successful,
+            otherwise an error message with the corresponding HTTP status code.
+        """
+        data = request.get_json()
+        token = data.get("token")
+
+        if not token:
+            return {"error": "Token is required"}, 400
+
+        # Verify the token using Google's token info endpoint
+        token_info_url = (
+            f"https://www.googleapis.com/oauth2/v3/tokeninfo?access_token={token}"
+        )
+
+        # Create a request to the token info endpoint
+        try:
+            token_info_response = reqs.get(token_info_url, timeout=5)
+        except reqs.exceptions.Timeout:
+            return {"error": "The request timed out"}, 408
+
+        if token_info_response.status_code != 200:
+            return {"error": "Invalid token"}, 400
+
+        token_info = token_info_response.json()
+        google_id = token_info["sub"]
+        email = token_info.get("email")
+
+        # Check if user already exists
+        user = User.query.filter_by(google_id=google_id).first()
+
+        if not user:
+            # Create a new user if doesn't exist
+            user = User(google_id=google_id, email=email, username=email)
+            db.session.add(user)
+            db.session.commit()
+
+        user.last_login = datetime.now()
+        db.session.add(user)
+        db.session.commit()
+
+        access_token = create_access_token(identity=user.id)
+
+        return {
+            "access_token": access_token,
+            "user": user.to_dict(),
+        }, 200
+
+
 def initialize_routes(api):
     """
     Initializes the routes for the user resources.
@@ -297,3 +371,4 @@ def initialize_routes(api):
     api.add_resource(
         RecipesByUserId, "/users/<int:user_id>/recipes", endpoint="recipes-by-user-id"
     )
+    api.add_resource(GoogleLogin, "/users/google-login", endpoint="google-login")

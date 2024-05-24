@@ -69,3 +69,8 @@ package-lock.json
 
 # .env file
 *.env 
+*.env.development
+*.env.test
+*.env.production
+*.env.local
+

@@ -17,7 +17,7 @@ VALUES(
         'john@example.com',
         NULL,
         '2024-05-16 13:45:58',
-        '2024-05-23 15:28:38.663824'
+        '2024-05-24 11:00:50.711513'
     );
 INSERT INTO users
 VALUES(
@@ -692,6 +692,17 @@ VALUES(
         '2024-05-22 18:41:51',
         20
     );
+INSERT INTO recipes
+VALUES(
+        63,
+        'tes test 12',
+        'test testsetset 12',
+        5,
+        6,
+        'https://thecozycook.com/wp-content/uploads/2023/02/Homemade-Ramen-f.jpg',
+        '2024-05-24 15:01:48',
+        1
+    );
 CREATE TABLE ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR NOT NULL,
@@ -941,6 +952,14 @@ INSERT INTO ingredients
 VALUES(121, 'Test Ingredient 1', NULL);
 INSERT INTO ingredients
 VALUES(122, 'fsdfs', NULL);
+INSERT INTO ingredients
+VALUES(123, 'Test Ingredient 16', NULL);
+INSERT INTO ingredients
+VALUES(124, 'Test Ingredient 2', NULL);
+INSERT INTO ingredients
+VALUES(125, 'Test ingredient 3', NULL);
+INSERT INTO ingredients
+VALUES(126, 'Test ingredient 3', NULL);
 CREATE TABLE recipe_ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     recipe_id INTEGER NOT NULL,
@@ -1399,6 +1418,12 @@ INSERT INTO recipe_ingredients
 VALUES(267, 58, 111, 'test');
 INSERT INTO recipe_ingredients
 VALUES(268, 58, 112, 'test');
+INSERT INTO recipe_ingredients
+VALUES(279, 63, 123, '1 tablespoon');
+INSERT INTO recipe_ingredients
+VALUES(280, 63, 124, '2 cups');
+INSERT INTO recipe_ingredients
+VALUES(282, 63, 126, '3 cups');
 CREATE TABLE saved_recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -1477,15 +1502,17 @@ INSERT INTO saved_recipes
 VALUES(68, 1, 1, '2024-05-23 14:44:07');
 INSERT INTO saved_recipes
 VALUES(69, 1, 21, '2024-05-23 17:55:20');
+INSERT INTO saved_recipes
+VALUES(71, 1, 63, '2024-05-24 15:02:29');
 DELETE FROM sqlite_sequence;
 INSERT INTO sqlite_sequence
-VALUES('users', 21);
+VALUES('users', 22);
 INSERT INTO sqlite_sequence
-VALUES('recipes', 62);
+VALUES('recipes', 63);
 INSERT INTO sqlite_sequence
-VALUES('ingredients', 122);
+VALUES('ingredients', 126);
 INSERT INTO sqlite_sequence
-VALUES('recipe_ingredients', 278);
+VALUES('recipe_ingredients', 282);
 INSERT INTO sqlite_sequence
-VALUES('saved_recipes', 69);
+VALUES('saved_recipes', 72);
 COMMIT;
