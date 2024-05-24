@@ -47,3 +47,7 @@ yarn-error.log*
 
 # .env file
 *.env 
+*.env.development
+*.env.test
+*.env.production
+

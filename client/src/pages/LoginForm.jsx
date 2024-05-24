@@ -20,6 +20,8 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser, setIsLoggedIn } from "../store/userSlice";
+import { useGoogleLogin } from "@react-oauth/google";
+import GoogleButton from "react-google-button";
 
 /**
  * Validation schema for the login form
@@ -102,6 +104,64 @@ function LoginForm() {
     loginMutation.mutate(values);
     setSubmitting(false);
   };
+
+  /**
+   * Google login mutation function using axios post request to the server
+   * @function
+   * @param {Object} tokenResponse - Google token response
+   * @returns {Promise}
+   * @throws {Error}
+   */
+  const googleLoginMutation = useMutation(
+    (tokenResponse) =>
+      axios.post("/api/users/google-login", {
+        token: tokenResponse.access_token,
+      }),
+    {
+      onSuccess: (response) => {
+        localStorage.setItem("accessToken", response.data.access_token);
+        dispatch(setUser(response.data.user));
+        dispatch(setIsLoggedIn(true));
+        navigate("/");
+      },
+      onError: (error) => {
+        setErrorMessage(error.response?.data?.error || "Google login failed");
+        setOpenMessageBox(true);
+      },
+    }
+  );
+
+  /**
+   * Handles the google login success
+   * @function
+   * @param {Object} tokenResponse - Google token response
+   * @returns {void}
+   * @async
+   */
+  const handleGoogleLoginSuccess = (tokenResponse) => {
+    googleLoginMutation.mutate(tokenResponse);
+  };
+
+  /**
+   * Handles the google login failure
+   * @function
+   * @returns {void}
+   */
+  const handleGoogleLoginFailure = () => {
+    setErrorMessage("Google login failed");
+    setOpenMessageBox(true);
+  };
+
+  /**
+   * Google login hook
+   * @function
+   * @async
+   */
+  const googleLogin = useGoogleLogin({
+    onSuccess: handleGoogleLoginSuccess,
+    onError: handleGoogleLoginFailure,
+  });
+
   /**
    * Navigates to the register page
    * @function
@@ -174,6 +234,9 @@ function LoginForm() {
             </Form>
           )}
         </Formik>
+        <Box style={{ paddingTop: "10px" }}>
+          <GoogleButton onClick={() => googleLogin()}></GoogleButton>
+        </Box>
         <Snackbar
           open={openMessageBox}
           autoHideDuration={6000}
