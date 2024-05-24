@@ -54,6 +54,8 @@ function LoginForm() {
   const [openMessageBox, setOpenMessageBox] = useState(false); // State for the snackbar openMessageBox status
   const [errorMessage, setErrorMessage] = useState(""); // State for the error message
 
+  window.scroll(0, 0);
+
   /**
    * Snackbar close handler function
    * @function
