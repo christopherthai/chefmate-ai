@@ -15,6 +15,8 @@ import { setSavedRecipes } from "../../store/userSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useMutation } from "react-query";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 /**
  * Component to render the saved recipe button
@@ -22,6 +24,8 @@ import { useMutation } from "react-query";
  * @returns {JSX.Element}
  */
 function SavedRecipeButton() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { user, isLoggedIn, savedRecipes } = useSelector((state) => state.user); // Get user from Redux store
   const [openDialogBox, setOpenDialogBox] = useState(false); // State for the dialog box open status
   const { id } = useParams(); // Get the recipe ID from the URL
@@ -95,7 +99,7 @@ function SavedRecipeButton() {
       sx={{
         display: "flex",
         justifyContent: "flex-end",
-        marginTop: "-7.5rem",
+        marginTop: isMobile ? "-20rem" : "-7.5rem",
       }}
     >
       <Button

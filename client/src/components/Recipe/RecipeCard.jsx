@@ -1,15 +1,7 @@
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Grid,
-  Box,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import PropType from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from "axios";
 import {
@@ -30,11 +22,15 @@ function RecipeCard({ recipe }) {
       id: PropType.number,
       image_url: PropType.string,
       title: PropType.string,
+      preparation_time: PropType.number,
       saved_recipes: PropType.array,
     }),
   };
 
-  const { user_id, id, image_url, title, saved_recipes } = recipe; // Destructure the recipe object
+  console.log(recipe);
+
+  const { user_id, id, image_url, title, preparation_time, saved_recipes } =
+    recipe; // Destructure the recipe object
 
   /**
    * Function to check the session of the user

@@ -7,7 +7,7 @@ function Footer() {
         textAlign: "center",
         marginTop: "2rem",
         width: "100%",
-        paddingTop: "3rem",
+        paddingTop: "13rem",
       }}
     >
       <Typography variant="body1" color="text.secondary">

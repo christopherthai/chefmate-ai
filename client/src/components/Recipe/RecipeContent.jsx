@@ -15,6 +15,9 @@ import {
   PinterestIcon,
   WhatsappIcon,
 } from "react-share";
+import CookingTimer from "../CookingTimer";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 /**
  * The RecipeContent component displays the content of a recipe
@@ -24,6 +27,9 @@ import {
  * @return {JSX.Element} The RecipeContent component
  */
 function RecipeContent({ recipe }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   // Destructure the recipe object
   const {
     title,
@@ -58,9 +64,8 @@ function RecipeContent({ recipe }) {
     }),
   };
 
-  // Define the share URL and title
-  const shareUrl = window.location.href;
-  const shareTitle = title;
+  const shareUrl = window.location.href; // Get the current URL
+  const shareTitle = title; // Get the recipe title
 
   return (
     <Container sx={{ padding: { xs: "4rem", md: "10rem" } }}>
@@ -149,6 +154,7 @@ function RecipeContent({ recipe }) {
         <RecipeInstructions instructions={instructions} />
         <IngredientList recipe_ingredients={recipe_ingredients} />
       </Grid>
+
       <Box
         sx={{
           display: "flex",
@@ -161,6 +167,18 @@ function RecipeContent({ recipe }) {
         <EditRecipeButton />
         <DeleteRecipeButton />
       </Box>
+      <Grid container justifyContent="center">
+        <Box
+          sx={{
+            position: isMobile ? "relative" : "absolute",
+            display: "flex",
+            marginTop: isMobile ? "1rem" : "-11rem",
+            marginLeft: "-1rem",
+          }}
+        >
+          <CookingTimer />
+        </Box>
+      </Grid>
       <SavedRecipeButton />
     </Container>
   );
