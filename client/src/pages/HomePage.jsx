@@ -95,7 +95,7 @@ function HomePage() {
                 sx={{ marginLeft: 2 }}
                 disabled={!values.ingredient}
               >
-                Find Recipes
+                Find Recipe
               </Button>
             </Box>
           </Form>
