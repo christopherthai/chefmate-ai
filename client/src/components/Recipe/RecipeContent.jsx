@@ -5,6 +5,16 @@ import IngredientList from "./IngredientList";
 import SavedRecipeButton from "./SavedRecipeButton";
 import DeleteRecipeButton from "./DeleteRecipeButton";
 import EditRecipeButton from "./EditRecipeButton";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  PinterestShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  PinterestIcon,
+  WhatsappIcon,
+} from "react-share";
 
 /**
  * The RecipeContent component displays the content of a recipe
@@ -47,6 +57,10 @@ function RecipeContent({ recipe }) {
       ),
     }),
   };
+
+  // Define the share URL and title
+  const shareUrl = window.location.href;
+  const shareTitle = title;
 
   return (
     <Container sx={{ padding: { xs: "4rem", md: "10rem" } }}>
@@ -93,6 +107,43 @@ function RecipeContent({ recipe }) {
           }}
         />
       </Grid>
+
+      <Box
+        sx={{
+          position: "relative",
+          top: 0,
+          left: 0,
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "-0.5rem",
+          gap: "1rem", // Add space between buttons
+        }}
+      >
+        <Box sx={{ mx: 1 }}>
+          <FacebookShareButton url={shareUrl} quote={shareTitle}>
+            <FacebookIcon size={32} round />
+          </FacebookShareButton>
+        </Box>
+        <Box sx={{ mx: 1 }}>
+          <TwitterShareButton url={shareUrl} title={shareTitle}>
+            <TwitterIcon size={32} round />
+          </TwitterShareButton>
+        </Box>
+        <Box sx={{ mx: 1 }}>
+          <PinterestShareButton
+            url={shareUrl}
+            media={image_url}
+            description={shareTitle}
+          >
+            <PinterestIcon size={32} round />
+          </PinterestShareButton>
+        </Box>
+        <Box sx={{ mx: 1 }}>
+          <WhatsappShareButton url={shareUrl} title={shareTitle}>
+            <WhatsappIcon size={32} round />
+          </WhatsappShareButton>
+        </Box>
+      </Box>
 
       <Grid container spacing={18}>
         <RecipeInstructions instructions={instructions} />
