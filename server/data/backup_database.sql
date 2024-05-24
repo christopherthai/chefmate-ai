@@ -8,7 +8,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login TIMESTAMP
 );
-INSERT INTO users VALUES(1,'john_doe','$2b$12$r.ijiRsf40Lqq75uBBPa6ekf8po6dOE1Sv3TAM0OmCc6Lt5MFbh1m','john@example.com','2024-05-16 13:45:58','2024-05-21 18:20:23.730947');
+INSERT INTO users VALUES(1,'john_doe','$2b$12$r.ijiRsf40Lqq75uBBPa6ekf8po6dOE1Sv3TAM0OmCc6Lt5MFbh1m','john@example.com','2024-05-16 13:45:58','2024-05-23 15:28:38.663824');
 INSERT INTO users VALUES(2,'jane_doe','$2b$12$RTuryqp6iKPJjyevvtgRpO671CuVx6l2kWvcdIr9UPqmBQzd8JQHa','jane@example.com','2024-05-16 13:45:58','2024-05-18 22:05:46.997503');
 INSERT INTO users VALUES(3,'alice_smith','$2b$12$ko3/otX6ngQHwBH45Bhew.CifGiQfgT9DYipNjCbP/30cyrdX84Ee','alice@example.com','2024-05-16 13:45:58',NULL);
 INSERT INTO users VALUES(4,'bob_jones','$2b$12$ZCjPnTTzpBb88XjTH7mXXeQpGDFgPGuSJp3/.gdUOCIhWEHVIzDYK','bob@example.com','2024-05-16 13:45:58','2024-05-18 16:33:19.350851');
@@ -26,6 +26,9 @@ INSERT INTO users VALUES(15,'test_user4','$2b$12$ba1py/nyq5v8ncpwu5qGNu0AKVPivAs
 INSERT INTO users VALUES(16,'jane_doe_test','$2b$12$Z/qiti/xjAUUBF0Z185IeeBp.xpuNoYMa6PLQIinGm7dBbkshwe1a','testtesttest@example.com','2024-05-19 02:17:08','2024-05-18 22:17:08.870749');
 INSERT INTO users VALUES(17,'test_user_1','$2b$12$ik6AS/3j2es6QH1IgS0QqO/VKa78nCtPtRM3/418fXnLJzufr2f7m','test10@example.com','2024-05-20 03:27:57','2024-05-19 23:27:57.495587');
 INSERT INTO users VALUES(18,'john_doe42332','$2b$12$zHz8QTDbJrIt4h0wybcor.BzmIrb/jtGdmC7wKP6PvhsqDgpsG2ti','testtesttefsdfsdst@example.com','2024-05-20 14:30:06','2024-05-20 10:30:06.060614');
+INSERT INTO users VALUES(19,'test_user_5','$2b$12$4kw4Nev95Ft/eGgm9L5B4OvRraW.tIZh9Yk3tKNr9p9rWh9Yd8mcW','testtesttfsdfest@example.com','2024-05-22 18:30:39','2024-05-22 14:30:39.941295');
+INSERT INTO users VALUES(20,'test_user_2342','$2b$12$BhSXkjO6tiamfvEi815Vv.d4rkNHGwTnooJWaCEuepwZpKagB4gIG','testtesttestfsdf@example.com','2024-05-22 18:31:14','2024-05-22 14:31:14.416836');
+INSERT INTO users VALUES(21,'john_doetest','$2b$12$Wu/gvCTzNUW7hcWVzL46cOLzqM.ZfIbSl.ZbgN6zvtVw9.2zDfZCu','testtesttetestst@example.com','2024-05-23 14:43:06','2024-05-23 10:43:06.179445');
 CREATE TABLE recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title VARCHAR(255) NOT NULL UNIQUE,
@@ -77,6 +80,8 @@ INSERT INTO recipes VALUES(37,'Chicken Pot Pie','Preheat oven to 425°F (220°C)
 INSERT INTO recipes VALUES(38,'Cheesecake','Preheat oven to 325°F (165°C). In a large bowl, mix cream cheese with sugar until smooth. Blend in milk, and then mix in eggs one at a time. Stir in sour cream, vanilla, and flour until smooth. Pour filling into crust. Bake for 1 hour. Turn off the oven, and let cheesecake cool in oven with the door closed for 5 to 6 hours to prevent cracking. Chill in refrigerator until serving.',420,12,'https://www.marthastewart.com/thmb/m6R1D2iuHvVxM8u7RJz7c-Us8Rg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/MSL-865202-new-york-cheesecake-hero-horiz-0723-84e3c796119d408581d1ef4d02d801cd.jpg','2024-05-16 13:45:58',8);
 INSERT INTO recipes VALUES(39,'Garlic Bread','Preheat oven to 350°F (175°C). In a small bowl, combine butter, garlic, and parsley. Spread mixture over bread slices. Arrange slices on a baking sheet and bake for 10-12 minutes, until golden brown.',15,4,'https://t4.ftcdn.net/jpg/03/19/22/35/360_F_319223572_ILWIWBuhaeyTzGPLQ0rJCVtBSGOqw864.jpg','2024-05-16 13:45:58',9);
 INSERT INTO recipes VALUES(40,'Deviled Eggs','Place eggs in a saucepan and cover with cold water. Bring water to a boil and immediately remove from heat. Cover and let eggs stand in hot water for 10-12 minutes. Remove eggs from hot water, cool under cold running water, and peel. Cut eggs in half lengthwise and remove yolks. In a small bowl, mash yolks with mayonnaise, mustard, vinegar, salt, and pepper. Fill egg whites with yolk mixture and garnish with paprika.',30,12,'https://static01.nyt.com/images/2021/10/15/dining/aw-classic-deviled-eggs/aw-classic-deviled-eggs-master768.jpg','2024-05-16 13:45:58',10);
+INSERT INTO recipes VALUES(57,'testfsdf','testsetset',2,5,'https://thecozycook.com/wp-content/uploads/2023/02/Homemade-Ramen-f.jpg','2024-05-22 18:41:24',20);
+INSERT INTO recipes VALUES(58,'tesettest','testfsdfsdf',3,3,'https://thecozycook.com/wp-content/uploads/2023/02/Homemade-Ramen-f.jpg','2024-05-22 18:41:51',20);
 CREATE TABLE ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR NOT NULL,
@@ -151,6 +156,59 @@ INSERT INTO ingredients VALUES(66,'Cocoa Powder','Baking');
 INSERT INTO ingredients VALUES(67,'Lasagna Noodles','Grain');
 INSERT INTO ingredients VALUES(68,'Red Bell Peppers','Vegetable');
 INSERT INTO ingredients VALUES(69,'Apple','Fruit');
+INSERT INTO ingredients VALUES(70,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(71,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(72,'Test Ingredient 2',NULL);
+INSERT INTO ingredients VALUES(73,'Test ingredient 3',NULL);
+INSERT INTO ingredients VALUES(74,'Test ingredient 4',NULL);
+INSERT INTO ingredients VALUES(75,'tes 1',NULL);
+INSERT INTO ingredients VALUES(76,'Test Ingredient 2',NULL);
+INSERT INTO ingredients VALUES(77,'Test ingredient 3',NULL);
+INSERT INTO ingredients VALUES(78,'Test ingredient 4',NULL);
+INSERT INTO ingredients VALUES(79,'Test ingredient 6',NULL);
+INSERT INTO ingredients VALUES(80,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(81,'test2',NULL);
+INSERT INTO ingredients VALUES(82,'Test ingredient 3',NULL);
+INSERT INTO ingredients VALUES(83,'tset',NULL);
+INSERT INTO ingredients VALUES(84,'test',NULL);
+INSERT INTO ingredients VALUES(85,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(86,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(87,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(88,'Test Ingredient 2',NULL);
+INSERT INTO ingredients VALUES(89,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(90,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(91,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(92,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(93,'test2',NULL);
+INSERT INTO ingredients VALUES(94,'Test ingredient 3',NULL);
+INSERT INTO ingredients VALUES(95,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(96,'Test Ingredient 2',NULL);
+INSERT INTO ingredients VALUES(97,'Test ingredient 3',NULL);
+INSERT INTO ingredients VALUES(98,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(99,'Test Ingredient 2343',NULL);
+INSERT INTO ingredients VALUES(100,'Test ingredient 6423fsdf',NULL);
+INSERT INTO ingredients VALUES(101,'test',NULL);
+INSERT INTO ingredients VALUES(102,'test',NULL);
+INSERT INTO ingredients VALUES(103,'testfsdf',NULL);
+INSERT INTO ingredients VALUES(104,'test',NULL);
+INSERT INTO ingredients VALUES(105,'test',NULL);
+INSERT INTO ingredients VALUES(106,'test',NULL);
+INSERT INTO ingredients VALUES(107,'tset',NULL);
+INSERT INTO ingredients VALUES(108,'test',NULL);
+INSERT INTO ingredients VALUES(109,'tset',NULL);
+INSERT INTO ingredients VALUES(110,'test',NULL);
+INSERT INTO ingredients VALUES(111,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(112,'tset',NULL);
+INSERT INTO ingredients VALUES(113,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(114,'tset',NULL);
+INSERT INTO ingredients VALUES(115,'stt',NULL);
+INSERT INTO ingredients VALUES(116,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(117,'Test Ingredient 2',NULL);
+INSERT INTO ingredients VALUES(118,'test',NULL);
+INSERT INTO ingredients VALUES(119,'test',NULL);
+INSERT INTO ingredients VALUES(120,'test',NULL);
+INSERT INTO ingredients VALUES(121,'Test Ingredient 1',NULL);
+INSERT INTO ingredients VALUES(122,'fsdfs',NULL);
 CREATE TABLE recipe_ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     recipe_id INTEGER NOT NULL,
@@ -381,6 +439,9 @@ INSERT INTO recipe_ingredients VALUES(220,40,11,'1/2 cup');
 INSERT INTO recipe_ingredients VALUES(221,40,3,'1 tsp');
 INSERT INTO recipe_ingredients VALUES(222,40,27,'1/2 tsp');
 INSERT INTO recipe_ingredients VALUES(223,40,1,'1/4 cup');
+INSERT INTO recipe_ingredients VALUES(266,57,110,'test');
+INSERT INTO recipe_ingredients VALUES(267,58,111,'test');
+INSERT INTO recipe_ingredients VALUES(268,58,112,'test');
 CREATE TABLE saved_recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -389,9 +450,6 @@ CREATE TABLE saved_recipes (
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (recipe_id) REFERENCES recipes (id)
 );
-INSERT INTO saved_recipes VALUES(1,1,2,'2024-05-16 13:45:58');
-INSERT INTO saved_recipes VALUES(2,1,11,'2024-05-16 13:45:58');
-INSERT INTO saved_recipes VALUES(3,1,31,'2024-05-16 13:45:58');
 INSERT INTO saved_recipes VALUES(4,2,1,'2024-05-16 13:45:58');
 INSERT INTO saved_recipes VALUES(5,2,12,'2024-05-16 13:45:58');
 INSERT INTO saved_recipes VALUES(6,2,32,'2024-05-16 13:45:58');
@@ -419,11 +477,18 @@ INSERT INTO saved_recipes VALUES(27,9,39,'2024-05-16 13:45:58');
 INSERT INTO saved_recipes VALUES(28,10,9,'2024-05-16 13:45:58');
 INSERT INTO saved_recipes VALUES(29,10,20,'2024-05-16 13:45:58');
 INSERT INTO saved_recipes VALUES(30,10,40,'2024-05-16 13:45:58');
-INSERT INTO saved_recipes VALUES(36,1,1,'2024-05-21 20:00:10');
+INSERT INTO saved_recipes VALUES(48,20,57,'2024-05-22 18:42:04');
+INSERT INTO saved_recipes VALUES(49,20,58,'2024-05-22 18:42:07');
+INSERT INTO saved_recipes VALUES(61,1,31,'2024-05-22 21:04:50');
+INSERT INTO saved_recipes VALUES(62,1,11,'2024-05-22 21:05:01');
+INSERT INTO saved_recipes VALUES(64,1,6,'2024-05-22 21:06:00');
+INSERT INTO saved_recipes VALUES(65,1,9,'2024-05-22 21:06:09');
+INSERT INTO saved_recipes VALUES(68,1,1,'2024-05-23 14:44:07');
+INSERT INTO saved_recipes VALUES(69,1,21,'2024-05-23 17:55:20');
 DELETE FROM sqlite_sequence;
-INSERT INTO sqlite_sequence VALUES('users',18);
-INSERT INTO sqlite_sequence VALUES('recipes',42);
-INSERT INTO sqlite_sequence VALUES('ingredients',69);
-INSERT INTO sqlite_sequence VALUES('recipe_ingredients',225);
-INSERT INTO sqlite_sequence VALUES('saved_recipes',38);
+INSERT INTO sqlite_sequence VALUES('users',21);
+INSERT INTO sqlite_sequence VALUES('recipes',62);
+INSERT INTO sqlite_sequence VALUES('ingredients',122);
+INSERT INTO sqlite_sequence VALUES('recipe_ingredients',278);
+INSERT INTO sqlite_sequence VALUES('saved_recipes',69);
 COMMIT;
