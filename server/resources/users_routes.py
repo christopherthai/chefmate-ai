@@ -8,10 +8,8 @@ from flask_jwt_extended import (
     get_jwt_identity,
     unset_jwt_cookies,
 )
-from google.oauth2 import id_token
-from google.auth.transport import requests
 import requests as reqs
-from config import db, app
+from config import db
 from models import User
 
 
