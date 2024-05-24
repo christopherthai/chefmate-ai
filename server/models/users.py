@@ -109,25 +109,6 @@ class User(db.Model, SerializerMixin):
             raise AssertionError("Username is already in use")
         return username
 
-    @validates("password_hash")
-    def validate_password_hash(self, _key, password_hash):
-        """
-        Validates the password hash.
-
-        Args:
-            _key (str): The key associated with the password hash.
-            password_hash (str): The password hash to be validated.
-
-        Raises:
-            AssertionError: If no password is provided.
-
-        Returns:
-            str: The validated password hash.
-        """
-        if not password_hash:
-            raise AssertionError("No password provided")
-        return password_hash
-
     @validates("email")
     def validate_email(self, _key, email):
         """
