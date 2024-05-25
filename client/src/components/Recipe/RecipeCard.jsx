@@ -150,7 +150,7 @@ function RecipeCard({ recipe }) {
           }
           subheader={
             <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-              <Rating value={averageRating} readOnly precision={0.1} />
+              <Rating value={averageRating} readOnly />
               <Typography variant="body2" sx={{ ml: 1 }}>
                 {averageRating.toFixed(1)} ({reviews?.length || 0} reviews)
               </Typography>
