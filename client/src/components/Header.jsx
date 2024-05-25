@@ -71,6 +71,11 @@ function Header() {
     navigate("/your-recipes");
   };
 
+  const handleRedirectToYourGroceryList = () => {
+    setAnchorEl(null);
+    navigate("/your-grocery-list");
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -126,6 +131,9 @@ function Header() {
                 <MenuItem onClick={handleRedirectToProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleRedirectToYourRecipes}>
                   Your Recipes
+                </MenuItem>
+                <MenuItem onClick={handleRedirectToYourGroceryList}>
+                  Your Grocery List
                 </MenuItem>
                 <LogOut handleClose={handleClose} />
               </Menu>
