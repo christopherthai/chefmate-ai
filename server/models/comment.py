@@ -30,8 +30,8 @@ class Comment(db.Model, SerializerMixin):
     recipe = db.relationship("Recipe", back_populates="comments")
 
     serialize_rules = (
-        "-user.comments",
-        "-recipe.comments",
+        "-user",
+        "-recipe",
     )
 
     @validates("comment")

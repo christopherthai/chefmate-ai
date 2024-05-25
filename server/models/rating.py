@@ -30,8 +30,8 @@ class Rating(db.Model, SerializerMixin):
     recipe = db.relationship("Recipe", back_populates="ratings")
 
     serialize_rules = (
-        "-user.ratings",
-        "-recipe.ratings",
+        "-user",
+        "-recipe",
     )
 
     @validates("rating")

@@ -29,7 +29,7 @@ class GroceryList(db.Model, SerializerMixin):
 
     serialize_rules = (
         "-user.grocery_lists",
-        "-grocery_list_items.grocery_lists",
+        "-grocery_list_items.grocery_list",
     )
 
     def __repr__(self):

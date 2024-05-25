@@ -32,8 +32,8 @@ class GroceryListItems(db.Model, SerializerMixin):
     ingredient = db.relationship("Ingredient", back_populates="grocery_list_items")
 
     serialize_rules = (
-        "-grocery_list.grocery_list_items",
-        "-ingredient.grocery_list_items",
+        "-grocery_list",
+        "-ingredient",
     )
 
     @validates("quantity")
