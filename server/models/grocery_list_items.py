@@ -12,7 +12,7 @@ class GroceryListItems(db.Model, SerializerMixin):
         id (int): The unique identifier of the grocery list item.
         grocery_list_id (int): The ID of the grocery list that this item belongs to.
         ingredient_id (int): The ID of the ingredient associated with this item.
-        quantity (str): The quantity of the ingredient needed for this item.
+        quantity (int): The quantity of the ingredient needed for this item.
         grocery_list (GroceryList): The grocery list that this item belongs to.
         ingredient (Ingredient): The ingredient associated with this item.
     """
@@ -26,7 +26,7 @@ class GroceryListItems(db.Model, SerializerMixin):
     ingredient_id = db.Column(
         db.Integer, db.ForeignKey("ingredients.id"), nullable=False
     )
-    quantity = db.Column(db.String, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
 
     grocery_list = db.relationship("GroceryList", back_populates="grocery_list_items")
     ingredient = db.relationship("Ingredient", back_populates="grocery_list_items")

@@ -79,7 +79,7 @@ CREATE TABLE grocery_list_items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     grocery_list_id INTEGER NOT NULL,
     ingredient_id INTEGER NOT NULL,
-    quantity VARCHAR NOT NULL,
+    quantity INTEGER NOT NULL,
     FOREIGN KEY (grocery_list_id) REFERENCES grocery_lists (id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredients (id)
 );

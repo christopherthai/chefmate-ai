@@ -504,6 +504,8 @@ CREATE TABLE comments (
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (recipe_id) REFERENCES recipes (id)
 );
+INSERT INTO comments VALUES(1,1,2,'Delicious!','2024-05-25 16:04:39');
+INSERT INTO comments VALUES(2,2,1,'Really good and easy to make.','2024-05-25 16:04:39');
 CREATE TABLE ratings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -516,20 +518,28 @@ CREATE TABLE ratings (
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (recipe_id) REFERENCES recipes (id)
 );
+INSERT INTO ratings VALUES(1,1,2,5,'2024-05-25 16:04:39');
+INSERT INTO ratings VALUES(2,2,1,4,'2024-05-25 16:04:39');
 CREATE TABLE grocery_lists (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
+INSERT INTO grocery_lists VALUES(1,1,'2024-05-25 16:04:39');
+INSERT INTO grocery_lists VALUES(2,2,'2024-05-25 16:04:39');
 CREATE TABLE grocery_list_items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     grocery_list_id INTEGER NOT NULL,
     ingredient_id INTEGER NOT NULL,
-    quantity VARCHAR NOT NULL,
+    quantity INTEGER NOT NULL,
     FOREIGN KEY (grocery_list_id) REFERENCES grocery_lists (id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredients (id)
 );
+INSERT INTO grocery_list_items VALUES(1,1,1,5);
+INSERT INTO grocery_list_items VALUES(2,1,2,2);
+INSERT INTO grocery_list_items VALUES(3,2,4,3);
+INSERT INTO grocery_list_items VALUES(4,2,5,1);
 DELETE FROM sqlite_sequence;
 INSERT INTO sqlite_sequence VALUES('users',24);
 INSERT INTO sqlite_sequence VALUES('recipes',63);

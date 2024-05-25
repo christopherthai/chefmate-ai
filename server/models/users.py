@@ -19,7 +19,13 @@ class User(db.Model, SerializerMixin):
 
         recipes (list): The list of recipes created by the user.
         saved_recipes (list): The list of recipes saved by the user.
+        comments(list): The list of comments made by the user.
+        ratings (list): The list of ratings given by the user.
+        grocery_lists (list): The list of grocery lists created by the user.
         user_saved_recipes (list): The list of saved recipes associated with the user.
+        user_comments (list): The list of comments associated with the user.
+        user_ratings (list): The list of ratings associated with the user.
+        user_grocery_lists (list): The list of grocery lists associated with the user.
     """
 
     __tablename__ = "users"

@@ -14,7 +14,9 @@ class Ingredient(db.Model, SerializerMixin):
         category (str): The category of the ingredient.
 
         recipe_ingredients (Relationship): The relationship with the RecipeIngredients model.
+        grocery_list_items (Relationship): The relationship with the GroceryListItem model.
         recipes (AssociationProxy): The association proxy to access the recipes of an ingredient.
+        ingredients_grocery_list_items (AssociationProxy): The association proxy to access the grocery list items of an ingredient.
         serialize_rules (tuple): The rules to exclude the recipe_ingredients field from the RecipeIngredients model.
     """
 

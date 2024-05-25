@@ -16,13 +16,18 @@ class Recipe(db.Model, SerializerMixin):
         serving_size (int): The number of servings the recipe yields.
         image_url (str): The URL of the image associated with the recipe.
         created_at (datetime): The timestamp when the recipe was created.
-
         user_id (int): The foreign key referencing the user who created the recipe.
+
         user (User): The user who created the recipe.
         recipe_ingredients (List[RecipeIngredients]): The ingredients required for the recipe.
         saved_recipes (List[SavedRecipes]): The users who have saved the recipe.
+        comments (List[Comment]): The comments made on the recipe.
+        ratings (List[Rating]): The ratings given to the recipe.
+
         ingredients (List[Ingredient]): The ingredients of the recipe.
         recipe_saved_users (List[User]): The users who have saved the recipe.
+        recipe_comments (List[Comment]): The comments made on the recipe.
+        recipe_ratings (List[Rating]): The ratings given to the recipe.
 
     """
 
