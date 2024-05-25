@@ -24,7 +24,7 @@ class GroceryList(db.Model, SerializerMixin):
 
     user = db.relationship("User", back_populates="grocery_lists")
     grocery_list_items = db.relationship(
-        "GroceryListItem", back_populates="grocery_list", cascade="all, delete-orphan"
+        "GroceryListItems", back_populates="grocery_list", cascade="all, delete-orphan"
     )
 
     serialize_rules = (

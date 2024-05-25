@@ -29,7 +29,7 @@ class Ingredient(db.Model, SerializerMixin):
         "RecipeIngredients", back_populates="ingredient"
     )
     grocery_list_items = db.relationship(
-        "GroceryListItem", back_populates="ingredient", cascade="all, delete-orphan"
+        "GroceryListItems", back_populates="ingredient", cascade="all, delete-orphan"
     )
 
     # Define an association proxy to access the recipes of an ingredient

@@ -43,6 +43,9 @@ class User(db.Model, SerializerMixin):
     comments = db.relationship(
         "Comment", back_populates="user", cascade="all, delete-orphan"
     )
+    ratings = db.relationship(
+        "Rating", back_populates="user", cascade="all, delete-orphan"
+    )
     grocery_lists = db.relationship(
         "GroceryList", back_populates="user", cascade="all, delete-orphan"
     )
