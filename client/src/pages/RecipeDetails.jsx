@@ -17,6 +17,8 @@ import { useState, useEffect } from "react";
 function RecipeDetails() {
   const { id } = useParams(); // Get the recipe ID from the URL
   const [reviews, setReviews] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
+
   /**
    * Fetches the recipe from the server
    * @returns {Promise<Object>} The recipe object
@@ -40,6 +42,17 @@ function RecipeDetails() {
       setReviews(recipe.reviews_list);
     }
   }, [recipe]);
+
+  useEffect(() => {
+    setAverageRating(0);
+    if (reviews.length > 0) {
+      const totalRating = reviews.reduce(
+        (acc, review) => acc + review.rating,
+        0
+      );
+      setAverageRating(totalRating / reviews.length);
+    }
+  }, [reviews]);
 
   // Display a loading spinner while fetching the recipe
   if (isLoading) {
@@ -72,7 +85,11 @@ function RecipeDetails() {
 
   return (
     <Box sx={{ padding: 0 }}>
-      <RecipeContent recipe={recipe} />
+      <RecipeContent
+        recipe={recipe}
+        averageRating={averageRating}
+        reviews={reviews}
+      />
       <CommentRatingForm handleReviews={handleReviews} />
       <Box
         sx={{

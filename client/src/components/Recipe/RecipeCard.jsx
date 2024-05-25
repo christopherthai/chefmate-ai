@@ -1,4 +1,13 @@
-import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardMedia,
+  Typography,
+  Grid,
+  Box,
+  Rating,
+} from "@mui/material";
 import PropType from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -24,11 +33,19 @@ function RecipeCard({ recipe }) {
       title: PropType.string,
       preparation_time: PropType.number,
       saved_recipes: PropType.array,
+      reviews: PropType.array,
     }),
   };
 
-  const { user_id, id, image_url, title, preparation_time, saved_recipes } =
-    recipe; // Destructure the recipe object
+  const {
+    user_id,
+    id,
+    image_url,
+    title,
+    preparation_time,
+    saved_recipes,
+    reviews,
+  } = recipe; // Destructure the recipe object
 
   /**
    * Function to check the session of the user
@@ -116,13 +133,34 @@ function RecipeCard({ recipe }) {
     window.scrollTo(0, 0); // Scroll to the top of the page
   };
 
+  // Calculate the average rating
+  const averageRating =
+    reviews && reviews.length
+      ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
+      : 0;
+
   return (
     <Grid item xs={12} sm={6} md={4} key={id}>
       <Card sx={{ maxWidth: 350, cursor: "pointer" }} onClick={handleClick}>
+        <CardHeader
+          title={
+            <Typography variant="h6" component="div">
+              {title}
+            </Typography>
+          }
+          subheader={
+            <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
+              <Rating value={averageRating} readOnly precision={0.1} />
+              <Typography variant="body2" sx={{ ml: 1 }}>
+                {averageRating.toFixed(1)} ({reviews?.length || 0} reviews)
+              </Typography>
+            </Box>
+          }
+        />
         <CardMedia sx={{ height: 140 }} image={image_url} title={title} />
         <CardContent>
-          <Typography variant="h5" component="h2">
-            {title}
+          <Typography variant="body2" color="textSecondary" component="p">
+            Preparation time: {preparation_time} minutes
           </Typography>
         </CardContent>
       </Card>

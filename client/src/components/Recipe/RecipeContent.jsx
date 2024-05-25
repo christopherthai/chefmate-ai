@@ -1,4 +1,11 @@
-import { Typography, Box, Grid, Container, CardMedia } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Grid,
+  Container,
+  CardMedia,
+  Rating,
+} from "@mui/material";
 import PropTypes from "prop-types";
 import RecipeInstructions from "./RecipeInstructions";
 import IngredientList from "./IngredientList";
@@ -26,7 +33,7 @@ import { useTheme } from "@mui/material/styles";
  * @param {Object} props.recipe The recipe object
  * @return {JSX.Element} The RecipeContent component
  */
-function RecipeContent({ recipe }) {
+function RecipeContent({ recipe, averageRating, reviews }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -98,7 +105,20 @@ function RecipeContent({ recipe }) {
       >
         <strong>Author:</strong> {user.username}
       </Typography>
-
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: 2,
+          pb: 2,
+        }}
+      >
+        <Rating value={averageRating} readOnly precision={0.1} />
+        <Typography variant="body1" sx={{ ml: 1 }}>
+          {averageRating.toFixed(1)} ({reviews.length} reviews)
+        </Typography>
+      </Box>
       <Grid container justifyContent="center">
         <CardMedia
           component="img"
