@@ -1,11 +1,24 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { Box, Button, TextField, Rating, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Rating,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import PropTypes from "prop-types";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object({
   comment: Yup.string().required("Comment is required"),
@@ -24,8 +37,18 @@ const initialValues = {
  * @return {JSX.Element} The CommentRatingForm component
  */
 function CommentRatingForm({ handleReviews }) {
-  const { user } = useSelector((state) => state.user); // Get user from Redux store
+  const { user, isLoggedIn } = useSelector((state) => state.user);
+  const [openDialogBox, setOpenDialogBox] = useState(false);
   const { id } = useParams();
+
+  /**
+   * Function to close the dialog box
+   * @function
+   * @returns {void}
+   */
+  const handleCloseDialogBox = () => {
+    setOpenDialogBox(false);
+  };
 
   const reviewsMutation = useMutation(
     async (values) => {
@@ -48,8 +71,12 @@ function CommentRatingForm({ handleReviews }) {
     initialValues,
     validationSchema,
     onSubmit: (values, { resetForm }) => {
-      reviewsMutation.mutate(values);
-      resetForm();
+      if (isLoggedIn == false) {
+        setOpenDialogBox(true);
+      } else if (isLoggedIn == true) {
+        reviewsMutation.mutate(values);
+        resetForm();
+      }
     },
   });
 
@@ -95,6 +122,23 @@ function CommentRatingForm({ handleReviews }) {
       >
         Submit
       </Button>
+      <Dialog open={openDialogBox} onClose={handleCloseDialogBox}>
+        <DialogTitle>{"You are not logged in"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To leave a comment, you need to be logged in. Please log in to
+            continue.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialogBox} color="primary">
+            Cancel
+          </Button>
+          <Button component={Link} to="/login" color="primary" autoFocus>
+            Go to Login
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
