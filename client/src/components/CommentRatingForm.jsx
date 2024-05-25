@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
 import axios from "axios";
-import { addComment, addRating } from "../store/recipeSlice";
 import { Box, Button, TextField, Rating, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useMutation } from "react-query";
+import PropTypes from "prop-types";
 
 const validationSchema = Yup.object({
   comment: Yup.string().required("Comment is required"),
@@ -14,25 +16,40 @@ const initialValues = {
   comment: "",
   rating: 0,
 };
+/**
+ * The CommentRatingForm component displays a form to submit a comment and rating
+ * @component
+ * @param {Object} props Component props
+ * @param {Function} props.handleReviews Function to update the reviews list
+ * @return {JSX.Element} The CommentRatingForm component
+ */
+function CommentRatingForm({ handleReviews }) {
+  const { user } = useSelector((state) => state.user); // Get user from Redux store
+  const { id } = useParams();
 
-function CommentRatingForm({ recipeId }) {
-  const dispatch = useDispatch();
+  const reviewsMutation = useMutation(
+    async (values) => {
+      const response = await axios.post(
+        `/api/recipes/${id}/reviews/${user.id}`,
+        values
+      );
+      return response.data;
+    },
+    {
+      onSuccess: (data) => {
+        console.log("Reviews", data);
+        handleReviews(data);
+      },
+    }
+  );
 
+  // Formik hook to handle form state and validation
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async (values, { resetForm }) => {
-      try {
-        const response = await axios.post(
-          `/api/recipes/${recipeId}/comment`,
-          values
-        );
-        dispatch(addComment(response.data.comment));
-        dispatch(addRating(response.data.rating));
-        resetForm();
-      } catch (error) {
-        console.error(error);
-      }
+    onSubmit: (values, { resetForm }) => {
+      reviewsMutation.mutate(values);
+      resetForm();
     },
   });
 
@@ -47,7 +64,7 @@ function CommentRatingForm({ recipeId }) {
         gap: 2,
         width: "50%",
         margin: "auto",
-        paddingTop: "7rem",
+        paddingTop: "2rem",
       }}
     >
       <Typography variant="h4" sx={{ mb: 0 }}>
@@ -81,5 +98,9 @@ function CommentRatingForm({ recipeId }) {
     </Box>
   );
 }
+
+CommentRatingForm.propTypes = {
+  handleReviews: PropTypes.func.isRequired,
+};
 
 export default CommentRatingForm;

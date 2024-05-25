@@ -44,22 +44,13 @@ CREATE TABLE saved_recipes (
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (recipe_id) REFERENCES recipes (id)
 );
--- Create comments table with foreign key references to users and recipes tables
-CREATE TABLE comments (
+-- Create reviews table with foreign key references to users and recipes tables
+CREATE TABLE reviews (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     recipe_id INTEGER NOT NULL,
-    comment TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (recipe_id) REFERENCES recipes (id)
-);
--- Create ratings table with foreign key references to users and recipes tables
-CREATE TABLE ratings (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    recipe_id INTEGER NOT NULL,
-    rating INTEGER NOT NULL CHECK (
+    comment TEXT,
+    rating INTEGER CHECK (
         rating >= 1
         AND rating <= 5
     ),

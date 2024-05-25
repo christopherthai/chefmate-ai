@@ -21,13 +21,11 @@ class Recipe(db.Model, SerializerMixin):
         user (User): The user who created the recipe.
         recipe_ingredients (List[RecipeIngredients]): The ingredients required for the recipe.
         saved_recipes (List[SavedRecipes]): The users who have saved the recipe.
-        comments (List[Comment]): The comments made on the recipe.
-        ratings (List[Rating]): The ratings given to the recipe.
-
+        reviews = (List[Review]): The reviews made on the recipe.
         ingredients (List[Ingredient]): The ingredients of the recipe.
         recipe_saved_users (List[User]): The users who have saved the recipe.
-        recipe_comments (List[Comment]): The comments made on the recipe.
-        recipe_ratings (List[Rating]): The ratings given to the recipe.
+        recipe_reviews (List[Review]): The reviews made on the recipe.
+
 
     """
 
@@ -51,11 +49,8 @@ class Recipe(db.Model, SerializerMixin):
     saved_recipes = db.relationship(
         "SavedRecipes", back_populates="recipe", cascade="all, delete-orphan"
     )
-    comments = db.relationship(
-        "Comment", back_populates="recipe", cascade="all, delete-orphan"
-    )
-    ratings = db.relationship(
-        "Rating", back_populates="recipe", cascade="all, delete-orphan"
+    reviews = db.relationship(
+        "Review", back_populates="recipe", cascade="all, delete-orphan"
     )
 
     ingredients = association_proxy("recipe_ingredients", "ingredient")
@@ -67,8 +62,7 @@ class Recipe(db.Model, SerializerMixin):
         "-user.recipes",
         "-saved_recipes.recipe",
         "-recipe_ingredients.recipe",
-        "-comments.recipe",
-        "-ratings.recipe",
+        "-reviews.recipe",
     )
 
     @validates("title")

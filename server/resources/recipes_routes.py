@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify, make_response, Flask, session
 from config import db
-from models import Recipe, Ingredient, RecipeIngredients, Comment, Rating
+from models import Recipe, Ingredient, RecipeIngredients, Review
 import openai
 
 
@@ -237,14 +237,19 @@ class RecipesById(Resource):
         if not recipe:
             return make_response({"error": "Recipe not found"}, 404)
 
-        reviews = [
-            {**comment.to_dict(), **rating.to_dict(), "username": comment.user.username}
-            for comment in recipe.comments
-            for rating in recipe.ratings
-            if comment.user_id == rating.user_id
+        reviews_list = [
+            {
+                "comment": review.comment,
+                "created_at": review.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                "id": review.id,
+                "rating": review.rating,
+                "recipe_id": review.recipe_id,
+                "username": review.user.username,  # get username from User object
+            }
+            for review in recipe.reviews
         ]
 
-        response = {**recipe.to_dict(), "reviews": reviews}
+        response = {**recipe.to_dict(), "reviews_list": reviews_list}
         return make_response(response, 200)
 
 
@@ -490,6 +495,50 @@ class RecipesSuggestions(Resource):
         return jsonify({"recipes": recipes})
 
 
+class Reviews(Resource):
+    """
+    Resource class for handling reviews of recipes.
+    """
+
+    def post(self, recipe_id, user_id):
+        """
+        Create a new review for a recipe.
+
+        Args:
+            recipe_id (int): The ID of the recipe.
+            user_id (int): The ID of the user.
+
+        Returns:
+            A response containing the newly created review in JSON format.
+        """
+        data = request.get_json()
+        recipe = Recipe.query.filter_by(id=recipe_id).first()
+
+        if not recipe:
+            return make_response({"error": "Recipe not found"}, 404)
+
+        review = Review(
+            rating=data.get("rating"),
+            comment=data.get("comment"),
+            user_id=user_id,
+            recipe_id=recipe_id,
+        )
+
+        db.session.add(review)
+        db.session.commit()
+
+        new_review = {
+            "comment": review.comment,
+            "created_at": review.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+            "id": review.id,
+            "rating": review.rating,
+            "recipe_id": review.recipe_id,
+            "username": review.user.username,
+        }
+
+        return make_response(new_review, 201)
+
+
 def initialize_routes(api):
     """
     Initializes the routes for the API.
@@ -532,4 +581,7 @@ def initialize_routes(api):
     )
     api.add_resource(
         RecipesSuggestions, "/recipes/suggestions", endpoint="recipes-suggestions"
+    )
+    api.add_resource(
+        Reviews, "/recipes/<int:recipe_id>/reviews/<int:user_id>", endpoint="reviews"
     )

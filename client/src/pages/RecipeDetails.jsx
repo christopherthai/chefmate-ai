@@ -6,8 +6,8 @@ import Typography from "@mui/material/Typography";
 import RecipeContent from "../components/Recipe/RecipeContent";
 import { Box } from "@mui/material";
 import CommentRatingForm from "../components/CommentRatingForm";
-import { useSelector, useDispatch } from "react-redux";
-import { List, Rating, Divider, Avatar } from "@mui/material";
+import { List, Rating, Avatar, Grid } from "@mui/material";
+import { useState, useEffect } from "react";
 
 /**
  * The RecipeDetails component fetches and displays the details of a recipe
@@ -16,10 +16,7 @@ import { List, Rating, Divider, Avatar } from "@mui/material";
  */
 function RecipeDetails() {
   const { id } = useParams(); // Get the recipe ID from the URL
-  const comments = useSelector((state) => state.recipe.comments);
-  const ratings = useSelector((state) => state.recipe.ratings);
-  const dispatch = useDispatch();
-
+  const [reviews, setReviews] = useState([]);
   /**
    * Fetches the recipe from the server
    * @returns {Promise<Object>} The recipe object
@@ -37,7 +34,12 @@ function RecipeDetails() {
     error,
   } = useQuery("recipe", fetchRecipe);
 
-  console.log(recipe);
+  // Update the reviews list when the recipe changes
+  useEffect(() => {
+    if (recipe) {
+      setReviews(recipe.reviews_list);
+    }
+  }, [recipe]);
 
   // Display a loading spinner while fetching the recipe
   if (isLoading) {
@@ -60,10 +62,18 @@ function RecipeDetails() {
     return <Typography variant="h6">Error: {error.message}</Typography>;
   }
 
+  /**
+   * Updates the reviews list with the new review
+   * @param {Object} review The new review object
+   */
+  const handleReviews = (review) => {
+    setReviews((prevReviews) => [...prevReviews, review]);
+  };
+
   return (
     <Box sx={{ padding: 0 }}>
       <RecipeContent recipe={recipe} />
-      <CommentRatingForm recipeId={id} />
+      <CommentRatingForm handleReviews={handleReviews} />
       <Box
         sx={{
           mt: 6,
@@ -78,10 +88,10 @@ function RecipeDetails() {
           Comments
         </Typography>
         <List>
-          {recipe.reviews.length > 0 ? (
-            recipe.reviews.map((review) => (
+          {reviews.length > 0 ? (
+            reviews.map((review, index) => (
               <Box
-                key={review.id}
+                key={index}
                 sx={{
                   mb: 2,
                   p: 2,
@@ -102,11 +112,14 @@ function RecipeDetails() {
                 <Typography variant="body1" sx={{ mt: 1 }}>
                   {review.comment}
                 </Typography>
-                <Divider sx={{ mt: 2 }} />
               </Box>
             ))
           ) : (
-            <Typography variant="body1">No comments yet</Typography>
+            <Grid item xs={12}>
+              <Typography variant="h5" sx={{ textAlign: "center" }}>
+                No comments yet
+              </Typography>
+            </Grid>
           )}
         </List>
       </Box>

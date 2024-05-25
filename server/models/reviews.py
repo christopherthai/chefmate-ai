@@ -4,30 +4,32 @@ from sqlalchemy.orm import validates
 from config import db
 
 
-class Rating(db.Model, SerializerMixin):
+class Review(db.Model, SerializerMixin):
     """
-    Represents a rating given by a user to a recipe.
+    Represents a review for a recipe.
 
     Attributes:
-        id (int): The unique identifier of the rating.
-        user_id (int): The ID of the user who gave the rating.
-        recipe_id (int): The ID of the recipe being rated.
-        rating (int): The rating given by the user (between 1 and 5).
-        created_at (datetime): The timestamp when the rating was created.
-        user (User): The user who gave the rating.
-        recipe (Recipe): The recipe being rated.
+        id (int): The unique identifier of the review.
+        user_id (int): The ID of the user who wrote the review.
+        recipe_id (int): The ID of the recipe being reviewed.
+        comment (str): The comment or feedback provided in the review.
+        rating (int): The rating given to the recipe (between 1 and 5).
+        created_at (datetime): The timestamp when the review was created.
+        user (User): The user who wrote the review.
+        recipe (Recipe): The recipe being reviewed.
     """
 
-    __tablename__ = "ratings"
+    __tablename__ = "reviews"
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.id"), nullable=False)
+    comment = db.Column(db.Text)
     rating = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    user = db.relationship("User", back_populates="ratings")
-    recipe = db.relationship("Recipe", back_populates="ratings")
+    user = db.relationship("User", back_populates="reviews")
+    recipe = db.relationship("Recipe", back_populates="reviews")
 
     serialize_rules = (
         "-user",
@@ -56,4 +58,4 @@ class Rating(db.Model, SerializerMixin):
         return rating
 
     def __repr__(self):
-        return f"<Rating {self.user_id}-{self.recipe_id}>"
+        return f"<Review {self.user_id}-{self.recipe_id}>"

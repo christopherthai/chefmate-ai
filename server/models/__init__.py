@@ -3,7 +3,6 @@ from .recipes import Recipe
 from .ingredients import Ingredient
 from .recipe_ingredients import RecipeIngredients
 from .saved_recipes import SavedRecipes
-from .comment import Comment
-from .rating import Rating
 from .groecery_list import GroceryList
 from .grocery_list_items import GroceryListItems
+from .reviews import Review

@@ -19,12 +19,9 @@ class User(db.Model, SerializerMixin):
 
         recipes (list): The list of recipes created by the user.
         saved_recipes (list): The list of recipes saved by the user.
-        comments(list): The list of comments made by the user.
-        ratings (list): The list of ratings given by the user.
+        reviews (list): The list of reviews created by the user.
         grocery_lists (list): The list of grocery lists created by the user.
         user_saved_recipes (list): The list of saved recipes associated with the user.
-        user_comments (list): The list of comments associated with the user.
-        user_ratings (list): The list of ratings associated with the user.
         user_grocery_lists (list): The list of grocery lists associated with the user.
     """
 
@@ -45,28 +42,22 @@ class User(db.Model, SerializerMixin):
     saved_recipes = db.relationship(
         "SavedRecipes", back_populates="user", cascade="all, delete-orphan"
     )
-    recipes = db.relationship("Recipe", back_populates="user")
-    comments = db.relationship(
-        "Comment", back_populates="user", cascade="all, delete-orphan"
-    )
-    ratings = db.relationship(
-        "Rating", back_populates="user", cascade="all, delete-orphan"
-    )
     grocery_lists = db.relationship(
         "GroceryList", back_populates="user", cascade="all, delete-orphan"
     )
+    reviews = db.relationship(
+        "Review", back_populates="user", cascade="all, delete-orphan"
+    )
 
     user_saved_recipes = association_proxy("saved_recipes", "recipe")
-    user_comments = association_proxy("comments", "comment")
-    user_ratings = association_proxy("ratings", "rating")
+    user_reviews = association_proxy("reviews", "recipe")
     user_grocery_lists = association_proxy("grocery_lists", "grocery_list")
 
     serialize_rules = (
         "-_password_hash",
         "-recipes.user",
         "-saved_recipes.user",
-        "-recipes.user",
-        "-comments.user",
+        "-reviews.user",
         "-grocery_lists.user",
     )
 
