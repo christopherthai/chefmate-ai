@@ -12,7 +12,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Snackbar,
 } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
@@ -37,9 +39,24 @@ const initialValues = {
  * @return {JSX.Element} The CommentRatingForm component
  */
 function CommentRatingForm({ handleReviews }) {
+  const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false); // State for the snackbar MessageBox status
   const { user, isLoggedIn } = useSelector((state) => state.user);
   const [openDialogBox, setOpenDialogBox] = useState(false);
   const { id } = useParams();
+
+  /**
+   * Snackbar close handler function for success message
+   * @function
+   * @param {Event} event - Event object
+   * @param {string} reason - Reason for the close
+   * @returns {void}
+   */
+  const handleCloseSuccessMessageBox = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSuccessMessageBox(false);
+  };
 
   /**
    * Function to close the dialog box
@@ -50,6 +67,7 @@ function CommentRatingForm({ handleReviews }) {
     setOpenDialogBox(false);
   };
 
+  // Mutation hook to submit the form data
   const reviewsMutation = useMutation(
     async (values) => {
       const response = await axios.post(
@@ -75,6 +93,7 @@ function CommentRatingForm({ handleReviews }) {
         setOpenDialogBox(true);
       } else if (isLoggedIn == true) {
         reviewsMutation.mutate(values);
+        setOpenSuccessMessageBox(true);
         resetForm();
       }
     },
@@ -139,6 +158,21 @@ function CommentRatingForm({ handleReviews }) {
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        open={openSuccessMessageBox}
+        autoHideDuration={6000}
+        onClose={handleCloseSuccessMessageBox}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <MuiAlert
+          onClose={handleCloseSuccessMessageBox}
+          severity="success"
+          elevation={6}
+          variant="filled"
+        >
+          {"Comment submitted successfully!"}
+        </MuiAlert>
+      </Snackbar>
     </Box>
   );
 }

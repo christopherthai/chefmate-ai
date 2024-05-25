@@ -157,7 +157,7 @@ function RecipeCard({ recipe }) {
             </Box>
           }
         />
-        <CardMedia sx={{ height: 140 }} image={image_url} title={title} />
+        <CardMedia sx={{ height: 250 }} image={image_url} title={title} />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             Preparation time: {preparation_time} minutes

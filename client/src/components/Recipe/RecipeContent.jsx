@@ -50,6 +50,17 @@ function RecipeContent({ recipe, averageRating, reviews }) {
 
   // Define the prop types for the RecipeContent component
   RecipeContent.propTypes = {
+    averageRating: PropTypes.number,
+    reviews: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        user: PropTypes.shape({
+          username: PropTypes.string,
+        }),
+        rating: PropTypes.number,
+        comment: PropTypes.string,
+      })
+    ),
     recipe: PropTypes.shape({
       title: PropTypes.string,
       preparation_time: PropTypes.number,
@@ -114,7 +125,7 @@ function RecipeContent({ recipe, averageRating, reviews }) {
           pb: 2,
         }}
       >
-        <Rating value={averageRating} readOnly precision={0.1} />
+        <Rating value={averageRating} readOnly />
         <Typography variant="body1" sx={{ ml: 1 }}>
           {averageRating.toFixed(1)} ({reviews.length} reviews)
         </Typography>
