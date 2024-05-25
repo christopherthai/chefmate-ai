@@ -9,6 +9,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setSortCriteria, setSearchQuery } from "../store/recipeSlice";
 
+/**
+ * The SearchBar component displays the search bar and sort criteria dropdown.
+ * @returns {JSX.Element} JSX.Element
+ * */
 const SearchBar = () => {
   const dispatch = useDispatch();
   const { searchQuery, sortCriteria } = useSelector((state) => state.recipe);

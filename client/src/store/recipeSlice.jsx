@@ -5,6 +5,8 @@ const initialState = {
   deleteMessage: false,
   searchQuery: "",
   sortCriteria: "All",
+  comments: [],
+  rating: [],
 };
 
 /**
@@ -26,10 +28,21 @@ const recipeSlice = createSlice({
     setSortCriteria: (state, action) => {
       state.sortCriteria = action.payload;
     },
+    addComment: (state, action) => {
+      state.comments.push(action.payload);
+    },
+    addRating: (state, action) => {
+      state.recipe.push(action.payload);
+    },
   },
 });
 
-export const { setDeleteRecipeDeleteMessage, setSearchQuery, setSortCriteria } =
-  recipeSlice.actions;
+export const {
+  setDeleteRecipeDeleteMessage,
+  setSearchQuery,
+  setSortCriteria,
+  addComment,
+  addRating,
+} = recipeSlice.actions;
 
 export default recipeSlice.reducer;

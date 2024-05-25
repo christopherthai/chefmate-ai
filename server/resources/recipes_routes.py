@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify, make_response, Flask, session
 from config import db
-from models import Recipe, Ingredient, RecipeIngredients
+from models import Recipe, Ingredient, RecipeIngredients, Comment, Rating
 import openai
 
 
@@ -237,7 +237,15 @@ class RecipesById(Resource):
         if not recipe:
             return make_response({"error": "Recipe not found"}, 404)
 
-        return make_response(recipe.to_dict(), 200)
+        reviews = [
+            {**comment.to_dict(), **rating.to_dict(), "username": comment.user.username}
+            for comment in recipe.comments
+            for rating in recipe.ratings
+            if comment.user_id == rating.user_id
+        ]
+
+        response = {**recipe.to_dict(), "reviews": reviews}
+        return make_response(response, 200)
 
 
 class RecipesByIdAndUserId(Resource):

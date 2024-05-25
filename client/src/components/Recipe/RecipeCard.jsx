@@ -27,8 +27,6 @@ function RecipeCard({ recipe }) {
     }),
   };
 
-  console.log(recipe);
-
   const { user_id, id, image_url, title, preparation_time, saved_recipes } =
     recipe; // Destructure the recipe object
 
