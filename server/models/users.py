@@ -39,15 +39,26 @@ class User(db.Model, SerializerMixin):
     saved_recipes = db.relationship(
         "SavedRecipes", back_populates="user", cascade="all, delete-orphan"
     )
+    recipes = db.relationship("Recipe", back_populates="user")
+    comments = db.relationship(
+        "Comment", back_populates="user", cascade="all, delete-orphan"
+    )
+    grocery_lists = db.relationship(
+        "GroceryList", back_populates="user", cascade="all, delete-orphan"
+    )
 
-    # Define an association proxy to access the recipes of a user
     user_saved_recipes = association_proxy("saved_recipes", "recipe")
+    user_comments = association_proxy("comments", "comment")
+    user_ratings = association_proxy("ratings", "rating")
+    user_grocery_lists = association_proxy("grocery_lists", "grocery_list")
 
-    # Serialize rules to exclude the password_hash, recipes.user, and saved_recipes.user fields
     serialize_rules = (
         "-_password_hash",
         "-recipes.user",
         "-saved_recipes.user",
+        "-recipes.user",
+        "-comments.user",
+        "-grocery_lists.user",
     )
 
     @hybrid_property

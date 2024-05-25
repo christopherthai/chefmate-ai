@@ -24,16 +24,25 @@ class Ingredient(db.Model, SerializerMixin):
     name = db.Column(db.String, nullable=False)
     category = db.Column(db.String(150))
 
-    # Define a relationship with the RecipeIngredients model
+    # Define a relationship with the RecipeIngredients model and the GroceryListItem model
     recipe_ingredients = db.relationship(
         "RecipeIngredients", back_populates="ingredient"
+    )
+    grocery_list_items = db.relationship(
+        "GroceryListItem", back_populates="ingredient", cascade="all, delete-orphan"
     )
 
     # Define an association proxy to access the recipes of an ingredient
     recipes = association_proxy("recipe_ingredients", "recipe")
+    ingredients_grocery_list_items = association_proxy(
+        "grocery_list_items", "grocery_list_item"
+    )
 
-    # Serialize rules to exclude the ingredient field from the RecipeIngredients model
-    serialize_rules = ("-recipe_ingredients.ingredient",)
+    # Serialize rules to exclude the ingredient field from the RecipeIngredients model and the GroceryListItem model
+    serialize_rules = (
+        "-recipe_ingredients.ingredient",
+        "-grocery_list_items.ingredient",
+    )
 
     @validates("name")
     def validate_name(self, _key, name):

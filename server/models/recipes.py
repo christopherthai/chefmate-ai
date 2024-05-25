@@ -39,7 +39,6 @@ class Recipe(db.Model, SerializerMixin):
     # Define ForeignKey relationships with the User model
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
-    # Define a relationship with the user model, the RecipeIngredients model and the SavedRecipes model
     user = db.relationship("User", back_populates="recipes")
     recipe_ingredients = db.relationship(
         "RecipeIngredients", back_populates="recipe", cascade="all, delete-orphan"
@@ -47,16 +46,24 @@ class Recipe(db.Model, SerializerMixin):
     saved_recipes = db.relationship(
         "SavedRecipes", back_populates="recipe", cascade="all, delete-orphan"
     )
+    comments = db.relationship(
+        "Comment", back_populates="recipe", cascade="all, delete-orphan"
+    )
+    ratings = db.relationship(
+        "Rating", back_populates="recipe", cascade="all, delete-orphan"
+    )
 
-    # Define an association proxy to access the ingredients of a recipe and the users who saved the recipe
     ingredients = association_proxy("recipe_ingredients", "ingredient")
     recipe_saved_users = association_proxy("saved_recipes", "user")
+    recipe_comments = association_proxy("comments", "comment")
+    recipe_ratings = association_proxy("ratings", "rating")
 
-    # Serialize rules to exclude the user.recipes, saved_recipes.recipe, and recipe_ingredients.recipe fields
     serialize_rules = (
         "-user.recipes",
         "-saved_recipes.recipe",
         "-recipe_ingredients.recipe",
+        "-comments.recipe",
+        "-ratings.recipe",
     )
 
     @validates("title")
