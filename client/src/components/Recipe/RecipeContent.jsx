@@ -172,7 +172,7 @@ function RecipeContent({ recipe }) {
           sx={{
             position: isMobile ? "relative" : "absolute",
             display: "flex",
-            marginTop: isMobile ? "1rem" : "-11rem",
+            marginTop: isMobile ? "1rem" : "-12rem",
             marginLeft: "-1rem",
           }}
         >

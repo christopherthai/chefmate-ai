@@ -6,11 +6,10 @@ import {
   Container,
   CircularProgress,
   Box,
-  TextField,
-  FormControlLabel,
-  Checkbox,
 } from "@mui/material";
 import RecipeCard from "./RecipeCard";
+import { useSelector } from "react-redux";
+import SearchBar from "../SearchBar";
 
 /**
  * Fetches the recipes from the server
@@ -30,6 +29,8 @@ const fetchRecipes = async () => {
  * @return {JSX.Element} The RecipeList component
  */
 function RecipeList() {
+  const { searchQuery, sortCriteria } = useSelector((state) => state.recipe);
+
   // Fetch the recipes from the server
   const {
     data: recipes,
@@ -60,8 +61,35 @@ function RecipeList() {
     );
   }
 
+  // Filter recipes based on search query
+  const filteredRecipes = recipes.filter((recipe) => {
+    const matchesSearchQuery = recipe.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+
+    return matchesSearchQuery;
+  });
+
+  // Sorted recipes based on selected criteria (recent, oldest, shortestPrep, longestPrep)
+  const sortedRecipes = filteredRecipes.sort((a, b) => {
+    switch (sortCriteria) {
+      case "recent":
+        return new Date(b.created_at) - new Date(a.created_at);
+      case "oldest":
+        return new Date(a.created_at) - new Date(b.created_at);
+      case "shortestPrep":
+        return a.preparation_time - b.preparation_time;
+      case "longestPrep":
+        return b.preparation_time - a.preparation_time;
+      case "All":
+        return 1;
+      default:
+        return 1;
+    }
+  });
+
   return (
-    <Container maxWidth="lg" sx={{ pt: 12, pb: 1, pl: 8 }}>
+    <Container maxWidth="lg" sx={{ pt: 12, pb: 2, pl: 8 }}>
       <Typography
         variant="h4"
         component="h1"
@@ -70,8 +98,9 @@ function RecipeList() {
       >
         Explore Recipes
       </Typography>
+      <SearchBar />
       <Grid container spacing={3}>
-        {recipes.map((recipe) => (
+        {sortedRecipes.map((recipe) => (
           <RecipeCard recipe={recipe} key={recipe.id} />
         ))}
       </Grid>
