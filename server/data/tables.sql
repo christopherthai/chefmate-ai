@@ -44,3 +44,42 @@ CREATE TABLE saved_recipes (
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (recipe_id) REFERENCES recipes (id)
 );
+-- Create comments table with foreign key references to users and recipes tables
+CREATE TABLE comments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    recipe_id INTEGER NOT NULL,
+    comment TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (recipe_id) REFERENCES recipes (id)
+);
+-- Create ratings table with foreign key references to users and recipes tables
+CREATE TABLE ratings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    recipe_id INTEGER NOT NULL,
+    rating INTEGER NOT NULL CHECK (
+        rating >= 1
+        AND rating <= 5
+    ),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (recipe_id) REFERENCES recipes (id)
+);
+-- Create grocery_lists table with foreign key reference to users table
+CREATE TABLE grocery_lists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
+-- Create grocery_list_items table with foreign key references to grocery_lists and ingredients tables
+CREATE TABLE grocery_list_items (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    grocery_list_id INTEGER NOT NULL,
+    ingredient_id INTEGER NOT NULL,
+    quantity VARCHAR NOT NULL,
+    FOREIGN KEY (grocery_list_id) REFERENCES grocery_lists (id),
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients (id)
+);
