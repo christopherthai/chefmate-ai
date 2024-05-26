@@ -181,7 +181,11 @@ function RecipeContent({ recipe, averageRating, reviews }) {
         </Box>
       </Box>
 
-      <Grid container spacing={18}>
+      <Grid
+        container
+        spacing={18}
+        sx={{ paddingBottom: isMobile ? 0 : "3rem" }}
+      >
         <RecipeInstructions instructions={instructions} />
         <IngredientList recipe_ingredients={recipe_ingredients} />
       </Grid>
@@ -189,8 +193,9 @@ function RecipeContent({ recipe, averageRating, reviews }) {
         sx={{
           display: "flex",
           justifyContent: "flex-start",
-          marginTop: isMobile ? "1rem" : "-2rem",
-          marginLeft: isMobile ? "3rem" : "7rem",
+          marginTop: isMobile ? "1rem" : "-5rem",
+          marginLeft: isMobile ? "3rem" : "10rem",
+          paddingBottom: isMobile ? "2rem" : "4rem",
         }}
       >
         <CookingTimer />
@@ -198,19 +203,16 @@ function RecipeContent({ recipe, averageRating, reviews }) {
 
       <Box
         sx={{
-          display: isMobile ? "flex" : "block",
-          flexDirection: isMobile ? "column" : "row",
-          justifyContent: isMobile ? "center" : "flex-end",
-          alignItems: "center",
-          gap: "1rem",
-          marginTop: "1rem",
+          marginTop: "2rem",
         }}
       >
         <List
           sx={{
-            marginTop: "2rem",
-            display: isMobile ? "block" : "flex",
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
             justifyContent: isMobile ? "center" : "flex-end",
+            alignItems: "center",
+            gap: "1rem",
           }}
         >
           <ListItem sx={{ justifyContent: isMobile ? "center" : "flex-end" }}>
