@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogContent,
   IconButton,
-  TextField,
+  //   TextField,
   List,
   ListItem,
 } from "@mui/material";
@@ -15,10 +15,11 @@ import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../store/userSlice";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useMutation } from "react-query";
+import { TextField } from "formik-mui";
 
 /**
  * Edit user profile component
@@ -167,31 +168,21 @@ function EditUserProfile() {
                 <ListItem>
                   <Field
                     fullWidth
-                    as={TextField}
+                    component={TextField}
                     variant="outlined"
                     label="Username"
                     name="username"
                   />
                 </ListItem>
-                <ErrorMessage
-                  name="username"
-                  component="div"
-                  style={{ marginLeft: "30px", color: "red" }}
-                />
                 <ListItem>
                   <Field
                     fullWidth
-                    as={TextField}
+                    component={TextField}
                     variant="outlined"
                     label="Email Address"
                     name="email"
                   />
                 </ListItem>
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  style={{ marginLeft: "30px", color: "red" }}
-                />
                 <ListItem style={{ justifyContent: "flex-end" }}>
                   <Button
                     type="submit"

@@ -1,16 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import LoginPrompt from "../components/LoginPrompt";
-import { Formik, Field, Form, FieldArray, ErrorMessage } from "formik";
+import { Formik, Field, Form, FieldArray } from "formik";
 import * as Yup from "yup";
-import {
-  Button,
-  TextField,
-  Container,
-  Grid,
-  Typography,
-  Box,
-} from "@mui/material";
+import { Button, Container, Grid, Typography, Box } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch } from "react-redux";
 import { useQuery } from "react-query";
@@ -20,6 +13,7 @@ import { useMutation } from "react-query";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { TextField } from "formik-mui";
 
 // Validation schema for the form fields using Yup
 const validationSchema = Yup.object().shape({
@@ -27,7 +21,9 @@ const validationSchema = Yup.object().shape({
   instructions: Yup.string()
     .min(10, "Instructions must be at least 10 characters")
     .required("Instruction is required"),
-  preparation_time: Yup.number().required("Preparation time is required"),
+  preparation_time: Yup.number()
+    .required("Preparation time is required")
+    .min(1, "Must be greater than 0"),
   serving_size: Yup.number().required("Serving size is required"),
   image_url: Yup.string()
     .required("Image URL is required")
@@ -230,70 +226,45 @@ function CreateRecipeForm() {
                   <Grid item xs={12}>
                     <Field
                       name="title"
-                      as={TextField}
+                      component={TextField}
                       label="Title"
                       fullWidth
-                    />
-                    <ErrorMessage
-                      name="title"
-                      component="div"
-                      style={{ color: "red" }}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <Field
                       name="instructions"
-                      as={TextField}
+                      component={TextField}
                       label="Instructions"
                       fullWidth
                       multiline
                       rows={4}
                     />
-                    <ErrorMessage
-                      name="instructions"
-                      component="div"
-                      style={{ color: "red" }}
-                    />
                   </Grid>
                   <Grid item xs={6}>
                     <Field
                       name="preparation_time"
-                      as={TextField}
+                      component={TextField}
                       label="Preparation Time (minutes)"
                       fullWidth
                       type="number"
                     />
-                    <ErrorMessage
-                      name="preparation_time"
-                      component="div"
-                      style={{ color: "red" }}
-                    />
                   </Grid>
                   <Grid item xs={6}>
                     <Field
                       name="serving_size"
-                      as={TextField}
+                      component={TextField}
                       label="Serving Size"
                       fullWidth
                       type="number"
-                    />
-                    <ErrorMessage
-                      name="serving_size"
-                      component="div"
-                      style={{ color: "red" }}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <Field
                       name="image_url"
-                      as={TextField}
+                      component={TextField}
                       label="Image URL"
                       fullWidth
-                    />
-                    <ErrorMessage
-                      name="image_url"
-                      component="div"
-                      style={{ color: "red" }}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -306,27 +277,17 @@ function CreateRecipeForm() {
                                 <Grid item xs={3}>
                                   <Field
                                     name={`ingredients[${index}].quantity`}
-                                    as={TextField}
+                                    component={TextField}
                                     label={`Quantity`}
                                     fullWidth
-                                  />
-                                  <ErrorMessage
-                                    name={`ingredients[${index}].quantity`}
-                                    component="div"
-                                    style={{ color: "red" }}
                                   />
                                 </Grid>
                                 <Grid item xs={9}>
                                   <Field
                                     name={`ingredients[${index}].name`}
-                                    as={TextField}
+                                    component={TextField}
                                     label={`Ingredient ${index + 1} `}
                                     fullWidth
-                                  />
-                                  <ErrorMessage
-                                    name={`ingredients[${index}].name`}
-                                    component="div"
-                                    style={{ color: "red" }}
                                   />
                                 </Grid>
                               </Grid>
