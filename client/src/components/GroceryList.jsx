@@ -14,6 +14,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
+import React, { useState, useEffect } from "react";
 
 // Define the schema for the form validation
 const groceryListSchema = Yup.object().shape({
@@ -34,23 +35,29 @@ const groceryListSchema = Yup.object().shape({
  */
 function GroceryList() {
   const { user } = useSelector((state) => state.user);
+  const [groceryList, setGroceryList] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Fetch the grocery list from the server
   const fetchGroceryList = async () => {
-    const { data } = await axios.get(`/api/grocery_lists/${user.id}`);
+    const { data } = await axios.get(`/api/grocery-lists/${user.id}`);
     return data.grocery_lists[0];
   };
 
-  const {
-    data: groceryList,
-    isLoading,
-    isError,
-  } = useQuery("groceryList", fetchGroceryList);
+  const { isLoading, isError } = useQuery("groceryList", fetchGroceryList, {
+    onSuccess: (data) => {
+      console.log(data);
+      setGroceryList(data);
+    },
+  });
 
   // Mutations for updating teh grocery list
   const updateGroceryListMutation = useMutation(
     async (updatedGroceryList) => {
-      await axios.put(`/api/grocery_lists/${user.id}`, updatedGroceryList);
+      await axios.put(`/api/grocery-lists/${user.id}`, updatedGroceryList);
     },
     {
       onSuccess: () => {
@@ -97,40 +104,38 @@ function GroceryList() {
                   {({ remove }) => (
                     <Grid container spacing={2}>
                       {values.grocery_list_items.map((item, index) => (
-                        <Grid item xs={13} key={index}>
-                          <Grid container spacing={2} alignItems="center">
-                            <Grid item xs={3}>
-                              <TextField
-                                name={`grocery_list_items[${index}].quantity`}
-                                label="Quantity"
-                                type="number"
-                                variant="outlined"
-                                fullWidth
-                                value={item.quantity}
-                                onChange={handleChange}
-                              />
-                            </Grid>
-                            <Grid item xs={8}>
-                              <TextField
-                                // name={`grocery_list_items[${index}].ingredient_name`}
-                                label="Ingredient"
-                                variant="outlined"
-                                fullWidth
-                                value={item.ingredient_name}
-                                onChange={handleChange}
-                                readOnly
-                              />
-                            </Grid>
-                            <Grid item xs={1}>
-                              <IconButton
-                                color="secondary"
-                                onClick={() => remove(index)}
-                              >
-                                <DeleteIcon />
-                              </IconButton>
-                            </Grid>
+                        <React.Fragment key={index}>
+                          <Grid item xs={3}>
+                            <TextField
+                              name={`grocery_list_items[${index}].quantity`}
+                              label="Quantity"
+                              type="number"
+                              variant="outlined"
+                              fullWidth
+                              value={item.quantity}
+                              onChange={handleChange}
+                            />
                           </Grid>
-                        </Grid>
+                          <Grid item xs={8}>
+                            <TextField
+                              name={`grocery_list_items[${index}].ingredient_name`}
+                              label="Ingredient"
+                              variant="outlined"
+                              fullWidth
+                              value={item.ingredient_name}
+                              onChange={handleChange}
+                              readOnly
+                            />
+                          </Grid>
+                          <Grid item xs={1}>
+                            <IconButton
+                              color="secondary"
+                              onClick={() => remove(index)}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </Grid>
+                        </React.Fragment>
                       ))}
                     </Grid>
                   )}
@@ -159,7 +164,13 @@ function GroceryList() {
       ) : (
         <Container maxWidth="md">
           <Typography variant="h5" sx={{ textAlign: "center" }}>
-            You have no items in your grocery list
+            {groceryList === undefined ? (
+              <Typography variant="h5" sx={{ textAlign: "center" }}>
+                Your grocery list is empty
+              </Typography>
+            ) : (
+              <CircularProgress />
+            )}
           </Typography>
         </Container>
       )}

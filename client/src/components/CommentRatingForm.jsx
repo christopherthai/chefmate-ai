@@ -78,7 +78,7 @@ function CommentRatingForm({ handleReviews }) {
     },
     {
       onSuccess: (data) => {
-        console.log("Reviews", data);
+        setOpenSuccessMessageBox(true);
         handleReviews(data);
       },
     }
@@ -93,7 +93,6 @@ function CommentRatingForm({ handleReviews }) {
         setOpenDialogBox(true);
       } else if (isLoggedIn == true) {
         reviewsMutation.mutate(values);
-        setOpenSuccessMessageBox(true);
         resetForm();
       }
     },
@@ -121,7 +120,6 @@ function CommentRatingForm({ handleReviews }) {
         value={formik.values.rating}
         onChange={(event, value) => formik.setFieldValue("rating", value)}
         error={formik.touched.rating && Boolean(formik.errors.rating)}
-        helperText={formik.touched.rating && formik.errors.rating}
       />
       <TextField
         label="Comment"

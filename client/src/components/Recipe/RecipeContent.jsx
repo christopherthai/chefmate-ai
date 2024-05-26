@@ -17,11 +17,11 @@ import {
   FacebookShareButton,
   TwitterShareButton,
   PinterestShareButton,
-  WhatsappShareButton,
+  RedditShareButton,
   FacebookIcon,
   TwitterIcon,
   PinterestIcon,
-  WhatsappIcon,
+  RedditIcon,
 } from "react-share";
 import CookingTimer from "../CookingTimer";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -177,9 +177,9 @@ function RecipeContent({ recipe, averageRating, reviews }) {
           </PinterestShareButton>
         </Box>
         <Box sx={{ mx: 1 }}>
-          <WhatsappShareButton url={shareUrl} title={shareTitle}>
-            <WhatsappIcon size={32} round />
-          </WhatsappShareButton>
+          <RedditShareButton url={shareUrl} title={shareTitle}>
+            <RedditIcon size={32} round />
+          </RedditShareButton>
         </Box>
       </Box>
 
@@ -210,7 +210,7 @@ function RecipeContent({ recipe, averageRating, reviews }) {
           maxWidth: "8.7rem",
         }}
       >
-        <AddIngredientsToGroceryListButton />
+        <AddIngredientsToGroceryListButton recipe={recipe} />
         <SavedRecipeButton />
         <EditRecipeButton />
         <DeleteRecipeButton />
