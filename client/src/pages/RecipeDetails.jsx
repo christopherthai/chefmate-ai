@@ -134,7 +134,7 @@ function RecipeDetails() {
           ) : (
             <Grid item xs={12}>
               <Typography variant="h5" sx={{ textAlign: "center" }}>
-                No comments yet
+                No reviews yet
               </Typography>
             </Grid>
           )}
