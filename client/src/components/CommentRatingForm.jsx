@@ -21,6 +21,8 @@ import { useMutation } from "react-query";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const validationSchema = Yup.object({
   comment: Yup.string().required("Comment is required"),
@@ -43,6 +45,8 @@ function CommentRatingForm({ handleReviews }) {
   const { user, isLoggedIn } = useSelector((state) => state.user);
   const [openDialogBox, setOpenDialogBox] = useState(false);
   const { id } = useParams();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   /**
    * Snackbar close handler function for success message
@@ -107,12 +111,12 @@ function CommentRatingForm({ handleReviews }) {
         display: "flex",
         flexDirection: "column",
         gap: 2,
-        width: "50%",
+        width: isMobile ? "90%" : "50%",
         margin: "auto",
         paddingTop: "2rem",
       }}
     >
-      <Typography variant="h4" sx={{ mb: 0 }}>
+      <Typography variant={isMobile ? "h5" : "h4"} sx={{ mb: 2 }}>
         Leave a Review
       </Typography>
       <Rating

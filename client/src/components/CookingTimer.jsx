@@ -4,11 +4,15 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useQuery } from "react-query";
 import CircularProgress from "@mui/material/CircularProgress";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const CookingTimer = () => {
   const [time, setTime] = useState(0);
   const [timerOn, setTimerOn] = useState(false);
   const { id } = useParams();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   /**
    * The useEffect hook is used to start the timer when the timerOn state is true
@@ -79,9 +83,9 @@ const CookingTimer = () => {
   const handleChange = (event) => setTime(event.target.value);
 
   return (
-    <Box sx={{ textAlign: "center", marginTop: "2rem" }}>
-      <Typography variant="h6">Cooking Timer</Typography>
-      <Typography variant="h4">
+    <Box sx={{ textAlign: "center", marginTop: isMobile ? "1rem" : "2rem" }}>
+      <Typography variant={isMobile ? "h6" : "h5"}>Cooking Timer</Typography>
+      <Typography variant={isMobile ? "h4" : "h3"}>
         {Math.floor(time / 60)}:{time % 60 < 10 ? "0" : ""}
         {time % 60}
       </Typography>
@@ -91,6 +95,7 @@ const CookingTimer = () => {
           justifyContent: "center",
           gap: "1rem",
           marginTop: "1rem",
+          flexWrap: isMobile ? "wrap" : "nowrap",
         }}
       >
         <Button variant="contained" onClick={handleStart} disabled={timerOn}>
@@ -103,12 +108,13 @@ const CookingTimer = () => {
           Reset
         </Button>
       </Box>
-      <Box sx={{ marginTop: "1rem" }}>
+      <Box sx={{ marginTop: "1rem", textAlign: "center" }}>
         <TextField
           label="Set Timer (seconds)"
           type="number"
           value={time}
           onChange={handleChange}
+          sx={{ width: isMobile ? "100%" : "auto" }}
         />
       </Box>
     </Box>

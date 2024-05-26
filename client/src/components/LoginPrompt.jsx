@@ -8,6 +8,7 @@ import { Container, Typography, Button } from "@mui/material";
  */
 function LoginPrompt() {
   const navigate = useNavigate(); // Hook from react-router-dom to navigate to different pages
+  window.scrollTo(0, 0);
 
   /**
    * Redirects the user to the login page

@@ -5,7 +5,8 @@ import {
   Container,
   CardMedia,
   Rating,
-  Button,
+  List,
+  ListItem,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import RecipeInstructions from "./RecipeInstructions";
@@ -88,33 +89,33 @@ function RecipeContent({ recipe, averageRating, reviews }) {
   const shareTitle = title; // Get the recipe title
 
   return (
-    <Container sx={{ padding: { xs: "4rem", md: "10rem" } }}>
+    <Container sx={{ padding: { xs: "2rem 1rem", md: "6rem 2rem" } }}>
       <Typography
         variant="h4"
         component="h1"
         gutterBottom
-        sx={{ textAlign: "center", marginBottom: "2rem", marginTop: "-2rem" }}
+        sx={{ textAlign: "center", marginBottom: "1rem" }}
       >
         {title}
       </Typography>
       <Typography
         variant="body2"
         align="center"
-        sx={{ textAlign: "center", marginBottom: "1rem", marginTop: "-1rem" }}
+        sx={{ textAlign: "center", marginBottom: "0.5rem" }}
       >
         <strong>Preparation Time:</strong> {preparation_time} minutes
       </Typography>
       <Typography
         variant="body2"
         align="center"
-        sx={{ textAlign: "center", marginBottom: "1rem", marginTop: "-1rem" }}
+        sx={{ textAlign: "center", marginBottom: "0.5rem" }}
       >
         <strong>Serving Size:</strong> {serving_size} servings
       </Typography>
       <Typography
         variant="body2"
         align="center"
-        sx={{ textAlign: "center", marginBottom: "1rem", marginTop: "-1rem" }}
+        sx={{ textAlign: "center", marginBottom: "0.5rem" }}
       >
         <strong>Author:</strong> {user.username}
       </Typography>
@@ -139,8 +140,7 @@ function RecipeContent({ recipe, averageRating, reviews }) {
           alt="Recipe Image"
           sx={{
             width: "100%",
-            height: 600,
-            marginLeft: "-2%",
+            height: isMobile ? 300 : 600,
             paddingBottom: "2rem",
           }}
         />
@@ -148,13 +148,11 @@ function RecipeContent({ recipe, averageRating, reviews }) {
 
       <Box
         sx={{
-          position: "relative",
-          top: 0,
-          left: 0,
           display: "flex",
           justifyContent: "center",
-          marginTop: "-0.5rem",
-          gap: "1rem", // Add space between buttons
+          gap: "1rem",
+          flexWrap: "wrap",
+          mb: 2,
         }}
       >
         <Box sx={{ mx: 1 }}>
@@ -187,33 +185,47 @@ function RecipeContent({ recipe, averageRating, reviews }) {
         <RecipeInstructions instructions={instructions} />
         <IngredientList recipe_ingredients={recipe_ingredients} />
       </Grid>
-      <Grid container justifyContent="center">
-        <Box
-          sx={{
-            position: isMobile ? "relative" : "absolute",
-            display: "flex",
-            marginTop: isMobile ? "1rem" : "0rem",
-            marginLeft: "-33rem",
-          }}
-        >
-          <CookingTimer />
-        </Box>
-      </Grid>
-
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          marginTop: "0rem",
-          marginLeft: "40rem",
-          maxWidth: "8.7rem",
+          justifyContent: "flex-start",
+          marginTop: isMobile ? "1rem" : "-2rem",
+          marginLeft: isMobile ? "3rem" : "7rem",
         }}
       >
-        <AddIngredientsToGroceryListButton recipe={recipe} />
-        <SavedRecipeButton />
-        <EditRecipeButton />
-        <DeleteRecipeButton />
+        <CookingTimer />
+      </Box>
+
+      <Box
+        sx={{
+          display: isMobile ? "flex" : "block",
+          flexDirection: isMobile ? "column" : "row",
+          justifyContent: isMobile ? "center" : "flex-end",
+          alignItems: "center",
+          gap: "1rem",
+          marginTop: "1rem",
+        }}
+      >
+        <List
+          sx={{
+            marginTop: "2rem",
+            display: isMobile ? "block" : "flex",
+            justifyContent: isMobile ? "center" : "flex-end",
+          }}
+        >
+          <ListItem sx={{ justifyContent: isMobile ? "center" : "flex-end" }}>
+            <AddIngredientsToGroceryListButton recipe={recipe} />
+          </ListItem>
+          <ListItem sx={{ justifyContent: isMobile ? "center" : "flex-end" }}>
+            <SavedRecipeButton />
+          </ListItem>
+          <ListItem sx={{ justifyContent: isMobile ? "center" : "flex-end" }}>
+            <EditRecipeButton />
+          </ListItem>
+          <ListItem sx={{ justifyContent: isMobile ? "center" : "flex-end" }}>
+            <DeleteRecipeButton />
+          </ListItem>
+        </List>
       </Box>
     </Container>
   );

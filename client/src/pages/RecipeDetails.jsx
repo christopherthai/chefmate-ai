@@ -8,6 +8,8 @@ import { Box } from "@mui/material";
 import CommentRatingForm from "../components/CommentRatingForm";
 import { List, Rating, Avatar, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 /**
  * The RecipeDetails component fetches and displays the details of a recipe
@@ -18,6 +20,8 @@ function RecipeDetails() {
   const { id } = useParams(); // Get the recipe ID from the URL
   const [reviews, setReviews] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   /**
    * Fetches the recipe from the server
@@ -84,7 +88,7 @@ function RecipeDetails() {
   };
 
   return (
-    <Box sx={{ padding: 0 }}>
+    <Box sx={{ paddingTop: isMobile ? 7 : 0 }}>
       <RecipeContent
         recipe={recipe}
         averageRating={averageRating}
@@ -96,12 +100,12 @@ function RecipeDetails() {
           mt: 6,
           display: "flex",
           flexDirection: "column",
-          width: "55%",
+          width: isMobile ? "93%" : "55%",
           margin: "auto",
-          paddingTop: "5rem",
+          paddingTop: isMobile ? "2rem" : "5rem",
         }}
       >
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant={isMobile ? "h5" : "h4"} sx={{ mb: 2 }}>
           Reviews
         </Typography>
         <List>
@@ -118,7 +122,17 @@ function RecipeDetails() {
               >
                 <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                   <Avatar sx={{ mr: 2 }}>{review.username.charAt(0)}</Avatar>
-                  <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontWeight: "bold",
+                      maxWidth: isMobile ? "70%" : "auto",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                    noWrap
+                  >
                     {review.username}
                   </Typography>
                   <Rating value={review.rating} readOnly sx={{ ml: "auto" }} />

@@ -10,6 +10,8 @@ import {
 import RecipeCard from "./RecipeCard";
 import { useSelector } from "react-redux";
 import SearchBar from "../SearchBar";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 /**
  * Fetches the recipes from the server
@@ -30,6 +32,8 @@ const fetchRecipes = async () => {
  */
 function RecipeList() {
   const { searchQuery, sortCriteria } = useSelector((state) => state.recipe);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   // Fetch the recipes from the server
   const {
@@ -89,7 +93,7 @@ function RecipeList() {
   });
 
   return (
-    <Container maxWidth="lg" sx={{ pt: 12, pb: 2, pl: 8 }}>
+    <Container maxWidth="lg" sx={{ pt: 12, pb: 2, pl: 5 }}>
       <Typography
         variant="h4"
         component="h1"

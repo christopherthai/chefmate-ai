@@ -95,16 +95,7 @@ function SavedRecipeButton() {
   );
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "flex-end",
-        marginTop: isMobile ? "-20rem" : "0.5rem",
-        marginLeft: isMobile ? "0" : "-30rem",
-        width: "38.5rem",
-        paddingBottom: "0.5rem",
-      }}
-    >
+    <>
       <Button
         variant="contained"
         color={savedRecipes ? "primary" : "secondary"}
@@ -138,7 +129,7 @@ function SavedRecipeButton() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Box>
+    </>
   );
 }
 
