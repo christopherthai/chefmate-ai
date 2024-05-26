@@ -215,7 +215,6 @@ function RecipeContent({ recipe, averageRating, reviews }) {
         <EditRecipeButton />
         <DeleteRecipeButton />
       </Box>
-      {/* <SavedRecipeButton /> */}
     </Container>
   );
 }

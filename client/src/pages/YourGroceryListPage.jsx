@@ -10,11 +10,11 @@ import MuiAlert from "@mui/material/Alert";
 import GroceryList from "../components/GroceryList";
 
 /**
- * The YourGrocery component displays the user's grocery list
+ * The YourGroceryListPage component displays the user's grocery list
  * @component
  * @return {JSX.Element} The YourGrocery component
  */
-function YourGrocery() {
+function YourGroceryListPage() {
   const dispatch = useDispatch();
 
   /**
@@ -83,4 +83,4 @@ function YourGrocery() {
   );
 }
 
-export default YourGrocery;
+export default YourGroceryListPage;

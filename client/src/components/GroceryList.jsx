@@ -112,12 +112,13 @@ function GroceryList() {
                             </Grid>
                             <Grid item xs={8}>
                               <TextField
-                                name={`grocery_list_items[${index}].ingredient_name`}
+                                // name={`grocery_list_items[${index}].ingredient_name`}
                                 label="Ingredient"
                                 variant="outlined"
                                 fullWidth
                                 value={item.ingredient_name}
                                 onChange={handleChange}
+                                readOnly
                               />
                             </Grid>
                             <Grid item xs={1}>
