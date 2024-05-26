@@ -102,7 +102,7 @@ function RecipeDetails() {
         }}
       >
         <Typography variant="h4" sx={{ mb: 2 }}>
-          Comments
+          Reviews
         </Typography>
         <List>
           {reviews.length > 0 ? (

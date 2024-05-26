@@ -5,6 +5,7 @@ import {
   Container,
   CardMedia,
   Rating,
+  Button,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import RecipeInstructions from "./RecipeInstructions";
@@ -25,6 +26,7 @@ import {
 import CookingTimer from "../CookingTimer";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import AddIngredientsToGroceryListButton from "../AddIngredientsToGroceryListButton";
 
 /**
  * The RecipeContent component displays the content of a recipe
@@ -185,32 +187,35 @@ function RecipeContent({ recipe, averageRating, reviews }) {
         <RecipeInstructions instructions={instructions} />
         <IngredientList recipe_ingredients={recipe_ingredients} />
       </Grid>
+      <Grid container justifyContent="center">
+        <Box
+          sx={{
+            position: isMobile ? "relative" : "absolute",
+            display: "flex",
+            marginTop: isMobile ? "1rem" : "0rem",
+            marginLeft: "-33rem",
+          }}
+        >
+          <CookingTimer />
+        </Box>
+      </Grid>
 
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          marginTop: "2rem",
-          maxWidth: "8.6rem",
+          marginTop: "0rem",
+          marginLeft: "40rem",
+          maxWidth: "8.7rem",
         }}
       >
+        <AddIngredientsToGroceryListButton />
+        <SavedRecipeButton />
         <EditRecipeButton />
         <DeleteRecipeButton />
       </Box>
-      <Grid container justifyContent="center">
-        <Box
-          sx={{
-            position: isMobile ? "relative" : "absolute",
-            display: "flex",
-            marginTop: isMobile ? "1rem" : "-12rem",
-            marginLeft: "-1rem",
-          }}
-        >
-          <CookingTimer />
-        </Box>
-      </Grid>
-      <SavedRecipeButton />
+      {/* <SavedRecipeButton /> */}
     </Container>
   );
 }

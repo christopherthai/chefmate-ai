@@ -9,6 +9,7 @@ from resources import (
     recipes_routes,
     ingredients_routes,
     saved_recipes_routes,
+    grocery_list_routes,
 )
 
 # Importing the routes from the resources folder
@@ -16,6 +17,7 @@ users_routes.initialize_routes(api)
 recipes_routes.initialize_routes(api)
 ingredients_routes.initialize_routes(api)
 saved_recipes_routes.initialize_routes(api)
+grocery_list_routes.initialize_routes(api)
 
 # Running the app
 if __name__ == "__main__":

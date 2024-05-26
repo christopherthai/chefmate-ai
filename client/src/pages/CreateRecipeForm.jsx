@@ -19,6 +19,7 @@ import { setUser, setIsLoggedIn } from "../store/userSlice";
 import { useMutation } from "react-query";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 // Validation schema for the form fields using Yup
 const validationSchema = Yup.object().shape({
@@ -334,7 +335,7 @@ function CreateRecipeForm() {
                                 onClick={() => remove(index)}
                                 sx={{ mt: 1, ml: 1 }}
                               >
-                                Remove
+                                <DeleteIcon />
                               </Button>
                             </Grid>
                           ))}

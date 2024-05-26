@@ -99,7 +99,10 @@ function SavedRecipeButton() {
       sx={{
         display: "flex",
         justifyContent: "flex-end",
-        marginTop: isMobile ? "-20rem" : "-7.5rem",
+        marginTop: isMobile ? "-20rem" : "0.5rem",
+        marginLeft: isMobile ? "0" : "-30rem",
+        width: "38.5rem",
+        paddingBottom: "0.5rem",
       }}
     >
       <Button

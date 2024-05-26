@@ -15,7 +15,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import YourGroceryList from "./pages/YourGroceryList";
+import YourGrocery from "./pages/YourGrocery";
 
 /**
  * The App component is the root component of the application.
@@ -48,7 +48,7 @@ function App() {
               <Route path="/edit-recipe/:id" element={<EditRecipePage />} />
               <Route path="/profile" element={<UserProfile />} />
               <Route path="/your-recipes" element={<YourRecipes />} />
-              <Route path="/your-grocery-list" element={<YourGroceryList />} />
+              <Route path="/your-grocery-list" element={<YourGrocery />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegistrationForm />} />

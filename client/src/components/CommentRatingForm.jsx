@@ -114,7 +114,7 @@ function CommentRatingForm({ handleReviews }) {
       }}
     >
       <Typography variant="h4" sx={{ mb: 0 }}>
-        Leave a Comment
+        Leave a Review
       </Typography>
       <Rating
         name="rating"
@@ -145,7 +145,7 @@ function CommentRatingForm({ handleReviews }) {
         <DialogTitle>{"You are not logged in"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To leave a comment, you need to be logged in. Please log in to
+            To leave a review, you need to be logged in. Please log in to
             continue.
           </DialogContentText>
         </DialogContent>
@@ -170,7 +170,7 @@ function CommentRatingForm({ handleReviews }) {
           elevation={6}
           variant="filled"
         >
-          {"Comment submitted successfully!"}
+          {"Review submitted successfully!"}
         </MuiAlert>
       </Snackbar>
     </Box>

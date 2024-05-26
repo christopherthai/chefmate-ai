@@ -4,21 +4,18 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../store/userSlice";
 import CircularProgress from "@mui/material/CircularProgress";
-import SavedRecipesList from "../components/Recipe/SavedRecipesList";
-import CreatedRecipesList from "../components/Recipe/CreatedRecipesList";
 import { Container } from "@mui/material";
 import { Snackbar, Box } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
-import { setDeleteRecipeDeleteMessage } from "../store/recipeSlice";
+import GroceryList from "../components/GroceryList";
 
 /**
- * The YourRecipes component displays the user's saved and created recipes
+ * The YourGrocery component displays the user's grocery list
  * @component
- * @return {JSX.Element} The YourRecipes component
+ * @return {JSX.Element} The YourGrocery component
  */
-function YourRecipes() {
-  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
-  const { deleteMessage } = useSelector((state) => state.recipe); // Get deleteMessage from Redux store
+function YourGrocery() {
+  const dispatch = useDispatch();
 
   /**
    * Function to check the session of the user
@@ -71,20 +68,6 @@ function YourRecipes() {
       <Typography variant="h5">An error occurred: {isError.message}</Typography>
     );
   }
-
-  /**
-   * Snackbar close handler function for delete message box
-   * @function
-   * @param {Event} event - Event object
-   * @param {string} reason - Reason for the close
-   * @returns {void}
-   */
-  const handleDeleteMessageBox = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    dispatch(setDeleteRecipeDeleteMessage(false));
-  };
   return (
     <Container maxWidth="lg" sx={{ pt: 12, pb: 1, pl: 1 }}>
       <Typography
@@ -93,27 +76,11 @@ function YourRecipes() {
         gutterBottom
         sx={{ textAlign: "center", marginBottom: "2rem" }}
       >
-        Your Saved and Created Recipes
+        Your Grocery List
       </Typography>
-      <SavedRecipesList />
-      <CreatedRecipesList />
-      <Snackbar
-        open={deleteMessage}
-        autoHideDuration={6000}
-        onClose={handleDeleteMessageBox}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <MuiAlert
-          onClose={handleDeleteMessageBox}
-          severity="success"
-          elevation={6}
-          variant="filled"
-        >
-          {"Recipe deleted successfully!"}
-        </MuiAlert>
-      </Snackbar>
+      <GroceryList />
     </Container>
   );
 }
 
-export default YourRecipes;
+export default YourGrocery;

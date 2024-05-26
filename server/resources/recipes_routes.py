@@ -230,7 +230,7 @@ class RecipesById(Resource):
         - recipe_id (int): The ID of the recipe to retrieve.
 
         Returns:
-        - response (dict): The response containing the retrieved recipe
+        - response (dict): The response containing the retrieved recipe and its reviews.
         """
         recipe = Recipe.query.filter_by(id=recipe_id).first()
 
