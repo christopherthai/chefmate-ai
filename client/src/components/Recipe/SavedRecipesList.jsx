@@ -78,7 +78,7 @@ function SavedRecipesList() {
         ) : (
           <Grid item xs={12}>
             <Typography variant="h5" sx={{ textAlign: "center" }}>
-              No saved recipes found
+              You have not saved any recipes yet.
             </Typography>
           </Grid>
         )}

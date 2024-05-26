@@ -81,78 +81,88 @@ function GroceryList() {
   }
 
   return (
-    <Container maxWidth="md">
-      <Formik
-        initialValues={groceryList}
-        validationSchema={groceryListSchema}
-        onSubmit={(values) => {
-          updateGroceryListMutation.mutate(values);
-        }}
-      >
-        {({ values, handleChange, handleSubmit }) => (
-          <Form onSubmit={handleSubmit}>
-            <FieldArray name="grocery_list_items">
-              {({ remove }) => (
-                <Grid container spacing={2}>
-                  {values.grocery_list_items.map((item, index) => (
-                    <Grid item xs={13} key={index}>
-                      <Grid container spacing={2} alignItems="center">
-                        <Grid item xs={3}>
-                          <TextField
-                            name={`grocery_list_items[${index}].quantity`}
-                            label="Quantity"
-                            type="number"
-                            variant="outlined"
-                            fullWidth
-                            value={item.quantity}
-                            onChange={handleChange}
-                          />
+    <>
+      {groceryList && groceryList.grocery_list_items.length > 0 ? (
+        <Container maxWidth="md">
+          <Formik
+            initialValues={groceryList}
+            validationSchema={groceryListSchema}
+            onSubmit={(values) => {
+              updateGroceryListMutation.mutate(values);
+            }}
+          >
+            {({ values, handleChange, handleSubmit }) => (
+              <Form onSubmit={handleSubmit}>
+                <FieldArray name="grocery_list_items">
+                  {({ remove }) => (
+                    <Grid container spacing={2}>
+                      {values.grocery_list_items.map((item, index) => (
+                        <Grid item xs={13} key={index}>
+                          <Grid container spacing={2} alignItems="center">
+                            <Grid item xs={3}>
+                              <TextField
+                                name={`grocery_list_items[${index}].quantity`}
+                                label="Quantity"
+                                type="number"
+                                variant="outlined"
+                                fullWidth
+                                value={item.quantity}
+                                onChange={handleChange}
+                              />
+                            </Grid>
+                            <Grid item xs={8}>
+                              <TextField
+                                name={`grocery_list_items[${index}].ingredient_name`}
+                                label="Ingredient"
+                                variant="outlined"
+                                fullWidth
+                                value={item.ingredient_name}
+                                onChange={handleChange}
+                              />
+                            </Grid>
+                            <Grid item xs={1}>
+                              <IconButton
+                                color="secondary"
+                                onClick={() => remove(index)}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </Grid>
+                          </Grid>
                         </Grid>
-                        <Grid item xs={8}>
-                          <TextField
-                            name={`grocery_list_items[${index}].ingredient_name`}
-                            label="Ingredient"
-                            variant="outlined"
-                            fullWidth
-                            value={item.ingredient_name}
-                            onChange={handleChange}
-                          />
-                        </Grid>
-                        <Grid item xs={1}>
-                          <IconButton
-                            color="secondary"
-                            onClick={() => remove(index)}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Grid>
-                      </Grid>
+                      ))}
                     </Grid>
-                  ))}
-                </Grid>
-              )}
-            </FieldArray>
-            <Box
-              mt={3}
-              sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-              }}
-            >
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={{ marginRight: "4.5rem" }}
-              >
-                Save
-              </Button>
-            </Box>
-          </Form>
-        )}
-      </Formik>
-    </Container>
+                  )}
+                </FieldArray>
+                <Box
+                  mt={3}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                  }}
+                >
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    sx={{ marginRight: "4.5rem" }}
+                  >
+                    Save
+                  </Button>
+                </Box>
+              </Form>
+            )}
+          </Formik>
+        </Container>
+      ) : (
+        <Container maxWidth="md">
+          <Typography variant="h5" sx={{ textAlign: "center" }}>
+            You have no items in your grocery list
+          </Typography>
+        </Container>
+      )}
+    </>
   );
 }
 
