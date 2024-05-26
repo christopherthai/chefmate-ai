@@ -12,9 +12,11 @@ import {
   Button,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Formik, Form, FieldArray } from "formik";
+import { Formik, Form, FieldArray, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 // Define the schema for the form validation
 const groceryListSchema = Yup.object().shape({
@@ -36,10 +38,21 @@ const groceryListSchema = Yup.object().shape({
 function GroceryList() {
   const { user } = useSelector((state) => state.user);
   const [groceryList, setGroceryList] = useState(null);
+  const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  /**
+   * Snackbar close handler function for success message
+   * @function
+   * @param {Event} event - Event object
+   * @param {string} reason - Reason for the close
+   * @returns {void}
+   */
+  const handleCloseSuccessMessageBox = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSuccessMessageBox(false);
+  };
 
   // Fetch the grocery list from the server
   const fetchGroceryList = async () => {
@@ -49,7 +62,6 @@ function GroceryList() {
 
   const { isLoading, isError } = useQuery("groceryList", fetchGroceryList, {
     onSuccess: (data) => {
-      console.log(data);
       setGroceryList(data);
     },
   });
@@ -57,11 +69,17 @@ function GroceryList() {
   // Mutations for updating teh grocery list
   const updateGroceryListMutation = useMutation(
     async (updatedGroceryList) => {
-      await axios.put(`/api/grocery-lists/${user.id}`, updatedGroceryList);
+      await axios.patch(
+        `/api/grocery-lists/${user.id}/update`,
+        updatedGroceryList
+      );
     },
     {
       onSuccess: () => {
-        console.log("Grocery list updated successfully");
+        setOpenSuccessMessageBox(true);
+      },
+      onError: (error) => {
+        console.error(error);
       },
     }
   );
@@ -115,10 +133,14 @@ function GroceryList() {
                               value={item.quantity}
                               onChange={handleChange}
                             />
+                            <ErrorMessage
+                              name={`grocery_list_items[${index}].quantity`}
+                              component="div"
+                              style={{ color: "red" }}
+                            />
                           </Grid>
                           <Grid item xs={8}>
                             <TextField
-                              name={`grocery_list_items[${index}].ingredient_name`}
                               label="Ingredient"
                               variant="outlined"
                               fullWidth
@@ -174,6 +196,21 @@ function GroceryList() {
           </Typography>
         </Container>
       )}
+      <Snackbar
+        open={openSuccessMessageBox}
+        autoHideDuration={6000}
+        onClose={handleCloseSuccessMessageBox}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <MuiAlert
+          onClose={handleCloseSuccessMessageBox}
+          severity="success"
+          elevation={6}
+          variant="filled"
+        >
+          {"Grocery list updated successfully"}
+        </MuiAlert>
+      </Snackbar>
     </>
   );
 }

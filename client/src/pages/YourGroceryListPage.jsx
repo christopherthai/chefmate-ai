@@ -1,13 +1,12 @@
 import { Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Container } from "@mui/material";
-import { Snackbar, Box } from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
 import GroceryList from "../components/GroceryList";
+import { Box } from "@mui/material";
 
 /**
  * The YourGroceryListPage component displays the user's grocery list

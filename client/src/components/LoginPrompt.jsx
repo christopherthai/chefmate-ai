@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, Button } from "@mui/material";
+import { useEffect } from "react";
 
 /**
  * Page component for the login prompt page
@@ -8,7 +9,10 @@ import { Container, Typography, Button } from "@mui/material";
  */
 function LoginPrompt() {
   const navigate = useNavigate(); // Hook from react-router-dom to navigate to different pages
-  window.scrollTo(0, 0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   /**
    * Redirects the user to the login page

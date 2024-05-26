@@ -84,6 +84,7 @@ ChefMate AI simplifies culinary creativity, offering a dynamic platform where us
 3. Integrate a smart cooking timer that users can activate directly from the recipe details page. The timer can be set automatically based on the cooking times provided in the recipe or adjusted manually by the user.
 4. Users can leave comments and ratings on Recipe Detail Page.
 5. Users can log in via Google Login for easy and secure access to their accounts
+6. Users can add the ingredients from a recipe into a grocery list.
 
 ## Trello Board
 

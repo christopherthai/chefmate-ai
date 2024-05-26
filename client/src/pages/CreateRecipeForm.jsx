@@ -61,8 +61,8 @@ const validationSchema = Yup.object().shape({
 function CreateRecipeForm() {
   const { isLoggedIn } = useSelector((state) => state.user); // Get the isLoggedIn state from the user slice of the Redux store
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
-  const [openErrorMessageBox, setOpenErrorMessageBox] = useState(false); // State for the snackbar MessageBox status
-  const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false); // State for the snackbar MessageBox status
+  const [openErrorMessageBox, setOpenErrorMessageBox] = useState(false);
+  const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false);
   const [errorMessage, setErrorMessage] = useState(""); // State for the error message
 
   /**
@@ -146,7 +146,7 @@ function CreateRecipeForm() {
 
   // Mutation to create a new recipe on the server using the createRecipe function
   const createRecipeMutation = useMutation(createRecipe, {
-    onSuccess: (response) => {
+    onSuccess: () => {
       setOpenSuccessMessageBox(true);
     },
     onError: (error) => {
@@ -204,6 +204,7 @@ function CreateRecipeForm() {
               createRecipeMutation.mutate(values, {
                 onSuccess: () => {
                   resetForm();
+                  setOpenSuccessMessageBox(true);
                   setSubmitting(false);
                 },
                 onError: (error) => {

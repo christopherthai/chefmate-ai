@@ -84,6 +84,7 @@ class AddItemsToGroceryList(Resource):
 
         for ingredient_id in ingredient_ids:
 
+            # Check if the ingredient is not already in the grocery list
             if not any(
                 item.ingredient_id == ingredient_id for item in grocery_list_items
             ):
@@ -95,6 +96,7 @@ class AddItemsToGroceryList(Resource):
                 db.session.add(grocery_list_item)
                 db.session.commit()
 
+            # If the ingredient is already in the grocery list, increment the quantity
             if any(item.ingredient_id == ingredient_id for item in grocery_list_items):
                 grocery_list_item = GroceryListItems.query.filter_by(
                     grocery_list_id=grocery_list.id, ingredient_id=ingredient_id
@@ -103,6 +105,54 @@ class AddItemsToGroceryList(Resource):
                 db.session.commit()
 
         return make_response({"message": "Items added to grocery list"}, 200)
+
+
+class UpdateGroceryList(Resource):
+    """
+    Represents a resource for updating a grocery list.
+
+    Methods:
+    - patch(user_id): Updates the grocery list for the specified user.
+    """
+
+    def patch(self, user_id):
+        """
+        Updates the grocery list for the specified user.
+
+        Args:
+        - user_id (int): The ID of the user.
+
+        Returns:
+        - response (dict): A dictionary containing the response message.
+        """
+        data = request.get_json()
+
+        # grocery_list_items is a list of grocery list items
+        grocery_list_items = data.get("grocery_list_items")
+
+        grocery_list = GroceryList.query.filter_by(user_id=user_id).first()
+
+        grocery_list_items_in_database = GroceryListItems.query.filter_by(
+            grocery_list_id=grocery_list.id
+        ).all()
+
+        # Update the quantity of the grocery list items in the database
+        for item in grocery_list_items_in_database:
+            matching_items = [
+                current_item
+                for current_item in grocery_list_items
+                if current_item["ingredient_id"] == item.ingredient_id
+            ]
+
+            if not matching_items:
+                db.session.delete(item)
+            else:
+                item.quantity = matching_items[0]["quantity"]
+                db.session.add(item)
+
+        db.session.commit()
+
+        return make_response({"message": "Grocery list updated"}, 200)
 
 
 def initialize_routes(api):
@@ -122,4 +172,9 @@ def initialize_routes(api):
         AddItemsToGroceryList,
         "/grocery-lists/<int:user_id>/add_items",
         endpoint="add_items_to_grocery_list",
+    )
+    api.add_resource(
+        UpdateGroceryList,
+        "/grocery-lists/<int:user_id>/update",
+        endpoint="update_grocery_list",
     )
