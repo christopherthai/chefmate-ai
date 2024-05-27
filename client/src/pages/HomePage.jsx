@@ -18,12 +18,9 @@ import axios from "axios";
 import Alert from "@mui/material/Alert";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "framer-motion";
 
-/**
- * Fetch recipes from the server
- * @param {string} ingredients - The ingredients to search for
- * @returns {Promise<Array>} - The recipes
- */
+// Fetch recipes from the server
 const fetchRecipes = async (ingredients) => {
   const response = await axios.post("/api/recipes/suggestions", {
     ingredients,
@@ -31,38 +28,42 @@ const fetchRecipes = async (ingredients) => {
   return response.data.recipes;
 };
 
-/**
- * Initial values for the form
- * @type {Object}
- * @property {string} ingredients - The ingredient to search for
- * @returns {Object} - The initial values
- */
+// Initial values for the form
 const initialValues = {
   ingredient: "",
 };
 
-/**
- * The home page component
- * @returns {JSX.Element} - The home page component
- */
+// The home page component
 function HomePage() {
-  const theme = useTheme(); // Get the theme object from the context
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is mobile
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const fetchRecipesMutation = useMutation(fetchRecipes);
 
   return (
     <Container sx={{ marginTop: 19 }}>
-      <Typography variant="h4" gutterBottom textAlign="center">
-        AI Recipe Suggester
-      </Typography>
-      <Typography
-        variant="h5"
-        align="center"
-        gutterBottom
-        style={{ paddingBottom: "20px" }}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        Enter the ingredients you have and we will suggest a recipe for you
-      </Typography>
+        <Typography variant="h4" gutterBottom textAlign="center">
+          AI Recipe Suggester
+        </Typography>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <Typography
+          variant="h5"
+          align="center"
+          gutterBottom
+          style={{ paddingBottom: "20px" }}
+        >
+          Enter the ingredients you have and we will suggest a recipe for you
+        </Typography>
+      </motion.div>
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
@@ -78,25 +79,39 @@ function HomePage() {
                 marginBottom: 2,
               }}
             >
-              <Field
-                as={TextField}
-                name="ingredient"
-                label="Enter Ingredients"
-                variant="outlined"
-                fullWidth
-                error={touched.ingredient && !!errors.ingredient}
-                helperText={touched.ingredient && errors.ingredient}
-                sx={{ width: "60%" }}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={{ marginLeft: 2 }}
-                disabled={!values.ingredient}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                style={{ width: "60%" }}
               >
-                Find Recipe
-              </Button>
+                <Field
+                  as={TextField}
+                  name="ingredient"
+                  label="Enter Ingredients"
+                  variant="outlined"
+                  fullWidth
+                  error={touched.ingredient && !!errors.ingredient}
+                  helperText={touched.ingredient && errors.ingredient}
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                style={{ marginLeft: 2, paddingLeft: 5 }}
+              >
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={!values.ingredient}
+                  sx={{ height: "100%" }}
+                >
+                  Find Recipe
+                </Button>
+              </motion.div>
             </Box>
           </Form>
         )}
@@ -127,53 +142,64 @@ function HomePage() {
         </Box>
       )}
       {fetchRecipesMutation.isSuccess && (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          style={{
-            minHeight: "50vh",
-            width: isMobile ? "90vw" : "600px",
-            margin: isMobile ? 0 : "auto",
-            paddingTop: "30px",
-          }}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          {fetchRecipesMutation.data.map((recipe, index) => (
-            <Grid key={index}>
-              <Card>
-                <CardContent>
-                  <Typography
-                    variant="h6"
-                    align="center"
-                    style={{ paddingBottom: "25px" }}
-                  >
-                    {recipe.title}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    <strong>Ingredients:</strong>
-                  </Typography>
-                  <List>
-                    {recipe.ingredients.split("\n").map((ingredient, i) => (
-                      <ListItem key={i} disablePadding>
-                        <ListItemText primary={ingredient.trim()} />
-                      </ListItem>
-                    ))}
-                  </List>
-                  <Typography variant="subtitle1">
-                    <strong>Instructions:</strong>
-                  </Typography>
-                  <List>
-                    {recipe.instructions.split("\n").map((instruction, i) => (
-                      <ListItem key={i} disablePadding>
-                        <ListItemText primary={instruction.trim()} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Box>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            style={{
+              minHeight: "50vh",
+              width: isMobile ? "90vw" : "600px",
+              margin: isMobile ? 0 : "auto",
+              paddingTop: "30px",
+            }}
+          >
+            {fetchRecipesMutation.data.map((recipe, index) => (
+              <Grid key={index}>
+                <Card
+                  component={motion.div}
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      align="center"
+                      style={{ paddingBottom: "25px" }}
+                    >
+                      {recipe.title}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      <strong>Ingredients:</strong>
+                    </Typography>
+                    <List>
+                      {recipe.ingredients.split("\n").map((ingredient, i) => (
+                        <ListItem key={i} disablePadding>
+                          <ListItemText primary={ingredient.trim()} />
+                        </ListItem>
+                      ))}
+                    </List>
+                    <Typography variant="subtitle1">
+                      <strong>Instructions:</strong>
+                    </Typography>
+                    <List>
+                      {recipe.instructions.split("\n").map((instruction, i) => (
+                        <ListItem key={i} disablePadding>
+                          <ListItemText primary={instruction.trim()} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Box>
+        </motion.div>
       )}
     </Container>
   );

@@ -1,6 +1,7 @@
 import { Box, Typography, Container, Paper } from "@mui/material";
 import EditUserProfile from "../components/EditUserProfile";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 /**
  * Page component for the User Profile page
@@ -19,24 +20,36 @@ function UserDetails() {
       paddingTop="3rem"
     >
       <Container maxWidth="sm">
-        <Paper elevation={3} sx={{ padding: 3, marginTop: 4 }}>
-          <Typography variant="h4" gutterBottom>
-            Profile
-          </Typography>
-          <Box display="flex" alignItems="center" sx={{ marginBottom: 1 }}>
-            <Typography variant="h6" sx={{ marginRight: 1 }}>
-              Username:
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <Paper elevation={3} sx={{ padding: 3, marginTop: 4 }}>
+            <Typography variant="h4" gutterBottom>
+              Profile
             </Typography>
-            <Typography variant="h7">{user.username}</Typography>
-          </Box>
-          <Box display="flex" alignItems="center">
-            <Typography variant="h6" sx={{ marginRight: 1 }}>
-              Email Address:{" "}
-            </Typography>
-            <Typography variant="h7">{user.email}</Typography>
-          </Box>
-        </Paper>
-        <EditUserProfile />
+            <Box display="flex" alignItems="center" sx={{ marginBottom: 1 }}>
+              <Typography variant="h6" sx={{ marginRight: 1 }}>
+                Username:
+              </Typography>
+              <Typography variant="h7">{user.username}</Typography>
+            </Box>
+            <Box display="flex" alignItems="center">
+              <Typography variant="h6" sx={{ marginRight: 1 }}>
+                Email Address:{" "}
+              </Typography>
+              <Typography variant="h7">{user.email}</Typography>
+            </Box>
+          </Paper>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <EditUserProfile />
+        </motion.div>
       </Container>
     </Box>
   );

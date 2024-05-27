@@ -5,6 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import UserDetails from "../components/UserDetails";
 import { useDispatch } from "react-redux";
 import { setUser, setIsLoggedIn } from "../store/userSlice";
+import { motion } from "framer-motion";
 
 /**
  * UserProfile page component
@@ -63,13 +64,26 @@ function UserProfile() {
   // Display an error message if the request fails
   if (isError) {
     return (
-      <Typography variant="h5">An error occurred: {isError.message}</Typography>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Typography variant="h5">
+          An error occurred: {isError.message}
+        </Typography>
+      </motion.div>
     );
   }
+
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <UserDetails />
-    </div>
+    </motion.div>
   );
 }
 

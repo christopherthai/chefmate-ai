@@ -11,6 +11,7 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import PropTypes from "prop-types";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "framer-motion";
 
 /**
  * The IngredientList component displays the ingredients for a recipe
@@ -38,39 +39,51 @@ function IngredientList({ recipe_ingredients }) {
 
   return (
     <Grid item xs={12} sm={6}>
-      <List sx={{ marginBottom: "2rem", marginTop: isMobile ? "-8rem" : "0" }}>
-        <Box sx={{ marginRight: isMobile ? "1rem" : "3rem" }}>
-          <Typography variant={isMobile ? "h5" : "h4"} align="center">
-            Ingredients
-          </Typography>
-        </Box>
-        {recipe_ingredients.map((ingredient) => (
-          <ListItem
-            key={ingredient.id}
-            sx={{ padding: isMobile ? "0.5rem" : "1rem" }}
-          >
-            <ListItemIcon>
-              <FiberManualRecordIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <>
-                  <Typography
-                    variant="body1"
-                    sx={{ fontWeight: "fontWeightBold" }}
-                    component="span"
-                  >
-                    {`${ingredient.quantity}`}
-                  </Typography>
-                  <Typography variant="body1" component="span">
-                    {` ${ingredient.ingredient.name}`}
-                  </Typography>
-                </>
-              }
-            />
-          </ListItem>
-        ))}
-      </List>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <List
+          sx={{ marginBottom: "2rem", marginTop: isMobile ? "-8rem" : "0" }}
+        >
+          <Box sx={{ marginRight: isMobile ? "1rem" : "3rem" }}>
+            <Typography variant={isMobile ? "h5" : "h4"} align="center">
+              Ingredients
+            </Typography>
+          </Box>
+          {recipe_ingredients.map((ingredient) => (
+            <motion.div
+              key={ingredient.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              <ListItem sx={{ padding: isMobile ? "0.5rem" : "1rem" }}>
+                <ListItemIcon>
+                  <FiberManualRecordIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText
+                  primary={
+                    <>
+                      <Typography
+                        variant="body1"
+                        sx={{ fontWeight: "fontWeightBold" }}
+                        component="span"
+                      >
+                        {`${ingredient.quantity}`}
+                      </Typography>
+                      <Typography variant="body1" component="span">
+                        {` ${ingredient.ingredient.name}`}
+                      </Typography>
+                    </>
+                  }
+                />
+              </ListItem>
+            </motion.div>
+          ))}
+        </List>
+      </motion.div>
     </Grid>
   );
 }

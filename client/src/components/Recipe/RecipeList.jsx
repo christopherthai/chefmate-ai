@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import SearchBar from "../SearchBar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "framer-motion";
 
 /**
  * Fetches the recipes from the server
@@ -94,15 +95,27 @@ function RecipeList() {
 
   return (
     <Container maxWidth="lg" sx={{ pt: 12, pb: 2, pl: 5 }}>
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        sx={{ textAlign: "center", marginBottom: "2rem" }}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        Explore Recipes
-      </Typography>
-      <SearchBar />
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          sx={{ textAlign: "center", marginBottom: "2rem" }}
+        >
+          Explore Recipes
+        </Typography>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <SearchBar />
+      </motion.div>
       <Grid container spacing={3}>
         {sortedRecipes.map((recipe) => (
           <RecipeCard recipe={recipe} key={recipe.id} />

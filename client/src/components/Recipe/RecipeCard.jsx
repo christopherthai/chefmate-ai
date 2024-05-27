@@ -8,7 +8,7 @@ import {
   Box,
   Rating,
 } from "@mui/material";
-import PropType from "prop-types";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useQuery } from "react-query";
@@ -19,21 +19,21 @@ import {
   setUserHasAccess,
   setSavedRecipes,
 } from "../../store/userSlice";
+import { motion } from "framer-motion";
 
 function RecipeCard({ recipe }) {
-  const navigate = useNavigate(); // Get the navigate function from the context
-  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // Define the prop types for the RecipeCard component
   RecipeCard.propTypes = {
-    recipe: PropType.shape({
-      user_id: PropType.number,
-      id: PropType.number,
-      image_url: PropType.string,
-      title: PropType.string,
-      preparation_time: PropType.number,
-      saved_recipes: PropType.array,
-      reviews: PropType.array,
+    recipe: PropTypes.shape({
+      user_id: PropTypes.number,
+      id: PropTypes.number,
+      image_url: PropTypes.string,
+      title: PropTypes.string,
+      preparation_time: PropTypes.number,
+      saved_recipes: PropTypes.array,
+      reviews: PropTypes.array,
     }),
   };
 
@@ -45,15 +45,8 @@ function RecipeCard({ recipe }) {
     preparation_time,
     saved_recipes,
     reviews,
-  } = recipe; // Destructure the recipe object
+  } = recipe;
 
-  /**
-   * Function to check the session of the user
-   * @async
-   * @function
-   * @returns {Promise<Object>}
-   * @throws {Error}
-   */
   const checkSession = async () => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken || accessToken.split(".").length !== 3) {
@@ -76,25 +69,18 @@ function RecipeCard({ recipe }) {
     }
   };
 
-  // Fetch the user data from the server
   const {
     data: loginUser,
     isLoading,
     isError,
   } = useQuery("loginUser", checkSession);
 
-  // Display an error message if the request fails
   if (isError) {
     return (
       <Typography variant="h5">An error occurred: {isError.message}</Typography>
     );
   }
 
-  /**
-   * The handleCheckUserHasAccess function checks if the logged in user has access to edit or delete the recipe
-   * @function
-   * @returns {void}
-   */
   const handleCheckUserHasAccess = () => {
     if (loginUser && user_id === loginUser.id) {
       dispatch(setUserHasAccess(true));
@@ -103,16 +89,10 @@ function RecipeCard({ recipe }) {
     }
   };
 
-  // Check if the recipe is saved by the logged in user
   const isRecipeSavedByUser = saved_recipes.some(
     (recipe) => loginUser && recipe.user_id === loginUser.id
   );
 
-  /**
-   * The handleCheckSavedRecipes function checks if the logged in user has saved the recipe
-   * @function
-   * @returns {void}
-   */
   const handleCheckSavedRecipes = () => {
     if (loginUser && isRecipeSavedByUser) {
       dispatch(setSavedRecipes(true));
@@ -121,19 +101,13 @@ function RecipeCard({ recipe }) {
     }
   };
 
-  /**
-   * The handleClick function navigates to the recipe details page
-   * @function
-   * @param {Event} event The event object
-   */
   const handleClick = () => {
     handleCheckUserHasAccess();
     handleCheckSavedRecipes();
     navigate(`/recipes/${id}`);
-    window.scrollTo(0, 0); // Scroll to the top of the page
+    window.scrollTo(0, 0);
   };
 
-  // Calculate the average rating
   const averageRating =
     reviews && reviews.length
       ? reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
@@ -141,29 +115,37 @@ function RecipeCard({ recipe }) {
 
   return (
     <Grid item xs={12} sm={6} md={4} key={id}>
-      <Card sx={{ maxWidth: 350, cursor: "pointer" }} onClick={handleClick}>
-        <CardHeader
-          title={
-            <Typography variant="h6" component="div">
-              {title}
-            </Typography>
-          }
-          subheader={
-            <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-              <Rating value={averageRating} readOnly />
-              <Typography variant="body2" sx={{ ml: 1 }}>
-                {averageRating.toFixed(1)} ({reviews?.length || 0} reviews)
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Card sx={{ maxWidth: 350, cursor: "pointer" }} onClick={handleClick}>
+          <CardHeader
+            title={
+              <Typography variant="h6" component="div">
+                {title}
               </Typography>
-            </Box>
-          }
-        />
-        <CardMedia sx={{ height: 250 }} image={image_url} title={title} />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Preparation time: {preparation_time} minutes
-          </Typography>
-        </CardContent>
-      </Card>
+            }
+            subheader={
+              <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
+                <Rating value={averageRating} readOnly />
+                <Typography variant="body2" sx={{ ml: 1 }}>
+                  {averageRating.toFixed(1)} ({reviews?.length || 0} reviews)
+                </Typography>
+              </Box>
+            }
+          />
+          <CardMedia sx={{ height: 250 }} image={image_url} title={title} />
+          <CardContent>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Preparation time: {preparation_time} minutes
+            </Typography>
+          </CardContent>
+        </Card>
+      </motion.div>
     </Grid>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import LoginPrompt from "../components/LoginPrompt";
 import { Formik, Field, Form, FieldArray, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -10,16 +10,15 @@ import {
   Grid,
   Typography,
   Box,
+  CircularProgress,
+  Snackbar,
 } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
-import { useDispatch } from "react-redux";
-import { useQuery } from "react-query";
-import axios from "axios";
-import { setUser, setIsLoggedIn } from "../store/userSlice";
-import { useMutation } from "react-query";
-import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useQuery, useMutation } from "react-query";
+import axios from "axios";
+import { setUser, setIsLoggedIn } from "../store/userSlice";
+import { motion } from "framer-motion";
 
 // Validation schema for the form fields using Yup
 const validationSchema = Yup.object().shape({
@@ -52,26 +51,13 @@ const validationSchema = Yup.object().shape({
   ),
 });
 
-/**
- * CreateRecipeForm component is a form that allows users to create a new recipe.
- * It uses Formik for form state management and Yup for form validation.
- * @returns {JSX.Element} CreateRecipeForm component
- * @component
- */
 function CreateRecipeForm() {
-  const { isLoggedIn } = useSelector((state) => state.user); // Get the isLoggedIn state from the user slice of the Redux store
-  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
+  const { isLoggedIn } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [openErrorMessageBox, setOpenErrorMessageBox] = useState(false);
   const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // State for the error message
+  const [errorMessage, setErrorMessage] = useState("");
 
-  /**
-   * Snackbar close handler function for error message
-   * @function
-   * @param {Event} event - Event object
-   * @param {string} reason - Reason for the close
-   * @returns {void}
-   */
   const handleCloseErrorMessageBox = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -79,13 +65,6 @@ function CreateRecipeForm() {
     setOpenErrorMessageBox(false);
   };
 
-  /**
-   * Snackbar close handler function for success message
-   * @function
-   * @param {Event} event - Event object
-   * @param {string} reason - Reason for the close
-   * @returns {void}
-   */
   const handleCloseSuccessMessageBox = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -93,13 +72,6 @@ function CreateRecipeForm() {
     setOpenSuccessMessageBox(false);
   };
 
-  /**
-   * Create a new recipe on the server using the POST /api/users/:id/create-recipes route
-   * @async
-   * @function
-   * @param {Object} newRecipe - New recipe object
-   * @returns {Promise<Object>}
-   */
   const createRecipe = async (newRecipe) => {
     const response = await axios.post(
       `/api/users/${loginUser.id}/create-recipes`,
@@ -108,13 +80,6 @@ function CreateRecipeForm() {
     return response.data;
   };
 
-  /**
-   * Function to check the session of the user
-   * @async
-   * @function
-   * @returns {Promise<Object>}
-   * @throws {Error}
-   */
   const checkSession = async () => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken || accessToken.split(".").length !== 3) {
@@ -137,14 +102,12 @@ function CreateRecipeForm() {
     }
   };
 
-  // Fetch the user data from the server
   const {
     data: loginUser,
     isLoading,
     isError,
   } = useQuery("loginUser", checkSession);
 
-  // Mutation to create a new recipe on the server using the createRecipe function
   const createRecipeMutation = useMutation(createRecipe, {
     onSuccess: () => {
       setOpenSuccessMessageBox(true);
@@ -155,7 +118,6 @@ function CreateRecipeForm() {
     },
   });
 
-  // Display a loading spinner while fetching the recipes
   if (isLoading) {
     return (
       <Box
@@ -171,14 +133,12 @@ function CreateRecipeForm() {
     );
   }
 
-  // Display an error message if the request fails
   if (isError) {
     return (
       <Typography variant="h5">An error occurred: {isError.message}</Typography>
     );
   }
 
-  // Initial values for the form fields using Formik
   let initialValues = {
     title: "",
     instructions: "",
@@ -218,83 +178,125 @@ function CreateRecipeForm() {
               <Form>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <Typography variant="h4" align="center" gutterBottom>
-                      Create a New Recipe
-                    </Typography>
+                    <motion.div
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Typography variant="h4" align="center" gutterBottom>
+                        Create a New Recipe
+                      </Typography>
+                    </motion.div>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography variant="h5" align="center" gutterBottom>
-                      Fill out the form below to create and share a new recipe
-                    </Typography>
+                    <motion.div
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                      <Typography variant="h5" align="center" gutterBottom>
+                        Fill out the form below to create and share a new recipe
+                      </Typography>
+                    </motion.div>
                   </Grid>
                   <Grid item xs={12}>
-                    <Field
-                      name="title"
-                      as={TextField}
-                      label="Title"
-                      fullWidth
-                    />
-                    <ErrorMessage
-                      name="title"
-                      component="div"
-                      style={{ color: "red" }}
-                    />
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 }}
+                    >
+                      <Field
+                        name="title"
+                        as={TextField}
+                        label="Title"
+                        fullWidth
+                      />
+                      <ErrorMessage
+                        name="title"
+                        component="div"
+                        style={{ color: "red" }}
+                      />
+                    </motion.div>
                   </Grid>
                   <Grid item xs={12}>
-                    <Field
-                      name="instructions"
-                      as={TextField}
-                      label="Instructions"
-                      fullWidth
-                      multiline
-                      rows={4}
-                    />
-                    <ErrorMessage
-                      name="instructions"
-                      component="div"
-                      style={{ color: "red" }}
-                    />
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.6 }}
+                    >
+                      <Field
+                        name="instructions"
+                        as={TextField}
+                        label="Instructions"
+                        fullWidth
+                        multiline
+                        rows={4}
+                      />
+                      <ErrorMessage
+                        name="instructions"
+                        component="div"
+                        style={{ color: "red" }}
+                      />
+                    </motion.div>
                   </Grid>
                   <Grid item xs={6}>
-                    <Field
-                      name="preparation_time"
-                      as={TextField}
-                      label="Preparation Time (minutes)"
-                      fullWidth
-                      type="number"
-                    />
-                    <ErrorMessage
-                      name="preparation_time"
-                      component="div"
-                      style={{ color: "red" }}
-                    />
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.8 }}
+                    >
+                      <Field
+                        name="preparation_time"
+                        as={TextField}
+                        label="Preparation Time (minutes)"
+                        fullWidth
+                        type="number"
+                      />
+                      <ErrorMessage
+                        name="preparation_time"
+                        component="div"
+                        style={{ color: "red" }}
+                      />
+                    </motion.div>
                   </Grid>
                   <Grid item xs={6}>
-                    <Field
-                      name="serving_size"
-                      as={TextField}
-                      label="Serving Size"
-                      fullWidth
-                      type="number"
-                    />
-                    <ErrorMessage
-                      name="serving_size"
-                      component="div"
-                      style={{ color: "red" }}
-                    />
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 1 }}
+                    >
+                      <Field
+                        name="serving_size"
+                        as={TextField}
+                        label="Serving Size"
+                        fullWidth
+                        type="number"
+                      />
+                      <ErrorMessage
+                        name="serving_size"
+                        component="div"
+                        style={{ color: "red" }}
+                      />
+                    </motion.div>
                   </Grid>
                   <Grid item xs={12}>
-                    <Field
-                      name="image_url"
-                      as={TextField}
-                      label="Image URL"
-                      fullWidth
-                    />
-                    <ErrorMessage
-                      name="image_url"
-                      component="div"
-                      style={{ color: "red" }}
-                    />
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 1.2 }}
+                    >
+                      <Field
+                        name="image_url"
+                        as={TextField}
+                        label="Image URL"
+                        fullWidth
+                      />
+                      <ErrorMessage
+                        name="image_url"
+                        component="div"
+                        style={{ color: "red" }}
+                      />
+                    </motion.div>
                   </Grid>
                   <Grid item xs={12}>
                     <FieldArray name="ingredients">
@@ -302,42 +304,50 @@ function CreateRecipeForm() {
                         <Grid container spacing={2}>
                           {values.ingredients.map((ingredient, index) => (
                             <Grid item xs={12} key={index}>
-                              <Grid container spacing={2}>
-                                <Grid item xs={3}>
-                                  <Field
-                                    name={`ingredients[${index}].quantity`}
-                                    as={TextField}
-                                    label={`Quantity`}
-                                    fullWidth
-                                  />
-                                  <ErrorMessage
-                                    name={`ingredients[${index}].quantity`}
-                                    component="div"
-                                    style={{ color: "red" }}
-                                  />
-                                </Grid>
-                                <Grid item xs={9}>
-                                  <Field
-                                    name={`ingredients[${index}].name`}
-                                    as={TextField}
-                                    label={`Ingredient ${index + 1} `}
-                                    fullWidth
-                                  />
-                                  <ErrorMessage
-                                    name={`ingredients[${index}].name`}
-                                    component="div"
-                                    style={{ color: "red" }}
-                                  />
-                                </Grid>
-                              </Grid>
-                              <Button
-                                variant="contained"
-                                color="secondary"
-                                onClick={() => remove(index)}
-                                sx={{ mt: 1, ml: 1 }}
+                              <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{
+                                  duration: 0.5,
+                                }}
                               >
-                                <DeleteIcon />
-                              </Button>
+                                <Grid container spacing={2}>
+                                  <Grid item xs={3}>
+                                    <Field
+                                      name={`ingredients[${index}].quantity`}
+                                      as={TextField}
+                                      label={`Quantity`}
+                                      fullWidth
+                                    />
+                                    <ErrorMessage
+                                      name={`ingredients[${index}].quantity`}
+                                      component="div"
+                                      style={{ color: "red" }}
+                                    />
+                                  </Grid>
+                                  <Grid item xs={9}>
+                                    <Field
+                                      name={`ingredients[${index}].name`}
+                                      as={TextField}
+                                      label={`Ingredient ${index + 1} `}
+                                      fullWidth
+                                    />
+                                    <ErrorMessage
+                                      name={`ingredients[${index}].name`}
+                                      component="div"
+                                      style={{ color: "red" }}
+                                    />
+                                  </Grid>
+                                </Grid>
+                                <Button
+                                  variant="contained"
+                                  color="secondary"
+                                  onClick={() => remove(index)}
+                                  sx={{ mt: 1, ml: 1 }}
+                                >
+                                  <DeleteIcon />
+                                </Button>
+                              </motion.div>
                             </Grid>
                           ))}
                           <Box
@@ -349,13 +359,23 @@ function CreateRecipeForm() {
                             }}
                           >
                             <Grid item xs={12}>
-                              <Button
-                                variant="contained"
-                                onClick={() => push("")}
-                                sx={{ mt: 4 }}
+                              <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
                               >
-                                Add Ingredient
-                              </Button>
+                                <Button
+                                  variant="contained"
+                                  onClick={() =>
+                                    push({ quantity: "", name: "" })
+                                  }
+                                  sx={{ mt: 4 }}
+                                >
+                                  Add Ingredient
+                                </Button>
+                              </motion.div>
                             </Grid>
                           </Box>
                         </Grid>
@@ -364,9 +384,21 @@ function CreateRecipeForm() {
                   </Grid>
                   <Box style={{ marginLeft: "auto", marginTop: "-5.34rem" }}>
                     <Grid item xs={12}>
-                      <Button type="submit" variant="contained" color="primary">
-                        Submit
-                      </Button>
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          color="primary"
+                        >
+                          Submit
+                        </Button>
+                      </motion.div>
                     </Grid>
                   </Box>
                 </Grid>

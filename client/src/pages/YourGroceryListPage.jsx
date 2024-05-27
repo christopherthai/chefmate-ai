@@ -1,12 +1,10 @@
-import { Typography } from "@mui/material";
+import { Typography, Box, Container, CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
-import CircularProgress from "@mui/material/CircularProgress";
-import { Container } from "@mui/material";
 import GroceryList from "../components/GroceryList";
-import { Box } from "@mui/material";
+import { motion } from "framer-motion";
 
 /**
  * The YourGroceryListPage component displays the user's grocery list
@@ -67,16 +65,24 @@ function YourGroceryListPage() {
       <Typography variant="h5">An error occurred: {isError.message}</Typography>
     );
   }
+
   return (
     <Container maxWidth="lg" sx={{ pt: 14, pb: 1, pl: 1 }}>
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        sx={{ textAlign: "center", marginBottom: "2rem" }}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        Your Grocery List
-      </Typography>
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          sx={{ textAlign: "center", marginBottom: "2rem" }}
+        >
+          Your Grocery List
+        </Typography>
+      </motion.div>
+
       <GroceryList />
     </Container>
   );

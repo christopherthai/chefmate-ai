@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, Button } from "@mui/material";
 import { useEffect } from "react";
+import { motion } from "framer-motion"; // Import framer-motion
 
 /**
  * Page component for the login prompt page
@@ -8,7 +9,7 @@ import { useEffect } from "react";
  * @returns {JSX.Element} JSX.Element
  */
 function LoginPrompt() {
-  const navigate = useNavigate(); // Hook from react-router-dom to navigate to different pages
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -21,6 +22,7 @@ function LoginPrompt() {
   const handleGoLogin = () => {
     navigate("/login");
   };
+
   return (
     <Container
       sx={{
@@ -30,21 +32,39 @@ function LoginPrompt() {
         paddingBottom: "40rem",
       }}
     >
-      <Typography variant="h4" component="h1" gutterBottom>
-        Enjoy creating new recipe with us!
-      </Typography>
-      <Typography variant="body1" paragraph>
-        Log in to access this page so you can create your own recipe.
-      </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        sx={{ marginTop: "20px" }}
-        onClick={handleGoLogin}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        Go to Login Page
-      </Button>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Enjoy creating new recipes with us!
+        </Typography>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <Typography variant="body1" paragraph>
+          Log in to access this page so you can create your own recipe.
+        </Typography>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          sx={{ marginTop: "20px" }}
+          onClick={handleGoLogin}
+        >
+          Go to Login Page
+        </Button>
+      </motion.div>
     </Container>
   );
 }

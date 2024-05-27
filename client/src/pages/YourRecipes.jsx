@@ -10,23 +10,12 @@ import { Container } from "@mui/material";
 import { Snackbar, Box } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { setDeleteRecipeDeleteMessage } from "../store/recipeSlice";
+import { motion } from "framer-motion";
 
-/**
- * The YourRecipes component displays the user's saved and created recipes
- * @component
- * @return {JSX.Element} The YourRecipes component
- */
 function YourRecipes() {
-  const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
-  const { deleteMessage } = useSelector((state) => state.recipe); // Get deleteMessage from Redux store
+  const dispatch = useDispatch();
+  const { deleteMessage } = useSelector((state) => state.recipe);
 
-  /**
-   * Function to check the session of the user
-   * @async
-   * @function
-   * @returns {Promise<Object>}
-   * @throws {Error}
-   */
   const checkSession = async () => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken || accessToken.split(".").length !== 3) {
@@ -46,10 +35,8 @@ function YourRecipes() {
     }
   };
 
-  // Fetch the user data from the server
   const { data: user, isLoading, isError } = useQuery("user", checkSession);
 
-  // Display a loading spinner while fetching the recipes
   if (isLoading) {
     return (
       <Box
@@ -65,38 +52,49 @@ function YourRecipes() {
     );
   }
 
-  // Display an error message if the request fails
   if (isError) {
     return (
       <Typography variant="h5">An error occurred: {isError.message}</Typography>
     );
   }
 
-  /**
-   * Snackbar close handler function for delete message box
-   * @function
-   * @param {Event} event - Event object
-   * @param {string} reason - Reason for the close
-   * @returns {void}
-   */
   const handleDeleteMessageBox = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
     dispatch(setDeleteRecipeDeleteMessage(false));
   };
+
   return (
     <Container maxWidth="lg" sx={{ pt: 12, pb: 1, pl: 1 }}>
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        sx={{ textAlign: "center", marginBottom: "2rem" }}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        Your Saved and Created Recipes
-      </Typography>
-      <SavedRecipesList />
-      <CreatedRecipesList />
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          sx={{ textAlign: "center", marginBottom: "2rem" }}
+        >
+          Your Saved and Created Recipes
+        </Typography>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <SavedRecipesList />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <CreatedRecipesList />
+      </motion.div>
       <Snackbar
         open={deleteMessage}
         autoHideDuration={6000}

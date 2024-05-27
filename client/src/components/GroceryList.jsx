@@ -10,13 +10,14 @@ import {
   IconButton,
   TextField,
   Button,
+  Snackbar,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Formik, Form, FieldArray, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React, { useState } from "react";
-import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
+import { motion } from "framer-motion";
 
 // Define the schema for the form validation
 const groceryListSchema = Yup.object().shape({
@@ -66,7 +67,7 @@ function GroceryList() {
     },
   });
 
-  // Mutations for updating teh grocery list
+  // Mutations for updating the grocery list
   const updateGroceryListMutation = useMutation(
     async (updatedGroceryList) => {
       await axios.patch(
@@ -124,38 +125,56 @@ function GroceryList() {
                       {values.grocery_list_items.map((item, index) => (
                         <React.Fragment key={index}>
                           <Grid item xs={3}>
-                            <TextField
-                              name={`grocery_list_items[${index}].quantity`}
-                              label="Quantity"
-                              type="number"
-                              variant="outlined"
-                              fullWidth
-                              value={item.quantity}
-                              onChange={handleChange}
-                            />
-                            <ErrorMessage
-                              name={`grocery_list_items[${index}].quantity`}
-                              component="div"
-                              style={{ color: "red" }}
-                            />
+                            <motion.div
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.5, delay: index * 0.1 }}
+                            >
+                              <TextField
+                                name={`grocery_list_items[${index}].quantity`}
+                                label="Quantity"
+                                type="number"
+                                variant="outlined"
+                                fullWidth
+                                value={item.quantity}
+                                onChange={handleChange}
+                              />
+                              <ErrorMessage
+                                name={`grocery_list_items[${index}].quantity`}
+                                component="div"
+                                style={{ color: "red" }}
+                              />
+                            </motion.div>
                           </Grid>
                           <Grid item xs={8}>
-                            <TextField
-                              label="Ingredient"
-                              variant="outlined"
-                              fullWidth
-                              value={item.ingredient_name}
-                              onChange={handleChange}
-                              readOnly
-                            />
+                            <motion.div
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.5, delay: index * 0.1 }}
+                            >
+                              <TextField
+                                label="Ingredient"
+                                variant="outlined"
+                                fullWidth
+                                value={item.ingredient_name}
+                                onChange={handleChange}
+                                readOnly
+                              />
+                            </motion.div>
                           </Grid>
                           <Grid item xs={1}>
-                            <IconButton
-                              color="secondary"
-                              onClick={() => remove(index)}
+                            <motion.div
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.5, delay: index * 0.1 }}
                             >
-                              <DeleteIcon />
-                            </IconButton>
+                              <IconButton
+                                color="secondary"
+                                onClick={() => remove(index)}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </motion.div>
                           </Grid>
                         </React.Fragment>
                       ))}
@@ -170,14 +189,20 @@ function GroceryList() {
                     alignItems: "center",
                   }}
                 >
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    sx={{ marginRight: "4.5rem" }}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 2 }}
                   >
-                    Save
-                  </Button>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      sx={{ marginRight: "4.5rem" }}
+                    >
+                      Save
+                    </Button>
+                  </motion.div>
                 </Box>
               </Form>
             )}

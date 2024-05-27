@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import RecipeContent from "../components/Recipe/RecipeContent";
-import { Box } from "@mui/material";
+import { Box, List, Rating, Avatar, Grid } from "@mui/material";
 import CommentRatingForm from "../components/CommentRatingForm";
-import { List, Rating, Avatar, Grid } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { motion } from "framer-motion";
 
 /**
  * The RecipeDetails component fetches and displays the details of a recipe
@@ -22,6 +22,7 @@ function RecipeDetails() {
   const [averageRating, setAverageRating] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const commentsRef = useRef(null);
 
   /**
    * Fetches the recipe from the server
@@ -85,75 +86,107 @@ function RecipeDetails() {
    */
   const handleReviews = (review) => {
     setReviews((prevReviews) => [...prevReviews, review]);
+    commentsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <Box sx={{ paddingTop: isMobile ? 7 : 0 }}>
-      <RecipeContent
-        recipe={recipe}
-        averageRating={averageRating}
-        reviews={reviews}
-      />
-      <CommentRatingForm handleReviews={handleReviews} />
-      <Box
-        sx={{
-          mt: 6,
-          display: "flex",
-          flexDirection: "column",
-          width: isMobile ? "93%" : "55%",
-          margin: "auto",
-          paddingTop: isMobile ? "2rem" : "5rem",
-        }}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        <Typography variant={isMobile ? "h5" : "h4"} sx={{ mb: 2 }}>
-          Reviews
-        </Typography>
-        <List>
-          {reviews.length > 0 ? (
-            reviews.map((review, index) => (
-              <Box
-                key={index}
-                sx={{
-                  mb: 2,
-                  p: 2,
-                  border: "1px solid #e0e0e0",
-                  borderRadius: "8px",
-                }}
-              >
-                <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                  <Avatar sx={{ mr: 2 }}>{review.username.charAt(0)}</Avatar>
-                  <Typography
-                    variant="body1"
+        <RecipeContent
+          recipe={recipe}
+          averageRating={averageRating}
+          reviews={reviews}
+        />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <CommentRatingForm handleReviews={handleReviews} />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <Box
+          sx={{
+            mt: 6,
+            display: "flex",
+            flexDirection: "column",
+            width: isMobile ? "93%" : "55%",
+            margin: "auto",
+            paddingTop: isMobile ? "2rem" : "5rem",
+          }}
+          ref={commentsRef}
+        >
+          <Typography variant={isMobile ? "h5" : "h4"} sx={{ mb: 2 }}>
+            Reviews
+          </Typography>
+          <List>
+            {reviews.length > 0 ? (
+              reviews.map((review, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  <Box
                     sx={{
-                      fontWeight: "bold",
-                      maxWidth: isMobile ? "70%" : "auto",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
+                      mb: 2,
+                      p: 2,
+                      border: "1px solid #e0e0e0",
+                      borderRadius: "8px",
                     }}
-                    noWrap
                   >
-                    {review.username}
-                  </Typography>
-                  <Rating value={review.rating} readOnly sx={{ ml: "auto" }} />
-                </Box>
-                <Typography variant="body2" color="textSecondary">
-                  {new Date(review.created_at).toLocaleDateString()}
+                    <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                      <Avatar sx={{ mr: 2 }}>
+                        {review.username.charAt(0)}
+                      </Avatar>
+                      <Typography
+                        variant="body1"
+                        sx={{
+                          fontWeight: "bold",
+                          maxWidth: isMobile ? "70%" : "auto",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                        noWrap
+                      >
+                        {review.username}
+                      </Typography>
+                      <Rating
+                        value={review.rating}
+                        readOnly
+                        sx={{ ml: "auto" }}
+                      />
+                    </Box>
+                    <Typography variant="body2" color="textSecondary">
+                      {new Date(review.created_at).toLocaleDateString()}
+                    </Typography>
+                    <Typography variant="body1" sx={{ mt: 1 }}>
+                      {review.comment}
+                    </Typography>
+                  </Box>
+                </motion.div>
+              ))
+            ) : (
+              <Grid item xs={12}>
+                <Typography variant="h5" sx={{ textAlign: "center" }}>
+                  No reviews yet
                 </Typography>
-                <Typography variant="body1" sx={{ mt: 1 }}>
-                  {review.comment}
-                </Typography>
-              </Box>
-            ))
-          ) : (
-            <Grid item xs={12}>
-              <Typography variant="h5" sx={{ textAlign: "center" }}>
-                No reviews yet
-              </Typography>
-            </Grid>
-          )}
-        </List>
-      </Box>
+              </Grid>
+            )}
+          </List>
+        </Box>
+      </motion.div>
     </Box>
   );
 }

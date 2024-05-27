@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import CircularProgress from "@mui/material/CircularProgress";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "framer-motion";
 
 const CookingTimer = () => {
   const [time, setTime] = useState(0);
@@ -14,11 +15,6 @@ const CookingTimer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  /**
-   * The useEffect hook is used to start the timer when the timerOn state is true
-   * and the time is greater than 0. The timer decrements the time by 1 second
-   * every second. When the time reaches 0, the timer is stopped.
-   */
   useEffect(() => {
     let timer;
     if (timerOn && time > 0) {
@@ -32,16 +28,11 @@ const CookingTimer = () => {
     return () => clearInterval(timer);
   }, [timerOn, time]);
 
-  /**
-   * Fetches the recipe from the server
-   * @returns {Promise<Object>} The recipe object
-   */
   const fetchRecipe = async () => {
     const { data } = await axios.get(`/api/recipes/${id}`);
     return data;
   };
 
-  // Fetch the recipe from the server using the useQuery hook from react-query
   const {
     data: recipe,
     isLoading,
@@ -55,7 +46,6 @@ const CookingTimer = () => {
     }
   }, [recipe]);
 
-  // Display a loading spinner while fetching the recipe
   if (isLoading) {
     return (
       <Box
@@ -71,7 +61,6 @@ const CookingTimer = () => {
     );
   }
 
-  // Display an error message if the request fails
   if (isError) {
     return <Typography variant="h6">Error: {error.message}</Typography>;
   }
@@ -79,44 +68,81 @@ const CookingTimer = () => {
   const handleStart = () => setTimerOn(true);
   const handlePause = () => setTimerOn(false);
   const handleReset = () => setTime(recipe.preparation_time * 60);
-
   const handleChange = (event) => setTime(event.target.value);
 
   return (
     <Box sx={{ textAlign: "center", marginTop: isMobile ? "1rem" : "2rem" }}>
-      <Typography variant={isMobile ? "h6" : "h5"}>Cooking Timer</Typography>
-      <Typography variant={isMobile ? "h4" : "h3"}>
-        {Math.floor(time / 60)}:{time % 60 < 10 ? "0" : ""}
-        {time % 60}
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "1rem",
-          marginTop: "1rem",
-          flexWrap: isMobile ? "wrap" : "nowrap",
-        }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        <Button variant="contained" onClick={handleStart} disabled={timerOn}>
-          Start
-        </Button>
-        <Button variant="contained" onClick={handlePause} disabled={!timerOn}>
-          Pause
-        </Button>
-        <Button variant="contained" onClick={handleReset}>
-          Reset
-        </Button>
-      </Box>
-      <Box sx={{ marginTop: "1rem", textAlign: "center" }}>
-        <TextField
-          label="Set Timer (seconds)"
-          type="number"
-          value={time}
-          onChange={handleChange}
-          sx={{ width: isMobile ? "100%" : "auto" }}
-        />
-      </Box>
+        <Typography variant={isMobile ? "h6" : "h5"}>Cooking Timer</Typography>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <Typography variant={isMobile ? "h4" : "h3"}>
+          {Math.floor(time / 60)}:{time % 60 < 10 ? "0" : ""}
+          {time % 60}
+        </Typography>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "1rem",
+            marginTop: "1rem",
+            flexWrap: isMobile ? "wrap" : "nowrap",
+          }}
+        >
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant="contained"
+              onClick={handleStart}
+              disabled={timerOn}
+            >
+              Start
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant="contained"
+              onClick={handlePause}
+              disabled={!timerOn}
+            >
+              Pause
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="contained" onClick={handleReset}>
+              Reset
+            </Button>
+          </motion.div>
+        </Box>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+      >
+        <Box sx={{ marginTop: "1rem", textAlign: "center" }}>
+          <TextField
+            label="Set Timer (seconds)"
+            type="number"
+            value={time}
+            onChange={handleChange}
+            sx={{ width: isMobile ? "100%" : "auto" }}
+          />
+        </Box>
+      </motion.div>
     </Box>
   );
 };
