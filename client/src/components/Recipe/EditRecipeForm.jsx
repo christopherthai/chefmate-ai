@@ -377,7 +377,7 @@ function EditRecipeForm({ recipe }) {
                           <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.2 }}
+                            transition={{ duration: 0.5 }}
                           >
                             <Grid container spacing={2}>
                               <Grid item xs={3}>
