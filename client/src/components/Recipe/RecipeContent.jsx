@@ -183,8 +183,12 @@ function RecipeContent({ recipe, averageRating, reviews }) {
 
       <Grid
         container
-        spacing={18}
-        sx={{ paddingBottom: isMobile ? 0 : "3rem" }}
+        spacing={19}
+        sx={{
+          paddingBottom: isMobile ? 0 : "3rem",
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
         <RecipeInstructions instructions={instructions} />
         <IngredientList recipe_ingredients={recipe_ingredients} />
@@ -192,9 +196,9 @@ function RecipeContent({ recipe, averageRating, reviews }) {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "flex-start",
+          justifyContent: "center",
           marginTop: isMobile ? "1rem" : "-5rem",
-          marginLeft: isMobile ? "3rem" : "10rem",
+          marginLeft: isMobile ? "0rem" : "auto",
           paddingBottom: isMobile ? "2rem" : "4rem",
         }}
       >

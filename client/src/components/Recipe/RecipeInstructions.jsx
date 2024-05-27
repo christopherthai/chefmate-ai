@@ -24,7 +24,7 @@ function RecipeInstructions({ instructions }) {
         <Box
           sx={{ marginBottom: "1rem", textAlign: isMobile ? "center" : "left" }}
         >
-          <Typography variant={isMobile ? "h6" : "h5"}>Instructions</Typography>
+          <Typography variant={isMobile ? "h6" : "h4"}>Instructions</Typography>
         </Box>
         <Typography variant="body1">{instructions}</Typography>
       </Box>
