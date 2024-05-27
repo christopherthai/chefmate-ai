@@ -40,7 +40,9 @@ function IngredientList({ recipe_ingredients }) {
     <Grid item xs={12} sm={6}>
       <List sx={{ marginBottom: "2rem", marginTop: isMobile ? "-8rem" : "0" }}>
         <Box sx={{ marginRight: isMobile ? "1rem" : "3rem" }}>
-          <Typography variant={isMobile ? "h6" : "h4"}>Ingredients</Typography>
+          <Typography variant={isMobile ? "h5" : "h4"} align="center">
+            Ingredients
+          </Typography>
         </Box>
         {recipe_ingredients.map((ingredient) => (
           <ListItem

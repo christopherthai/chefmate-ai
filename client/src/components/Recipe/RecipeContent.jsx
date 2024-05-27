@@ -186,6 +186,7 @@ function RecipeContent({ recipe, averageRating, reviews }) {
         spacing={19}
         sx={{
           paddingBottom: isMobile ? 0 : "3rem",
+          paddingTop: isMobile ? 0 : "1rem",
           display: "flex",
           justifyContent: "center",
         }}
