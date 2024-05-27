@@ -330,6 +330,22 @@ class GoogleLogin(Resource):
         google_id = token_info["sub"]
         email = token_info.get("email")
 
+        # Check if email already exists
+        existing_email_user = User.query.filter_by(email=email).first()
+
+        if existing_email_user and not existing_email_user.google_id:
+
+            existing_email_user.google_id = google_id
+            db.session.add(existing_email_user)
+            db.session.commit()
+
+            access_token = create_access_token(identity=existing_email_user.id)
+
+            return {
+                "access_token": access_token,
+                "user": existing_email_user.to_dict(),
+            }, 200
+
         # Check if user already exists
         user = User.query.filter_by(google_id=google_id).first()
 
