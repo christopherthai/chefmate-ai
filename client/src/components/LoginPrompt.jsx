@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, Button } from "@mui/material";
 import { useEffect } from "react";
-import { motion } from "framer-motion"; // Import framer-motion
+import { motion } from "framer-motion";
 
 /**
  * Page component for the login prompt page
