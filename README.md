@@ -101,14 +101,8 @@ OPENAI_API_KEY=your-openai-api-key
 ## Running the Application
 
 1. Ensure you are in the root directory of the project.
-2. Create a `Procfile.dev` with the following content:
 
-   ```plaintext
-    web: PORT=3000 npm start --prefix client
-    api: gunicorn -b 127.0.0.1:5555 --chdir ./server app:app
-   ```
-
-3. Start the application using Honcho:
+2. Start the application using Honcho:
 
    ```bash
    honcho start -f Procfile.dev
