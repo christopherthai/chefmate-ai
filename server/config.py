@@ -10,7 +10,6 @@ from flask_jwt_extended import JWTManager
 import openai
 import os
 
-
 load_dotenv()
 
 # Instantiate app, set attributes

@@ -38,7 +38,7 @@ const groceryListSchema = Yup.object().shape({
  */
 function GroceryList() {
   const { user } = useSelector((state) => state.user);
-  const [groceryList, setGroceryList] = useState(null);
+  const [groceryList, setGroceryList] = useState(undefined);
   const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false);
   const queryClient = useQueryClient();
 
@@ -217,9 +217,9 @@ function GroceryList() {
           <Typography variant="h5" sx={{ textAlign: "center" }}>
             {fetchGroceryList.isLoading ? (
               <CircularProgress />
-            ) : groceryList === undefined ||
-              groceryList === null ||
-              groceryList.grocery_list_items <= 0 ? (
+            ) : groceryList &&
+              groceryList.grocery_list_items &&
+              groceryList.grocery_list_items.length <= 0 ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -235,9 +235,7 @@ function GroceryList() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <Typography variant="h5" sx={{ textAlign: "center" }}>
-                  An error occurred while fetching the grocery list items
-                </Typography>
+                <CircularProgress />
               </motion.div>
             )}
           </Typography>
