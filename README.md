@@ -68,7 +68,7 @@ To get a local copy up and running, follow these steps.
 2. Create a database file from the SQL file:
 
    ```bash
-   sqlite3 your-database.db < backup_database.sql
+   sqlite3 your_database.db < backup_database.sql
    ```
 
 3. Update the path to your database file in your environment variables:
@@ -76,7 +76,7 @@ To get a local copy up and running, follow these steps.
    Ensure the `SQLALCHEMY_DATABASE_URI` variable in your `.env` file points to the absolute path of your database file. For example:
 
    ```dotenv
-   SQLALCHEMY_DATABASE_URI=sqlite:////Users/.../your-database.db
+   SQLALCHEMY_DATABASE_URI=sqlite:////Users/.../your_database.db
    ```
 
 ### Environment Variables
@@ -93,7 +93,7 @@ VITE_GOOGLE_CLIENT_ID=your-google-client-id
 #### Back-end (server folder) `.env` Example
 
 ```dotenv
-SQLALCHEMY_DATABASE_URI=sqlite:////absolute/path/to/your-database.db
+SQLALCHEMY_DATABASE_URI=sqlite:////absolute/path/to/your_database.db
 JWT_SECRET_KEY=your-jwt-secret-key
 OPENAI_API_KEY=your-openai-api-key
 ```
