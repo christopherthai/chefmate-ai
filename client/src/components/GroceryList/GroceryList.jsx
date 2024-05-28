@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import {
   CircularProgress,
   Typography,
@@ -40,6 +40,7 @@ function GroceryList() {
   const { user } = useSelector((state) => state.user);
   const [groceryList, setGroceryList] = useState(null);
   const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false);
+  const queryClient = useQueryClient();
 
   /**
    * Snackbar close handler function for success message
@@ -82,6 +83,9 @@ function GroceryList() {
       onError: (error) => {
         console.error(error);
       },
+      onSettled: () => {
+        queryClient.invalidateQueries("groceryList");
+      },
     }
   );
 
@@ -105,8 +109,6 @@ function GroceryList() {
       <Typography variant="h5">An error occurred: {isError.message}</Typography>
     );
   }
-
-  console.log(groceryList);
 
   return (
     <>
@@ -213,9 +215,11 @@ function GroceryList() {
       ) : (
         <Container maxWidth="md">
           <Typography variant="h5" sx={{ textAlign: "center" }}>
-            {groceryList === undefined ||
-            groceryList === null ||
-            groceryList.grocery_list_items <= 0 ? (
+            {fetchGroceryList.isLoading ? (
+              <CircularProgress />
+            ) : groceryList === undefined ||
+              groceryList === null ||
+              groceryList.grocery_list_items <= 0 ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -226,7 +230,15 @@ function GroceryList() {
                 </Typography>
               </motion.div>
             ) : (
-              <CircularProgress />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Typography variant="h5" sx={{ textAlign: "center" }}>
+                  An error occurred while fetching the grocery list items
+                </Typography>
+              </motion.div>
             )}
           </Typography>
         </Container>
