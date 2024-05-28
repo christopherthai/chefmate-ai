@@ -14,22 +14,13 @@ import openai
 import os
 
 
-# Set the base directory to the absolute path of the current file's directory
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-
-# Set the DATABASE variable to the value of the environment variable "DB_URI"
-# If the environment variable is not set, use a SQLite database at the path ./data/app.db relative to the base directory of the project
-DATABASE = os.environ.get(
-    "DB_URI", f"sqlite:///{os.path.join(BASE_DIR, './data/app.db')}"
-)
-
 load_dotenv()
 
 # Instantiate app, set attributes
 app = Flask(__name__)
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
 app.config["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
-app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
 

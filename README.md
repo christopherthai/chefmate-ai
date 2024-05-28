@@ -10,6 +10,8 @@ ChefMate AI simplifies culinary creativity, offering a dynamic platform where us
 
 Before you begin, ensure you have met the following requirements:
 
+- You have installed [Git](https://git-scm.com/).
+- You have a [GitHub](https://github.com/) account.
 - You have installed [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/get-npm).
 - You have installed [Python](https://www.python.org/) and [pipenv](https://pipenv.pypa.io/en/latest/).
 - You have installed [Honcho](https://honcho.readthedocs.io/en/latest/) (to manage Procfile-based applications).
@@ -80,7 +82,8 @@ To get a local copy up and running, follow these steps.
 
 #### Back-end `.env` Example
 
-    JWT_SECRET_KEY=your-secret-key
+    SQLALCHEMY_DATABASE_URI=sqlite:///path/to/your-database.db
+    JWT_SECRET_KEY=your-jwt-secret-key
     OPENAI_API_KEY=your-openai-api-key
 
 ## Running the Application
