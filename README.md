@@ -113,7 +113,7 @@ OPENAI_API_KEY=your-openai-api-key
 To use the API, make requests to the endpoints defined in your backend. Example:
 
 ```bash
-  curl -X GET http://localhost:3000/api/recipes
+curl -X GET http://localhost:3000/api/recipes
 ```
 
 Or using a tool like Postman, set the URL to your local server's API endpoint and make your desired requests.
