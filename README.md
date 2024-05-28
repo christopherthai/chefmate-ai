@@ -206,7 +206,3 @@ Or using a tool like Postman, set the URL to your local server's API endpoint an
 ## Trello Board
 
 ![Trello Board](./planning/TrelloBoard.png)
-
-```
-
-```
