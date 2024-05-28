@@ -25,7 +25,7 @@ import MuiAlert from "@mui/material/Alert";
 function AddIngredientsToGroceryListButton({ recipe }) {
   const { user, isLoggedIn } = useSelector((state) => state.user);
   const [openDialogBox, setOpenDialogBox] = useState(false);
-  const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false); // State for the snackbar MessageBox status
+  const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false);
   const { id } = useParams();
   const { recipe_ingredients } = recipe;
 
@@ -107,7 +107,6 @@ function AddIngredientsToGroceryListButton({ recipe }) {
           padding: "1rem",
           borderRadius: "0.5rem",
           width: "200px",
-          marginLeft: "-2rem",
         }}
       >
         Add Ingredients to Grocery List
