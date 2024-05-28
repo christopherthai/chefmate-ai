@@ -11,9 +11,18 @@ import { Snackbar, Box } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { setDeleteRecipeDeleteMessage } from "../store/recipeSlice";
 import { motion } from "framer-motion";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
+/**
+ * Page component for the user's saved and created recipes
+ * @component
+ * @returns {JSX.Element} JSX.Element
+ */
 function YourRecipes() {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { deleteMessage } = useSelector((state) => state.recipe);
 
   const checkSession = async () => {
@@ -66,7 +75,10 @@ function YourRecipes() {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ pt: 12, pb: 1, pl: 1 }}>
+    <Container
+      maxWidth="lg"
+      sx={{ pt: 12, pb: 1, pl: 1, marginLeft: isMobile ? "-1.5rem" : "" }}
+    >
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -76,7 +88,12 @@ function YourRecipes() {
           variant="h4"
           component="h1"
           gutterBottom
-          sx={{ textAlign: "center", marginBottom: "2rem" }}
+          sx={{
+            textAlign: "center",
+            marginBottom: "2rem",
+            marginLeft: isMobile ? "3rem" : "",
+            marginTop: isMobile ? "1rem" : "2rem",
+          }}
         >
           Your Saved and Created Recipes
         </Typography>
