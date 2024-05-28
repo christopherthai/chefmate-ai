@@ -82,7 +82,7 @@ To get a local copy up and running, follow these steps.
 
 #### Back-end `.env` Example
 
-    SQLALCHEMY_DATABASE_URI=sqlite:///path/to/your-database.db
+    SQLALCHEMY_DATABASE_URI=sqlite:////path/to/your-database.db
     JWT_SECRET_KEY=your-jwt-secret-key
     OPENAI_API_KEY=your-openai-api-key
 
