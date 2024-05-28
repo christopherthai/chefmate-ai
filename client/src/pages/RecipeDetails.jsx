@@ -144,7 +144,7 @@ function RecipeDetails() {
                   >
                     <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
                       <Avatar sx={{ mr: 2 }}>
-                        {review.username.charAt(0)}
+                        {review.username.charAt(0).toUpperCase()}
                       </Avatar>
                       <Typography
                         variant="body1"

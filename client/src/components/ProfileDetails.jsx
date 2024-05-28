@@ -20,7 +20,9 @@ function ProfileDetails({ user }) {
           alt={user.username}
           src={user.avatarUrl}
           sx={{ width: 56, height: 56, marginRight: 2 }}
-        />
+        >
+          {user.username.charAt(0).toUpperCase()}
+        </Avatar>
         <Box>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
