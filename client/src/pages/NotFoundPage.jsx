@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Container, Typography, Button } from "@mui/material";
 import { motion } from "framer-motion";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 /**
  * Page component for the 404 Not Found page
@@ -8,7 +10,9 @@ import { motion } from "framer-motion";
  * @returns {JSX.Element} JSX.Element
  */
 function NotFoundPage() {
-  const navigate = useNavigate(); // Hook from react-router-dom to navigate to different pages
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   /**
    * Redirects the user to the home page
@@ -25,6 +29,8 @@ function NotFoundPage() {
         padding: "0rem",
         marginTop: "16rem",
         paddingBottom: "40rem",
+        paddingLeft: isMobile ? "2rem" : "",
+        paddingRight: isMobile ? "2rem" : "",
       }}
     >
       <motion.div

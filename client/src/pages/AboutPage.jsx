@@ -1,6 +1,8 @@
 import { Typography, Container, Box, Grid } from "@mui/material";
 import RecipeImage from "../assets/images/Recipes.jpg";
 import { motion } from "framer-motion";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 /**
  * Page component for the About page
@@ -8,14 +10,20 @@ import { motion } from "framer-motion";
  * @returns {JSX.Element} JSX.Element
  */
 function AboutPage() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Grid
       container
       direction="column"
       justifyContent="center"
-      style={{ minHeight: "10vh", paddingBottom: "0.2rem" }}
+      style={{
+        minHeight: "10vh",
+        paddingBottom: "0.2rem",
+        paddingTop: isMobile ? "2rem" : "",
+      }}
     >
-      <Container sx={{ padding: { xs: "5rem", md: "10rem" } }}>
+      <Container sx={{ padding: { xs: "4rem", md: "10rem" } }}>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -25,7 +33,11 @@ function AboutPage() {
             variant="h4"
             component="h1"
             gutterBottom
-            sx={{ textAlign: "center", marginBottom: "2rem" }}
+            sx={{
+              textAlign: "center",
+              marginBottom: "2rem",
+              width: "100%",
+            }}
           >
             About ChefMate AI
           </Typography>

@@ -1,7 +1,8 @@
-import { Box, Typography, Container, Paper } from "@mui/material";
+import { Box, Container, Typography, Paper } from "@mui/material";
 import EditUserProfile from "../components/EditUserProfile";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import ProfileDetails from "../components/ProfileDetails";
 
 /**
  * Page component for the User Profile page
@@ -23,24 +24,19 @@ function UserDetails() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Typography variant="h4" component="h1" gutterBottom align="center">
+            User Profile
+          </Typography>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
           <Paper elevation={3} sx={{ padding: 3, marginTop: 4 }}>
-            <Typography variant="h4" gutterBottom>
-              Profile
-            </Typography>
-            <Box display="flex" alignItems="center" sx={{ marginBottom: 1 }}>
-              <Typography variant="h6" sx={{ marginRight: 1 }}>
-                Username:
-              </Typography>
-              <Typography variant="h7">{user.username}</Typography>
-            </Box>
-            <Box display="flex" alignItems="center">
-              <Typography variant="h6" sx={{ marginRight: 1 }}>
-                Email Address:{" "}
-              </Typography>
-              <Typography variant="h7">{user.email}</Typography>
-            </Box>
+            <ProfileDetails user={user} />
           </Paper>
         </motion.div>
         <motion.div
