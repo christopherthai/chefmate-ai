@@ -412,8 +412,9 @@ function EditRecipeForm({ recipe }) {
                               color="secondary"
                               onClick={() => remove(index)}
                               sx={{ mt: 1, ml: 1 }}
+                              startIcon={<DeleteIcon />}
                             >
-                              <DeleteIcon />
+                              Remove
                             </Button>
                           </motion.div>
                         </Grid>

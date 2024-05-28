@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
@@ -56,7 +56,9 @@ function RegistrationForm() {
   const [openMessageBox, setOpenMessageBox] = useState(false); // State for the snackbar MessageBox status
   const [errorMessage, setErrorMessage] = useState(""); // State for the error message
 
-  window.scroll(0, 0);
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   /**
    * Snackbar close handler function

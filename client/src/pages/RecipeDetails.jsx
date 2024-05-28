@@ -22,7 +22,6 @@ function RecipeDetails() {
   const [averageRating, setAverageRating] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const commentsRef = useRef(null);
 
   /**
    * Fetches the recipe from the server
@@ -86,7 +85,6 @@ function RecipeDetails() {
    */
   const handleReviews = (review) => {
     setReviews((prevReviews) => [...prevReviews, review]);
-    commentsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -123,7 +121,6 @@ function RecipeDetails() {
             margin: "auto",
             paddingTop: isMobile ? "2rem" : "5rem",
           }}
-          ref={commentsRef}
         >
           <Typography variant={isMobile ? "h5" : "h4"} sx={{ mb: 2 }}>
             Reviews
