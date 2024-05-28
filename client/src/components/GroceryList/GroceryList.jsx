@@ -110,8 +110,6 @@ function GroceryList() {
     );
   }
 
-  console.log(groceryList);
-
   return (
     <>
       {groceryList && groceryList.grocery_list_items.length > 0 ? (
