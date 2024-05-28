@@ -110,6 +110,8 @@ function GroceryList() {
     );
   }
 
+  console.log(groceryList);
+
   return (
     <>
       {groceryList && groceryList.grocery_list_items.length > 0 ? (
@@ -223,20 +225,24 @@ function GroceryList() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 1 }}
+              >
+                <Typography variant="h5" sx={{ textAlign: "center" }}>
+                  Your grocery list is empty
+                </Typography>
+              </motion.div>
+            ) : groceryList === undefined ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
               >
                 <Typography variant="h5" sx={{ textAlign: "center" }}>
                   Your grocery list is empty
                 </Typography>
               </motion.div>
             ) : (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <CircularProgress />
-              </motion.div>
+              <CircularProgress />
             )}
           </Typography>
         </Container>
