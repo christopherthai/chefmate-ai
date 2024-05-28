@@ -75,14 +75,14 @@ const CookingTimer = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
       >
         <Typography variant={isMobile ? "h6" : "h5"}>Cooking Timer</Typography>
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
       >
         <Typography variant={isMobile ? "h4" : "h3"}>
           {Math.floor(time / 60)}:{time % 60 < 10 ? "0" : ""}
@@ -92,7 +92,7 @@ const CookingTimer = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
       >
         <Box
           sx={{
