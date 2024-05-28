@@ -32,7 +32,7 @@ To get a local copy up and running, follow these steps.
 2. Navigate to the front-end directory:
 
    ```bash
-   cd client
+   cd chefmate-ai/client
    ```
 
 3. Install npm packages:
