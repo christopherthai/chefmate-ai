@@ -71,6 +71,14 @@ To get a local copy up and running, follow these steps.
    sqlite3 app.db < backup_database.sql
    ```
 
+3. Update the path to your database file in your environment variables:
+
+   Ensure the `SQLALCHEMY_DATABASE_URI` variable in your `.env` file points to the absolute path of your database file. For example:
+
+   ```dotenv
+   SQLALCHEMY_DATABASE_URI=sqlite:////absolute/path/to/your-database.db
+   ```
+
 ### Environment Variables
 
 1. Create a `.env` file in both the front-end (client folder) and back-end (server folder) directories.
@@ -82,7 +90,7 @@ To get a local copy up and running, follow these steps.
 
 #### Back-end `.env` Example
 
-    SQLALCHEMY_DATABASE_URI=sqlite:////path/to/your-database.db
+    SQLALCHEMY_DATABASE_URI=sqlite:////absolute/path/to/your-database.db
     JWT_SECRET_KEY=your-jwt-secret-key
     OPENAI_API_KEY=your-openai-api-key
 
