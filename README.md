@@ -86,13 +86,17 @@ To get a local copy up and running, follow these steps.
 
 #### Front-end `.env` Example
 
-    VITE_GOOGLE_CLIENT_ID=your-google-client-id
+```dotenv
+VITE_GOOGLE_CLIENT_ID=your-google-client-id
+```
 
 #### Back-end `.env` Example
 
-    SQLALCHEMY_DATABASE_URI=sqlite:////absolute/path/to/your-database.db
-    JWT_SECRET_KEY=your-jwt-secret-key
-    OPENAI_API_KEY=your-openai-api-key
+```dotenv
+SQLALCHEMY_DATABASE_URI=sqlite:////absolute/path/to/your-database.db
+JWT_SECRET_KEY=your-jwt-secret-key
+OPENAI_API_KEY=your-openai-api-key
+```
 
 ## Running the Application
 
