@@ -84,13 +84,13 @@ To get a local copy up and running, follow these steps.
 1. Create a `.env` file in both the front-end (client folder) and back-end (server folder) directories.
 2. Add your environment variables as required. Here is an example for both:
 
-#### Front-end `.env` Example
+#### Front-end (client folder) `.env` Example
 
 ```dotenv
 VITE_GOOGLE_CLIENT_ID=your-google-client-id
 ```
 
-#### Back-end `.env` Example
+#### Back-end (server folder) `.env` Example
 
 ```dotenv
 SQLALCHEMY_DATABASE_URI=sqlite:////absolute/path/to/your-database.db
