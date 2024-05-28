@@ -2,7 +2,7 @@ import { Typography, Box } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-import UserDetails from "../components/UserDetails";
+import UserDetails from "../components/User/UserDetails";
 import { useDispatch } from "react-redux";
 import { setUser, setIsLoggedIn } from "../store/userSlice";
 import { motion } from "framer-motion";

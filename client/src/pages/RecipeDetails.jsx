@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import RecipeContent from "../components/Recipe/RecipeContent";
 import { Box, List, Rating, Avatar, Grid } from "@mui/material";
 import CommentRatingForm from "../components/CommentRatingForm";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { motion } from "framer-motion";

@@ -1,8 +1,8 @@
 import { Box, Container, Typography, Paper } from "@mui/material";
-import EditUserProfile from "../components/EditUserProfile";
+import EditUserProfile from "../User/EditUserProfile";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import ProfileDetails from "../components/ProfileDetails";
+import ProfileDetails from "../User/ProfileDetails";
 
 /**
  * Page component for the User Profile page

@@ -27,7 +27,7 @@ import {
 import CookingTimer from "../CookingTimer";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import AddIngredientsToGroceryListButton from "../AddIngredientsToGroceryListButton";
+import AddIngredientsToGroceryListButton from "../GroceryList/AddIngredientsToGroceryListButton";
 import { motion } from "framer-motion";
 
 function RecipeContent({ recipe, averageRating, reviews }) {

@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
-import GroceryList from "../components/GroceryList";
+import GroceryList from "../components/GroceryList/GroceryList";
 import { motion } from "framer-motion";
 
 /**
