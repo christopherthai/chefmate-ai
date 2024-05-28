@@ -106,6 +106,8 @@ function GroceryList() {
     );
   }
 
+  console.log(groceryList);
+
   return (
     <>
       {groceryList && groceryList.grocery_list_items.length > 0 ? (
@@ -211,10 +213,18 @@ function GroceryList() {
       ) : (
         <Container maxWidth="md">
           <Typography variant="h5" sx={{ textAlign: "center" }}>
-            {groceryList === undefined ? (
-              <Typography variant="h5" sx={{ textAlign: "center" }}>
-                Your grocery list is empty
-              </Typography>
+            {groceryList === undefined ||
+            groceryList === null ||
+            groceryList.grocery_list_items <= 0 ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Typography variant="h5" sx={{ textAlign: "center" }}>
+                  Your grocery list is empty
+                </Typography>
+              </motion.div>
             ) : (
               <CircularProgress />
             )}
