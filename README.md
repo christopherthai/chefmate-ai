@@ -6,6 +6,104 @@
 
 ChefMate AI simplifies culinary creativity, offering a dynamic platform where users can discover recipes shared by a vibrant community, find new dishes based on available ingredients with AI-powered suggestions, and manage their culinary collections.
 
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- You have installed [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/get-npm).
+- You have installed [Python](https://www.python.org/) and [pipenv](https://pipenv.pypa.io/en/latest/).
+- You have installed [Honcho](https://honcho.readthedocs.io/en/latest/) (to manage Procfile-based applications).
+- You have obtained the necessary API keys and secrets for your application (e.g., from OpenAI, Google, etc.).
+
+## Getting Started
+
+To get a local copy up and running, follow these steps.
+
+### Front-end Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/chefmate-ai.git
+   ```
+
+2. Navigate to the front-end directory:
+
+   ```bash
+   cd client
+   ```
+
+3. Install npm packages:
+
+   ```bash
+   npm install
+   ```
+
+### Back-end Installation
+
+1. Ensure you are in the root directory of the project.
+
+2. Install pipenv and dependencies:
+
+   ```bash
+   pipenv install
+   ```
+
+3. Activate the virtual environment:
+
+   ```bash
+   pipenv shell
+   ```
+
+### Database Setup
+
+1. Navigate to the data directory:
+
+   ```bash
+   cd server/data
+   ```
+
+2. Create a database file from the SQL file:
+
+   ```bash
+   sqlite3 app.db < backup_database.sql
+   ```
+
+### Environment Variables
+
+1. Create a `.env` file in both the front-end (client folder) and back-end (server folder) directories.
+2. Add your environment variables as required. Here is an example for both:
+
+#### Front-end `.env` Example
+
+    VITE_GOOGLE_CLIENT_ID=your-google-client-id
+
+#### Back-end `.env` Example
+
+    JWT_SECRET_KEY=your-secret-key
+    OPENAI_API_KEY=your-openai-api-key
+
+## Running the Application
+
+1. Ensure you are in the root directory of the project.
+2. Create a `Procfile.dev` with the following content:
+
+   ```plaintext
+    web: PORT=3000 npm start --prefix client
+    api: gunicorn -b 127.0.0.1:5555 --chdir ./server app:app
+   ```
+
+3. Start the application using Honcho:
+
+   ```bash
+   honcho start -f Procfile.dev
+   ```
+
+## Additional Notes
+
+- Ensure your SQLite database file is correctly set up before starting the back-end server.
+- Adjust the configurations in your `.env` files based on your local environment and API keys.
+
 ## Wireframe
 
 ### Home Page
