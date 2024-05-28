@@ -76,7 +76,7 @@ To get a local copy up and running, follow these steps.
    Ensure the `SQLALCHEMY_DATABASE_URI` variable in your `.env` file points to the absolute path of your database file. For example:
 
    ```dotenv
-   SQLALCHEMY_DATABASE_URI=sqlite:////absolute/path/to/your-database.db
+   SQLALCHEMY_DATABASE_URI=sqlite:////Users/.../your-database.db
    ```
 
 ### Environment Variables
