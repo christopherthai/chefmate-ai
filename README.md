@@ -68,7 +68,7 @@ To get a local copy up and running, follow these steps.
 2. Create a database file from the SQL file:
 
    ```bash
-   sqlite3 app.db < backup_database.sql
+   sqlite3 your-database.db < backup_database.sql
    ```
 
 3. Update the path to your database file in your environment variables:
