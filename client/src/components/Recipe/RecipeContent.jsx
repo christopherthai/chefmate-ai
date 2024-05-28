@@ -175,6 +175,7 @@ function RecipeContent({ recipe, averageRating, reviews }) {
       </Grid>
       <Box
         sx={{
+          position: "relative",
           display: "flex",
           justifyContent: "center",
           gap: "1rem",
