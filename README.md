@@ -114,6 +114,16 @@ OPENAI_API_KEY=your-openai-api-key
    honcho start -f Procfile.dev
    ```
 
+## API Usage
+
+To use the API, make requests to the endpoints defined in your backend. Example:
+
+```bash
+  curl -X GET http://localhost:3000/api/recipes
+```
+
+Or using a tool like Postman, set the URL to your local server's API endpoint and make your desired requests.
+
 ## Additional Notes
 
 - Ensure your SQLite database file is correctly set up before starting the back-end server.
@@ -202,3 +212,7 @@ OPENAI_API_KEY=your-openai-api-key
 ## Trello Board
 
 ![Trello Board](./planning/TrelloBoard.png)
+
+```
+
+```
