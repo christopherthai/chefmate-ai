@@ -9,6 +9,8 @@ import Proptypes from "prop-types";
  * @returns {JSX.Element} JSX.Element
  */
 function ProfileDetails({ user }) {
+  const { username, email, created_at, avatarUrl } = user;
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
@@ -17,11 +19,11 @@ function ProfileDetails({ user }) {
     >
       <Box display="flex" alignItems="center" sx={{ marginBottom: 2 }}>
         <Avatar
-          alt={user.username}
-          src={user.avatarUrl}
+          alt={username}
+          src={avatarUrl}
           sx={{ width: 56, height: 56, marginRight: 2 }}
         >
-          {user.username.charAt(0).toUpperCase()}
+          {username.charAt(0).toUpperCase()}
         </Avatar>
         <Box>
           <motion.div
@@ -29,7 +31,7 @@ function ProfileDetails({ user }) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Typography variant="h6">{user.username}</Typography>
+            <Typography variant="h6">{username}</Typography>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -37,7 +39,7 @@ function ProfileDetails({ user }) {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <Typography variant="body2" color="textSecondary">
-              Member since {new Date(user.created_at).toLocaleDateString()}
+              Member since {new Date(created_at).toLocaleDateString()}
             </Typography>
           </motion.div>
         </Box>
@@ -57,7 +59,7 @@ function ProfileDetails({ user }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <Typography variant="body1">{user.username}</Typography>
+          <Typography variant="body1">{username}</Typography>
         </motion.div>
       </Box>
       <Box display="flex" alignItems="center">
@@ -75,7 +77,7 @@ function ProfileDetails({ user }) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <Typography variant="body1">{user.email}</Typography>
+          <Typography variant="body1">{email}</Typography>
         </motion.div>
       </Box>
     </motion.div>
