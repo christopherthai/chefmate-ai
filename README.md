@@ -90,6 +90,8 @@ To get a local copy up and running, follow these steps.
 VITE_GOOGLE_CLIENT_ID=your-google-client-id
 ```
 
+- **Google Client ID**: This is used for enabling Google Login for users to securely access their accounts.
+
 #### Back-end (server folder) `.env` Example
 
 ```dotenv
@@ -97,6 +99,10 @@ SQLALCHEMY_DATABASE_URI=sqlite:////absolute/path/to/your_database.db
 JWT_SECRET_KEY=your-jwt-secret-key
 OPENAI_API_KEY=your-openai-api-key
 ```
+
+- **SQLAlchemy Database URI**: This is used to specify the database location and connection details for SQLAlchemy, which manages database interactions.
+- **JWT Secret Key**: This key is used for signing and verifying JSON Web Tokens (JWT) for secure authentication and authorization.
+- **OpenAI API Key**: This key is used to access OpenAI's API for generating recipe suggestions and other AI-powered features.
 
 ## Running the Application
 
