@@ -93,9 +93,9 @@ function CommentRatingForm({ handleReviews }) {
     initialValues,
     validationSchema,
     onSubmit: (values, { resetForm }) => {
-      if (isLoggedIn == false) {
+      if (isLoggedIn === false) {
         setOpenDialogBox(true);
-      } else if (isLoggedIn == true) {
+      } else if (isLoggedIn === true) {
         reviewsMutation.mutate(values);
         resetForm();
       }

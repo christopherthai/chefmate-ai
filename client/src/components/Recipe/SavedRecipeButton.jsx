@@ -8,7 +8,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Box,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { setSavedRecipes } from "../../store/userSlice";
@@ -32,9 +31,9 @@ function SavedRecipeButton() {
   const dispatch = useDispatch(); // Get the dispatch function from the useDispatch hook
 
   const handleClick = () => {
-    if (isLoggedIn == false) {
+    if (isLoggedIn === false) {
       setOpenDialogBox(true);
-    } else if (isLoggedIn == true && savedRecipes == false) {
+    } else if (isLoggedIn === true && savedRecipes === false) {
       savedRecipeMutation.mutate(id);
     } else {
       unSavedRecipeMutation.mutate(id);

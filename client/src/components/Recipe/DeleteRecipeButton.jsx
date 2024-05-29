@@ -35,9 +35,9 @@ function DeleteRecipeButton() {
    * @returns {void}
    */
   const handleClick = () => {
-    if (isLoggedIn == false) {
+    if (isLoggedIn === false) {
       setOpenDialogBox(true);
-    } else if (isLoggedIn == true) {
+    } else if (isLoggedIn === true) {
       setOpenDeleteDialogBox(true);
     }
   };

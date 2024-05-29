@@ -115,7 +115,8 @@ function AddIngredientsToGroceryListButton({ recipe }) {
         <DialogTitle>{"You are not logged in"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To add ingredients to your grocery list, you need to be logged in.
+            To add ingredients to the grocery list, you need to be logged in.
+            Please login to continue.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
