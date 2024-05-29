@@ -22,6 +22,8 @@ import MuiAlert from "@mui/material/Alert";
 import PropTypes from "prop-types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { motion } from "framer-motion";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 // Validation schema for the form fields using Yup
 const validationSchema = Yup.object().shape({
@@ -66,6 +68,8 @@ function EditRecipeForm({ recipe }) {
   const [openErrorMessageBox, setOpenErrorMessageBox] = useState(false); // State for the snackbar MessageBox status
   const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false); // State for the snackbar MessageBox status
   const [errorMessage, setErrorMessage] = useState(""); // State for the error message
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   // Prop types for the EditRecipeForm component
   EditRecipeForm.propTypes = {
@@ -257,9 +261,9 @@ function EditRecipeForm({ recipe }) {
               </Grid>
               <Grid container justifyContent="center">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
                 >
                   <CardMedia
                     component="img"
@@ -267,7 +271,7 @@ function EditRecipeForm({ recipe }) {
                     alt="Recipe Image"
                     sx={{
                       width: "100%",
-                      height: 600,
+                      height: isMobile ? 300 : 600,
                       marginLeft: "1%",
                       paddingBottom: "2rem",
                     }}
