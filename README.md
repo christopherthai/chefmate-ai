@@ -102,7 +102,7 @@ OPENAI_API_KEY=your-openai-api-key
 
 - **SQLAlchemy Database URI**: This is used to specify the database location and connection details for SQLAlchemy, which manages database interactions.
 - **JWT Secret Key**: This key is used for signing and verifying JSON Web Tokens (JWT) for secure authentication and authorization.
-- **OpenAI API Key**: This key is used to access OpenAI's API for generating recipe suggestions and other AI-powered features.
+- **OpenAI API Key**: This key is used to access OpenAI's API for generating recipe suggestions.
 
 ## Running the Application
 
