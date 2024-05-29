@@ -5,7 +5,7 @@ function Footer() {
     <Box
       sx={{
         textAlign: "center",
-        marginTop: "2rem",
+        marginTop: "auto",
         width: "100%",
         paddingTop: "13rem",
       }}
