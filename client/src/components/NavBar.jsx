@@ -215,7 +215,7 @@ function NavBar() {
                   <ListItemIcon>
                     <KitchenIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Create Recipes" />
+                  <ListItemText primary="Create Recipe" />
                 </>
               )}
             </ListItemButton>
