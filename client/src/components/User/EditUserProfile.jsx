@@ -142,7 +142,7 @@ function EditUserProfile() {
         fullWidth={true}
       >
         <DialogTitle style={{ textAlign: "center" }}>
-          <strong>Edit User Profile</strong>
+          <strong>Edit Profile</strong>
         </DialogTitle>
         <IconButton
           color="inherit"

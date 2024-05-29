@@ -128,7 +128,9 @@ function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleRedirectToProfile}>Profile</MenuItem>
+                <MenuItem onClick={handleRedirectToProfile}>
+                  Your Profile
+                </MenuItem>
                 <MenuItem onClick={handleRedirectToYourRecipes}>
                   Your Recipes
                 </MenuItem>

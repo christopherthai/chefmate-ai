@@ -27,7 +27,7 @@ function UserDetails() {
           transition={{ duration: 0.5 }}
         >
           <Typography variant="h4" component="h1" gutterBottom align="center">
-            User Profile
+            My Profile
           </Typography>
         </motion.div>
         <motion.div
