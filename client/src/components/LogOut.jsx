@@ -53,6 +53,6 @@ function LogOut({ handleClose }) {
     logOutMutation.mutate();
   };
 
-  return <MenuItem onClick={handleLogOut}>Logout</MenuItem>;
+  return <MenuItem onClick={handleLogOut}>Log Out</MenuItem>;
 }
 export default LogOut;
