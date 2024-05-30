@@ -17,6 +17,8 @@ import { Formik, Form, FieldArray, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import React, { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
 
 // Define the schema for the form validation
@@ -40,6 +42,8 @@ function GroceryList() {
   const { user } = useSelector((state) => state.user);
   const [groceryList, setGroceryList] = useState(undefined);
   const [openSuccessMessageBox, setOpenSuccessMessageBox] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const queryClient = useQueryClient();
 
   /**
@@ -202,7 +206,7 @@ function GroceryList() {
                       type="submit"
                       variant="contained"
                       color="primary"
-                      sx={{ marginRight: "4.5rem" }}
+                      sx={{ marginRight: isMobile ? "2.3rem" : "4.5rem" }}
                     >
                       Save
                     </Button>
