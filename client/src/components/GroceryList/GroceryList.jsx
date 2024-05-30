@@ -206,7 +206,7 @@ function GroceryList() {
                       type="submit"
                       variant="contained"
                       color="primary"
-                      sx={{ marginRight: isMobile ? "2.3rem" : "4.5rem" }}
+                      sx={{ marginRight: isMobile ? "2rem" : "4.5rem" }}
                     >
                       Save
                     </Button>
