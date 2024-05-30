@@ -446,6 +446,8 @@ class RecipesSuggestions(Resource):
         if not ingredients:
             return make_response({"error": "No ingredients provided"}, 400)
 
+        # Call the OpenAI API to generate a recipe suggestion
+        # based on the ingredients provided by the user using the GPT-4o model
         response = openai.ChatCompletion.create(
             model="gpt-4o",
             messages=[
@@ -458,12 +460,15 @@ class RecipesSuggestions(Resource):
             max_tokens=500,
         )
 
-        # Parse the response
+        # Parse the response from the OpenAI API to extract the recipe suggestion
         content = response["choices"][0]["message"]["content"].strip()
         recipes = []
         current_recipe = {}
         current_section = None
 
+        # Parse the recipe suggestion into individual recipes
+        # with title, ingredients, and instructions sections separated out
+        # for each recipe in the response from the OpenAI API
         for line in content.split("\n"):
             line = line.strip()
             if line.startswith("Recipe Title:"):
@@ -484,7 +489,8 @@ class RecipesSuggestions(Resource):
                 elif current_section == "instructions":
                     current_recipe["instructions"] += line + "\n"
 
-        if current_recipe:  # Add the last recipe if it exists
+        # Add the last recipe to the list of recipes if it exists
+        if current_recipe:
             recipes.append(current_recipe)
 
         # Strip trailing newlines and extra spaces

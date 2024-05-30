@@ -323,9 +323,11 @@ class GoogleLogin(Resource):
         except reqs.exceptions.Timeout:
             return {"error": "The request timed out"}, 408
 
+        # Check if the token is invalid or expired
         if token_info_response.status_code != 200:
             return {"error": "Invalid token"}, 400
 
+        # Extract the Google ID and email from the token info response
         token_info = token_info_response.json()
         google_id = token_info["sub"]
         email = token_info.get("email")

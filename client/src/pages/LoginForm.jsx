@@ -111,6 +111,7 @@ function LoginForm() {
 
   /**
    * Google login mutation function using axios post request to the server
+   * with the google token response object
    * @function
    * @param {Object} tokenResponse - Google token response
    * @returns {Promise}
@@ -157,7 +158,8 @@ function LoginForm() {
   };
 
   /**
-   * Google login hook
+   * Google login hook function to trigger
+   * the google login popup window when the google button is clicked
    * @function
    * @async
    */

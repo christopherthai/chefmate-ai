@@ -20,7 +20,16 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
 
-// Fetch recipes from the server
+/**
+ * Fetch recipes from the server using the ingredients provided by the user in the
+ * form submission and return the recipes to the component for rendering on the page as a list of cards
+ * @param {Array} ingredients - The ingredients provided by the user in the form submission
+ * @returns {Array} - The recipes fetched from the server
+ * @throws {Error} - If there is an error fetching the recipes
+ * @async
+ * @function fetchRecipes
+ *
+ */
 const fetchRecipes = async (ingredients) => {
   const response = await axios.post("/api/recipes/suggestions", {
     ingredients,
@@ -33,7 +42,11 @@ const initialValues = {
   ingredient: "",
 };
 
-// The home page component
+/**
+ * HomePage component
+ * @component
+ * @return {JSX.Element}
+ */
 function HomePage() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
