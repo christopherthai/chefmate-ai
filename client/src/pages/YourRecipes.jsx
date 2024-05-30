@@ -77,7 +77,13 @@ function YourRecipes() {
   return (
     <Container
       maxWidth="lg"
-      sx={{ pt: 12, pb: 1, pl: 1, marginLeft: isMobile ? "-1.5rem" : "" }}
+      sx={{
+        pt: 12,
+        pb: 1,
+        pl: 0,
+        pr: 0,
+        marginLeft: isMobile ? "-1.5rem" : "",
+      }}
     >
       <motion.div
         initial={{ opacity: 0, y: -20 }}
