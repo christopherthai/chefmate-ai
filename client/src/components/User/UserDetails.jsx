@@ -3,6 +3,8 @@ import EditUserProfile from "../User/EditUserProfile";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import ProfileDetails from "../User/ProfileDetails";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 /**
  * Page component for the User Profile page
@@ -10,7 +12,9 @@ import ProfileDetails from "../User/ProfileDetails";
  * @returns {JSX.Element} JSX.Element
  */
 function UserDetails() {
-  const { user } = useSelector((state) => state.user); // Get user from Redux store
+  const { user } = useSelector((state) => state.user);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box
@@ -18,7 +22,7 @@ function UserDetails() {
       justifyContent="center"
       alignItems="center"
       minHeight="55vh"
-      paddingTop="3rem"
+      paddingTop={isMobile ? "6rem" : "3rem"}
     >
       <Container maxWidth="sm">
         <motion.div
